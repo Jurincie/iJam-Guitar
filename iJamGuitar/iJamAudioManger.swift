@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 import CoreData
+import OSLog
 
 enum InitializeErrors: Error {
     case InitializeSoundsError
@@ -29,7 +30,7 @@ class iJamAudioManager {
     var formerZone          = -1
     var zoneBreaks:[Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     var audioPlayerArray    = [AVAudioPlayer?]() // contains 1 audioPlayer for each guitar string 6-1
-    var noteNamesArray      = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav"]
+    var noteNamesArray      = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
     
     init() {
         initializeAVAudioSession()
@@ -51,7 +52,7 @@ class iJamAudioManager {
 
     func loadWaveFilesIntoAudioPlayers() {
         for _ in 0...5 {
-            if let asset = NSDataAsset(name:"NoNote"){
+            if let asset = NSDataAsset(name:"NoNote") {
                 do {
                     let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                     if thisAudioPlayer.isPlaying {
@@ -73,7 +74,7 @@ class iJamAudioManager {
         var zone = 0
         
         if loc.x < zoneBreaks[0] {
-            zone = 0
+            zone = 0  // left of string 6
         } else if loc.x <= zoneBreaks[0] + kHalfStringWidth {
             zone = 1 // over string 6
         } else if loc.x < zoneBreaks[1] {
@@ -99,6 +100,7 @@ class iJamAudioManager {
         } else {
             zone = 12  // right of string 1
         }
+        
         return zone
     }
     
@@ -113,9 +115,11 @@ class iJamAudioManager {
         guard oldZone != -1  else { return 0 }
         
         var stringNumber = (6 - (zone / 2))
+        
         if oldZone < zone && zone != 0 {
             stringNumber += 1
         }
+        
         return stringNumber
     }
     

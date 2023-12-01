@@ -104,7 +104,8 @@ struct ChordButtonsView: View {
         }
         
         /// sets model.activeChord and model.selectedIndex
-        func setNewChord() {            if let chordNames = model.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"]) {
+        func setNewChord() {
+            if let chordNames = model.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"]) {
                 guard self.pick.id < chordNames.count else { return }
                 
                 let newActiveChordName = chordNames[self.pick.id]
