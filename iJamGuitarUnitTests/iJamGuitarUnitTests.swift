@@ -33,8 +33,8 @@ final class iJamViewModelTests: XCTestCase {
         XCTAssertEqual(chordNameArray.count, 10)
     }
    
-    func test_iJamAudioManager_noteNamesArray_shouldHaveFortyTwoElements() {
-        XCTAssertEqual(audioManager.noteNamesArray.count, 42)
+    func test_iJamAudioManager_noteNamesArray_shouldHaveFortyFourElements() {
+        XCTAssertEqual(audioManager.noteNamesArray.count, 44)
     }
     
     func test_iJamModel_Tunings_ChordsMeetRequirements() {
@@ -107,7 +107,7 @@ final class iJamViewModelTests: XCTestCase {
         if chord.fretMap?.count != 6 {
             return false
         }
-        let span = getSpan(fretMap: chord.fretMap ?? "119911")
+        let span = getSpan(fretMap: chord.fretMap ?? "111111")
         if span < 0 || span > 5 {
             return false
         }
