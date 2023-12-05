@@ -36,7 +36,9 @@ struct StringsAndFretsAreaView : View {
                 // display StringAreaView in Bottom half
                 Image("StringAreaView")
                     .resizable()
-                    .frame(width: width, height: height / 2, alignment: .top)
+                    .frame(width: width, 
+                           height: height / 2,
+                           alignment: .top)
             }
             
             // TOP layer

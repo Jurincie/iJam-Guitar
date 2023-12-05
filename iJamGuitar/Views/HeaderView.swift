@@ -25,11 +25,15 @@ struct HeaderView: View {
                 Spacer()
                 TuningPickerView(model: $model)
                     .frame(alignment: .trailing)
-                    .border( .white, width: 2, cornerRadius: 7)
+                    .border(.white, 
+                            width: 2,
+                            cornerRadius: 7)
                 Spacer()
                 ChordGroupPickerView(model: $model)
                     .frame(alignment: .leading)
-                    .border( .white, width: 2, cornerRadius: 7)
+                    .border(.white,
+                            width: 2,
+                            cornerRadius: 7)
                 Spacer()
             }
         }

@@ -34,6 +34,7 @@ import OSLog
 struct StringsView: View {
     @Bindable var model: iJamModel
     @State private var dragLocation: CGPoint?
+    let halfStringWidth = 10.0
     let audioManager: iJamAudioManager
     var height: CGFloat
     var drag: some Gesture {
@@ -59,21 +60,21 @@ struct StringsView: View {
                            height: height,
                            stringNumber: 6)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[0] = newFrame.minX
+                    audioManager.zoneBreaks[0] = newFrame.minX + halfStringWidth
                 }
                 Spacer()
                 StringView(model: model,
                            height: height,
                            stringNumber: 5)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[1] = newFrame.minX
+                    audioManager.zoneBreaks[1] = newFrame.minX + halfStringWidth
                 }
                 Spacer()
                 StringView(model: model,
                            height: height,
                            stringNumber: 4)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[2] = newFrame.minX
+                    audioManager.zoneBreaks[2] = newFrame.minX + halfStringWidth
                 }
                 Spacer()
             }
@@ -82,21 +83,21 @@ struct StringsView: View {
                            height: height,
                            stringNumber: 3)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[3] = newFrame.minX
+                    audioManager.zoneBreaks[3] = newFrame.minX + halfStringWidth
                 }
                 Spacer()
                 StringView(model: model,
                            height: height,
                            stringNumber: 2)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[4] = newFrame.minX
+                    audioManager.zoneBreaks[4] = newFrame.minX + halfStringWidth
                 }
                 Spacer()
                 StringView(model: model,
                            height: height, 
                            stringNumber: 1)
                 .readFrame { newFrame in
-                    audioManager.zoneBreaks[5] = newFrame.minX
+                    audioManager.zoneBreaks[5] = newFrame.minX + halfStringWidth
                 }
             }
             SixSpacerHStack()

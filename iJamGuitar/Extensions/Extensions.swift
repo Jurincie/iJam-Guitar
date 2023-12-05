@@ -11,14 +11,16 @@ import SwiftUI
 extension StringView {
     func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
         var fretBoxArray:[FretBox] = []
-        fretBoxArray.append(FretBox(id: 0, 
-                                    title: model.fretIndexMap[6 - stringNumber] == -1 ?
-                                    "X" : getFretNoteTitle(openNote: openStringNote, 
+        let index = model.fretIndexMap[6 - stringNumber]
+        fretBoxArray.append(FretBox(id: 0,
+                                    title: index == -1 ?
+                                    "X" : getFretNoteTitle(openNote: openStringNote,
                                                            offset: 0)))
         for index in Range(0...4) {
+            let title = getFretNoteTitle(openNote: openStringNote,
+                                         offset: index + minFret)
             fretBoxArray.append(FretBox(id: minFret + index,
-                                        title: getFretNoteTitle(openNote: openStringNote, 
-                                                                offset: index + minFret)))
+                                        title: title))
         }
         return fretBoxArray
     }
@@ -40,7 +42,8 @@ extension View {
     background(
       GeometryReader { geometryProxy in
         Color.clear
-              .preference(key: FramePreferenceKey.self, value: geometryProxy.frame(in: .global))
+              .preference(key: FramePreferenceKey.self, 
+                          value: geometryProxy.frame(in: .global))
       }
     )
     .onPreferenceChange(FramePreferenceKey.self, perform: onChange)

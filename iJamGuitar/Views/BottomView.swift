@@ -17,7 +17,9 @@ struct BottomView: View {
         ZStack() {
             Image("BottomView")
                 .resizable()
-                .frame(width:width, height:height, alignment:.topLeading)
+                .frame(width:width, 
+                       height:height,
+                       alignment:.topLeading)
             VStack() {
                 VolumeView(model: $model)
                     .padding(.horizontal, 40)

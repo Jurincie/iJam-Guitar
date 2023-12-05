@@ -1,7 +1,5 @@
 //
 //  iJamGuitarUnitTests.swift
-//  IJAM_2022UnitTests
-//
 //  Created by Ron Jurincie on 4/8/23.
 //
 

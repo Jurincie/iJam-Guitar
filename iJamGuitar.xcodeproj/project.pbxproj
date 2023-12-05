@@ -56,6 +56,7 @@
 /* Begin PBXFileReference section */
 		7A302E4F2A1FF21B005864F4 /* iJamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamModel.swift; path = iJamGuitar/iJamModel.swift; sourceTree = SOURCE_ROOT; };
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
+		7A3ACFFC2B1F70C1003EEF9A /* iJamGuitarTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iJamGuitarTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7AA07A222A040F6A00AE87B3 /* iJamGuitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJamGuitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarApp.swift; sourceTree = "<group>"; };
 		7AA07A292A040F6B00AE87B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,7 +86,6 @@
 		7AA07A822A0417E800AE87B3 /* CapoPositionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapoPositionPickerView.swift; path = iJamGuitar/Views/CapoPositionPickerView.swift; sourceTree = SOURCE_ROOT; };
 		7AA07A832A0417E800AE87B3 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopView.swift; path = iJamGuitar/Views/TopView.swift; sourceTree = SOURCE_ROOT; };
 		7AA07A842A0417E800AE87B3 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = iJamGuitar/Views/ContentView.swift; sourceTree = SOURCE_ROOT; };
-		7AB446D52A0DCDC9005B8F88 /* iJamGuitarTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iJamGuitarTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7AB446D62A0DCDCA005B8F88 /* iJamGuitarUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarUnitTests.swift; sourceTree = "<group>"; };
 		7AE86C282B1BAC820032DABD /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
@@ -168,8 +168,8 @@
 		7AA07A3A2A040F6B00AE87B3 /* iJamGuitarUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				7A3ACFFC2B1F70C1003EEF9A /* iJamGuitarTests-Bridging-Header.h */,
 				7AB446D62A0DCDCA005B8F88 /* iJamGuitarUnitTests.swift */,
-				7AB446D52A0DCDC9005B8F88 /* iJamGuitarTests-Bridging-Header.h */,
 			);
 			path = iJamGuitarUnitTests;
 			sourceTree = "<group>";

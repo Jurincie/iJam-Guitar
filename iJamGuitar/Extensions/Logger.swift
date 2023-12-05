@@ -16,8 +16,7 @@ extension Logger {
 
     /// All logs related to tracking and analytics.
     static let statistics = Logger(subsystem: subsystem, category: "statistics")
-    
-    
+
     /// All logs related to errors
     static let errors = Logger(subsystem: subsystem, category: "errors")
 }

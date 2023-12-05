@@ -9,7 +9,7 @@ import Foundation
 
 extension iJamModel
 {
-    /// This method takes a name associated with appState.Tunings names
+    /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
     /// - Parameter name: name-> The name selected by user in Tuning Picker
     /// - Returns:Tuning associated with Name
@@ -28,14 +28,14 @@ extension iJamModel
     
     /// - Parameter newTuning: newTuning
     /// /// Description: When user selects NEW Tuning, we need to set:
-    /// ///activeTuning,  appState?.activeTUNINGm activeChordGroup and appState?.activeChordGroup, activeChordGroupNamem availableChords
+    /// /// activeTuning, activeChordGroup, activeChordGroupName and availableChords
     /// /// fretIndexMap and selectedIndex based on the activeChord for this Tuning
-    /// /// We save new appState members here
     /// /// Warning: Must set activeChordGroup prior to setting activeChordGroupName
-    func setNewActiveTuning(newTuning: Tuning) {
-        // set activeTuning in model and dataModel
+    func makeNewTuningActive(newTuning: Tuning) {
+        guard newTuning.activeChordGroup != nil else { return }
+        
         activeTuning = newTuning
-        activeChordGroup = newTuning.activeChordGroup
+        activeChordGroup = activeTuning?.activeChordGroup
         activeChordGroupName = activeChordGroup?.name ?? ""
         activeTuning?.activeChordGroup = newTuning.activeChordGroup
         availableChords = getAvailableChords(activeChordGroup: activeChordGroup, activeTuning: activeTuning)
@@ -61,10 +61,10 @@ extension iJamModel
         return newChordGroup
     }
     
-    ///  This method sets the newly instantiated newChordGroup as the appState.activeChordGroup.
-    ///  Then sets the appState.availableChords to the chords associated with this newChordGroup.
-    ///  Then sets the appState.activeChord to the newChordGroup.activeChord
-    ///  Then sets the appState.selectedIndex via getSelectedChordButtonIndex()
+    ///  This method sets the newly instantiated newChordGroup as the activeChordGroup.
+    ///  Then sets the availableChords to the chords associated with this newChordGroup.
+    ///  Then sets the activeChord to the newChordGroup.activeChord
+    ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
     ///  Then saves the context.
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func setActiveChordGroup(newChordGroup: ChordGroup) {
@@ -75,7 +75,7 @@ extension iJamModel
         selectedChordIndex = getSelectedChordButtonIndex()
     }
     
-    /// This method returns an array of names associated with available appState.Tunings
+    /// This method returns an array of names associated with available Tunings
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {
         var tuningNames: [String] = []
@@ -85,8 +85,8 @@ extension iJamModel
         return tuningNames
     }
     
-    /// This method returns an array of names associated with appState.activeTuning.chordGroup.names
-    /// - Returns: an Array of Strings containing the available chordGroup names for appState.activeTuning.
+    /// This method returns an array of names associated with activeTuning.chordGroup.names
+    /// - Returns: an Array of Strings containing the available chordGroup names for activeTuning.
     func getActiveTuningChordGroupNames() -> [String] {
         var chordGroupNames: [String] = []
         

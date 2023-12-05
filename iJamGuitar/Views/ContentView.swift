@@ -19,7 +19,9 @@ struct ContentView: View {
             let width = geo.size.width
             
             VStack(spacing: 0) {
-                HeaderView(model: $dataModel, width: width, height: height * 0.10 )
+                HeaderView(model: $dataModel, 
+                           width: width,
+                           height: height * 0.10 )
                     .aspectRatio(contentMode: .fit)
                 TopView(model: $dataModel,
                         width:width,
@@ -35,8 +37,10 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fit)
             }
             .cornerRadius(16.0)
-            .frame(width:width, height:height)
-            .position(CGPoint(x: width / 2.0, y: height / 2.0))
+            .frame(width:width, 
+                   height:height)
+            .position(CGPoint(x: width / 2.0,
+                              y: height / 2.0))
         }
         .background(Color.black)
         .environment(dataModel)  // inject iJamModel into environment

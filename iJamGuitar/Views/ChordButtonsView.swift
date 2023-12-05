@@ -12,16 +12,16 @@ struct ChordButtonsView: View {
     @Binding var model: iJamModel
     let width: CGFloat
     let height: CGFloat
-    let mySpacing:CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
+    let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    var activeButtonId: Int = -1
     
     func getPicks() -> [Pick] {
         let chordNames:[String] = model.getAvailableChordNames(activeChordGroup: model.activeChordGroup)
         var pickArray: [Pick] = []
         
         for index in 0..<10 {
-            pickArray.append(Pick(id: index, title: chordNames[index], image:Image("UndefinedPick")))
+            pickArray.append(Pick(id: index, title: chordNames[index], 
+                                  image:Image("UndefinedPick")))
         }
         
         return pickArray
@@ -30,7 +30,8 @@ struct ChordButtonsView: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing:mySpacing) {
                 ForEach(getPicks(), id: \.id) { pick in
-                    PickView(model: $model, pick: pick)
+                    PickView(model: $model, 
+                             pick: pick)
             }
         }
     }
@@ -69,7 +70,7 @@ struct ChordButtonsView: View {
                     withAnimation(.default) {
                         isAnimated.toggle()
                     }
-                    setNewChord()
+                    makeChosenPicksChordActive()
                 }
             }){
                 Image(getPickImageName())
@@ -89,7 +90,7 @@ struct ChordButtonsView: View {
             var pickImageName = "BlankPick"
             if model.selectedChordIndex == self.pick.id {
                 let thisChord = model.availableChords[self.pick.id]
-                pickImageName =  model.fretIndexMap != model.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
+                pickImageName = model.fretIndexMap != model.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
             } else {
                 pickImageName = self.pick.id < model.availableChords.count ? "BlankPick" : "UndefinedPick"
             }
@@ -103,12 +104,13 @@ struct ChordButtonsView: View {
         }
         
         /// sets model.activeChord and model.selectedIndex
-        func setNewChord() {
+        func makeChosenPicksChordActive() {
             if let chordNames = model.activeChordGroup?.availableChordNames.components(separatedBy: ["-"]) {
                 guard self.pick.id < chordNames.count else { return }
                 
                 let newActiveChordName = chordNames[self.pick.id]
-                if let newActiveChord = model.getChord(name: newActiveChordName, tuning: model.activeTuning) {
+                if let newActiveChord = model.getChord(name: newActiveChordName, 
+                                                       tuning: model.activeTuning) {
                     model.activeChord = newActiveChord
                     model.selectedChordIndex = self.pick.id
                 }
@@ -117,13 +119,13 @@ struct ChordButtonsView: View {
             }
         }
         
-        func getFontSize(targetString:String) -> Double {
+        func getFontSize(targetString: String) -> Double {
             
             switch targetString.count {
             case 1:     return UIDevice.current.userInterfaceIdiom == .pad ? 28.0 : 22.0
             case 2:     return UIDevice.current.userInterfaceIdiom == .pad ? 26.0 : 20.0
             case 3:     return UIDevice.current.userInterfaceIdiom == .pad ? 24.0 : 18.0
-            case 4, 5:  return UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 14.0
+            case 4,5:  return UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 14.0
             default:    return UIDevice.current.userInterfaceIdiom == .pad ? 14.0 : 10.0
             }
         }

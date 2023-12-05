@@ -19,12 +19,15 @@ struct FretBoardView: View {
         VStack() {
             Image("Nut")
                 .resizable()
-                .frame(width: width, height: height / 6, alignment: .top)
-    
+                .frame(width: width, 
+                       height: height / 6,
+                       alignment: .top)
             Spacer()
         }
         .background( Image("FretBoard")
             .resizable()
-            .frame(width: width, height: height, alignment: .top))
+            .frame(width: width, 
+                   height: height,
+                   alignment: .top))
     }
 }
