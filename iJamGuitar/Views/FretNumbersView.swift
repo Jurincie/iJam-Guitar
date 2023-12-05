@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct FretNumbersView: View {
-    @EnvironmentObject var model: iJamModel
-    var width:CGFloat = 0.0
-    var height:CGFloat = 0.0
+    @Binding var model: iJamModel
+    let width: CGFloat
+    let height: CGFloat
      
     var body: some View {
         
         VStack(alignment: .leading, spacing:0) {
             // lowest row is for the nut / open string / capo position
-            CapoPositionPickerView()
+            CapoPositionPickerView(model: model)
                 .frame(width: width, height: height / 6, alignment: .center)
                 .background(Color.accentColor)
                 .overlay(RoundedRectangle(cornerRadius:8)

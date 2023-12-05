@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct TuningPickerView: View {
-   
-    @EnvironmentObject var model: iJamModel
+   @Binding var model: iJamModel
 
     var body: some View {
        VStack {
@@ -17,6 +17,7 @@ struct TuningPickerView: View {
                Picker("Tunings", selection: $model.activeTuningName) {
                    ForEach(model.getTuningNames(), id: \.self) {
                        Text($0)
+                           .fixedSize()
                    }
                }
                .labelsHidden()
@@ -31,6 +32,7 @@ struct TuningPickerView: View {
                    .foregroundColor(Color.white)
                    .cornerRadius(10.0)
                    .shadow(color: .white , radius: 2.0)
+                   .fixedSize()
            }
        }
     }

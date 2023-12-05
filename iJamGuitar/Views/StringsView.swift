@@ -9,6 +9,7 @@
 
 import AVFoundation
 import SwiftUI
+import OSLog
 
 ///  StringsView
 ///  is responsible for displaying the 6 StringView views
@@ -17,25 +18,24 @@ import SwiftUI
 /// StringsView moitors a DragGesture's position to track when to pluck a string to play its  Audio player
 ///
 /// Zone 0:  left of string 6
-/// Zone 1:  over String 6
+/// Zone 1:  inside String 6
 /// Zone 2:  between Strings 6 - 5
-/// Zone 3:  over String 5
+/// Zone 3:  inside String 5
 /// Zone 4:  between Strings 5 - 4
-/// Zone 5:  over String 4
+/// Zone 5:  inside String 4
 /// Zone 6:  between Strings 4 - 3
-/// Zone 7:  over String 3
+/// Zone 7:  inside String 3
 /// Zone 8:  between Strings 3 - 2
-/// Zone 9:  over String 2
+/// Zone 9:  inside String 2
 /// Zone 10: between Strings 2 - 1
-/// Zone 11: over String 1
+/// Zone 11: inside String 1
 /// Zone 12: right of String 1
 ///
 struct StringsView: View {
-    @EnvironmentObject var model: iJamModel
-    let audioManager = iJamAudioManager()
+    @Bindable var model: iJamModel
     @State private var dragLocation: CGPoint?
-    var height: CGFloat = 0.0
-    let kHalfStringWidh = 5.0
+    let audioManager: iJamAudioManager
+    var height: CGFloat
     var drag: some Gesture {
         DragGesture()
             .onEnded { _ in audioManager.formerZone = -1 }
@@ -44,47 +44,59 @@ struct StringsView: View {
                 audioManager.newDragLocation(dragLocation)
         }
     }
+    
+    init(model: iJamModel, height: CGFloat) {
+        self.model = model
+        self.height = height
+        self.audioManager = iJamAudioManager(model: model)
+    }
 
     var body: some View {
         HStack() {
             SixSpacerHStack()
             HStack(spacing:0) {
-                StringView(height:height, 
-                           stringNumber: 6,
-                           fretNumber: model.fretIndexMap[0]) .readFrame { newFrame in
-                    audioManager.zoneBreaks[0] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
+                StringView(model: model, 
+                           height: height,
+                           stringNumber: 6)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[0] = newFrame.minX
                 }
                 Spacer()
-                StringView(height:height, 
-                           stringNumber: 5,
-                           fretNumber: model.fretIndexMap[1]) .readFrame { newFrame in
-                    audioManager.zoneBreaks[1] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
+                StringView(model: model,
+                           height: height,
+                           stringNumber: 5)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[1] = newFrame.minX
                 }
                 Spacer()
-                StringView(height:height, 
-                           stringNumber: 4,
-                           fretNumber: model.fretIndexMap[2]) .readFrame { newFrame in
-                    audioManager.zoneBreaks[2] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
-                }
-                Spacer()
-                StringView(height:height, 
-                           stringNumber: 3,
-                           fretNumber: model.fretIndexMap[3]) .readFrame { newFrame in
-                    audioManager.zoneBreaks[3] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
-                }
-                Spacer()
-                StringView(height:height, 
-                           stringNumber: 2,
-                           fretNumber: model.fretIndexMap[4]) .readFrame { newFrame in
-                    audioManager.zoneBreaks[4] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
+                StringView(model: model,
+                           height: height,
+                           stringNumber: 4)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[2] = newFrame.minX
                 }
                 Spacer()
             }
             HStack() {
-                StringView(height:height, 
-                           stringNumber: 1,
-                           fretNumber: model.fretIndexMap[5]).readFrame { newFrame in
-                    audioManager.zoneBreaks[5] = ((newFrame.maxX + newFrame.minX) / 2.0) - kHalfStringWidh
+                StringView(model: model,
+                           height: height,
+                           stringNumber: 3)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[3] = newFrame.minX
+                }
+                Spacer()
+                StringView(model: model,
+                           height: height,
+                           stringNumber: 2)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[4] = newFrame.minX
+                }
+                Spacer()
+                StringView(model: model,
+                           height: height, 
+                           stringNumber: 1)
+                .readFrame { newFrame in
+                    audioManager.zoneBreaks[5] = newFrame.minX
                 }
             }
             SixSpacerHStack()

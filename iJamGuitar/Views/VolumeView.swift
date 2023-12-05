@@ -6,24 +6,18 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct VolumeView: View {
-    @EnvironmentObject var model: iJamModel
-    let context = PersistenceController.shared.container.viewContext
+    @Binding var model: iJamModel
     @State private var isEditing = false
-    var imageWidth = UIDevice.current.userInterfaceIdiom == .pad ? 35.0 : 25.0
+    let imageWidth = UIDevice.current.userInterfaceIdiom == .pad ? 35.0 : 25.0
     
     func VolumeSlider() -> some View {
         Slider(
             value: $model.volumeLevel,
-            in: 0...10,
-            onEditingChanged: { editing in
-                isEditing = editing
-                if isEditing == false {
-                    model.appState?.volumeLevel = NSDecimalNumber(value: model.volumeLevel)
-                    try? context.save()
-                }
-            })
+            in: 0...10
+        )
     }
     
     func SpeakerImage() -> some View {
@@ -43,8 +37,6 @@ struct VolumeView: View {
                 Spacer()
                 Button(action: {
                     model.isMuted.toggle()
-                    updateIsMuted()
-                    try? context.save()
                 }) {
                     SpeakerImage()
                 }
@@ -52,24 +44,6 @@ struct VolumeView: View {
                 Spacer()
             }
             Spacer()
-        }
-    }
-    
-    func updateIsMuted() {
-        model.appState?.isMuted = model.isMuted
-       
-        if (model.isMuted) {
-            // save volume level and set to zero
-            model.savedVolumeLevel = model.volumeLevel
-            model.volumeLevel = 0.0
-            model.appState?.volumeLevel = 0.0
-        }
-        else {
-            // restore volume level if user hasn't changed it from zero
-            if model.volumeLevel == 0.0 {
-                model.volumeLevel = model.savedVolumeLevel
-                model.appState?.volumeLevel = NSDecimalNumber(value: model.volumeLevel)
-            }
         }
     }
 }

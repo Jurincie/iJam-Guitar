@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct CapoPositionPickerView: View {
-    @EnvironmentObject var model: iJamModel
+    @Bindable var model: iJamModel
     let frets = Range(-2...5)
     let kLabelWidth = 40.0
 

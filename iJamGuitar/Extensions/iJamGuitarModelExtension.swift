@@ -16,12 +16,11 @@ extension iJamModel
     /// - Returns:Tuning associated with Name
     func getTuning(name: String) -> Tuning? {
         var newTuning: Tuning? = nil
-        if let tunings = appState?.tunings {
-            for case let tuning as Tuning in tunings {
-                if tuning.name == name {
-                    newTuning = tuning
-                    break
-                }
+        
+        for tuning in tunings {
+            if tuning.name == name {
+                newTuning = tuning
+                break
             }
         }
         return newTuning
@@ -37,14 +36,12 @@ extension iJamModel
     func setNewActiveTuning(newTuning: Tuning) {
         // set activeTuning in model and dataModel
         activeTuning = newTuning
-        appState?.activeTuning = newTuning
         activeChordGroup = newTuning.activeChordGroup
         activeChordGroupName = activeChordGroup?.name ?? ""
-        appState?.activeTuning?.activeChordGroup = newTuning.activeChordGroup
+        activeTuning?.activeChordGroup = newTuning.activeChordGroup
         availableChords = getAvailableChords(activeChordGroup: activeChordGroup, activeTuning: activeTuning)
         fretIndexMap = getFretIndexMap(chord: activeChordGroup?.activeChord)
         selectedChordIndex = getSelectedChordButtonIndex()
-        try? context.save()
     }
     
     ///  This method instantiates and returns a new ChordGroup based upon the name parameter.
@@ -55,7 +52,7 @@ extension iJamModel
         var newChordGroup: ChordGroup? = nil
         
         if let chordGroups = activeTuning?.chordGroups {
-            for case let chordGroup as ChordGroup in chordGroups {
+            for case let chordGroup in chordGroups {
                 if chordGroup.name == name {
                     newChordGroup = chordGroup
                     break
@@ -74,34 +71,32 @@ extension iJamModel
     func setActiveChordGroup(newChordGroup: ChordGroup) {
         activeChordGroup = newChordGroup
         availableChords = getAvailableChords(activeChordGroup: newChordGroup, activeTuning: activeTuning)
-        appState?.activeTuning?.activeChordGroup = newChordGroup
+        activeTuning?.activeChordGroup = newChordGroup
         activeChord = newChordGroup.activeChord
         selectedChordIndex = getSelectedChordButtonIndex()
-        try? context.save()
     }
     
     /// This method returns an array of names associated with available appState.Tunings
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {
         var tuningNames: [String] = []
-        if let tuningsArray: [Tuning] = self.appState?.tunings?.allObjects as? [Tuning] {
-            for tuning in tuningsArray {
-                tuningNames.append(tuning.name ?? "BadName")
-            }
+        for tuning in tunings {
+            tuningNames.append(tuning.name)
         }
         return tuningNames
     }
     
     /// This method returns an array of names associated with appState.activeTuning.chordGroup.names
     /// - Returns: an Array of Strings containing the available chordGroup names for appState.activeTuning.
-    func getChordGroupNames() -> [String] {
+    func getActiveTuningChordGroupNames() -> [String] {
         var chordGroupNames: [String] = []
         
-        if let chordGroupArray: [ChordGroup] = self.appState?.activeTuning?.chordGroups?.allObjects as? [ChordGroup] {
-            for chordGroup in chordGroupArray {
-                chordGroupNames.append(chordGroup.name ?? "")
+        if let chordGroups = activeTuning?.chordGroups {
+            for group in chordGroups {
+                chordGroupNames.append(group.name)
             }
         }
+    
         return chordGroupNames
     }
   
@@ -133,24 +128,11 @@ extension iJamModel
         return fretsArray
     }
     
-    func getAppState() -> AppState? {
-        var appState: AppState?
-        let request = NSFetchRequest<AppState>(entityName: "AppState")
-        do {
-            let appStates: [AppState] = try context.fetch(request)
-            appState = appStates.first
-        } catch {
-            let error = error as NSError
-            debugPrint("Error getting AppState \(error)")
-        }
-        return appState
-    }
-    
     /// Gets chord names for this chordGroup
     /// - Parameter activeChordGroup: the currently active chordGroup
     /// - Returns: array of chord names associated with activeChordGroup argument
     func getAvailableChordNames(activeChordGroup: ChordGroup?) -> [String] {
-        if var availableChordNames: [String] = activeChordGroup?.availableChordNames?.components(separatedBy: ["-"]) {
+        if var availableChordNames: [String] = activeChordGroup?.availableChordNames.components(separatedBy: ["-"]) {
             if availableChordNames.count == 10 {
                 return availableChordNames
             }
@@ -159,6 +141,7 @@ extension iJamModel
             }
             return availableChordNames
         }
+        
         return []
     }
     
@@ -169,7 +152,7 @@ extension iJamModel
     /// - Returns: array of chords associated with activeChordGroup for activeTuning or empty array if anything goes wrong
     func getAvailableChords(activeChordGroup: ChordGroup?, activeTuning: Tuning?) -> [Chord] {
         var availableChords: [Chord] = []
-        if let chordNames = activeChordGroup?.availableChordNames?.components(separatedBy: "-"),
+        if let chordNames = activeChordGroup?.availableChordNames.components(separatedBy: "-"),
            let activeTuning = activeTuning {
             for chordName in chordNames {
                 if let chord = getChord(name: chordName, tuning: activeTuning) {
@@ -188,7 +171,7 @@ extension iJamModel
     ///             which is nil if no chord with name in arg #1 exists in the optional(Tuning) in arg #2
     ///             otherwise it returns the new chord for the optional(Tuning) in arg #2 if tuning exists
     func getChord(name: String, tuning: Tuning?) -> Chord? {
-        if let chordArray: [Chord] = tuning?.chords?.allObjects as? [Chord] {
+        if let chordArray: [Chord] = tuning?.chords {
             for chord in chordArray {
                 if chord.name == name {
                     return chord

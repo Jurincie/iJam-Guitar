@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import OSLog
 
 @available(iOS 16.0, *)
 struct ChordGroupPickerView: View {
-    @EnvironmentObject var model: iJamModel
+    @Binding var model: iJamModel
     
     var body: some View {
         VStack {
             Menu {
                 Picker("Chord Groups", selection: $model.activeChordGroupName) {
-                    ForEach(model.getChordGroupNames(), id: \.self) {
+                    ForEach(model.getActiveTuningChordGroupNames(), id: \.self) {
                         Text($0)
                     }
                 }

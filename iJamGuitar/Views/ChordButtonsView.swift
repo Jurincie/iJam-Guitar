@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct ChordButtonsView: View {
-    @EnvironmentObject var model: iJamModel
-    let context = PersistenceController.shared.container.viewContext
-    var width:CGFloat = 0.0
-    var height:CGFloat = 0.0
+    @Binding var model: iJamModel
+    let width: CGFloat
+    let height: CGFloat
     let mySpacing:CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
-    private let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    private var activeButtonId: Int = -1
+    let columns = Array(repeating: GridItem(.flexible()), count: 5)
+    var activeButtonId: Int = -1
     
     func getPicks() -> [Pick] {
         let chordNames:[String] = model.getAvailableChordNames(activeChordGroup: model.activeChordGroup)
@@ -30,7 +30,7 @@ struct ChordButtonsView: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing:mySpacing) {
                 ForEach(getPicks(), id: \.id) { pick in
-                    PickView(pick: pick)
+                    PickView(model: $model, pick: pick)
             }
         }
     }
@@ -42,9 +42,8 @@ struct ChordButtonsView: View {
     }
     
     struct PickView: View {
-        @EnvironmentObject var model: iJamModel
+        @Binding var model: iJamModel
         @State private var isAnimated: Bool = false
-        let context = PersistenceController.shared.container.viewContext
         let noChordArray = [Int](repeating: -1, count: 10)
         let kNoChordName = "NoChord"
         var pick: Pick
@@ -105,18 +104,13 @@ struct ChordButtonsView: View {
         
         /// sets model.activeChord and model.selectedIndex
         func setNewChord() {
-            if let chordNames = model.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"]) {
+            if let chordNames = model.activeChordGroup?.availableChordNames.components(separatedBy: ["-"]) {
                 guard self.pick.id < chordNames.count else { return }
                 
                 let newActiveChordName = chordNames[self.pick.id]
                 if let newActiveChord = model.getChord(name: newActiveChordName, tuning: model.activeTuning) {
                     model.activeChord = newActiveChord
                     model.selectedChordIndex = self.pick.id
-                }
-                do {
-                    try context.save()
-                } catch {
-                    fatalError()
                 }
                 
                 isAnimated.toggle()

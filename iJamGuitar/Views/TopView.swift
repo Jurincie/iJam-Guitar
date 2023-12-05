@@ -6,18 +6,24 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct TopView: View {
-
-     var width:CGFloat = 0.0
-     var height:CGFloat = 0.0
+    @Binding var model: iJamModel
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
-        ChordButtonsView()
-            .frame(width: width, height: height, alignment: .center)
+        ChordButtonsView(model: $model, 
+                         width: width,
+                         height: height)
+            .frame(width: width, 
+                   height: height,
+                   alignment: .center)
             .background( Image("TopView")
                 .resizable()
-                .frame(width: width, height: height, alignment: .topLeading))
+                .frame(width: width, 
+                       height: height,
+                       alignment: .topLeading))
     }
-    
 }

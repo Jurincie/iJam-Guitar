@@ -7,44 +7,63 @@
 
 import Foundation
 import SwiftUI
+import OSLog
 
 // StringView has 2 layers:
 //  bottom layer: appropriate string image
 //  top layer:  VStack() of 6 possibly-RedBall images evenly spaced over top half of the stringsView
 
 struct StringView: View {
-    @EnvironmentObject var model: iJamModel
+    @Bindable var model: iJamModel
     let notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
-    var height: CGFloat
-    var stringImageName: String
-    var stringNumber: Int
+    let height: CGFloat
+    var stringImageName: String = ""
+    let stringNumber: Int
     
-    init(height: CGFloat, stringNumber: Int, fretNumber: Int) {
-        self.height             = height
-        self.stringNumber       = stringNumber
-        self.stringImageName    = "String"
+    init(model: iJamModel, 
+         height: CGFloat,
+         stringNumber: Int) {
+        self.model = model
+        self.height = height
+        self.stringNumber = stringNumber
+        self.stringImageName = "String"
         stringImageName.append("\(stringNumber)")
     }
         
     var body: some View {
-        let openNotesString = (model.appState?.activeTuning?.stringNoteNames)
+        let openNotesString = (model.activeTuning?.stringNoteNames)
         if let openNotes:[String] = openNotesString?.components(separatedBy: ["-"]) {
             let fretBoxes:[FretBox] = getFretBoxArray(minFret: model.minimumFret, openStringNote: openNotes[6 - stringNumber])
-            // 1x6 grid of Buttons with noteName in text on top of the possible image
-            // zero or one of the buttons may show the redBall image indicating string if fretted there
+            /*
+             1x6 grid of Buttons with noteName in text on top of the possible image
+             zero or one of the buttons may show the redBall image indicating string
+             if fretted there
+             */
             VStack(spacing:0) {
-                FretBoxView(fretBox: fretBoxes[0], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[1], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[2], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[3], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[4], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[5], stringNumber:stringNumber)
-                    .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[0],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[1],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[2],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[3],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[4],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
+                FretBoxView(model: model,
+                            fretBox: fretBoxes[5],
+                            stringNumber:stringNumber)
+                .frame(width: height / 10, height: height / 12, alignment: .top)
                 
                 Spacer()
             }
@@ -54,17 +73,17 @@ struct StringView: View {
                 .opacity(model.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0))
         }
     }
+ 
     
     struct FretBox: Identifiable  {
-        var id: Int
-        var title: String
+        let id: Int
+        let title: String
     }
     
     struct FretBoxView: View {
-        @EnvironmentObject var model: iJamModel
-        var fretBox: FretBox
-        var stringNumber: Int
-        let context = PersistenceController.shared.container.viewContext
+        @Bindable var model: iJamModel
+        let fretBox: FretBox
+        let stringNumber: Int
 
         var body: some View {
             let minFret = model.minimumFret
@@ -72,7 +91,7 @@ struct StringView: View {
                 // background
                 Button(action:{
                     let currentFret = model.fretIndexMap[6 - stringNumber]
-                    debugPrint("currentFret: \(currentFret)  minFret: \(minFret)  fretBoxID: \(fretBox.id)")
+                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(minFret)  fretBoxID: \(fretBox.id)")
                     if currentFret == 0 && fretBox.id == 0 {
                         // if nut tapped when string open => make string muted
                         model.fretIndexMap[6 - stringNumber] = -1
@@ -83,13 +102,12 @@ struct StringView: View {
                         // tap this fret
                         model.fretIndexMap[6 - stringNumber] = fretBox.id
                     }
-                    try? context.save()
                 }){
                     if(self.fretBox.id == 0)
                     {
                         // show a white circle on zeroFret with black text
                         CircleView(color: Color.teal, lineWidth: 1.0)
-                    } else if model.fretIndexMap[6 - stringNumber] == fretBox.id {
+                    } else if model.fretIndexMap[6 - stringNumber] == fretBox.id - 1{
                         // red ball on freted fretBox
                         // yellow ball if not in the chord - meaning user tapped on different fret
                         CircleView(color: fretIsFromChord() ? Color.red : Color.yellow, lineWidth: 1.0)
@@ -105,7 +123,7 @@ struct StringView: View {
                         .font(.footnote)
                         .fixedSize()
                 } else {
-                    let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
+                    let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] + 1 ? self.fretBox.title : ""
                     Text(text)
                         .foregroundColor(Color.black)
                         .font(.caption)
@@ -131,8 +149,8 @@ struct StringView: View {
 }
 
 struct CircleView: View {
-    var color: Color
-    var lineWidth: CGFloat
+    let color: Color
+    let lineWidth: CGFloat
     
     init(color: Color = Color.clear, lineWidth: CGFloat = 0.0) {
         self.color = color

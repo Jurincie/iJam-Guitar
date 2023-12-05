@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct BottomView: View {
-    var width:CGFloat = 0.0
-    var height:CGFloat = 0.0
-    
-    init(width:CGFloat, height:CGFloat) {
-        self.width = width
-        self.height = height
-    }
+    @Binding var model: iJamModel
+    let width: CGFloat
+    let height: CGFloat
 
     var body: some View {
         ZStack() {
@@ -22,7 +19,7 @@ struct BottomView: View {
                 .resizable()
                 .frame(width:width, height:height, alignment:.topLeading)
             VStack() {
-                VolumeView()
+                VolumeView(model: $model)
                     .padding(.horizontal, 40)
             }
         }

@@ -23,16 +23,16 @@ struct FramePreferenceKey: PreferenceKey {
 }
 
 class iJamAudioManager {
-    let context             = PersistenceController.shared.container.viewContext
-    var model: iJamModel    = iJamModel.shared
+    @Bindable var model: iJamModel
     let kNoFret             = -1
     let kHalfStringWidth    = 5.0
     var formerZone          = -1
     var zoneBreaks:[Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    var audioPlayerArray    = [AVAudioPlayer?]() // contains 1 audioPlayer for each guitar string 6-1
+    var audioPlayerArray    = [AVAudioPlayer?]() // 1 audioPlayer for each string 6-1
     var noteNamesArray      = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
     
-    init() {
+    init(model: iJamModel) {
+        self.model = model
         initializeAVAudioSession()
         loadWaveFilesIntoAudioPlayers()
     }
@@ -45,7 +45,7 @@ class iJamAudioManager {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
             model.showAudioPlayerErrorAlert = true
-            debugPrint(error.localizedDescription)
+            Logger.statistics.error("\(error.localizedDescription)")
             fatalError()
         }
     }
@@ -62,7 +62,7 @@ class iJamAudioManager {
                 } catch InitializeErrors.AVAudioSessionError{ fatalError() }
                 catch {
                     model.showAudioPlayerErrorAlert = true
-                    debugPrint(error.localizedDescription)
+                    Logger.errors.error("\(error.localizedDescription)")
                     fatalError()
                 }
             }
@@ -128,10 +128,9 @@ class iJamAudioManager {
     /// - Parameter location:- the current location of the drag in global co-ordinates
     func newDragLocation(_ location: CGPoint?) {
         guard let location =  location else { return }
-//        debugPrint("====> DragLocation: \(location)")
         let zone = getZone(loc: location)
         guard zone != formerZone else { return }
-        debugPrint("====> In New Zone: \(zone)")
+        Logger.viewCycle.notice("====> In New Zone: \(zone)")
 
         let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
         if shouldPickString(zone: zone, stringNumber: stringToPlay) {
@@ -142,7 +141,7 @@ class iJamAudioManager {
     
     func shouldPickString(zone: Int, stringNumber: Int) -> Bool {
         var answer = false
-        if zone % 2 == 0 && model.appState?.isMuted == false {
+        if zone % 2 == 0 && model.isMuted == false {
             answer = stringNumber > 0 && stringNumber < 7
         }
         
@@ -153,14 +152,14 @@ class iJamAudioManager {
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) {
-        let openNotes = model.activeTuning?.openNoteIndices?.components(separatedBy: "-")
+        let openNotes = model.activeTuning?.openNoteIndices.components(separatedBy: "-")
         let fretPosition = model.fretIndexMap[6 - stringToPlay]
         
         if fretPosition > kNoFret {
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
-                let index               = fretPosition + thisStringsOpenIndex + model.capoPosition
-                let noteToPlayName      = noteNamesArray[index]
-                let volume              = model.appState?.volumeLevel?.doubleValue  ?? 0.0
+                let index = fretPosition + thisStringsOpenIndex + model.capoPosition
+                let noteToPlayName = noteNamesArray[index]
+                let volume = model.volumeLevel
 
                 playWaveFile(noteName:noteToPlayName,
                              stringNumber: stringToPlay,
