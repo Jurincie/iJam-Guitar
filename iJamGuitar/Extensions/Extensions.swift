@@ -6,16 +6,17 @@
 //
 
 import Foundation
-import CoreData
 import SwiftUI
 
 extension StringView {
     func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
         var fretBoxArray:[FretBox] = []
-        fretBoxArray.append(FretBox(id: 0, title: model.fretIndexMap[6 - stringNumber] == -1 ?
+        fretBoxArray.append(FretBox(id: 0, 
+                                    title: model.fretIndexMap[6 - stringNumber] == -1 ?
                                     "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)))
         for index in Range(1...5) {
-            fretBoxArray.append(FretBox(id: minFret + index, title: getFretNoteTitle(openNote: openStringNote, offset: index + minFret)))
+            fretBoxArray.append(FretBox(id: minFret + index, 
+                                        title: getFretNoteTitle(openNote: openStringNote, offset: index + minFret)))
         }
         return fretBoxArray
     }
