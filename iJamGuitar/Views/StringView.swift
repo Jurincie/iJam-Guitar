@@ -32,8 +32,9 @@ struct StringView: View {
         
     var body: some View {
         let openNotesString = (model.activeTuning?.stringNoteNames)
-        if let openNotes:[String] = openNotesString?.components(separatedBy: ["-"]) {
-            let fretBoxes:[FretBox] = getFretBoxArray(minFret: model.minimumFret, openStringNote: openNotes[6 - stringNumber])
+        if let openNotes: [String] = openNotesString?.components(separatedBy: ["-"]) {
+            let fretBoxes: [FretBox] = getFretBoxArray(minFret: model.minimumFret,
+                                                       openStringNote: openNotes[6 - stringNumber])
             /*
              1x6 grid of Buttons with noteName in text on top of the possible image
              zero or one of the buttons may show the redBall image indicating string
@@ -86,12 +87,11 @@ struct StringView: View {
         let stringNumber: Int
 
         var body: some View {
-            let minFret = model.minimumFret
             ZStack() {
                 // background
                 Button(action:{
                     let currentFret = model.fretIndexMap[6 - stringNumber]
-                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(minFret)  fretBoxID: \(fretBox.id)")
+                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(model.minimumFret)  fretBoxID: \(fretBox.id)")
                     if currentFret == 0 && fretBox.id == 0 {
                         // if nut tapped when string open => make string muted
                         model.fretIndexMap[6 - stringNumber] = -1
@@ -99,7 +99,7 @@ struct StringView: View {
                         // tapped existing fret => make string open
                         model.fretIndexMap[6 - stringNumber] = 0
                     } else {
-                        // tap this fret
+                        // tapped different fret
                         model.fretIndexMap[6 - stringNumber] = fretBox.id
                     }
                 }){
@@ -107,7 +107,7 @@ struct StringView: View {
                     {
                         // show a white circle on zeroFret with black text
                         CircleView(color: Color.teal, lineWidth: 1.0)
-                    } else if model.fretIndexMap[6 - stringNumber] == fretBox.id - 1{
+                    } else if model.fretIndexMap[6 - stringNumber] == fretBox.id {
                         // red ball on freted fretBox
                         // yellow ball if not in the chord - meaning user tapped on different fret
                         CircleView(color: fretIsFromChord() ? Color.red : Color.yellow, lineWidth: 1.0)
@@ -123,7 +123,7 @@ struct StringView: View {
                         .font(.footnote)
                         .fixedSize()
                 } else {
-                    let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] + 1 ? self.fretBox.title : ""
+                    let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
                     Text(text)
                         .foregroundColor(Color.black)
                         .font(.caption)

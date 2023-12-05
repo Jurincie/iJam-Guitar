@@ -13,10 +13,12 @@ extension StringView {
         var fretBoxArray:[FretBox] = []
         fretBoxArray.append(FretBox(id: 0, 
                                     title: model.fretIndexMap[6 - stringNumber] == -1 ?
-                                    "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)))
-        for index in Range(1...5) {
-            fretBoxArray.append(FretBox(id: minFret + index, 
-                                        title: getFretNoteTitle(openNote: openStringNote, offset: index + minFret)))
+                                    "X" : getFretNoteTitle(openNote: openStringNote, 
+                                                           offset: 0)))
+        for index in Range(0...4) {
+            fretBoxArray.append(FretBox(id: minFret + index,
+                                        title: getFretNoteTitle(openNote: openStringNote, 
+                                                                offset: index + minFret)))
         }
         return fretBoxArray
     }
