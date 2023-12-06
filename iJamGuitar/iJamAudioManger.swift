@@ -53,7 +53,8 @@ class iJamAudioManager {
         for _ in 0...5 {
             if let asset = NSDataAsset(name:"NoNote") {
                 do {
-                    let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                    let thisAudioPlayer = try AVAudioPlayer(data:asset.data,
+                                                            fileTypeHint:"wav")
                     if thisAudioPlayer.isPlaying {
                         model.showAudioPlayerInUseAlert = true
                     }
@@ -69,57 +70,30 @@ class iJamAudioManager {
     }
     
     func getZone(loc: CGPoint) -> Int{
-        // ZoneBreaks[n] is left-most position of string[6-n]
+        // ZoneBreaks[n] is left-most position of string[n + 1]
         var zone = 0
         
         if loc.x < zoneBreaks[0] {
-            // left of string 6
-        } else if loc.x <= zoneBreaks[0] + kHalfStringWidth {
-            zone = 1 // over string 6
+            zone = 6    // left of string 6
         } else if loc.x < zoneBreaks[1] {
-            zone = 2  // between string 6 and string 5
-        } else if loc.x <= zoneBreaks[1] + kHalfStringWidth {
-            zone = 3 // over string 5
+            zone = 5    // between string 6 and string 5
         } else if loc.x < zoneBreaks[2] {
             zone = 4  // between string 5 and string 4
-        } else if loc.x <= zoneBreaks[2] + kHalfStringWidth {
-            zone = 5 // over string 4
         } else if loc.x < zoneBreaks[3] {
-            zone = 6  // between string 4 and string 3
-        } else if loc.x <= zoneBreaks[3] + kHalfStringWidth {
-            zone = 7 // over string 3
+            zone = 3  // between string 4 and string 3
         } else if loc.x < zoneBreaks[4] {
-            zone = 8  // between string 3 and string 2
-        } else if loc.x <= zoneBreaks[4] + kHalfStringWidth {
-            zone = 9 // over string 2
+            zone = 2  // between string 3 and string 2
         } else if loc.x < zoneBreaks[5] {
-            zone = 10  // between string 2 and string 1
-        } else if loc.x <= zoneBreaks[5] + kHalfStringWidth {
-            zone = 11 // over string 1
+            zone = 1  // between string 2 and string 1
         } else {
-            zone = 12  // right of string 1
+            zone = 0  // right of string 1
         }
         
         return zone
     }
     
-    ///   Description:
-    ///     if moving to left play string to right -
-    ///     if moving to right play string to left
-    /// - Parameters:
-    ///   - zone: the zone where drag resides
-    ///   - oldZone: the former Zone
-    /// - Returns: String number to play
     func stringNumberToPlay(zone: Int, oldZone: Int) -> Int {
-        guard oldZone != -1  else { return 0 }
-        
-        var stringNumber = (6 - (zone / 2))
-        
-        if oldZone < zone && zone != 0 {
-            stringNumber += 1
-        }
-        
-        return stringNumber
+        return oldZone > zone ? oldZone : zone
     }
     
     ///   Description: This method determines if we are in a new zone -
@@ -127,15 +101,18 @@ class iJamAudioManager {
     /// - Parameter location:- the current location of the drag in global co-ordinates
     func newDragLocation(_ location: CGPoint?) {
         guard let location =  location else { return }
+        
         let zone = getZone(loc: location)
-        guard zone != formerZone else { return }
-        Logger.viewCycle.notice("====> In New Zone: \(zone)")
+        if zone != formerZone {
+            Logger.viewCycle.notice("====> In New Zone: \(zone)")
+            
+            if formerZone >= 0 {
+                let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
+                pickString(stringToPlay)
+            }
 
-        let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
-        if shouldPickString(zone: zone, stringNumber: stringToPlay) {
-            pickString(stringToPlay)
+            formerZone = zone
         }
-        formerZone = zone
     }
     
     func shouldPickString(zone: Int, stringNumber: Int) -> Bool {
@@ -160,6 +137,7 @@ class iJamAudioManager {
                 let noteToPlayName = noteNamesArray[index]
                 let volume = model.volumeLevel
 
+                Logger.viewCycle.debug("playing string: \(stringToPlay)")
                 playWaveFile(noteName:noteToPlayName,
                              stringNumber: stringToPlay,
                              volume: volume / 5.0)
