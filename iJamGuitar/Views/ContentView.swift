@@ -43,7 +43,6 @@ struct ContentView: View {
                               y: height / 2.0))
         }
         .background(Color.black)
-        .environment(dataModel)  // inject iJamModel into environment
     }
 }
 

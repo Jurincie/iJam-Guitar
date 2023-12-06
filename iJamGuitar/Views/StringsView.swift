@@ -115,9 +115,12 @@ struct StringsView: View {
         .alert("Unknown Audio Player Error", isPresented: $model.showAudioPlayerErrorAlert) {
             Button("OK", role: .cancel) { fatalError() }
         }
+        
+        
     }
     
     func playOpeningArpegio() async {
+        Logger.viewCycle.debug("ZoneBreaks: \(audioManager.zoneBreaks)")
         for string in 0...5 {
             audioManager.pickString(6 - string)
             try? await Task.sleep(nanoseconds: 0_150_000_000)
