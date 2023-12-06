@@ -39,8 +39,6 @@ struct ContentView: View {
             .cornerRadius(16.0)
             .frame(width:width, 
                    height:height)
-            .position(CGPoint(x: width / 2.0,
-                              y: height / 2.0))
         }
         .background(Color.black)
     }
