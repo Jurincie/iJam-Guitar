@@ -120,13 +120,13 @@ struct StringView: View {
                 if self.fretBox.id == 0 {
                     Text(self.fretBox.title)
                         .foregroundColor(Color.white)
-                        .font(.footnote)
+                        .font(.title3)
                         .fixedSize()
                 } else {
                     let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
                     Text(text)
                         .foregroundColor(Color.black)
-                        .font(.caption)
+                        .font(.title3)
                         .fixedSize()
                 }
             }

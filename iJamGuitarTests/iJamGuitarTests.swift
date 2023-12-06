@@ -1,6 +1,8 @@
 //
-//  iJamGuitarUnitTests.swift
-//  Created by Ron Jurincie on 4/8/23.
+//  iJamGuitarTests.swift
+//  iJamGuitarTests
+//
+//  Created by Ron Jurincie on 12/5/23.
 //
 
 import XCTest
@@ -11,17 +13,16 @@ import AVFAudio
 
 final class iJamViewModelTests: XCTestCase {
     // Given
-    let audioManager = iJamAudioManager()
-    let model = iJamModel.shared
+    let model = iJamModel()
     let tooBig = 20
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+//    override func setUpWithError() throws {
+//        // Put setup code here. This method is called before the invocation of each test method in the class.
+//    }
+//
+//    override func tearDownWithError() throws {
+//        // Put teardown code here. This method is called after the invocation of each test method in the class.
+//    }
     
     func test_iJamViewModel_getAvailableChordNames_returnsArrayOfTenStrings() {
         // When:
@@ -32,21 +33,16 @@ final class iJamViewModelTests: XCTestCase {
     }
    
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyFourElements() {
+        let audioManager = iJamAudioManager(model: model)
         XCTAssertEqual(audioManager.noteNamesArray.count, 44)
     }
     
     func test_iJamModel_Tunings_ChordsMeetRequirements() {
-        
-        if let allTunings = model.appState?.tunings {
-            if let tunings = Array(allTunings) as? [Tuning] {
-                for tuning in tunings {
-                    
-                    for chord in tuning.chords! {
-                        if let thisChord = chord as? Chord {
-                            let meetsRequirements = doesChordMeetRequirements(thisChord)
-                            XCTAssertEqual(meetsRequirements, true)
-                        }
-                    }
+        if let tunings = Array(model.tunings) as? [Tuning] {
+            for tuning in tunings {
+                for chord in tuning.chords {
+                    let meetsRequirements = doesChordMeetRequirements(chord)
+                    XCTAssertEqual(meetsRequirements, true)
                 }
             }
         }
@@ -54,6 +50,7 @@ final class iJamViewModelTests: XCTestCase {
         
     func test_iJamAudioManager_formerZone_shouldInitializeToNegativeOne () {
         // When
+        let audioManager = iJamAudioManager(model: model)
         let zone = audioManager.formerZone
         
         // Then
@@ -62,6 +59,7 @@ final class iJamViewModelTests: XCTestCase {
     
     func test_iJamAudioManager_audioPlayerArray_ShouldHaveSixAudioPlayers() {
         // When
+        let audioManager = iJamAudioManager(model: model)
         XCTAssertNotNil(audioManager.audioPlayerArray)
         XCTAssertEqual(audioManager.audioPlayerArray.count, 6)
         
@@ -76,6 +74,7 @@ final class iJamViewModelTests: XCTestCase {
     
     func test_iJamAudioManager_thisZone_shouldInitializeToNegativeOne () {
         // When
+        let audioManager = iJamAudioManager(model: model)
         let zone = audioManager.formerZone
 
         // Then

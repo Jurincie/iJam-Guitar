@@ -15,13 +15,12 @@ struct HeaderView: View {
 
     var body: some View {
         ZStack() {
-            // background
-            Image("HeaderView")
+            Image("HeaderView")  // background
                 .resizable()
                 .frame(width: width, height: height)
                 .border(Color.gray, width: 2)
-            // Foreground
-            HStack() {
+            
+            HStack() {          // Foreground
                 Spacer()
                 TuningPickerView(model: $model)
                     .frame(alignment: .trailing)

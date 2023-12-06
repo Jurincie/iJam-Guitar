@@ -20,8 +20,7 @@ struct ChordGroupPickerView: View {
                         Text($0)
                     }
                 }
-                .labelsHidden()
-                .pickerStyle(.menu)
+                .pickerStyle(.automatic)
                 .frame(maxWidth: .infinity)
             } label: {
                 Text(model.activeChordGroupName)

@@ -20,8 +20,7 @@ struct TuningPickerView: View {
                            .fixedSize()
                    }
                }
-               .labelsHidden()
-               .pickerStyle(.menu)
+               .pickerStyle(.automatic)
                .frame(maxWidth: .infinity)
            } label: {
                Text("Tuning: \(model.activeTuningName)")

@@ -119,54 +119,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F561887C-EFC3-4DAA-B4C1-737070786EC3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/iJamAudioManger.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "newDragLocation(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F561887C-EFC3-4DAA-B4C1-737070786EC3 - 4d8fac680f43229f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iJamGuitar.iJamAudioManager.newDragLocation(Swift.Optional&lt;__C.CGPoint&gt;) -&gt; ()"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/XCode/iJamGuitar/iJamGuitar/iJamAudioManger.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "1904">
-               </Location>
-               <Location
-                  uuid = "F561887C-EFC3-4DAA-B4C1-737070786EC3 - 4d8fac680f4322be"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iJamGuitar.iJamAudioManager.newDragLocation(Swift.Optional&lt;__C.CGPoint&gt;) -&gt; ()"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/XCode/iJamGuitar/iJamGuitar/iJamAudioManger.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "1904">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "88AB8024-F702-48C8-8E61-CD56DC74C7AA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -183,49 +135,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "74229611-FD65-43BC-B938-9648BBE627C9"
+            uuid = "B46A674A-3D4E-4FC7-BC45-2F93F111A23F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/StringView.swift"
+            filePath = "iJamGuitar/iJamAudioManger.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "74229611-FD65-43BC-B938-9648BBE627C9 - e718c84ae880fb8f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;iJamGuitar.CircleView, iJamGuitar.CircleView&gt;, iJamGuitar.CircleView&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.fixedSize() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.fixedSize() -&gt; some&gt;&gt;.0&gt;)&gt; in iJamGuitar.StringView.FretBoxView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/XCode/iJamGuitar/iJamGuitar/Views/StringView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "1712">
-               </Location>
-               <Location
-                  uuid = "74229611-FD65-43BC-B938-9648BBE627C9 - e718c84ae880fb8f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;iJamGuitar.CircleView, iJamGuitar.CircleView&gt;, iJamGuitar.CircleView&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.fixedSize() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.fixedSize() -&gt; some&gt;&gt;.0&gt;)&gt; in iJamGuitar.StringView.FretBoxView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/XCode/iJamGuitar/iJamGuitar/Views/StringView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "1660">
-               </Location>
-            </Locations>
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "newDragLocation(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7209CC08-BD16-4F88-8BF6-944FA667B9AD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/iJamAudioManger.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "pickString(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

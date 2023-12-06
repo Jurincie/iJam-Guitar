@@ -105,6 +105,8 @@ struct ChordButtonsView: View {
         
         /// sets model.activeChord and model.selectedIndex
         func makeChosenPicksChordActive() {
+            isAnimated.toggle()
+            
             if let chordNames = model.activeChordGroup?.availableChordNames.components(separatedBy: ["-"]) {
                 guard self.pick.id < chordNames.count else { return }
                 
@@ -114,13 +116,10 @@ struct ChordButtonsView: View {
                     model.activeChord = newActiveChord
                     model.selectedChordIndex = self.pick.id
                 }
-                
-                isAnimated.toggle()
             }
         }
         
         func getFontSize(targetString: String) -> Double {
-            
             switch targetString.count {
             case 1:     return UIDevice.current.userInterfaceIdiom == .pad ? 28.0 : 22.0
             case 2:     return UIDevice.current.userInterfaceIdiom == .pad ? 26.0 : 20.0
