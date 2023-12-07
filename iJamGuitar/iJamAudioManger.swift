@@ -106,22 +106,13 @@ class iJamAudioManager {
         if zone != formerZone {
             Logger.viewCycle.notice("====> In New Zone: \(zone)")
             
-            if formerZone >= 0 {
+            if formerZone >= 0 && model.isMuted == false {
                 let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
                 pickString(stringToPlay)
             }
 
             formerZone = zone
         }
-    }
-    
-    func shouldPickString(zone: Int, stringNumber: Int) -> Bool {
-        var answer = false
-        if zone % 2 == 0 && model.isMuted == false {
-            answer = stringNumber > 0 && stringNumber < 7
-        }
-        
-        return answer
     }
     
     /// Description: This method identifies the note to play on this string based on capo position and fret -
