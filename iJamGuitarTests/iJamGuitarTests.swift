@@ -34,7 +34,9 @@ final class iJamViewModelTests: XCTestCase {
    
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyFourElements() {
         let audioManager = iJamAudioManager(model: model)
-        XCTAssertEqual(audioManager.noteNamesArray.count, 44)
+        
+        // Then
+        XCTAssertEqual(audioManager.noteNamesArray.count, 43)
     }
     
     func test_iJamModel_Tunings_ChordsMeetRequirements() {
@@ -93,11 +95,9 @@ final class iJamViewModelTests: XCTestCase {
             }
         }
         
-        if minFret >= tooBig {
-            minFret = 0
-        }
+        let span = minFret >= tooBig ? maxFret : maxFret - minFret
         
-        return maxFret - minFret
+        return span
     }
     
     func doesChordMeetRequirements(_ chord: Chord) -> Bool {

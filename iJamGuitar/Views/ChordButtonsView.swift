@@ -61,7 +61,7 @@ struct ChordButtonsView: View {
                     .fontWeight(.bold)
             }
             .cornerRadius(10.0)
-            .rotationEffect(Angle(degrees: self.pick.title == kNoChordName ? 0 : isAnimated ? 360 : 0))
+            .scaleEffect(isAnimated ? 2.0 : 1.0)
         }
         
         func PickButton() -> some View {

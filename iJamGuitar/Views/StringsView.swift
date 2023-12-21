@@ -123,7 +123,7 @@ struct StringsView: View {
         Logger.viewCycle.debug("ZoneBreaks: \(audioManager.zoneBreaks)")
         for string in 0...5 {
             audioManager.pickString(6 - string)
-            try? await Task.sleep(nanoseconds: 0_150_000_000)
+            try? await Task.sleep(nanoseconds: 0_100_000_000)
         }
         
         Logger.viewCycle.debug("zoneBreaks: \(audioManager.zoneBreaks)")
