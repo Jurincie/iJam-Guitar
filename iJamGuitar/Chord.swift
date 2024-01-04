@@ -16,9 +16,7 @@ class Chord: Equatable {
     
     var fretMap: String?
     var name: String?
-    var activeChord: ChordGroup?
     var tuning: Tuning?
     
-    init() {
-    }
+    init() {}
 }

@@ -22,7 +22,7 @@ struct HeaderView: View {
             
             HStack() {          // Foreground
                 Spacer()
-                TuningPickerView(model: $model)
+                TuningPickerView(model: model)
                     .frame(alignment: .trailing)
                     .border(.white, 
                             width: 2,

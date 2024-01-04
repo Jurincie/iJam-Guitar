@@ -16,7 +16,8 @@ struct ChordGroupPickerView: View {
         VStack {
             Menu {
                 Picker("Chord Groups", selection: $model.activeChordGroupName) {
-                    ForEach(model.getActiveTuningChordGroupNames(), id: \.self) {
+                    let chordGroupNames = model.getActiveTuningChordGroupNames()
+                    ForEach(chordGroupNames, id: \.self) {
                         Text($0)
                     }
                 }

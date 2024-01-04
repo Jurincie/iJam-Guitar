@@ -12,7 +12,6 @@ import SwiftData
 class ChordGroup {
     var availableChordNames: String = ""
     var name: String = ""
-    @Relationship(inverse: \Chord.activeChord)
     var activeChord: Chord?
     var availableChords: [Chord] = []
     @Relationship(inverse: \Tuning.activeChordGroup)

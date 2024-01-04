@@ -49,7 +49,7 @@ extension iJamModel
     /// - Returns: Optional(ChordGroup)
     func getChordGroup(name: String) -> ChordGroup? {
         var newChordGroup: ChordGroup? = nil
-        
+                
         if let chordGroups = activeTuning?.chordGroups {
             for case let chordGroup in chordGroups {
                 if chordGroup.name == name {
@@ -65,7 +65,6 @@ extension iJamModel
     ///  Then sets the availableChords to the chords associated with this newChordGroup.
     ///  Then sets the activeChord to the newChordGroup.activeChord
     ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
-    ///  Then saves the context.
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func setActiveChordGroup(newChordGroup: ChordGroup) {
         activeChordGroup = newChordGroup
@@ -107,7 +106,6 @@ extension iJamModel
         return 0
     }
     
-    // Must acccept both: "xx0212" "9ABCAA" and "320003"
     func getFretFromChar(_ char: Character) -> Int {
         switch char {
         case "A": return 10

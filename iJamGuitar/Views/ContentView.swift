@@ -36,6 +36,7 @@ struct ContentView: View {
                            height:height * 0.15)
                     .aspectRatio(contentMode: .fit)
             }
+            .dynamicTypeSize(...DynamicTypeSize.large)
             .cornerRadius(16.0)
             .frame(width:width, 
                    height:height)
@@ -48,4 +49,18 @@ struct ContentView: View {
     @State var model = iJamModel()
     
     return ContentView(dataModel: $model)
+}
+
+#Preview {
+    @State var model = iJamModel()
+    
+    return ContentView(dataModel: $model)
+        .environment(\.sizeCategory, .extraSmall)
+}
+
+#Preview {
+    @State var model = iJamModel()
+    
+    return ContentView(dataModel: $model)
+        .environment(\.sizeCategory, .accessibilityLarge)
 }
