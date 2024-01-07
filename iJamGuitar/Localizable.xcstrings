@@ -1,0 +1,74 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld" : {
+
+    },
+    "Another App is using the Audio Player" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une autre application utilise le lecteur audio"
+          }
+        }
+      }
+    },
+    "Capo Position" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position du capodastre"
+          }
+        }
+      }
+    },
+    "Chord Groups" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupes d'accords"
+          }
+        }
+      }
+    },
+    "CREATE NEW CHORD GROUP" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NOUVEAU GROUPE D'ACCORDS"
+          }
+        }
+      }
+    },
+    "Enter Group Name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez le nom du groupe"
+          }
+        }
+      }
+    },
+    "Master Volume is OFF" : {
+
+    },
+    "OK" : {
+
+    },
+    "Tuning: %@" : {
+
+    },
+    "Tunings" : {
+
+    },
+    "Unknown Audio Player Error" : {
+
+    }
+  },
+  "version" : "1.0"
+}

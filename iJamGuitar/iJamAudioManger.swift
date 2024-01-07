@@ -107,8 +107,12 @@ class iJamAudioManager {
             Logger.viewCycle.notice("====> In New Zone: \(zone)")
             
             if formerZone >= 0 && model.isMuted == false {
-                let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
-                pickString(stringToPlay)
+                if AVAudioSession.sharedInstance().outputVolume == 0.0 {
+                    model.showVolumeAlert = true
+                } else {
+                    let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
+                    pickString(stringToPlay)
+                }
             }
 
             formerZone = zone

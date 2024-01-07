@@ -47,20 +47,17 @@ struct ContentView: View {
 
 #Preview {
     @State var model = iJamModel()
-    
     return ContentView(dataModel: $model)
 }
 
 #Preview {
     @State var model = iJamModel()
-    
     return ContentView(dataModel: $model)
         .environment(\.sizeCategory, .extraSmall)
 }
 
 #Preview {
     @State var model = iJamModel()
-    
     return ContentView(dataModel: $model)
         .environment(\.sizeCategory, .accessibilityLarge)
 }
