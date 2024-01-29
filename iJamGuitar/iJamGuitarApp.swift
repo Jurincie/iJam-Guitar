@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct iJamGuitarApp: App {
-    @State var model = iJamModel()
+    @State var model = iJamModel.shared
 
     var body: some Scene {
         WindowGroup {

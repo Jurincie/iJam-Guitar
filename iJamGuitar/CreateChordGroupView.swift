@@ -16,7 +16,7 @@ struct CreateChordGroupView: View {
     @State private var chordGroupName: String = ""
     @State private var currentTuning: Tuning?
     @State private var selectedChordIndex = 0
-    
+
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     
@@ -68,8 +68,7 @@ struct CreateChordGroupView: View {
                     .font(.headline)
                 LazyVGrid(columns: columns,
                           spacing: mySpacing) {
-                    let picks = getUndefinedPicks()
-                    ForEach(picks, id: \.id) { pick in
+                    ForEach(getUndefinedPicks(), id: \.id) { pick in
                         PickView(model: $model,
                                  pick: pick)
                     }

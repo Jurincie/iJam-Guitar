@@ -42,19 +42,23 @@ struct ContentView: View {
                    height:height)
         }
         .background(Color.black)
+        .ignoresSafeArea()
     }
 }
 
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model).preferredColorScheme(.dark)
+    return ContentView(dataModel: $model)
+        .preferredColorScheme(.dark)
 }
 
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model).preferredColorScheme(.light)
+    return ContentView(dataModel: $model)
+        .preferredColorScheme(.light)
 }
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model).environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+    return ContentView(dataModel: $model)
+        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }

@@ -17,24 +17,30 @@ struct HeaderView: View {
 
     var body: some View {
         ZStack() {
+            // Background
             Image("HeaderView")
                 .resizable()
                 .frame(width: width, height: height)
+            
             // Foreground
-            HStack() {
+            VStack {
                 Spacer()
-                TuningPickerView(model: model)
-                    .frame(alignment: .trailing)
-                    .border(.white,
-                            width: 2,
-                            cornerRadius: 7)
-                Spacer()
-                ChordGroupPickerView(model: $model)
-                    .frame(alignment: .leading)
-                    .border(.white,
-                            width: 2,
-                            cornerRadius: 7)
-                Spacer()
+                HStack() {
+                    Spacer()
+                    TuningPickerView(model: model)
+                        .frame(alignment: .trailing)
+                        .border(.white,
+                                width: 2,
+                                cornerRadius: 7)
+                    Spacer()
+                    ChordGroupPickerView(model: $model)
+                        .frame(alignment: .leading)
+                        .border(.white,
+                                width: 2,
+                                cornerRadius: 7)
+                    Spacer()
+                }
+                .padding()
             }
         }
     }

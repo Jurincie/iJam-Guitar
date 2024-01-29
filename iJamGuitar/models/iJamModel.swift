@@ -12,6 +12,7 @@ import OSLog
 
 @Observable
 final class iJamModel {
+    static let shared = iJamModel()
     let kDefaultVolume = 5.0
     var showVolumeAlert = false
     var showAudioPlayerInUseAlert = false
@@ -53,7 +54,7 @@ final class iJamModel {
         
     init() {
         if tunings.count == 0 {
-            loadDataModelFromPLists()
+            try? loadDataModelFromPLists()
         }
         
         setupModel()
@@ -61,27 +62,27 @@ final class iJamModel {
         // if another app is using AudioPlayer -> show alert
         showAudioNotAvailableAlert = AVAudioSession.sharedInstance().isOtherAudioPlaying
     }
-    
-    private func setupModel() {
-        availableChords = getAvailableChords(activeChordGroup: activeTuning?.activeChordGroup, activeTuning: activeTuning)
-        fretIndexMap = getFretIndexMap(chord: activeTuning?.activeChordGroup?.activeChord)
-        selectedChordIndex = getSelectedChordIndex()
-    }
 }
 
 extension iJamModel {
-    func getSelectedChordIndex() -> Int {
-        var selectedChordIndex = 0
+    private func setupModel() {
+        availableChords = getAvailableChords(activeChordGroup: activeTuning?.activeChordGroup, activeTuning: activeTuning)
+        fretIndexMap = getFretIndexMap(chord: activeTuning?.activeChordGroup?.activeChord)
+        setSelectedChordIndex()
+    }
+    
+    func setSelectedChordIndex() {
+        var chordIndex = 0
         
         for chord in availableChords {
             if chord == activeTuning?.activeChordGroup!.activeChord {
                 break
             }
-            selectedChordIndex += 1
+            chordIndex += 1
         }
-        selectedChordIndex = min(availableChords.count - 1, selectedChordIndex)
+        chordIndex = min(availableChords.count - 1, selectedChordIndex)
         
-        return selectedChordIndex
+        selectedChordIndex = chordIndex
     }
     
     /// This method sets all needed values for Tuning identified by tuningName
@@ -101,24 +102,26 @@ extension iJamModel {
                      openIndices: String,
                      noteNames: String,
                      chordLibraryPath: String,
-                     chordGroupsPath: String) {
+                     chordGroupsPath: String) throws {
         tuning.name = tuningName
         tuning.openNoteIndices = openIndices
         tuning.stringNoteNames = noteNames
         
-        if let path = Bundle.main.path(forResource: chordLibraryPath, ofType: "plist"),
-           let thisChordGroupChordDictionary = NSDictionary(contentsOfFile: path) as? [String: String] {
-            let chords: [Chord] = convertToArrayOfChords(chordDictionary: thisChordGroupChordDictionary, parentTuning: tuning)
-            tuning.chords.append(contentsOf: chords)
-            
-            if let path = Bundle.main.path(forResource: chordGroupsPath, ofType: "plist"),
-                let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, parentTuning: tuning)
-                tuning.chordGroups.append(contentsOf: chordGroups)
-            } else {
-                
-            }
+        guard let path = Bundle.main.path(forResource: chordLibraryPath, ofType: "plist"),
+              let thisChordGroupChordDictionary = NSDictionary(contentsOfFile: path) as? [String: String]  else {
+            throw PlistError.badChordLibraryAddress
         }
+            
+        let chords: [Chord] = convertToArrayOfChords(chordDictionary: thisChordGroupChordDictionary, parentTuning: tuning)
+        tuning.chords.append(contentsOf: chords)
+            
+        guard let path = Bundle.main.path(forResource: chordGroupsPath, ofType: "plist"),
+              let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String]  else { 
+            throw PlistError.badChordLibraryAddress
+        }
+        
+        let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, parentTuning: tuning)
+        tuning.chordGroups.append(contentsOf: chordGroups)
         
         Logger.statistics.info("New tuning added")
         tunings.append(tuning)
@@ -132,33 +135,48 @@ extension iJamModel {
     /// activeTuning
     /// eachTunings activeChordGroup
     /// each chordGroups activeChord
-    func loadDataModelFromPLists() { // populate our initial dataModel from Plists
+    func loadDataModelFromPLists() throws { // populate our initial dataModel from Plists
         // Standard Tuning
         let standardTuning = Tuning()
-        setupTuning(tuning: standardTuning,
-                    tuningName: "Standard",
-                    openIndices: "4-9-14-19-23-28",
-                    noteNames: "E-A-D-G-B-E",
-                    chordLibraryPath: "StandardTuning_ChordLibrary",
-                    chordGroupsPath: "StandardTuningChordGroups")
+        
+        do {
+            try setupTuning(tuning: standardTuning,
+                        tuningName: "Standard",
+                        openIndices: "4-9-14-19-23-28",
+                        noteNames: "E-A-D-G-B-E",
+                        chordLibraryPath: "StandardTuning_ChordLibrary",
+                        chordGroupsPath: "StandardTuningChordGroups")
+        } catch {
+            throw PlistError.unknownError
+        }
         
         // Drop-D Tuning
         let dropDTuning = Tuning()
-        setupTuning(tuning: dropDTuning,
-                    tuningName: "Drop D",
-                    openIndices: "2-9-14-19-23-28",
-                    noteNames: "D-A-D-G-B-E",
-                    chordLibraryPath: "DropD_ChordLibrary",
-                    chordGroupsPath: "DropDTuningChordGroups")
+        do {
+            try setupTuning(tuning: dropDTuning,
+                            tuningName: "Drop D",
+                            openIndices: "2-9-14-19-23-28",
+                            noteNames: "D-A-D-G-B-E",
+                            chordLibraryPath: "DropD_ChordLibrary",
+                            chordGroupsPath: "DropDTuningChordGroups")
+        } catch {
+            throw PlistError.unknownError
+        }
+        
         
         // Open D Tuning
         let openDTuning = Tuning()
-        setupTuning(tuning: openDTuning,
-                    tuningName: "Open D",
-                    openIndices: "2-9-14-18-21-26",
-                    noteNames: "D-A-D-F#-A-D",
-                    chordLibraryPath: "OpenD_ChordLibrary",
-                    chordGroupsPath: "OpenDTuningChordGroups")
+        do {
+            try setupTuning(tuning: openDTuning,
+                            tuningName: "Open D",
+                            openIndices: "2-9-14-18-21-26",
+                            noteNames: "D-A-D-F#-A-D",
+                            chordLibraryPath: "OpenD_ChordLibrary",
+                            chordGroupsPath: "OpenDTuningChordGroups")
+        } catch {
+            throw PlistError.unknownError
+        }
+        
         
         // remainder of appState
         activeTuning = standardTuning
@@ -206,7 +224,8 @@ extension iJamModel {
             let chordGroup = ChordGroup()
             chordGroup.name                 = entry.key
             chordGroup.availableChordNames  = entry.value
-            chordGroup.availableChords      = getGroupsChords(chordGroup: chordGroup, parentTuning: parentTuning)
+            chordGroup.availableChords      = getGroupsChords(chordGroup: chordGroup, 
+                                                              parentTuning: parentTuning)
             chordGroup.tuning               = parentTuning
             if activeChordGroupIsSet == false {
                 parentTuning.activeChordGroup = chordGroup
@@ -223,7 +242,8 @@ extension iJamModel {
     ///   - chordGroup: Optional ChordGroup
     ///   - parentTuning: Optional Tuning to which this group belongs
     /// - Returns: array of Chords
-    func getGroupsChords(chordGroup: ChordGroup?, parentTuning: Tuning?) -> [Chord] {
+    func getGroupsChords(chordGroup: ChordGroup?, 
+                         parentTuning: Tuning?) -> [Chord] {
         var thisGroupsChords: [Chord] = []
         var activeChordIsSet = false
         if let chordNames = chordGroup?.availableChordNames.components(separatedBy: "-") {
@@ -257,4 +277,8 @@ extension iJamModel {
         
         return nil
     }
+}
+
+enum PlistError: Error {
+    case badChordGroupsLibraryAddress, badChordLibraryAddress, unknownError
 }
