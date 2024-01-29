@@ -60,6 +60,9 @@
         }
       }
     },
+    "CANCEL" : {
+
+    },
     "Capo Position" : {
       "localizations" : {
         "de" : {
@@ -146,7 +149,6 @@
       }
     },
     "Enter Group Name" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -202,6 +204,9 @@
         }
       }
     },
+    "New Group Name" : {
+
+    },
     "OK" : {
       "localizations" : {
         "de" : {
@@ -229,6 +234,15 @@
           }
         }
       }
+    },
+    "Select Tuning:" : {
+
+    },
+    "SUBMIT" : {
+
+    },
+    "Tap on picks to select chords below" : {
+
     },
     "Tuning: %@" : {
       "extractionState" : "stale",
