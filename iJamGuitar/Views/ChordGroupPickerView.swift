@@ -30,7 +30,6 @@ struct ChordGroupPickerView: View {
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
-                    .cornerRadius(10.0)
                     .shadow(color: .white , radius: 2.0)
             }
         }

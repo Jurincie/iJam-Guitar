@@ -20,6 +20,7 @@ struct TopView: View {
             .frame(width: width, 
                    height: height,
                    alignment: .center)
+            // background image (could have used z-stack here instead
             .background( Image("TopView")
                 .resizable()
                 .frame(width: width, 

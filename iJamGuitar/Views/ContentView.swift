@@ -38,7 +38,7 @@ struct ContentView: View {
             }
             .dynamicTypeSize(...DynamicTypeSize.large)
             .cornerRadius(16.0)
-            .frame(width:width, 
+            .frame(width:width,
                    height:height)
         }
         .background(Color.black)
@@ -47,17 +47,14 @@ struct ContentView: View {
 
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model)
+    return ContentView(dataModel: $model).preferredColorScheme(.dark)
 }
 
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model)
-        .environment(\.sizeCategory, .extraSmall)
+    return ContentView(dataModel: $model).preferredColorScheme(.light)
 }
-
 #Preview {
     @State var model = iJamModel()
-    return ContentView(dataModel: $model)
-        .environment(\.sizeCategory, .accessibilityLarge)
+    return ContentView(dataModel: $model).environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }

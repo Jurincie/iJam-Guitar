@@ -23,7 +23,7 @@ struct TuningPickerView: View {
                .pickerStyle(.automatic)
                .frame(maxWidth: .infinity)
            } label: {
-               Text("Tuning: \(model.activeTuningName)")
+               Text("\(model.activeTuningName)")
                    .padding(10)
                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                    .fontWeight(.semibold)
@@ -38,7 +38,8 @@ struct TuningPickerView: View {
 }
 
 extension View {
-    func border(_ color: Color, width: CGFloat, cornerRadius: CGFloat) -> some View {
+    func border(_ color: Color, 
+                width: CGFloat, cornerRadius: CGFloat) -> some View {
         overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(color, lineWidth: width))
     }
 }

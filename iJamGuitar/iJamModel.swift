@@ -67,7 +67,9 @@ final class iJamModel {
         fretIndexMap = getFretIndexMap(chord: activeTuning?.activeChordGroup?.activeChord)
         selectedChordIndex = getSelectedChordIndex()
     }
-    
+}
+
+extension iJamModel {
     func getSelectedChordIndex() -> Int {
         var selectedChordIndex = 0
         
@@ -83,7 +85,7 @@ final class iJamModel {
     }
     
     /// This method sets all needed values for Tuning identified by tuningName
-    /// and adds the new compled Tuning to the 
+    /// and adds the new compled Tuning to the
     /// It should ONLY be callled on the initial launch to build the appState from iJamDataModel.xcaDataModel,
     /// which is then used by iJamModel.
     /// - Parameters:
@@ -165,7 +167,7 @@ final class iJamModel {
         isMuted = false
         volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
         activeTuning = standardTuning
-        activeTuningName = activeTuning?.name ?? "Error"
+        activeTuningName = activeTuning?.name ?? "Error setting activeTuning"
     }
     
     /// Creates and returns a array of Chords available to parentTuning
@@ -194,7 +196,7 @@ final class iJamModel {
     ///   - dict: [String: String]  dictionary of [ChordGroup.name, chordNamesString] which are used to build returned chordGroupsSet
     ///   - parentTuning: the parentTuning to which this group belongs
     /// - Returns: NSMutableSet of ChordGroups managed Objects
-    func convertToArrayOfChordGroups(dict: Dictionary<String,String>, 
+    func convertToArrayOfChordGroups(dict: Dictionary<String,String>,
                                      parentTuning: Tuning) -> [ChordGroup] {
         var chordGroups: [ChordGroup] = []
         var activeChordGroupIsSet = false

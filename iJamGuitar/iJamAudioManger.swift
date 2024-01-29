@@ -26,7 +26,7 @@ class iJamAudioManager {
     let kNoFret             = -1
     let kHalfStringWidth    = 5.0
     var formerZone          = -1
-    var zoneBreaks:[Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
     var audioPlayerArray    = [AVAudioPlayer?]() // 1 audioPlayer for each string 6-1
     var noteNamesArray      = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
     
@@ -48,7 +48,8 @@ class iJamAudioManager {
             fatalError()
         }
     }
-
+    
+    /// This method instantiates one AudioPlayer for each string
     func loadWaveFilesIntoAudioPlayers() {
         for _ in 0...5 {
             if let asset = NSDataAsset(name:"NoNote") {
@@ -59,7 +60,9 @@ class iJamAudioManager {
                         model.showAudioPlayerInUseAlert = true
                     }
                     audioPlayerArray.append(thisAudioPlayer)
-                } catch InitializeErrors.AVAudioSessionError{ fatalError() }
+                } catch InitializeErrors.AVAudioSessionError{
+                    fatalError()
+                }
                 catch {
                     model.showAudioPlayerErrorAlert = true
                     Logger.errors.error("\(error.localizedDescription)")

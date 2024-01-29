@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "de" : {
@@ -114,6 +117,7 @@
       }
     },
     "CREATE NEW CHORD GROUP" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -142,6 +146,7 @@
       }
     },
     "Enter Group Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -226,6 +231,7 @@
       }
     },
     "Tuning: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

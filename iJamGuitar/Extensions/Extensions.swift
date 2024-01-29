@@ -38,14 +38,14 @@ extension StringView {
 }
 
 extension View {
-  func readFrame(onChange: @escaping (CGRect) -> ()) -> some View {
-    background(
-      GeometryReader { geometryProxy in
-        Color.clear
-              .preference(key: FramePreferenceKey.self, 
-                          value: geometryProxy.frame(in: .global))
-      }
-    )
-    .onPreferenceChange(FramePreferenceKey.self, perform: onChange)
-  }
+    func readFrame(onChange: @escaping (CGRect) -> ()) -> some View {
+        background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .preference(key: FramePreferenceKey.self,
+                                value: geometryProxy.frame(in: .global))
+            }
+        )
+        .onPreferenceChange(FramePreferenceKey.self, perform: onChange)
+    }
 }

@@ -21,7 +21,7 @@ struct CapoPositionPickerView: View {
                        Text(String($0))
                    }
                }
-               .pickerStyle(.menu)
+               .pickerStyle(.automatic)
            } label: {
                getCapoLabel()
            }
@@ -30,7 +30,7 @@ struct CapoPositionPickerView: View {
     
     func getCapoLabel() -> some View {
         return Text("\(model.capoPosition)")
-            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .callout)
             .fontWeight(.semibold)
             .padding()
             .background(Color.clear)
