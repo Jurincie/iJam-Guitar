@@ -18,7 +18,7 @@ class Tuning: Hashable {
         hasher.combine(name)
     }
     
-    @Attribute(.unique) var name: String = ""
+    @Attribute(.unique) var name: String?
     var openNoteIndices: String = ""
     var stringNoteNames: String = ""
     var activeChordGroup: ChordGroup?

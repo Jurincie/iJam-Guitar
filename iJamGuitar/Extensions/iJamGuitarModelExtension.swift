@@ -79,7 +79,7 @@ extension iJamModel
     func getTuningNames() -> [String] {
         var tuningNames: [String] = []
         for tuning in tunings {
-            tuningNames.append(tuning.name)
+            tuningNames.append(tuning.name ?? "ERROR")
         }
         return tuningNames
     }

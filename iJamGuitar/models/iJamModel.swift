@@ -53,8 +53,9 @@ final class iJamModel {
     }
         
     init() {
+        // only load data from Plists if there is no data
         if tunings.count == 0 {
-            try? loadDataModelFromPLists()
+            try? loadDataModelFromPlists()
         }
         
         setupModel()
@@ -135,7 +136,7 @@ extension iJamModel {
     /// activeTuning
     /// eachTunings activeChordGroup
     /// each chordGroups activeChord
-    func loadDataModelFromPLists() throws { // populate our initial dataModel from Plists
+    func loadDataModelFromPlists() throws { // populate our initial dataModel from Plists
         // Standard Tuning
         let standardTuning = Tuning()
         

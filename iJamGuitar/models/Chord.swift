@@ -11,7 +11,9 @@ import SwiftData
 
 class Chord: Equatable {
     static func == (lhs: Chord, rhs: Chord) -> Bool {
-        lhs.name == rhs.name && lhs.fretMap == rhs.fretMap
+        lhs.name == rhs.name && 
+        lhs.fretMap == rhs.fretMap  &&
+        lhs.tuning == rhs.tuning
     }
     
     var fretMap: String?
