@@ -16,6 +16,7 @@ struct HeaderView: View {
     let height: CGFloat
 
     var body: some View {
+        Spacer()
         ZStack() {
             // Background
             Image("HeaderView")
@@ -24,7 +25,7 @@ struct HeaderView: View {
             
             // Foreground
             VStack {
-                Spacer()
+                Text(" ")
                 HStack() {
                     Spacer()
                     TuningPickerView(model: model)
@@ -32,12 +33,14 @@ struct HeaderView: View {
                         .border(.white,
                                 width: 2,
                                 cornerRadius: 7)
+                        .padding(.top)
                     Spacer()
                     ChordGroupPickerView(model: $model)
                         .frame(alignment: .leading)
                         .border(.white,
                                 width: 2,
                                 cornerRadius: 7)
+                        .padding(.top)
                     Spacer()
                 }
                 .padding()
