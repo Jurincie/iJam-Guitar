@@ -5,7 +5,8 @@
 //  Created by Ron Jurincie on 5/26/23.
 //
 
-import Foundation
+//import Foundation
+import SwiftData
 import SwiftUI
 import AVFoundation
 import OSLog
@@ -22,7 +23,8 @@ struct FramePreferenceKey: PreferenceKey {
 }
 
 class iJamAudioManager {
-    @Bindable var model: iJamModel
+    var viewModel = iJamViewModel.shared
+    @Query var appState: AppState
     let kNoFret             = -1
     let kHalfStringWidth    = 5.0
     var formerZone          = -1
@@ -30,8 +32,7 @@ class iJamAudioManager {
     var audioPlayerArray    = [AVAudioPlayer?]() // 1 audioPlayer for each string 6-1
     var noteNamesArray      = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
     
-    init(model: iJamModel) {
-        self.model = model
+    init() {
         initializeAVAudioSession()
         loadWaveFilesIntoAudioPlayers()
     }
@@ -43,7 +44,7 @@ class iJamAudioManager {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
-            model.showAudioPlayerErrorAlert = true
+            viewModel.showAudioPlayerErrorAlert = true
             Logger.statistics.error("\(error.localizedDescription)")
             fatalError()
         }
@@ -57,14 +58,14 @@ class iJamAudioManager {
                     let thisAudioPlayer = try AVAudioPlayer(data:asset.data,
                                                             fileTypeHint:"wav")
                     if thisAudioPlayer.isPlaying {
-                        model.showAudioPlayerInUseAlert = true
+                        viewModel.showAudioPlayerInUseAlert = true
                     }
                     audioPlayerArray.append(thisAudioPlayer)
                 } catch InitializeErrors.AVAudioSessionError{
                     fatalError()
                 }
                 catch {
-                    model.showAudioPlayerErrorAlert = true
+                    viewModel.showAudioPlayerErrorAlert = true
                     Logger.errors.error("\(error.localizedDescription)")
                     fatalError()
                 }
@@ -109,9 +110,9 @@ class iJamAudioManager {
         if zone != formerZone {
             Logger.viewCycle.notice("====> In New Zone: \(zone)")
             
-            if formerZone >= 0 && model.isMuted == false {
+            if formerZone >= 0 && appState.isMuted == false {
                 if AVAudioSession.sharedInstance().outputVolume == 0.0 {
-                    model.showVolumeAlert = true
+                    viewModel.showVolumeAlert = true
                 } else {
                     let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
                     pickString(stringToPlay)
@@ -126,14 +127,14 @@ class iJamAudioManager {
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) {
-        let openNotes = model.activeTuning?.openNoteIndices.components(separatedBy: "-")
-        let fretPosition = model.fretIndexMap[6 - stringToPlay]
+        let openNotes = appState.activeTuning?.openNoteIndices.components(separatedBy: "-")
+        let fretPosition = viewModel.currentFretIndexMap[6 - stringToPlay]
         
         if fretPosition > kNoFret {
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
-                let index = fretPosition + thisStringsOpenIndex + model.capoPosition
+                let index = fretPosition + thisStringsOpenIndex + appState.capoPosition
                 let noteToPlayName = noteNamesArray[index]
-                let volume = model.volumeLevel
+                let volume = appState.volumeLevel
 
                 Logger.viewCycle.debug("playing string: \(stringToPlay)")
                 playWaveFile(noteName:noteToPlayName,
@@ -157,10 +158,10 @@ class iJamAudioManager {
                 thisAudioPlayer.play()
             }
             catch InitializeErrors.AVAudioSessionError{
-                model.showAudioPlayerErrorAlert = true
+                viewModel.showAudioPlayerErrorAlert = true
             }
             catch {
-                model.showAudioPlayerErrorAlert = true
+                viewModel.showAudioPlayerErrorAlert = true
             }
         }
     }

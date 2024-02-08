@@ -5,6 +5,7 @@
 //  Created by Ron Jurincie on 5/5/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
@@ -14,7 +15,6 @@ import OSLog
 //  There are empty images to left and right of strings in BOTTOM part
 
 struct StringsAndFretsAreaView : View {
-    @Binding var dataModel: iJamModel
     let width: CGFloat
     let height: CGFloat
     
@@ -24,16 +24,16 @@ struct StringsAndFretsAreaView : View {
             VStack(spacing:0) {
                 // display frets in Top half
                 HStack(spacing:0) {
-                    FretNumbersView(model: $dataModel, 
-                                    width: width * 0.12,
-                                    height: height / 2)
-                    FretBoardView(width: width * 0.76, 
+                    FretNumbersView(width: width * 0.12,
+                                    height: height / 2, 
+                                    capoPosition: 0)
+                    FretBoardView(width: width * 0.76,
                                   height: height / 2)
-                    FretNumbersView(model: $dataModel, 
-                                    width: width * 0.12,
-                                    height: height / 2)
+                    FretNumbersView(width: width * 0.12,
+                                    height: height / 2,
+                                    capoPosition: 0)
                 }
-                // display StringAreaView in Bottom half
+                // display StringAreaView in Lower half
                 Image("StringAreaView")
                     .resizable()
                     .frame(width: width, 
@@ -42,7 +42,7 @@ struct StringsAndFretsAreaView : View {
             }
             
             // TOP layer
-            StringsView(model: dataModel, height: height)
+            StringsView(height: height)
         }
     }
 }

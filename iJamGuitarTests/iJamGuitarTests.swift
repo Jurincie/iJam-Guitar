@@ -5,42 +5,37 @@
 //  Created by Ron Jurincie on 12/5/23.
 //
 
-import XCTest
-import SwiftUI
 import AVFAudio
+import SwiftData
+import SwiftUI
+import XCTest
 
 @testable import iJamGuitar
 
+@available(iOS 17.0, *)
 final class iJamViewModelTests: XCTestCase {
     // Given
-    let model = iJamModel()
+    @Query var appState: AppState
+    let viewModel = iJamViewModel.shared
     let tooBig = 20
-
-//    override func setUpWithError() throws {
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//    }
     
     func test_iJamViewModel_getAvailableChordNames_returnsArrayOfTenStrings() {
         // When:
-        let chordNameArray: [String] = model.getAvailableChordNames(activeChordGroup: model.activeChordGroup)
+        let chordNameArray: [String] = viewModel.getAvailableChordNames(activeChordGroup: appState.activeTuning?.activeChordGroup)
             
         // Then:
         XCTAssertEqual(chordNameArray.count, 10)
     }
    
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyFourElements() {
-        let audioManager = iJamAudioManager(model: model)
+        let audioManager = iJamAudioManager()
         
         // Then
         XCTAssertEqual(audioManager.noteNamesArray.count, 43)
     }
     
     func test_iJamModel_Tunings_ChordsMeetRequirements() {
-        if let tunings = Array(model.tunings) as? [Tuning] {
+        if let tunings = Array(appState.tunings) as? [Tuning] {
             for tuning in tunings {
                 for chord in tuning.chords {
                     let meetsRequirements = doesChordMeetRequirements(chord)
@@ -52,7 +47,7 @@ final class iJamViewModelTests: XCTestCase {
         
     func test_iJamAudioManager_formerZone_shouldInitializeToNegativeOne () {
         // When
-        let audioManager = iJamAudioManager(model: model)
+        let audioManager = iJamAudioManager()
         let zone = audioManager.formerZone
         
         // Then
@@ -61,7 +56,7 @@ final class iJamViewModelTests: XCTestCase {
     
     func test_iJamAudioManager_audioPlayerArray_ShouldHaveSixAudioPlayers() {
         // When
-        let audioManager = iJamAudioManager(model: model)
+        let audioManager = iJamAudioManager()
         XCTAssertNotNil(audioManager.audioPlayerArray)
         XCTAssertEqual(audioManager.audioPlayerArray.count, 6)
         
@@ -76,7 +71,7 @@ final class iJamViewModelTests: XCTestCase {
     
     func test_iJamAudioManager_thisZone_shouldInitializeToNegativeOne () {
         // When
-        let audioManager = iJamAudioManager(model: model)
+        let audioManager = iJamAudioManager()
         let zone = audioManager.formerZone
 
         // Then
@@ -89,7 +84,7 @@ final class iJamViewModelTests: XCTestCase {
         
         for char in fretMap {
             if char != "x" && char != "0" {
-                let fret = model.getFretFromChar(char)
+                let fret = viewModel.getFretFromChar(char)
                 maxFret = max(maxFret, fret)
                 minFret = min(minFret, fret)
             }

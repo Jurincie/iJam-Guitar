@@ -9,14 +9,28 @@
 import Foundation
 import SwiftData
 
+@Model
 class ChordGroup {
-    var availableChordNames: String = ""
+    var availableChordNames: [String] {
+        get {
+            availableChords.map() {
+                $0.name ?? ""
+            }
+        }
+        set {}
+    }
     var name: String = ""
-    var activeChord: Chord?
-    var availableChords: [Chord] = []
-    @Relationship(inverse: \Tuning.activeChordGroup)
-    var tuning: Tuning?
-
-    init() {
+    @Relationship var activeChord: Chord?
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord] = []
+    @Relationship(inverse: \Tuning.chordGroups)
+    var parentTuning: Tuning?
+    
+    init(name: String = "",
+         activeChord: Chord? = nil,
+         tuning: Tuning? = nil) {
+        self.name = name
+        self.activeChord = activeChord
+        self.availableChords = []
+        self.parentTuning = tuning
     }
 }

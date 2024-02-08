@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A302E502A1FF21B005864F4 /* iJamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E4F2A1FF21B005864F4 /* iJamModel.swift */; };
+		7A302E502A1FF21B005864F4 /* iJamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */; };
 		7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */; };
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */; };
+		7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7FBC202B72DE1D00BD5567 /* AppState.swift */; };
 		7A86A0CF2B4B0928004E67CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */; };
 		7A9AF58C2B66FF7B00E37CDB /* PickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AF58B2B66FF7B00E37CDB /* PickView.swift */; };
 		7A9AF58E2B6738B400E37CDB /* CreateChordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AF58D2B6738B400E37CDB /* CreateChordGroupView.swift */; };
@@ -17,7 +18,7 @@
 		7AA07A2A2A040F6B00AE87B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A292A040F6B00AE87B3 /* Assets.xcassets */; };
 		7AA07A2D2A040F6B00AE87B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */; };
 		7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */; };
-		7AA07A612A0416EC00AE87B3 /* iJamGuitarModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A5D2A0416EB00AE87B3 /* iJamGuitarModelExtension.swift */; };
+		7AA07A612A0416EC00AE87B3 /* iJamViewModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */; };
 		7AA07A6E2A04177100AE87B3 /* OpenDTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */; };
 		7AA07A6F2A04177100AE87B3 /* OpenGTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */; };
 		7AA07A702A04177100AE87B3 /* OpenG_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */; };
@@ -57,12 +58,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7A302E4F2A1FF21B005864F4 /* iJamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamModel.swift; path = iJamGuitar/models/iJamModel.swift; sourceTree = SOURCE_ROOT; };
+		7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamViewModel.swift; path = iJamGuitar/ViewModel/iJamViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
 		7A3AD0012B1FFE5F003EEF9A /* iJamGuitarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarTests.swift; sourceTree = "<group>"; };
-		7A6BE95A2B6333FF00C5146E /* SyncedProducts.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = SyncedProducts.storekit; sourceTree = "<group>"; };
-		7A6BE95B2B633FE800C5146E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		7A7FBC202B72DE1D00BD5567 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7A9AF58B2B66FF7B00E37CDB /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
 		7A9AF58D2B6738B400E37CDB /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateChordGroupView.swift; path = iJamGuitar/CreateChordGroupView.swift; sourceTree = SOURCE_ROOT; };
@@ -71,7 +71,7 @@
 		7AA07A292A040F6B00AE87B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = iJamGuitar/Extensions/Extensions.swift; sourceTree = SOURCE_ROOT; };
-		7AA07A5D2A0416EB00AE87B3 /* iJamGuitarModelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamGuitarModelExtension.swift; path = iJamGuitar/Extensions/iJamGuitarModelExtension.swift; sourceTree = SOURCE_ROOT; };
+		7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamViewModelExtension.swift; path = iJamGuitar/Extensions/iJamViewModelExtension.swift; sourceTree = SOURCE_ROOT; };
 		7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenDTuningChordGroups.plist; path = iJamGuitar/Plists/OpenDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenGTuningChordGroups.plist; path = iJamGuitar/Plists/OpenGTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenG_ChordLibrary.plist; path = iJamGuitar/Plists/OpenG_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
@@ -118,10 +118,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A2300402B744CE40040825B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7A302E4D2A1FD25B005864F4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7AA07A5D2A0416EB00AE87B3 /* iJamGuitarModelExtension.swift */,
+				7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */,
 				7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */,
 				7AE86C2F2B1D15E90032DABD /* Logger.swift */,
 			);
@@ -139,10 +147,10 @@
 		7A9AF58F2B68419900E37CDB /* models */ = {
 			isa = PBXGroup;
 			children = (
-				7AE86C282B1BAC820032DABD /* Chord.swift */,
+				7A7FBC202B72DE1D00BD5567 /* AppState.swift */,
 				7AE86C2A2B1BAC820032DABD /* Tuning.swift */,
 				7AE86C292B1BAC820032DABD /* ChordGroup.swift */,
-				7A302E4F2A1FF21B005864F4 /* iJamModel.swift */,
+				7AE86C282B1BAC820032DABD /* Chord.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -150,8 +158,6 @@
 		7AA07A192A040F6A00AE87B3 = {
 			isa = PBXGroup;
 			children = (
-				7A6BE95B2B633FE800C5146E /* Store.swift */,
-				7A6BE95A2B6333FF00C5146E /* SyncedProducts.storekit */,
 				7AA07A652A04175200AE87B3 /* Property Lists */,
 				7AA07A242A040F6A00AE87B3 /* iJamGuitar */,
 				7A3AD0022B1FFE5F003EEF9A /* iJamGuitarTests */,
@@ -173,9 +179,10 @@
 			children = (
 				7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */,
 				7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */,
+				7A2300402B744CE40040825B /* ViewModel */,
 				7A9AF58F2B68419900E37CDB /* models */,
-				7A302E4D2A1FD25B005864F4 /* Extensions */,
 				7AA07A762A0417C800AE87B3 /* Views */,
+				7A302E4D2A1FD25B005864F4 /* Extensions */,
 				7AA07A292A040F6B00AE87B3 /* Assets.xcassets */,
 				7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */,
 				7AA07A2B2A040F6B00AE87B3 /* Preview Content */,
@@ -355,7 +362,7 @@
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
 				7AA07A882A0417E800AE87B3 /* FretNumbersView.swift in Sources */,
 				7AA07A8E2A0417E800AE87B3 /* ChordButtonsView.swift in Sources */,
-				7AA07A612A0416EC00AE87B3 /* iJamGuitarModelExtension.swift in Sources */,
+				7AA07A612A0416EC00AE87B3 /* iJamViewModelExtension.swift in Sources */,
 				7AA07A862A0417E800AE87B3 /* BottomView.swift in Sources */,
 				7AE86C302B1D15E90032DABD /* Logger.swift in Sources */,
 				7AA07A8D2A0417E800AE87B3 /* StringsAndFretsAreaView.swift in Sources */,
@@ -372,7 +379,8 @@
 				7AA07A912A0417E800AE87B3 /* TopView.swift in Sources */,
 				7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */,
 				7AA07A8B2A0417E800AE87B3 /* HeaderView.swift in Sources */,
-				7A302E502A1FF21B005864F4 /* iJamModel.swift in Sources */,
+				7A302E502A1FF21B005864F4 /* iJamViewModel.swift in Sources */,
+				7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */,
 				7AA07A8C2A0417E800AE87B3 /* FretBoardView.swift in Sources */,
 				7A9AF58C2B66FF7B00E37CDB /* PickView.swift in Sources */,
 			);
@@ -399,10 +407,15 @@
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PixleyConsulting.iJamGuitarTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -421,10 +434,15 @@
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PixleyConsulting.iJamGuitarTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -562,7 +580,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 156;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;
@@ -574,12 +592,13 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.5;
+				MARKETING_VERSION = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.iJamGuitar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -594,7 +613,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 156;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;
@@ -606,12 +625,13 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.5;
+				MARKETING_VERSION = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.iJamGuitar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

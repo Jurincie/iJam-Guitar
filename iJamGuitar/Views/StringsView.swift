@@ -8,6 +8,7 @@
 
 
 import AVFoundation
+import SwiftData
 import SwiftUI
 import OSLog
 
@@ -30,93 +31,69 @@ import OSLog
 /// Zone 10: between Strings 2 - 1
 /// Zone 11: inside String 1
 /// Zone 12: right of String 1
-///
+
 struct StringsView: View {
-    @Bindable var model: iJamModel
     @State private var dragLocation: CGPoint?
-    let halfStringWidth = 10.0
+    @State private var viewModel = iJamViewModel.shared
     let audioManager: iJamAudioManager
     var height: CGFloat
     var drag: some Gesture {
         DragGesture()
-            .onEnded { _ in audioManager.formerZone = -1 }
+            .onEnded { _ in
+                audioManager.formerZone = -1
+            }
             .onChanged { drag in
-            dragLocation = drag.location
+                dragLocation = drag.location
                 audioManager.newDragLocation(dragLocation)
                 Logger.viewCycle.debug("Drag[x] = \(drag.location.x)")
-        }
+            }
     }
     
-    init(model: iJamModel, height: CGFloat) {
-        self.model = model
+    init(height: CGFloat,
+         showVolumeAlert: Bool) {
         self.height = height
-        self.audioManager = iJamAudioManager(model: model)
+        self.audioManager = iJamAudioManager()
     }
-
+    
     var body: some View {
         HStack() {
             SixSpacerHStack()
             HStack(spacing:0) {
-                StringView(model: model, 
-                           height: height,
-                           stringNumber: 6)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[0] = (newFrame.maxX + newFrame.minX) / 2.0
+                ForEach(0...5, id: \.self) { index in
+                    StringView(height: height,
+                               stringNumber: 6 - index)
+                    .readFrame { newFrame in
+                        audioManager.zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
+                    }
                 }
-                Spacer()
-                StringView(model: model,
-                           height: height,
-                           stringNumber: 5)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[1] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(model: model,
-                           height: height,
-                           stringNumber: 4)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[2] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
+                SixSpacerHStack()
             }
+            .task({ await playOpeningArpegio() })
+            .contentShape(Rectangle())
+            .gesture(drag)
+            .alert("Master Volume is OFF", 
+                   isPresented: $viewModel.showVolumeAlert) {
+                Button("OK", role: .cancel) { viewModel.showVolumeAlert = false }
+            }
+            .alert("Another App is using the Audio Player",
+                   isPresented: $viewModel.showAudioPlayerInUseAlert) {
+                Button("OK", role: .cancel) { viewModel.showAudioPlayerInUseAlert = false }
+            }
+                   .alert("Unknown Audio Player Error", isPresented: $viewModel.showAudioPlayerErrorAlert) {
+                Button("OK", role: .cancel) { fatalError() }
+            }
+        }
+        
+        
+    }
+    struct SixSpacerHStack: View {
+        var body: some View {
             HStack() {
-                StringView(model: model,
-                           height: height,
-                           stringNumber: 3)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[3] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(model: model,
-                           height: height,
-                           stringNumber: 2)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[4] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(model: model,
-                           height: height, 
-                           stringNumber: 1)
-                .readFrame { newFrame in
-                    audioManager.zoneBreaks[5] = (newFrame.maxX + newFrame.minX) / 2.0
+                ForEach(0...5, id: \.self) { _ in
+                    Spacer()
                 }
             }
-            SixSpacerHStack()
         }
-        .task({await playOpeningArpegio()})
-        .contentShape(Rectangle())
-        .gesture(drag)
-        .alert("Master Volume is OFF", isPresented: $model.showVolumeAlert) {
-            Button("OK", role: .cancel) { model.showVolumeAlert = false }
-        }
-        .alert("Another App is using the Audio Player", isPresented: $model.showAudioPlayerInUseAlert) {
-            Button("OK", role: .cancel) { model.showAudioPlayerInUseAlert = false }
-        }
-        .alert("Unknown Audio Player Error", isPresented: $model.showAudioPlayerErrorAlert) {
-            Button("OK", role: .cancel) { fatalError() }
-        }
-        
-        
     }
     
     func playOpeningArpegio() async {
@@ -128,19 +105,7 @@ struct StringsView: View {
         
         Logger.viewCycle.debug("zoneBreaks: \(audioManager.zoneBreaks)")
     }
-
-    struct SixSpacerHStack: View {
-        var body: some View {
-            HStack() {
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-            }
-        }
-    }
 }
+
 
 

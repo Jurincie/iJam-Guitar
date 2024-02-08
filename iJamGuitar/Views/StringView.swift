@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 import SwiftUI
 import OSLog
 
@@ -14,16 +15,15 @@ import OSLog
 //  top layer:  VStack() of 6 possibly-RedBall images evenly spaced over top half of the stringsView
 
 struct StringView: View {
-    @Bindable var model: iJamModel
+    @Query var appState: AppState
+    var viewModel = iJamViewModel.shared
     let notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     let height: CGFloat
     var stringImageName: String = ""
     let stringNumber: Int
     
-    init(model: iJamModel, 
-         height: CGFloat,
+    init(height: CGFloat,
          stringNumber: Int) {
-        self.model = model
         self.height = height
         self.stringNumber = stringNumber
         self.stringImageName = "String"
@@ -31,9 +31,9 @@ struct StringView: View {
     }
         
     var body: some View {
-        let openNotesString = (model.activeTuning?.stringNoteNames)
+        let openNotesString = (appState.activeTuning?.stringNoteNames)
         if let openNotes: [String] = openNotesString?.components(separatedBy: ["-"]) {
-            let fretBoxes: [FretBox] = getFretBoxArray(minFret: model.minimumFret,
+            let fretBoxes: [FretBox] = getFretBoxArray(minFret: viewModel.minimumFret,
                                                        openStringNote: openNotes[6 - stringNumber])
             /*
              1x6 grid of Buttons with noteName in text on top of the possible image
@@ -41,48 +41,24 @@ struct StringView: View {
              if fretted there
              */
             VStack(spacing:0) {
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[0],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[1],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[2],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[3],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[4],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(model: model,
-                            fretBox: fretBoxes[5],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
+                ForEach(0...5, id: \.self) { index in
+                    FretBoxView(fretBox: fretBoxes[index],
+                                stringNumber:stringNumber)
+                    .frame(width: height / 10, height: height / 12, alignment: .top)
+                }
                 
                 Spacer()
             }
             .background(Image(stringImageName)
                 .resizable()
                 .frame(width:20, height:height, alignment:.topLeading)
-                .opacity(model.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0))
+                .opacity(viewModel.currentFretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0))
         }
-    }
- 
-    
-    struct FretBox: Identifiable  {
-        let id: Int
-        let title: String
+        Spacer()
     }
     
     struct FretBoxView: View {
-        @Bindable var model: iJamModel
+        var viewModel = iJamViewModel.shared
         let fretBox: FretBox
         let stringNumber: Int
 
@@ -90,27 +66,27 @@ struct StringView: View {
             ZStack() {
                 // background
                 Button(action:{
-                    let currentFret = model.fretIndexMap[6 - stringNumber]
-                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(model.minimumFret)  fretBoxID: \(fretBox.id)")
+                    let currentFret = viewModel.currentFretIndexMap[6 - stringNumber]
+                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(viewModel.minimumFret)  fretBoxID: \(fretBox.id)")
                     if currentFret == 0 && fretBox.id == 0 {
                         // if nut tapped when string open => make string muted
-                        model.fretIndexMap[6 - stringNumber] = -1
+                        viewModel.currentFretIndexMap[6 - stringNumber] = -1
                     } else if currentFret == fretBox.id {
                         // tapped existing fret => make string open
-                        model.fretIndexMap[6 - stringNumber] = 0
+                        viewModel.currentFretIndexMap[6 - stringNumber] = 0
                     } else {
                         // tapped different fret
-                        model.fretIndexMap[6 - stringNumber] = fretBox.id
+                        viewModel.currentFretIndexMap[6 - stringNumber] = fretBox.id
                     }
                 }){
                     if(self.fretBox.id == 0)
                     {
                         // show a white circle on zeroFret with black text
                         CircleView(color: Color.teal, lineWidth: 1.0)
-                    } else if model.fretIndexMap[6 - stringNumber] == fretBox.id {
+                    } else if viewModel.currentFretIndexMap[6 - stringNumber] == fretBox.id {
                         // red ball on freted fretBox
                         // yellow ball if not in the chord - meaning user tapped on different fret
-                        CircleView(color: fretIsFromChord() ? Color.red : Color.yellow, lineWidth: 1.0)
+                        CircleView(color: fretIsFromChord(fretNumber: fretBox.id) ? Color.red : Color.yellow, lineWidth: 1.0)
                     } else {
                         CircleView()
                     }
@@ -123,7 +99,7 @@ struct StringView: View {
                         .font(.title3)
                         .fixedSize()
                 } else {
-                    let text = self.fretBox.id == model.fretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
+                    let text = self.fretBox.id == viewModel.currentFretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
                     Text(text)
                         .foregroundColor(Color.black)
                         .font(.title3)
@@ -132,19 +108,19 @@ struct StringView: View {
             }
         }
         
-        func fretIsFromChord() -> Bool {
+        func fretIsFromChord(fretNumber: Int) -> Bool {
             guard stringNumber < 6 && stringNumber >= 0 else { return true }
             
-            if let fretMap = model.activeChord?.fretMap {
-                let index = fretMap.index(fretMap.startIndex, offsetBy: (6 - stringNumber))
-                let chordFretNumber = model.getFretFromChar(fretMap[index])
-                let currentFretNumber = model.fretIndexMap[6 - stringNumber]
-                
-                return currentFretNumber == chordFretNumber ? true : false
-            }
+            let chordFretNumber = fretNumber
+            let currentFretNumber = viewModel.currentFretIndexMap[6 - stringNumber]
             
-            return true
+            return currentFretNumber == chordFretNumber
         }
+    }
+    
+    struct FretBox: Identifiable  {
+        let id: Int
+        let title: String
     }
 }
 
@@ -167,4 +143,34 @@ struct CircleView: View {
         
     }
 }
+
+extension StringView {
+    func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
+        var fretBoxArray:[FretBox] = []
+        let index = iJamViewModel.shared.currentFretIndexMap[6 - stringNumber]
+        fretBoxArray.append(FretBox(id: 0,
+                                    title: index == -1 ?
+                                    "X" : getFretNoteTitle(openNote: openStringNote,
+                                                           offset: 0)))
+        for index in Range(0...4) {
+            let title = getFretNoteTitle(openNote: openStringNote,
+                                         offset: index + minFret)
+            fretBoxArray.append(FretBox(id: minFret + index,
+                                        title: title))
+        }
+        return fretBoxArray
+    }
+    
+    func getFretNoteTitle(openNote:String, offset:Int) -> String {
+        if let index = self.notes.firstIndex(of: openNote) {
+            var finalIndex = index + offset + appState.capoPosition
+            if finalIndex < 0 {
+                finalIndex += 12
+            }
+            return self.notes[finalIndex % 12]
+        }
+        return "C"
+    }
+}
+
 

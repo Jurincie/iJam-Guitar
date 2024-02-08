@@ -5,6 +5,7 @@
 //  Created by Ron Jurincie on 1/28/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct Pick: Identifiable  {
@@ -14,38 +15,40 @@ struct Pick: Identifiable  {
 }
 
 struct PickView: View {
-    @Binding var model: iJamModel
+    @Query var appState: AppState
+    var viewModel = iJamViewModel.shared
     @State private var isAnimated: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
     
     var body: some View {
         ZStack() {
-            // background layer
             PickButton()
+            // background layer
             
             // top layer
             Text(self.pick.title == kNoChordName ? "" : self.pick.title)
                 .foregroundColor(Color.white)
-                .font(.custom("Arial Rounded MT Bold", size: getFontSize(targetString: self.pick.title)))
-                .fontWeight(.bold)
+                .font(.custom("Arial Rounded MT Bold", 
+                              size: getFontSize(targetString: self.pick.title)))
         }
         .cornerRadius(10.0)
-        .scaleEffect(isAnimated ? 2.0 : 1.0)
+        .scaleEffect(isAnimated ? 3.0 : 1.0)
     }
 }
 
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
-            if model.selectedChordIndex != pick.id || chordIsAltered(pick.id) {
+            if appState.selectedChordIndex != pick.id || chordIsAltered(pick.id) {
                 withAnimation(.default) {
                     isAnimated.toggle()
                 }
                 makeChosenPicksChordActive()
             }
         }){
-            Image(getPickImageName())
+            Image(getPickImageName(availableChords: appState.availableChords,
+                                   selectedChordIndex: appState.selectedChordIndex))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 100.0)
@@ -58,35 +61,42 @@ extension PickView {
     }
     
     // returns approprieate imageName for pickButton or "BlankPick" on failure
-    func getPickImageName() -> String {
+    func getPickImageName(availableChords: [Chord],
+                          selectedChordIndex: Int) -> String {
+        var viewModel = iJamViewModel.shared
         var pickImageName = "BlankPick"
-        if model.selectedChordIndex == self.pick.id {
-            let thisChord = model.availableChords[self.pick.id]
-            pickImageName = model.fretIndexMap != model.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
+        
+        if selectedChordIndex == self.pick.id {
+            let thisChord = availableChords[self.pick.id]
+            pickImageName = viewModel.currentFretIndexMap != viewModel.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
         } else {
-            pickImageName = self.pick.id < model.availableChords.count ? "BlankPick" : "UndefinedPick"
+            pickImageName = self.pick.id < availableChords.count ? "BlankPick" : "UndefinedPick"
         }
         
         return pickImageName
     }
     
     func chordIsAltered(_ chordIndex: Int) -> Bool {
-        let thisChord = model.availableChords[chordIndex]
-        return model.fretIndexMap != model.getFretIndexMap(chord: thisChord)
+        @Query var appState: AppState
+        
+        let thisChord = appState.availableChords[chordIndex]
+        return viewModel.currentFretIndexMap != viewModel.getFretIndexMap(chord: thisChord)
     }
     
     /// sets model.activeChord and model.selectedIndex
     func makeChosenPicksChordActive() {
+        @Query var appState: AppState
+        let viewModel = iJamViewModel.shared
         isAnimated.toggle()
         
-        if let chordNames = model.activeChordGroup?.availableChordNames.components(separatedBy: ["-"]) {
+        if let chordNames = appState.activeChordGroup?.availableChordNames {
             guard self.pick.id < chordNames.count else { return }
             
             let newActiveChordName = chordNames[self.pick.id]
-            if let newActiveChord = model.getChord(name: newActiveChordName,
-                                                   tuning: model.activeTuning) {
-                model.activeChord = newActiveChord
-                model.selectedChordIndex = self.pick.id
+            if let newActiveChord = viewModel.getChord(name: newActiveChordName,
+                                                       tuning: appState.activeTuning) {
+                appState.activeTuning?.activeChordGroup?.activeChord = newActiveChord
+                appState.selectedChordIndex = self.pick.id
             }
         }
     }

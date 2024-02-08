@@ -5,13 +5,18 @@
 //  Created by Ron Jurincie on 4/25/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
 struct BottomView: View {
-    @Binding var model: iJamModel
     let width: CGFloat
     let height: CGFloat
+    
+    init(width: CGFloat, height: CGFloat) {
+        self.width = width
+        self.height = height
+    }
 
     var body: some View {
         ZStack() {
@@ -21,7 +26,7 @@ struct BottomView: View {
                        height:height,
                        alignment:.topLeading)
             VStack() {
-                VolumeView(model: $model)
+                VolumeView()
                     .padding(.horizontal, 40)
             }
         }

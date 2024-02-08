@@ -5,23 +5,25 @@
 //  Created by Ron Jurincie on 4/29/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
 struct VolumeView: View {
-    @Binding var model: iJamModel
-    @State private var isEditing = false
+    var viewModel = iJamViewModel.shared
+    @State private var volumeAmount: Double = 0.0
+    @Query var appState: AppState
     let imageWidth = UIDevice.current.userInterfaceIdiom == .pad ? 35.0 : 25.0
-    
+   
     func VolumeSlider() -> some View {
         Slider(
-            value: $model.volumeLevel,
+            value: $volumeAmount,
             in: 0...10
         )
     }
     
-    func SpeakerImage() -> some View {
-        Image(systemName: model.isMuted ? "speaker.slash.fill" : "speaker.wave.1")
+    func SpeakerImage(isMuted: Bool) -> some View {
+        Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.1")
             .resizable()
             .frame(width: imageWidth, height: imageWidth)
             .shadow(radius: 10)
@@ -36,9 +38,9 @@ struct VolumeView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    model.isMuted.toggle()
+                    appState.isMuted.toggle()
                 }) {
-                    SpeakerImage()
+                    SpeakerImage(isMuted: appState.isMuted)
                 }
                 VolumeSlider()
                 Spacer()

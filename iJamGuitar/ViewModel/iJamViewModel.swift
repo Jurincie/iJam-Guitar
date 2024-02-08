@@ -1,63 +1,34 @@
 //
-//  iJamModel.swift
+//  iJamViewModel.swift
 //  iJamGuitar
 //
 //  Created by Ron Jurincie on 4/24/23.
 //
 
-import SwiftUI
-import SwiftData
 import AVFAudio
 import OSLog
+import SwiftData
+import SwiftUI
 
-@Observable
-final class iJamModel {
-    static let shared = iJamModel()
+/// Load Tunings() and AppState() from SwiftData
+/// use those Tunings to build all of our data
+
+final class iJamViewModel {
+    @Environment(\.modelContext) var modelContext
+    @Query var appState: AppState
+    static var shared = iJamViewModel()
+    var currentFretIndexMap: [Int] = []
+    var minimumFret: Int = 0
     let kDefaultVolume = 5.0
     var showVolumeAlert = false
     var showAudioPlayerInUseAlert = false
-    var showAudioNotAvailableAlert: Bool = false
+    var showAudioNotAvailableAlert = false
     var showAudioPlayerErrorAlert = false
-    var activeTuning: Tuning?
-    var tunings: [Tuning] = []
-    var capoPosition: Int = 0
-    var activeChordGroup: ChordGroup?
-    var isMuted = false
-    var volumeLevel = 5.0
-    var selectedChordIndex: Int = 0
-    var savedVolumeLevel = 5.0
-    var fretIndexMap: [Int] = []
-    var minimumFret: Int = 0
-    var availableChords: [Chord] = []
-    var activeTuningName: String = "" {
-        didSet {
-            if let newTuning = getTuning(name: activeTuningName) {
-                makeNewTuningActive(newTuning: newTuning)
-            }
-        }
-    }
+    var activeTuningName: String = ""
     var activeChordGroupName: String = ""
-    {
-        didSet {
-            if let newChordGroup = getChordGroup(name: activeChordGroupName) {
-                setActiveChordGroup(newChordGroup: newChordGroup)
-            }
-        }
-    }
-    var activeChord: Chord? {
-        didSet {
-            activeTuning?.activeChordGroup?.activeChord = activeChord
-            fretIndexMap = getFretIndexMap(chord: activeChord)
-            minimumFret = getMinimumDisplayedFret()
-        }
-    }
+    var activeChord: Chord? = nil
         
     init() {
-        // only load data from Plists if there is no data
-        if tunings.count == 0 {
-            try? loadDataModelFromPlists()
-        }
-        
         setupModel()
         
         // if another app is using AudioPlayer -> show alert
@@ -65,34 +36,71 @@ final class iJamModel {
     }
 }
 
-extension iJamModel {
+extension iJamViewModel {
     private func setupModel() {
-        availableChords = getAvailableChords(activeChordGroup: activeTuning?.activeChordGroup, activeTuning: activeTuning)
-        fretIndexMap = getFretIndexMap(chord: activeTuning?.activeChordGroup?.activeChord)
-        setSelectedChordIndex()
+        // Create one instance of AppState
+        // Attach created or existing Tunings to tunings: [Tuning]
+        @Query var appState: AppState?
+        
+        if let appState = appState {
+            do {
+                try buildModelFromPlists()
+            } catch {
+                print("Error loading data")
+            }
+            
+            // Now that AppState and [Tuning] exist -> connect them
+            @Query var tunings: [Tuning]
+            appState.tunings.append(contentsOf: tunings)
+            
+            appState.activeTuning = appState.tunings.first
+            appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
+            appState.capoPosition = 0
+            appState.isMuted = false
+            appState.volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
+            
+            appState.activeTuning?.activeChordGroup?.availableChords = getAvailableChords(activeChordGroup: appState.activeChordGroup,
+                                                          activeTuning: appState.activeTuning)
+            currentFretIndexMap = getFretIndexMap(chord: appState.activeTuning?.activeChordGroup?.activeChord)
+            setSelectedChordIndex()
+            
+        }
+        
+        
+    }
+    
+    private func buildModelFromPlists() throws {
+        var appState = AppState()
+        modelContext.insert(appState)
+        
+        do {
+            try createTuningsFromPlists()
+        } catch {
+            throw PlistError.unknownError
+        }
     }
     
     func setSelectedChordIndex() {
+        @Query var appState: AppState
         var chordIndex = 0
         
-        for chord in availableChords {
-            if chord == activeTuning?.activeChordGroup!.activeChord {
+        for chord in appState.availableChords {
+            if chord == appState.activeTuning?.activeChordGroup!.activeChord {
                 break
             }
             chordIndex += 1
         }
-        chordIndex = min(availableChords.count - 1, selectedChordIndex)
+        chordIndex = min(appState.availableChords.count - 1, appState.selectedChordIndex)
         
-        selectedChordIndex = chordIndex
+        appState.selectedChordIndex = chordIndex
     }
     
     /// This method sets all needed values for Tuning identified by tuningName
-    /// and adds the new compled Tuning to the
+    /// and adds the new instantiated Tuning to the
     /// It should ONLY be callled on the initial launch to build the appState from iJamDataModel.xcaDataModel,
     /// which is then used by iJamModel.
     /// - Parameters:
-    ///   - appState: appState @Model
-    ///   - tuning: tuning from appState
+    ///   - tuning: newly instantiated Tuning
     ///   - tuningName: name of this Tuning
     ///   - openIndices: represents each Strings (open position)  index into the noteNames Array
     ///   - noteNames: noteNames is an array of the noteNames
@@ -125,7 +133,6 @@ extension iJamModel {
         tuning.chordGroups.append(contentsOf: chordGroups)
         
         Logger.statistics.info("New tuning added")
-        tunings.append(tuning)
     }
     
     /// This method should ONLY be called on initial launch of app
@@ -136,7 +143,9 @@ extension iJamModel {
     /// activeTuning
     /// eachTunings activeChordGroup
     /// each chordGroups activeChord
-    func loadDataModelFromPlists() throws { // populate our initial dataModel from Plists
+    func createTuningsFromPlists() throws {
+        // populate our initial dataModel from Plists //
+        
         // Standard Tuning
         let standardTuning = Tuning()
         
@@ -178,15 +187,9 @@ extension iJamModel {
             throw PlistError.unknownError
         }
         
-        
-        // remainder of appState
-        activeTuning = standardTuning
-        activeChordGroup = activeTuning?.chordGroups.first
-        capoPosition = 0
-        isMuted = false
-        volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
-        activeTuning = standardTuning
-        activeTuningName = activeTuning?.name ?? "Error setting activeTuning"
+        modelContext.insert(standardTuning)
+        modelContext.insert(dropDTuning)
+        modelContext.insert(openDTuning)
     }
     
     /// Creates and returns a array of Chords available to parentTuning
@@ -194,16 +197,15 @@ extension iJamModel {
     ///   - chordDictionary: dictionary of <chordName, fretIndicesString>
     ///   - parentTuning: the Tuning to which this set of Chords belongs
     /// - Returns: [Chord]
-    func convertToArrayOfChords(chordDictionary: Dictionary<String,String>,
+    func convertToArrayOfChords(chordDictionary: Dictionary<String, String>,
                                 parentTuning: Tuning) -> [Chord] {
-        // create a NSMutableSet of Chord managed Objects
+        @Query var appState: AppState
         var chords: [Chord] = []
         
         for entry in chordDictionary {
-            let chord       = Chord()
-            chord.name      = entry.key
-            chord.fretMap   = entry.value
-            chord.tuning    = parentTuning
+            let chord = Chord(parentChordGroup: (appState.activeTuning?.activeChordGroup)!)
+            chord.name = entry.key
+            chord.fretMap = entry.value
             chords.append(chord)
         }
         
@@ -221,13 +223,13 @@ extension iJamModel {
         var activeChordGroupIsSet = false
         
         for entry in dict {
-            // create new ChordGroup
-            let chordGroup = ChordGroup()
-            chordGroup.name                 = entry.key
-            chordGroup.availableChordNames  = entry.value
-            chordGroup.availableChords      = getGroupsChords(chordGroup: chordGroup, 
-                                                              parentTuning: parentTuning)
-            chordGroup.tuning               = parentTuning
+            // create new ChordGroupd
+            var chordGroup = ChordGroup()
+            chordGroup.name = entry.key
+            chordGroup.availableChordNames = (entry.value).components(separatedBy: "-")
+            chordGroup.availableChords = getGroupsChords(chordGroup: chordGroup,
+                                                         parentTuning: parentTuning)
+            chordGroup.parentTuning = parentTuning
             if activeChordGroupIsSet == false {
                 parentTuning.activeChordGroup = chordGroup
                 activeChordGroupIsSet = true
@@ -247,10 +249,12 @@ extension iJamModel {
                          parentTuning: Tuning?) -> [Chord] {
         var thisGroupsChords: [Chord] = []
         var activeChordIsSet = false
-        if let chordNames = chordGroup?.availableChordNames.components(separatedBy: "-") {
+        if let chordNames = chordGroup?.availableChordNames {
             for chordName in chordNames {
-                if let chord = getChord(name: chordName, parentTuning: parentTuning) {
+                if let chord = getChord(name: chordName, 
+                                        parentTuning: parentTuning) {
                     thisGroupsChords.append(chord)
+                    
                     if activeChordIsSet == false {
                         chordGroup?.activeChord = chord
                         activeChordIsSet = true
@@ -267,7 +271,8 @@ extension iJamModel {
     ///   - name: name of the chord in this Tuning
     ///   - parentTuning: the Tuning to which this chord belongs
     /// - Returns: Chord specified by name in parentTuning
-    func getChord(name: String, parentTuning: Tuning?) -> Chord? {
+    func getChord(name: String, 
+                  parentTuning: Tuning?) -> Chord? {
         if let chordArray: [Chord] = parentTuning?.chords as? [Chord] {
             for chord in chordArray {
                 if chord.name == name {
@@ -281,5 +286,7 @@ extension iJamModel {
 }
 
 enum PlistError: Error {
-    case badChordGroupsLibraryAddress, badChordLibraryAddress, unknownError
+    case badChordGroupsLibraryAddress
+    case badChordLibraryAddress
+    case unknownError
 }

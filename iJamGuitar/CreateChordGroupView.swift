@@ -5,12 +5,13 @@
 //  Created by Ron Jurincie on 1/1/24.
 //
 
-import SwiftUI
 import OSLog
+import SwiftData
+import SwiftUI
 
 struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var model: iJamModel
+    @Query var model: iJamViewModel
     @State private var chordGroupNameExistsAlert = false
     @State private var selectedChords: [Chord?] = Array(repeating: nil, count: 10)
     @State private var chordGroupName: String = ""
@@ -69,7 +70,7 @@ struct CreateChordGroupView: View {
                 LazyVGrid(columns: columns,
                           spacing: mySpacing) {
                     ForEach(getUndefinedPicks(), id: \.id) { pick in
-                        PickView(model: $model,
+                        PickView(model: model,
                                  pick: pick)
                     }
                 }
@@ -108,25 +109,10 @@ struct CreateChordGroupView: View {
         
         return pickArray
     }
-    
-//    func NewPickButton() -> some View {
-//        ZStack {
-//            // background
-//            Image(named: "BlankPick")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(maxWidth: 100.0)
-//                .padding(10)
-//                .opacity(self.pick.title == kNoChordName ? 0.3 : 1.0)
-//                .disabled(self.pick.title == kNoChordName)
-//        }
-//        
-//        return button
-//    }
 }
 
 #Preview {
-    @State var model = iJamModel()
-    return CreateChordGroupView(model: $model)
+    @State var model = iJamViewModel()
+    return CreateChordGroupView()
 }
 

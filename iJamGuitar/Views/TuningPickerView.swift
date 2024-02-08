@@ -5,25 +5,25 @@
 //  Created by Ron Jurincie on 5/18/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
 struct TuningPickerView: View {
-   @Bindable var model: iJamModel
-
+    @Binding var activeTuningName: String
     var body: some View {
-       VStack {
-           Menu {
-               Picker("Tunings", selection: $model.activeTuningName) {
-                   ForEach(model.getTuningNames(), id: \.self) {
-                       Text($0)
-                           .fixedSize()
-                   }
-               }
-               .pickerStyle(.automatic)
-               .frame(maxWidth: .infinity)
+        VStack {
+            Menu {
+                Picker("Tunings", selection: $activeTuningName) {
+                    ForEach(iJamViewModel.shared.getTuningNames(), id: \.self) {
+                        Text($0)
+                            .fixedSize()
+                    }
+                }
+                .pickerStyle(.automatic)
+                .frame(maxWidth: .infinity)
            } label: {
-               Text("\(model.activeTuningName)")
+               Text("\(iJamViewModel.shared.activeTuningName)")
                    .padding(10)
                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                    .fontWeight(.semibold)
@@ -34,6 +34,10 @@ struct TuningPickerView: View {
                    .fixedSize()
            }
        }
+        .frame(alignment: .trailing)
+        .border(.white,
+                width: 2,
+                cornerRadius: 7)
     }
 }
 

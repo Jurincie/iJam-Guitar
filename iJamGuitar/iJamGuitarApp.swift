@@ -9,12 +9,11 @@ import SwiftUI
 
 @main
 struct iJamGuitarApp: App {
-    @State var model = iJamModel.shared
-
     var body: some Scene {
         WindowGroup {
-            ContentView(dataModel: $model)
+            ContentView()
         }
+        .modelContainer(for: [Tuning.self, ChordGroup.self, Chord.self, AppState.self])
     }
 }
 

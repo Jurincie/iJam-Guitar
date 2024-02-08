@@ -5,12 +5,11 @@
 //  Created by Ron Jurincie on 4/24/23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 import OSLog
 
 struct ContentView: View {
-    @Binding var dataModel: iJamModel
     var x: CGFloat = 0.0
     
     var body: some View {
@@ -19,22 +18,18 @@ struct ContentView: View {
             let width = geo.size.width
             
             VStack(spacing: 0) {
-                HeaderView(model: $dataModel, 
-                           width: width,
-                           height: height * 0.10 )
+                HeaderView(width: width,
+                           height: height * 0.10)
                     .aspectRatio(contentMode: .fit)
-                TopView(model: $dataModel,
-                        width:width,
+                TopView(width:width,
                         height:height * 0.25)
                     .aspectRatio(contentMode: .fit)
-                StringsAndFretsAreaView(dataModel: $dataModel,
-                                        width:width,
+                StringsAndFretsAreaView(width:width,
                                         height:height * 0.50)
                     .aspectRatio(contentMode: .fit)
-                BottomView(model: $dataModel,
-                           width: width,
+                BottomView(width: width,
                            height:height * 0.15)
-                    .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
             }
             .dynamicTypeSize(...DynamicTypeSize.large)
             .cornerRadius(16.0)
@@ -47,18 +42,15 @@ struct ContentView: View {
 }
 
 #Preview {
-    @State var model = iJamModel()
-    return ContentView(dataModel: $model)
+    return ContentView()
         .preferredColorScheme(.dark)
 }
 
 #Preview {
-    @State var model = iJamModel()
-    return ContentView(dataModel: $model)
+    return ContentView()
         .preferredColorScheme(.light)
 }
 #Preview {
-    @State var model = iJamModel()
-    return ContentView(dataModel: $model)
+    return ContentView()
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }
