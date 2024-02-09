@@ -10,16 +10,15 @@ import SwiftUI
 import OSLog
 
 struct ChordButtonsView: View {
-    let viewModel = iJamViewModel.shared
+    @Query var appState: AppState
     let width: CGFloat
     let height: CGFloat
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
     func getPicks() -> [Pick] {
-        
-        let thisChordGroup: ChordGroup? = viewModel.getChordGroup(name: viewModel.activeChordGroupName)
-        let chordNames:[String] = viewModel.getAvailableChordNames(activeChordGroup: thisChordGroup)
+        let thisChordGroup: ChordGroup? = appState.getChordGroup(name: appState.activeChordGroupName)
+        let chordNames:[String] = appState.getAvailableChordNames(activeChordGroup: thisChordGroup)
         var pickArray: [Pick] = []
         
         for index in 0..<10 {
@@ -31,7 +30,7 @@ struct ChordButtonsView: View {
     }
             
     var body: some View {
-        LazyVGrid(columns: columns, spacing:mySpacing) {
+        LazyVGrid(columns: columns, spacing: mySpacing) {
                 ForEach(getPicks(), id: \.id) { pick in
                     PickView(pick: pick)
             }

@@ -11,13 +11,13 @@ import SwiftUI
 
 struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
-    @Query var model: iJamViewModel
     @State private var chordGroupNameExistsAlert = false
     @State private var selectedChords: [Chord?] = Array(repeating: nil, count: 10)
     @State private var chordGroupName: String = ""
     @State private var currentTuning: Tuning?
     @State private var selectedChordIndex = 0
-
+    var chordNames: [String]
+    var activeChordName: String
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     
@@ -42,7 +42,7 @@ struct CreateChordGroupView: View {
                     VStack {
                         Menu {
                             Picker("Tunings", selection: $currentTuning) {
-                                ForEach(model.getTuningNames(), id: \.self) {
+                                ForEach(appState.getTuningNames(), id: \.self) {
                                     Text($0)
                                         .fixedSize()
                                 }
@@ -50,7 +50,7 @@ struct CreateChordGroupView: View {
                             .pickerStyle(.automatic)
                             .frame(maxWidth: .infinity)
                         } label: {
-                            Text("\(model.activeTuningName)")
+                            Text("\(appState.activeTuningName)")
                                 .padding(10)
                                 .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                                 .fontWeight(.semibold)
@@ -70,8 +70,7 @@ struct CreateChordGroupView: View {
                 LazyVGrid(columns: columns,
                           spacing: mySpacing) {
                     ForEach(getUndefinedPicks(), id: \.id) { pick in
-                        PickView(model: model,
-                                 pick: pick)
+                        PickView(pick: pick)
                     }
                 }
                 Spacer()
@@ -112,7 +111,6 @@ struct CreateChordGroupView: View {
 }
 
 #Preview {
-    @State var model = iJamViewModel()
     return CreateChordGroupView()
 }
 

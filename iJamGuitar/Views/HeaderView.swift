@@ -5,23 +5,24 @@
 //  Created by Ron Jurincie on 4/30/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
 struct HeaderView: View {
-    let viewModel = iJamViewModel.shared
+    @Query var appState: AppState
     let width: CGFloat
     let height: CGFloat
     @State private var showAlert = false
     @State private var showCreateChordGroupView = false
     @State private var selectedTuningName: String {
         didSet {
-            viewModel.activeTuningName = selectedTuningName
+            appState.activeTuningName = selectedTuningName
         }
     }
     @State private var selectedChordGroupName: String {
         didSet {
-            viewModel.activeChordGroupName = selectedChordGroupName
+            appState.activeChordGroupName = selectedChordGroupName
         }
     }
     
@@ -40,25 +41,29 @@ struct HeaderView: View {
     }
 
     var body: some View {
-        ZStack() {
-            // Background
-            Image("HeaderView")
-                .resizable()
-                .frame(width: width, height: height)
-            
-            // Foreground
-            VStack {
-                Spacer()
-                HStack() {
+        VStack {
+            Spacer()
+            ZStack() {
+                // Background
+                Image("HeaderView")
+                    .resizable()
+                    .frame(width: width, height: height)
+                
+                // Foreground
+                VStack {
                     Spacer()
-                    TuningPickerView(activeTuningName: $selectedTuningName)
-                    Spacer()
-                    ChordGroupPickerView(activeChordGroupName: $selectedChordGroupName)
-                        
-                    Spacer()
+                    HStack() {
+                        Spacer()
+                        TuningPickerView()
+                        Spacer()
+                        ChordGroupPickerView()
+                            
+                        Spacer()
+                    }
+                    .padding()
                 }
-                .padding()
             }
         }
+        
     }
 }

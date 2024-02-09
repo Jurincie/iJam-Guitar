@@ -34,7 +34,7 @@ import OSLog
 
 struct StringsView: View {
     @State private var dragLocation: CGPoint?
-    @State private var viewModel = iJamViewModel.shared
+    @Query var appState: AppState
     let audioManager: iJamAudioManager
     var height: CGFloat
     var drag: some Gesture {
@@ -72,14 +72,14 @@ struct StringsView: View {
             .contentShape(Rectangle())
             .gesture(drag)
             .alert("Master Volume is OFF", 
-                   isPresented: $viewModel.showVolumeAlert) {
-                Button("OK", role: .cancel) { viewModel.showVolumeAlert = false }
+                   isPresented: appState.showVolumeAlert) {
+                Button("OK", role: .cancel) { appState.showVolumeAlert = false }
             }
             .alert("Another App is using the Audio Player",
-                   isPresented: $viewModel.showAudioPlayerInUseAlert) {
-                Button("OK", role: .cancel) { viewModel.showAudioPlayerInUseAlert = false }
+                   isPresented: appState.showAudioPlayerInUseAlert) {
+                Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
             }
-                   .alert("Unknown Audio Player Error", isPresented: $viewModel.showAudioPlayerErrorAlert) {
+                   .alert("Unknown Audio Player Error", isPresented: appState.showAudioPlayerErrorAlert) {
                 Button("OK", role: .cancel) { fatalError() }
             }
         }

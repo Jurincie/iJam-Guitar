@@ -5,6 +5,7 @@
 //  Created by Ron Jurincie on 4/25/22.
 //
 
+import SwiftData
 import SwiftUI
 import OSLog
 
@@ -17,6 +18,7 @@ struct TopView: View {
                          height: height)
             .frame(width: width, 
                    height: height)
+        
             // background image (could have used z-stack here instead
             .background( Image("TopView")
                 .resizable()

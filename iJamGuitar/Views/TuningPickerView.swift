@@ -10,12 +10,13 @@ import SwiftUI
 import OSLog
 
 struct TuningPickerView: View {
-    @Binding var activeTuningName: String
+    @Query var appState: AppState
+    
     var body: some View {
         VStack {
             Menu {
-                Picker("Tunings", selection: $activeTuningName) {
-                    ForEach(iJamViewModel.shared.getTuningNames(), id: \.self) {
+                Picker("Tunings", selection: Bindable(appState).activeTuningName) {
+                    ForEach(appState.getTuningNames(), id: \.self) {
                         Text($0)
                             .fixedSize()
                     }
@@ -23,7 +24,7 @@ struct TuningPickerView: View {
                 .pickerStyle(.automatic)
                 .frame(maxWidth: .infinity)
            } label: {
-               Text("\(iJamViewModel.shared.activeTuningName)")
+               Text("\(appState.activeTuningName)")
                    .padding(10)
                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                    .fontWeight(.semibold)

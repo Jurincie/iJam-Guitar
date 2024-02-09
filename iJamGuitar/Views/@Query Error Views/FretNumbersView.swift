@@ -13,23 +13,18 @@ struct FretNumbersView: View {
     @Query var appState: AppState
     let width: CGFloat
     let height: CGFloat
-    @State var capoPosition: Int = 0
-    
-    init() {
-        self.capoPosition = appState.capoPosition
-    }
      
     var body: some View {
         VStack(alignment: .leading) {
             // lowest row is for the nut / open string / capo position
-            CapoPositionPickerView(capoPosition: $capoPosition)
+            CapoPositionPickerView(capoPosition: appState.capoPosition)
                 .frame(width: width, height: height / 6)
                 .background(Color.accentColor)
                 .overlay(RoundedRectangle(cornerRadius:8)
                 .stroke(.white, lineWidth: 2))
             // next 5 rows span the chord - from minfret to minFret + 5)
             ForEach((0...4), id: \.self) {
-                Text(String(capoPosition + iJamViewModel.shared.minimumFret + Int($0)))
+                Text(String(appState.capoPosition + appState.minimumFret + Int($0)))
                     .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                     .fontWeight(.semibold)
                     .frame(width: width, height: height / 6, alignment: .center)

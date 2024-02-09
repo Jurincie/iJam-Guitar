@@ -12,6 +12,7 @@ import OSLog
 struct BottomView: View {
     let width: CGFloat
     let height: CGFloat
+    @Query var appState: AppState
     
     init(width: CGFloat, height: CGFloat) {
         self.width = width
@@ -26,7 +27,8 @@ struct BottomView: View {
                        height:height,
                        alignment:.topLeading)
             VStack() {
-                VolumeView()
+                VolumeView(volumeAmount: appState.volumeLevel,
+                           isMuted: appState.isMuted)
                     .padding(.horizontal, 40)
             }
         }

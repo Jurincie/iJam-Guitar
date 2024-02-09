@@ -10,10 +10,16 @@ import SwiftUI
 import OSLog
 
 struct VolumeView: View {
-    var viewModel = iJamViewModel.shared
     @State private var volumeAmount: Double = 0.0
-    @Query var appState: AppState
+    @State var isMuted: Bool
     let imageWidth = UIDevice.current.userInterfaceIdiom == .pad ? 35.0 : 25.0
+    
+    init(
+        volumeAmount: Double,
+        isMuted: Bool) {
+        self.volumeAmount = volumeAmount
+        self.isMuted = isMuted
+    }
    
     func VolumeSlider() -> some View {
         Slider(
@@ -38,9 +44,9 @@ struct VolumeView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    appState.isMuted.toggle()
+                    isMuted.toggle()
                 }) {
-                    SpeakerImage(isMuted: appState.isMuted)
+                    SpeakerImage(isMuted: isMuted)
                 }
                 VolumeSlider()
                 Spacer()

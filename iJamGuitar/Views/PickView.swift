@@ -15,8 +15,6 @@ struct Pick: Identifiable  {
 }
 
 struct PickView: View {
-    @Query var appState: AppState
-    var viewModel = iJamViewModel.shared
     @State private var isAnimated: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
@@ -39,6 +37,8 @@ struct PickView: View {
 
 extension PickView {
     func PickButton() -> some View {
+        @Query var appState: AppState
+        
         let button =  Button(action: {
             if appState.selectedChordIndex != pick.id || chordIsAltered(pick.id) {
                 withAnimation(.default) {
@@ -63,12 +63,11 @@ extension PickView {
     // returns approprieate imageName for pickButton or "BlankPick" on failure
     func getPickImageName(availableChords: [Chord],
                           selectedChordIndex: Int) -> String {
-        var viewModel = iJamViewModel.shared
         var pickImageName = "BlankPick"
         
         if selectedChordIndex == self.pick.id {
             let thisChord = availableChords[self.pick.id]
-            pickImageName = viewModel.currentFretIndexMap != viewModel.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
+            pickImageName = appState.currentFretIndexMap != appState.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
         } else {
             pickImageName = self.pick.id < availableChords.count ? "BlankPick" : "UndefinedPick"
         }
@@ -77,23 +76,19 @@ extension PickView {
     }
     
     func chordIsAltered(_ chordIndex: Int) -> Bool {
-        @Query var appState: AppState
-        
         let thisChord = appState.availableChords[chordIndex]
-        return viewModel.currentFretIndexMap != viewModel.getFretIndexMap(chord: thisChord)
+        return appState.currentFretIndexMap != appState.getFretIndexMap(chord: thisChord)
     }
     
     /// sets model.activeChord and model.selectedIndex
     func makeChosenPicksChordActive() {
-        @Query var appState: AppState
-        let viewModel = iJamViewModel.shared
         isAnimated.toggle()
         
         if let chordNames = appState.activeChordGroup?.availableChordNames {
             guard self.pick.id < chordNames.count else { return }
             
             let newActiveChordName = chordNames[self.pick.id]
-            if let newActiveChord = viewModel.getChord(name: newActiveChordName,
+            if let newActiveChord = appState.getChord(name: newActiveChordName,
                                                        tuning: appState.activeTuning) {
                 appState.activeTuning?.activeChordGroup?.activeChord = newActiveChord
                 appState.selectedChordIndex = self.pick.id

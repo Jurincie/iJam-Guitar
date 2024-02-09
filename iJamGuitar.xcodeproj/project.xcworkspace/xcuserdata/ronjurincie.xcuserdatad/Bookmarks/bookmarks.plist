@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>68</string>
+					<string>67</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
 					<string>66</string>
 					<key>Timestamp</key>
-					<string>729043062.077549</string>
+					<string>729139445.195786</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -65,7 +65,7 @@
 					<key>StartingLineNumber</key>
 					<string>28</string>
 					<key>Timestamp</key>
-					<string>729042606.032104</string>
+					<string>729133923.858569</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -95,6 +95,51 @@
 			</dict>
 			<key>title</key>
 			<string>need value here!!</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>199</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>198</string>
+					<key>Timestamp</key>
+					<string>729133158.755931</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>iJamGuitar/Extensions/iJamViewModelExtension.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>        return highest &lt; 6 ? 1 : max(1, highest - 4)    }
+</string>
+				<key>leading</key>
+				<string>        }
+        
+</string>
+				<key>trailing</key>
+				<string>}
+</string>
+			</dict>
+			<key>title</key>
+			<string>Use clamp instea</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

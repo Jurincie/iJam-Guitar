@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-extension iJamViewModel
+extension AppState
 {
     /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
@@ -18,7 +18,7 @@ extension iJamViewModel
     func getTuning(name: String) -> Tuning? {
         var newTuning: Tuning? = nil
         
-        for tuning in appState.tunings {
+        for tuning in tunings {
             if tuning.name == name {
                 newTuning = tuning
                 break
@@ -27,22 +27,6 @@ extension iJamViewModel
         return newTuning
     }
     
-    /// - Parameter newTuning: newTuning
-    /// /// Description: When user selects NEW Tuning, we need to set:
-    /// /// activeTuning, activeChordGroup, activeChordGroupName and availableChords
-    /// /// fretIndexMap and selectedIndex based on the activeChord for this Tuning
-    /// /// Warning: Must set activeChordGroup prior to setting activeChordGroupName
-//    func setupNewTuning(newTuning: Tuning) {
-//        @Query var appState: AppState
-//        guard newTuning.activeChordGroup != nil else { return }
-//        appState.activeTuning = newTuning
-//        activeChordGroupName = appState.activeTuning?.activeChordGroup?.name ?? ""
-//        appState.activeTuning?.activeChordGroup = newTuning.activeChordGroup
-//        appState.availableChords = getAvailableChords(activeChordGroup: appState.activeTuning?.activeChordGroup, activeTuning: appState.activeTuning)
-//        currentFretIndexMap = getFretIndexMap(chord: appState.activeTuning?.activeChordGroup?.activeChord)
-//        appState.selectedChordIndex = getSelectedChordButtonIndex()
-//    }
-    
     ///  This method instantiates and returns a new ChordGroup based upon the name parameter.
     ///     if no such ChordGroup with that name exists, this method returns nil
     /// - Parameter name: name-> The name selected by user in ChordGroup Picker
@@ -50,7 +34,7 @@ extension iJamViewModel
     func getChordGroup(name: String) -> ChordGroup? {
         var newChordGroup: ChordGroup? = nil
                 
-        if let chordGroups = appState.activeTuning?.chordGroups {
+        if let chordGroups = activeTuning?.chordGroups {
             for case let chordGroup in chordGroups {
                 if chordGroup.name == name {
                     newChordGroup = chordGroup
@@ -68,18 +52,18 @@ extension iJamViewModel
     ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func setActiveChordGroup(newChordGroup: ChordGroup) {
-        appState.activeTuning?.activeChordGroup = newChordGroup
-        appState.availableChords = getAvailableChords(activeChordGroup: newChordGroup, activeTuning: appState.activeTuning)
-        appState.activeTuning?.activeChordGroup = newChordGroup
+        activeTuning?.activeChordGroup = newChordGroup
+        availableChords = getAvailableChords(activeChordGroup: newChordGroup, activeTuning: activeTuning)
+        activeTuning?.activeChordGroup = newChordGroup
         activeChord = newChordGroup.activeChord
-        appState.selectedChordIndex = getSelectedChordButtonIndex()
+        selectedChordIndex = getSelectedChordButtonIndex()
     }
     
     /// This method returns an array of names associated with available Tunings
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {
         var tuningNames: [String] = []
-        for tuning in appState.tunings {
+        for tuning in tunings {
             tuningNames.append(tuning.name ?? "ERROR")
         }
         return tuningNames
@@ -90,7 +74,7 @@ extension iJamViewModel
     func getActiveTuningChordGroupNames() -> [String] {
         var chordGroupNames: [String] = []
         
-        if let chordGroups = appState.activeTuning?.chordGroups {
+        if let chordGroups = activeTuning?.chordGroups {
             for group in chordGroups {
                 chordGroupNames.append(group.name)
             }
@@ -101,7 +85,7 @@ extension iJamViewModel
   
     func getSelectedChordButtonIndex() -> Int {
         if let activeChord = activeChord,
-           let activeChordIndex = appState.availableChords.firstIndex(of: activeChord) {
+           let activeChordIndex = availableChords.firstIndex(of: activeChord) {
             return activeChordIndex
         }
         return 0
@@ -212,6 +196,5 @@ extension iJamViewModel
             highest = max(highest, thisFretVal)
         }
         
-        return highest < 6 ? 1 : max(1, highest - 4)
-    }
+        return highest < 6 ? 1 : max(1, highest - 4)    }
 }
