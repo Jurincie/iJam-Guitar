@@ -14,7 +14,7 @@ import OSLog
 //  There are empty images to left and right of strings in BOTTOM part
 
 struct StringsAndFretsAreaView : View {
-    @Binding var dataModel: iJamModel
+    @Binding var dataModel: iJamViewModel
     let width: CGFloat
     let height: CGFloat
     

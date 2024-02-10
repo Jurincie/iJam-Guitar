@@ -13,4 +13,5 @@ enum AppDefaults: String {
     case isMuted = "isMuted"
     case activeChordGroupName = "ActiveChordGroupName"
     case activeTuningName = "ActiveTuningName"
+    case activeChordName = "ActiveChordName"
 }

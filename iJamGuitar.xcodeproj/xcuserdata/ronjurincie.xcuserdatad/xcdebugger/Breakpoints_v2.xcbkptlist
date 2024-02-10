@@ -205,40 +205,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "iJamModel"
+            landmarkName = "iJamViewModel"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "14A28BE2-0E1D-4A87-8431-6B658559838E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/models/iJamModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "activeChord"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AD511412-D7A7-4A91-881E-E178D4070B06"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/models/iJamModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "volumeLevel"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -251,13 +219,13 @@
             filePath = "iJamGuitar/models/iJamModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "loadDataModelFromPlists()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "962C52F7-D272-443D-8EEF-4061E6967A6C - 12e7cb3918e1b16a"
+                  uuid = "962C52F7-D272-443D-8EEF-4061E6967A6C - 12e7cb3918e1b2e6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -267,12 +235,12 @@
                   urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/models/iJamModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "1644">
+                  startingLineNumber = "203"
+                  endingLineNumber = "203"
+                  offsetFromSymbolStart = "1228">
                </Location>
                <Location
-                  uuid = "962C52F7-D272-443D-8EEF-4061E6967A6C - 12e7cb3918e1b16a"
+                  uuid = "962C52F7-D272-443D-8EEF-4061E6967A6C - 12e7cb3918e1b2e6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -282,11 +250,75 @@
                   urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/models/iJamModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "1160">
+                  startingLineNumber = "203"
+                  endingLineNumber = "203"
+                  offsetFromSymbolStart = "1616">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "412E66A6-2683-4389-AB01-0103CC5CD191"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/PickView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "makeChosenPicksChordActive()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "412E66A6-2683-4389-AB01-0103CC5CD191 - 8e44fc5c60a4a725"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.PickView.makeChosenPicksChordActive() -&gt; ()"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/PickView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "1128">
+               </Location>
+               <Location
+                  uuid = "412E66A6-2683-4389-AB01-0103CC5CD191 - 8e44fc5c60a4a725"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.PickView.makeChosenPicksChordActive() -&gt; ()"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/PickView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "1172">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B22BA9E4-378C-48CF-855F-509F0B0E9E50"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/models/iJamModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "activeChord"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -10,7 +10,7 @@ import OSLog
 
 @available(iOS 16.0, *)
 struct ChordGroupPickerView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     
     var body: some View {
         VStack {

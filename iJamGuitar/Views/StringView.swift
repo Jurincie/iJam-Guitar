@@ -14,13 +14,13 @@ import OSLog
 //  top layer:  VStack() of 6 possibly-RedBall images evenly spaced over top half of the stringsView
 
 struct StringView: View {
-    @Bindable var model: iJamModel
+    @Bindable var model: iJamViewModel
     let notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     let height: CGFloat
     var stringImageName: String = ""
     let stringNumber: Int
     
-    init(model: iJamModel, 
+    init(model: iJamViewModel, 
          height: CGFloat,
          stringNumber: Int) {
         self.model = model
@@ -82,7 +82,7 @@ struct StringView: View {
     }
     
     struct FretBoxView: View {
-        @Bindable var model: iJamModel
+        @Bindable var model: iJamViewModel
         let fretBox: FretBox
         let stringNumber: Int
 

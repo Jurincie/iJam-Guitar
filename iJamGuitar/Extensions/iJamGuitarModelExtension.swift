@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension iJamModel
+extension iJamViewModel
 {
     /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
@@ -22,6 +22,7 @@ extension iJamModel
                 break
             }
         }
+        
         return newTuning
     }
    
@@ -58,6 +59,7 @@ extension iJamModel
                 }
             }
         }
+        
         return newChordGroup
     }
     
@@ -81,6 +83,7 @@ extension iJamModel
         for tuning in tunings {
             tuningNames.append(tuning.name ?? "ERROR")
         }
+        
         return tuningNames
     }
     
@@ -103,6 +106,7 @@ extension iJamModel
            let activeChordIndex = availableChords.firstIndex(of: activeChord) {
             return activeChordIndex
         }
+        
         return 0
     }
     
@@ -122,6 +126,7 @@ extension iJamModel
                 fretsArray.append(getFretFromChar(char))
             }
         }
+        
         return fretsArray
     }
     
@@ -157,6 +162,7 @@ extension iJamModel
                 }
             }
         }
+        
         return availableChords
     }
     
@@ -175,6 +181,7 @@ extension iJamModel
                 }
             }
         }
+        
         return nil
     }
     

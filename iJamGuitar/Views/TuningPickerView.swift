@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 struct TuningPickerView: View {
-   @Bindable var model: iJamModel
+   @Bindable var model: iJamViewModel
 
     var body: some View {
        VStack {

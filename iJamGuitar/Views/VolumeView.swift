@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 struct VolumeView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     @State private var isEditing = false
     let imageWidth = UIDevice.current.userInterfaceIdiom == .pad ? 35.0 : 25.0
     

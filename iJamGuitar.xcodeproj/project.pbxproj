@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A1CF6DE2B76C8E000F00AF1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */; };
-		7A302E502A1FF21B005864F4 /* iJamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E4F2A1FF21B005864F4 /* iJamModel.swift */; };
+		7A302E502A1FF21B005864F4 /* iJamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */; };
 		7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */; };
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */; };
 		7A86A0CF2B4B0928004E67CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */; };
@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		7A302E4F2A1FF21B005864F4 /* iJamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamModel.swift; path = iJamGuitar/models/iJamModel.swift; sourceTree = SOURCE_ROOT; };
+		7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamViewModel.swift; path = iJamGuitar/iJamViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
 		7A3AD0012B1FFE5F003EEF9A /* iJamGuitarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarTests.swift; sourceTree = "<group>"; };
@@ -144,7 +144,6 @@
 				7AE86C282B1BAC820032DABD /* Chord.swift */,
 				7AE86C2A2B1BAC820032DABD /* Tuning.swift */,
 				7AE86C292B1BAC820032DABD /* ChordGroup.swift */,
-				7A302E4F2A1FF21B005864F4 /* iJamModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -176,6 +175,7 @@
 				7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */,
 				7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */,
 				7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */,
+				7A302E4F2A1FF21B005864F4 /* iJamViewModel.swift */,
 				7A9AF58F2B68419900E37CDB /* models */,
 				7A302E4D2A1FD25B005864F4 /* Extensions */,
 				7AA07A762A0417C800AE87B3 /* Views */,
@@ -376,7 +376,7 @@
 				7AA07A912A0417E800AE87B3 /* TopView.swift in Sources */,
 				7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */,
 				7AA07A8B2A0417E800AE87B3 /* HeaderView.swift in Sources */,
-				7A302E502A1FF21B005864F4 /* iJamModel.swift in Sources */,
+				7A302E502A1FF21B005864F4 /* iJamViewModel.swift in Sources */,
 				7AA07A8C2A0417E800AE87B3 /* FretBoardView.swift in Sources */,
 				7A9AF58C2B66FF7B00E37CDB /* PickView.swift in Sources */,
 			);

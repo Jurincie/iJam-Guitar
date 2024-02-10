@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 struct BottomView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     let width: CGFloat
     let height: CGFloat
 

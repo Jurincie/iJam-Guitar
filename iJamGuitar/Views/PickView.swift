@@ -14,7 +14,7 @@ struct Pick: Identifiable  {
 }
 
 struct PickView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     @State private var isAnimated: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
@@ -87,6 +87,7 @@ extension PickView {
                                                    tuning: model.activeTuning) {
                 model.activeChord = newActiveChord
                 model.selectedChordIndex = self.pick.id
+                UserDefaults.standard.setValue(model.activeChord?.name, forKey: "ActiveChordName")
             }
         }
     }

@@ -13,7 +13,7 @@ import AVFAudio
 
 final class iJamViewModelTests: XCTestCase {
     // Given
-    let model = iJamModel()
+    let model = iJamViewModel()
     let tooBig = 20
 
 //    override func setUpWithError() throws {

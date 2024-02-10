@@ -32,7 +32,7 @@ import OSLog
 /// Zone 12: right of String 1
 ///
 struct StringsView: View {
-    @Bindable var model: iJamModel
+    @Bindable var model: iJamViewModel
     @State private var dragLocation: CGPoint?
     let halfStringWidth = 10.0
     let audioManager: iJamAudioManager
@@ -47,7 +47,7 @@ struct StringsView: View {
         }
     }
     
-    init(model: iJamModel, height: CGFloat) {
+    init(model: iJamViewModel, height: CGFloat) {
         self.model = model
         self.height = height
         self.audioManager = iJamAudioManager(model: model)

@@ -10,7 +10,7 @@ import OSLog
 
 struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     @State private var chordGroupNameExistsAlert = false
     @State private var selectedChords: [Chord?] = Array(repeating: nil, count: 10)
     @State private var chordGroupName: String = ""
@@ -126,7 +126,7 @@ struct CreateChordGroupView: View {
 }
 
 #Preview {
-    @State var model = iJamModel()
+    @State var model = iJamViewModel()
     return CreateChordGroupView(model: $model)
 }
 

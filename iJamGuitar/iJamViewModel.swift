@@ -11,8 +11,8 @@ import AVFAudio
 import OSLog
 
 @Observable
-final class iJamModel {
-    static let shared = iJamModel()
+final class iJamViewModel {
+    static let shared = iJamViewModel()
     let kDefaultVolume = 5.0
     var showVolumeAlert = false
     var showAudioPlayerInUseAlert = false
@@ -62,6 +62,8 @@ final class iJamModel {
     }
     var activeChord: Chord? {
         didSet {
+            print("Active chord changed to: \(activeChord?.name)")
+            UserDefaults.standard.setValue(activeChord?.name, forKey: "ActiveChordName")
             activeTuning?.activeChordGroup?.activeChord = activeChord
             fretIndexMap = getFretIndexMap(chord: activeChord)
             minimumFret = getMinimumDisplayedFret()
@@ -81,7 +83,7 @@ final class iJamModel {
     }
 }
 
-extension iJamModel {
+extension iJamViewModel {
     private func setupModel() {
         availableChords = getAvailableChords(activeChordGroup: activeTuning?.activeChordGroup, activeTuning: activeTuning)
         fretIndexMap = getFretIndexMap(chord: activeTuning?.activeChordGroup?.activeChord)
@@ -202,18 +204,19 @@ extension iJamModel {
             activeTuningName = tuningName
             activeTuning = getTuning(name: tuningName)
         } else {
-            activeTuningName = "standard"
+            activeTuningName = "Standard"
             activeTuning = standardTuning
-            defaults.set(activeTuningName, forKey: "ActiveTuning")
+            defaults.set(activeTuningName, forKey: "ActiveTuningName")
         }
         
         if let name = defaults.object(forKey:"ActiveChordGroupName") {
             activeChordGroup = getChordGroup(name: name as? String ?? "")
         } else {
             activeChordGroup = activeTuning?.chordGroups.first
+            defaults.set(activeChordGroupName, forKey: activeChordGroupName)
+            activeChordGroupName = activeChordGroup?.name ?? ""
         }
-        activeChordGroupName = activeChordGroup?.name ?? ""
-        defaults.set(activeChordGroupName, forKey: activeChordGroupName)
+        
         
         if let capoPos = defaults.object(forKey:"CapoPosition") as? Int {
             capoPosition = capoPos
@@ -226,17 +229,24 @@ extension iJamModel {
             isMuted = muted
         } else {
             isMuted = false
+            defaults.set(isMuted, forKey: "IsMuted")
         }
-        defaults.set(isMuted, forKey: "IsMuted")
         
         if let level = defaults.object(forKey:"VolumeLevel") as? Double {
             volumeLevel = level
         } else {
             volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
+            defaults.set(volumeLevel, forKey: "VolumeLevel")
         }
-        defaults.set(volumeLevel, forKey: "VolumeLevel")
         
-        activeChord = activeChordGroup?.activeChord
+        if let savedChordName = defaults.string(forKey: "ActiveChordName") {
+            let chord = getChord(name: savedChordName, tuning: activeTuning)
+            activeChord = chord
+            activeChordGroup?.activeChord = chord
+        } else {
+            activeChord = activeChordGroup?.activeChord
+            defaults.set(activeChord?.name, forKey: "ActiveChordName")
+        }
     }
     
     /// Creates and returns a array of Chords available to parentTuning

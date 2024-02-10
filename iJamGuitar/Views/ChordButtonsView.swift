@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 struct ChordButtonsView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     let width: CGFloat
     let height: CGFloat
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0

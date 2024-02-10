@@ -10,7 +10,7 @@ import SwiftData
 import OSLog
 
 struct ContentView: View {
-    @Binding var dataModel: iJamModel
+    @Binding var dataModel: iJamViewModel
     var x: CGFloat = 0.0
     
     var body: some View {
@@ -47,18 +47,18 @@ struct ContentView: View {
 }
 
 #Preview {
-    @State var model = iJamModel()
+    @State var model = iJamViewModel()
     return ContentView(dataModel: $model)
         .preferredColorScheme(.dark)
 }
 
 #Preview {
-    @State var model = iJamModel()
+    @State var model = iJamViewModel()
     return ContentView(dataModel: $model)
         .preferredColorScheme(.light)
 }
 #Preview {
-    @State var model = iJamModel()
+    @State var model = iJamViewModel()
     return ContentView(dataModel: $model)
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }

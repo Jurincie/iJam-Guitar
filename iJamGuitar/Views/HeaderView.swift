@@ -11,7 +11,7 @@ import OSLog
 struct HeaderView: View {
     @State private var showAlert = false
     @State private var showCreateChordGroupView = false
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     let width: CGFloat
     let height: CGFloat
 

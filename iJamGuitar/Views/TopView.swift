@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 struct TopView: View {
-    @Binding var model: iJamModel
+    @Binding var model: iJamViewModel
     let width: CGFloat
     let height: CGFloat
     
