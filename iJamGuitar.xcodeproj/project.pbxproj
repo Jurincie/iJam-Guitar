@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1CF6DE2B76C8E000F00AF1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */; };
 		7A302E502A1FF21B005864F4 /* iJamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E4F2A1FF21B005864F4 /* iJamModel.swift */; };
 		7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */; };
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7A302E4F2A1FF21B005864F4 /* iJamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamModel.swift; path = iJamGuitar/models/iJamModel.swift; sourceTree = SOURCE_ROOT; };
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
 		7A3AD0012B1FFE5F003EEF9A /* iJamGuitarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 		7AA07A242A040F6A00AE87B3 /* iJamGuitar */ = {
 			isa = PBXGroup;
 			children = (
+				7A1CF6DD2B76C8E000F00AF1 /* Settings.swift */,
 				7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */,
 				7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */,
 				7A9AF58F2B68419900E37CDB /* models */,
@@ -352,6 +355,7 @@
 			files = (
 				7AA07A892A0417E800AE87B3 /* VolumeView.swift in Sources */,
 				7AA07A8F2A0417E800AE87B3 /* StringsView.swift in Sources */,
+				7A1CF6DE2B76C8E000F00AF1 /* Settings.swift in Sources */,
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
 				7AA07A882A0417E800AE87B3 /* FretNumbersView.swift in Sources */,
 				7AA07A8E2A0417E800AE87B3 /* ChordButtonsView.swift in Sources */,

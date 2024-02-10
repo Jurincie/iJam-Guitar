@@ -20,10 +20,26 @@ final class iJamModel {
     var showAudioPlayerErrorAlert = false
     var activeTuning: Tuning?
     var tunings: [Tuning] = []
-    var capoPosition: Int = 0
-    var activeChordGroup: ChordGroup?
-    var isMuted = false
-    var volumeLevel = 5.0
+    var capoPosition: Int = 0 {
+        didSet {
+            UserDefaults.standard.setValue(capoPosition, forKey: "CapoPosition")
+        }
+    }
+    var activeChordGroup: ChordGroup? {
+        didSet {
+            UserDefaults.standard.set(activeChordGroup?.name, forKey: "ActiveChordGroupName")
+        }
+    }
+    var isMuted = false {
+        didSet {
+            UserDefaults.standard.setValue(isMuted, forKey: "CapoPosition")
+        }
+    }
+    var volumeLevel = 5.0 {
+        didSet {
+            UserDefaults.standard.setValue(volumeLevel, forKey: "VolumeLevel")
+        }
+    }
     var selectedChordIndex: Int = 0
     var savedVolumeLevel = 5.0
     var fretIndexMap: [Int] = []
@@ -76,7 +92,7 @@ extension iJamModel {
         var chordIndex = 0
         
         for chord in availableChords {
-            if chord == activeTuning?.activeChordGroup!.activeChord {
+            if chord == activeTuning?.activeChordGroup?.activeChord {
                 break
             }
             chordIndex += 1
@@ -178,15 +194,49 @@ extension iJamModel {
             throw PlistError.unknownError
         }
         
+        // Obtain these values from UserSetting if exists
+        // Otherwise use a default
+        let defaults = UserDefaults.standard
         
-        // remainder of appState
-        activeTuning = standardTuning
-        activeChordGroup = activeTuning?.chordGroups.first
-        capoPosition = 0
-        isMuted = false
-        volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
-        activeTuning = standardTuning
-        activeTuningName = activeTuning?.name ?? "Error setting activeTuning"
+        if let tuningName = defaults.object(forKey:"ActiveTuningName") as? String {
+            activeTuningName = tuningName
+            activeTuning = getTuning(name: tuningName)
+        } else {
+            activeTuningName = "standard"
+            activeTuning = standardTuning
+            defaults.set(activeTuningName, forKey: "ActiveTuning")
+        }
+        
+        if let name = defaults.object(forKey:"ActiveChordGroupName") {
+            activeChordGroup = getChordGroup(name: name as? String ?? "")
+        } else {
+            activeChordGroup = activeTuning?.chordGroups.first
+        }
+        activeChordGroupName = activeChordGroup?.name ?? ""
+        defaults.set(activeChordGroupName, forKey: activeChordGroupName)
+        
+        if let capoPos = defaults.object(forKey:"CapoPosition") as? Int {
+            capoPosition = capoPos
+        } else {
+            capoPosition = 0
+        }
+        defaults.set(capoPosition, forKey: "CapoPosition")
+        
+        if let muted = defaults.object(forKey:"IsMuted") as? Bool {
+            isMuted = muted
+        } else {
+            isMuted = false
+        }
+        defaults.set(isMuted, forKey: "IsMuted")
+        
+        if let level = defaults.object(forKey:"VolumeLevel") as? Double {
+            volumeLevel = level
+        } else {
+            volumeLevel = Double(truncating: NSDecimalNumber(value: kDefaultVolume))
+        }
+        defaults.set(volumeLevel, forKey: "VolumeLevel")
+        
+        activeChord = activeChordGroup?.activeChord
     }
     
     /// Creates and returns a array of Chords available to parentTuning
