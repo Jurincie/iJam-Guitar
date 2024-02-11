@@ -5,9 +5,6 @@
 //  Created by Ron Jurincie on 5/3/22.
 //
 
-
-
-import AVFoundation
 import SwiftData
 import SwiftUI
 import OSLog
@@ -34,9 +31,9 @@ import OSLog
 
 struct StringsView: View {
     @State private var dragLocation: CGPoint?
-    @Query var appState: AppState
     let audioManager: iJamAudioManager
     var height: CGFloat
+    var appState: AppState
     var drag: some Gesture {
         DragGesture()
             .onEnded { _ in
@@ -50,9 +47,11 @@ struct StringsView: View {
     }
     
     init(height: CGFloat,
-         showVolumeAlert: Bool) {
+         showVolumeAlert: Bool,
+         appState: AppState) {
         self.height = height
         self.audioManager = iJamAudioManager()
+        self.appState = appState
     }
     
     var body: some View {
@@ -72,20 +71,19 @@ struct StringsView: View {
             .contentShape(Rectangle())
             .gesture(drag)
             .alert("Master Volume is OFF", 
-                   isPresented: appState.showVolumeAlert) {
+                   isPresented: Bindable(appState).showVolumeAlert) {
                 Button("OK", role: .cancel) { appState.showVolumeAlert = false }
             }
             .alert("Another App is using the Audio Player",
-                   isPresented: appState.showAudioPlayerInUseAlert) {
+                   isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
                 Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
             }
-                   .alert("Unknown Audio Player Error", isPresented: appState.showAudioPlayerErrorAlert) {
+                   .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
                 Button("OK", role: .cancel) { fatalError() }
             }
         }
-        
-        
     }
+    
     struct SixSpacerHStack: View {
         var body: some View {
             HStack() {
@@ -100,7 +98,7 @@ struct StringsView: View {
         Logger.viewCycle.debug("ZoneBreaks: \(audioManager.zoneBreaks)")
         for string in 0...5 {
             audioManager.pickString(6 - string)
-            try? await Task.sleep(nanoseconds: 0_100_000_000)
+            try? await Task.sleep(nanoseconds: 50_000_000)
         }
         
         Logger.viewCycle.debug("zoneBreaks: \(audioManager.zoneBreaks)")

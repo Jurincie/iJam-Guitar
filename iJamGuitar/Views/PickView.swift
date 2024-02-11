@@ -18,6 +18,7 @@ struct PickView: View {
     @State private var isAnimated: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
+    var appState: AppState
     
     var body: some View {
         ZStack() {
@@ -37,7 +38,6 @@ struct PickView: View {
 
 extension PickView {
     func PickButton() -> some View {
-        @Query var appState: AppState
         
         let button =  Button(action: {
             if appState.selectedChordIndex != pick.id || chordIsAltered(pick.id) {

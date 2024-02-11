@@ -10,20 +10,23 @@ import Foundation
 import SwiftData
  
 @Model
-class Tuning: Hashable {
+final class Tuning: Hashable {
     @Attribute(.unique) var name: String?
     var openNoteIndices: String
     var stringNoteNames: String
+    
+    // Relationships
     @Relationship(deleteRule: .cascade) var activeChordGroup: ChordGroup?
     @Relationship(deleteRule: .cascade) var chordGroups: [ChordGroup] = []
-    @Relationship var chords: [Chord] = []
+    @Relationship var chords: Set<Chord>
+    @Relationship(inverse: \AppState.self)
     
     init(name: String? = nil,
          openNoteIndices: String = "",
          stringNoteNames: String = "",
          activeChordGroup: ChordGroup? = nil,
          chordGroups: [ChordGroup] = [],
-         chords: [Chord] = []) {
+         chords: Set<Chord> = Set<Chord>()) {
         self.name = name
         self.openNoteIndices = openNoteIndices
         self.stringNoteNames = stringNoteNames

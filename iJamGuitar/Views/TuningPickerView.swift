@@ -10,35 +10,36 @@ import SwiftUI
 import OSLog
 
 struct TuningPickerView: View {
-    @Query var appState: AppState
+//    @Query var appState: AppState
     
     var body: some View {
-        VStack {
-            Menu {
-                Picker("Tunings", selection: Bindable(appState).activeTuningName) {
-                    ForEach(appState.getTuningNames(), id: \.self) {
-                        Text($0)
-                            .fixedSize()
-                    }
-                }
-                .pickerStyle(.automatic)
-                .frame(maxWidth: .infinity)
-           } label: {
-               Text("\(appState.activeTuningName)")
-                   .padding(10)
-                   .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
-                   .fontWeight(.semibold)
-                   .background(Color.accentColor)
-                   .foregroundColor(Color.white)
-                   .cornerRadius(10.0)
-                   .shadow(color: .white , radius: 2.0)
-                   .fixedSize()
-           }
-       }
-        .frame(alignment: .trailing)
-        .border(.white,
-                width: 2,
-                cornerRadius: 7)
+        Text("")
+//        VStack {
+//            Menu {
+//                Picker("Tunings", selection: Bindable(appState).activeTuningName) {
+//                    ForEach(appState.getTuningNames(), id: \.self) {
+//                        Text($0)
+//                            .fixedSize()
+//                    }
+//                }
+//                .pickerStyle(.automatic)
+//                .frame(maxWidth: .infinity)
+//           } label: {
+//               Text("\(appState.activeTuningName)")
+//                   .padding(10)
+//                   .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+//                   .fontWeight(.semibold)
+//                   .background(Color.accentColor)
+//                   .foregroundColor(Color.white)
+//                   .cornerRadius(10.0)
+//                   .shadow(color: .white , radius: 2.0)
+//                   .fixedSize()
+//           }
+//       }
+//        .frame(alignment: .trailing)
+//        .border(.white,
+//                width: 2,
+//                cornerRadius: 7)
     }
 }
 

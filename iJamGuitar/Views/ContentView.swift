@@ -10,6 +10,7 @@ import SwiftUI
 import OSLog
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
     var x: CGFloat = 0.0
     
     var body: some View {
@@ -38,6 +39,10 @@ struct ContentView: View {
         }
         .background(Color.black)
         .ignoresSafeArea()
+        .onAppear() {
+            let state = AppState()
+            modelContext.insert(state)
+        }
     }
 }
 

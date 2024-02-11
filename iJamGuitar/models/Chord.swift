@@ -10,10 +10,11 @@ import Foundation
 import SwiftData
 
 @Model
-class Chord: Equatable {
+final class Chord: Equatable {
     var fretMap: String?
     @Attribute(.unique) var name: String?
     @Relationship(inverse: \ChordGroup.self)
+    @Relationship(inverse: \Tuning.self)
     var parentChordGroup: ChordGroup
    
     init(parentChordGroup: ChordGroup,

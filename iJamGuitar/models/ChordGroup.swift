@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 @Model
-class ChordGroup {
+final class ChordGroup {
     var availableChordNames: [String] {
         get {
             availableChords.map() {
@@ -21,7 +21,7 @@ class ChordGroup {
     }
     var name: String = ""
     @Relationship var activeChord: Chord?
-    @Relationship(deleteRule: .cascade) var availableChords: [Chord] = []
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord]
     @Relationship(inverse: \Tuning.chordGroups)
     var parentTuning: Tuning?
     

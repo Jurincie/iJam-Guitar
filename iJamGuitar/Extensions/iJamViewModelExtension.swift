@@ -53,7 +53,7 @@ extension AppState
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func setActiveChordGroup(newChordGroup: ChordGroup) {
         activeTuning?.activeChordGroup = newChordGroup
-        availableChords = getAvailableChords(activeChordGroup: newChordGroup, activeTuning: activeTuning)
+        availableChords = getAvailableChords(newChordGroup, activeTuning)
         activeTuning?.activeChordGroup = newChordGroup
         activeChord = newChordGroup.activeChord
         selectedChordIndex = getSelectedChordButtonIndex()
@@ -134,7 +134,7 @@ extension AppState
     ///   - activeChordGroup: optional(activeChordGroup)
     ///   - activeTuning: optional(activeTuning
     /// - Returns: array of chords associated with activeChordGroup for activeTuning or empty array if anything goes wrong
-    func getAvailableChords(activeChordGroup: ChordGroup?, activeTuning: Tuning?) -> [Chord] {
+    func getAvailableChords(_ activeChordGroup: ChordGroup?, _ activeTuning: Tuning?) -> [Chord] {
         var availableChords: [Chord] = []
         if let chordNames = activeChordGroup?.availableChordNames,
            let activeTuning = activeTuning {
