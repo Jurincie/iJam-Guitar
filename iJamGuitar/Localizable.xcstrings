@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%@" : {
 
     },
@@ -59,9 +62,6 @@
           }
         }
       }
-    },
-    "CANCEL" : {
-
     },
     "Capo Position" : {
       "localizations" : {
@@ -149,6 +149,7 @@
       }
     },
     "Enter Group Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -204,9 +205,6 @@
         }
       }
     },
-    "New Group Name" : {
-
-    },
     "OK" : {
       "localizations" : {
         "de" : {
@@ -234,15 +232,6 @@
           }
         }
       }
-    },
-    "Select Tuning:" : {
-
-    },
-    "SUBMIT" : {
-
-    },
-    "Tap on picks to select chords below" : {
-
     },
     "Tuning: %@" : {
       "extractionState" : "stale",

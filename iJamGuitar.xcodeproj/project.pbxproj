@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1636982B7AC3E3000506A8 /* AppStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1636972B7AC3E3000506A8 /* AppStateExtension.swift */; };
 		7A1CF6DC2B75D2B400F00AF1 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6DB2B75D2B400F00AF1 /* ChordGroupPickerView.swift */; };
 		7A1CF6EC2B7883E800F00AF1 /* ChordButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6EB2B7883E800F00AF1 /* ChordButtonsView.swift */; };
 		7A1CF6EE2B7883EB00F00AF1 /* FretNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6ED2B7883EB00F00AF1 /* FretNumbersView.swift */; };
@@ -21,7 +22,6 @@
 		7AA07A2A2A040F6B00AE87B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A292A040F6B00AE87B3 /* Assets.xcassets */; };
 		7AA07A2D2A040F6B00AE87B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */; };
 		7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */; };
-		7AA07A612A0416EC00AE87B3 /* iJamViewModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */; };
 		7AA07A6E2A04177100AE87B3 /* OpenDTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */; };
 		7AA07A6F2A04177100AE87B3 /* OpenGTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */; };
 		7AA07A702A04177100AE87B3 /* OpenG_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */; };
@@ -57,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A1636972B7AC3E3000506A8 /* AppStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateExtension.swift; sourceTree = "<group>"; };
 		7A1CF6DB2B75D2B400F00AF1 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
 		7A1CF6EB2B7883E800F00AF1 /* ChordButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordButtonsView.swift; sourceTree = "<group>"; };
 		7A1CF6ED2B7883EB00F00AF1 /* FretNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretNumbersView.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		7AA07A292A040F6B00AE87B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = iJamGuitar/Extensions/Extensions.swift; sourceTree = SOURCE_ROOT; };
-		7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = iJamViewModelExtension.swift; path = iJamGuitar/Extensions/iJamViewModelExtension.swift; sourceTree = SOURCE_ROOT; };
 		7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenDTuningChordGroups.plist; path = iJamGuitar/Plists/OpenDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenGTuningChordGroups.plist; path = iJamGuitar/Plists/OpenGTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenG_ChordLibrary.plist; path = iJamGuitar/Plists/OpenG_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
@@ -119,7 +119,6 @@
 		7A302E4D2A1FD25B005864F4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7AA07A5D2A0416EB00AE87B3 /* iJamViewModelExtension.swift */,
 				7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */,
 				7AE86C2F2B1D15E90032DABD /* Logger.swift */,
 			);
@@ -138,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				7A7FBC202B72DE1D00BD5567 /* AppState.swift */,
+				7A1636972B7AC3E3000506A8 /* AppStateExtension.swift */,
 				7AE86C2A2B1BAC820032DABD /* Tuning.swift */,
 				7AE86C292B1BAC820032DABD /* ChordGroup.swift */,
 				7AE86C282B1BAC820032DABD /* Chord.swift */,
@@ -350,10 +350,10 @@
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
 				7A1CF6EC2B7883E800F00AF1 /* ChordButtonsView.swift in Sources */,
 				7AD6674D2B75CEF100FA6C6D /* ContentView.swift in Sources */,
-				7AA07A612A0416EC00AE87B3 /* iJamViewModelExtension.swift in Sources */,
 				7AE86C302B1D15E90032DABD /* Logger.swift in Sources */,
 				7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */,
 				7AA07A872A0417E800AE87B3 /* StringView.swift in Sources */,
+				7A1636982B7AC3E3000506A8 /* AppStateExtension.swift in Sources */,
 				7A1CF6EE2B7883EB00F00AF1 /* FretNumbersView.swift in Sources */,
 				7AD6674C2B75CEF100FA6C6D /* TopView.swift in Sources */,
 				7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */,
@@ -581,7 +581,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -614,7 +614,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

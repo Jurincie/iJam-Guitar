@@ -17,22 +17,21 @@ import OSLog
 struct StringsAndFretsAreaView : View {
     let width: CGFloat
     let height: CGFloat
-    @Query var appState: AppState
+    @Query var appStates: [AppState]
     
     var body: some View {
+        let appState = appStates.first!
         ZStack() {
             // BOTTOM layer
             VStack(spacing:0) {
                 // display frets in Top half
                 HStack(spacing:0) {
                     FretNumbersView(width: width * 0.12,
-                                    height: height / 2, 
-                                    capoPosition: appState.capoPosition)
+                                    height: height / 2)
                     FretBoardView(width: width * 0.76,
                                   height: height / 2)
                     FretNumbersView(width: width * 0.12,
-                                    height: height / 2,
-                                    capoPosition: appState.capoPosition)
+                                    height: height / 2)
                 }
                 // display StringAreaView in Lower half
                 Image("StringAreaView")
@@ -43,8 +42,7 @@ struct StringsAndFretsAreaView : View {
             }
             
             // TOP layer
-            StringsView(height: height,
-                        appState: appState)
+            StringsView(height: height)
         }
     }
 }

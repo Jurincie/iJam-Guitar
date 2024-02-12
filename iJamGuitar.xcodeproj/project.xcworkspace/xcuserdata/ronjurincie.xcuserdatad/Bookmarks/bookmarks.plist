@@ -14,11 +14,11 @@
 					<key>EndingLineNumber</key>
 					<string>30</string>
 					<key>StartingColumnNumber</key>
-					<string>0</string>
+					<string>54</string>
 					<key>StartingLineNumber</key>
 					<string>29</string>
 					<key>Timestamp</key>
-					<string>729370900.9020621</string>
+					<string>729458538.396431</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,12 +34,12 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>                                    capoPosition: appState.capoPosition)
+				<string>)
 </string>
 				<key>leading</key>
-				<string>                    FretNumbersView(width: width * 0.12,
-                                    height: height / 2, 
-</string>
+				<string>                HStack(spacing:0) {
+                    FretNumbersView(width: width * 0.12,
+                                    height: height / 2</string>
 				<key>trailing</key>
 				<string>                    FretBoardView(width: width * 0.76,
                                   height: height / 2)
@@ -59,13 +59,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>199</string>
+					<string>206</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>198</string>
+					<string>205</string>
 					<key>Timestamp</key>
-					<string>729133158.755931</string>
+					<string>729461211.690364</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>

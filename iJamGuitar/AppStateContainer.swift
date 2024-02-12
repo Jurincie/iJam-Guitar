@@ -11,40 +11,42 @@ import SwiftData
 
 actor AppStateContainer {
     @MainActor
-    static func create() -> ModelContainer {
+    static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
         let schema = Schema([AppState.self])
         let configuration = ModelConfiguration()
         let container = try! ModelContainer(for: schema,
                                             configurations: configuration)
-
-        do {
-            try populateData()
-        } catch {
-            print("FOUND ERROR")
+        if shouldCreateDefaults {
+            do {
+                try populateData()
+            } catch {
+                print("FOUND ERROR")
+            }
+            
+            UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
+        
         
         return container
         
         func populateData() throws {
             let appState = AppState()
+            container.mainContext.insert(appState)
             
             do {
-               appState.tunings = try createTuningsFromPlists()
-           } catch {
-               throw PlistError.unknownError
-           }
-           appState.activeTuning = appState.tunings.first
-           appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
-           appState.capoPosition = 0
-           appState.isMuted = false
-           appState.volumeLevel = Double(truncating: NSDecimalNumber(value: appState.kDefaultVolume))
-           appState.activeTuning?.activeChordGroup?.availableChords = appState.getAvailableChords(appState.activeChordGroup,appState.activeTuning)
-           appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeTuning?.activeChordGroup?.activeChord)
-           
+                appState.tunings = try createTuningsFromPlists()
+            } catch {
+                throw PlistError.unknownError
+            }
+            appState.activeTuning = appState.tunings?.first
+            appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
+            appState.capoPosition = 0
+            appState.isMuted = false
+            appState.volumeLevel = 0.5
+            appState.activeTuning?.activeChordGroup?.availableChords = appState.getAvailableChords(appState.activeChordGroup,appState.activeTuning)
+            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeTuning?.activeChordGroup?.activeChord)
+            
             setSelectedChordIndex(appState: appState)
-            
-            
-            container.mainContext.insert(appState)
         }
         
         func setSelectedChordIndex(appState: AppState) {
@@ -85,15 +87,18 @@ actor AppStateContainer {
                   let thisChordGroupChordDictionary = NSDictionary(contentsOfFile: path) as? [String: String]  else {
                 throw PlistError.badChordLibraryAddress
             }
-                
-            tuning.chords = convertToSetOfChords(chordDictionary: thisChordGroupChordDictionary, parentTuning: tuning)
-                
+            
+            let chords = convertToArrayOfChords(chordDictionary: thisChordGroupChordDictionary, parentTuning: tuning)
+            
+            tuning.chords.append(contentsOf: chords)
+            
             guard let path = Bundle.main.path(forResource: chordGroupsPath, ofType: "plist"),
                   let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String]  else {
                 throw PlistError.badChordLibraryAddress
             }
             
             let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, parentTuning: tuning)
+            
             tuning.chordGroups.append(contentsOf: chordGroups)
             
             Logger.statistics.info("New tuning added")
@@ -115,11 +120,11 @@ actor AppStateContainer {
             
             do {
                 try setupTuning(tuning: standardTuning,
-                            tuningName: "Standard",
-                            openIndices: "4-9-14-19-23-28",
-                            noteNames: "E-A-D-G-B-E",
-                            chordLibraryPath: "StandardTuning_ChordLibrary",
-                            chordGroupsPath: "StandardTuningChordGroups")
+                                tuningName: "Standard",
+                                openIndices: "4-9-14-19-23-28",
+                                noteNames: "E-A-D-G-B-E",
+                                chordLibraryPath: "StandardTuning_ChordLibrary",
+                                chordGroupsPath: "StandardTuningChordGroups")
             } catch {
                 throw PlistError.unknownError
             }
@@ -137,7 +142,6 @@ actor AppStateContainer {
                 throw PlistError.unknownError
             }
             
-            
             // Open D Tuning
             let openDTuning = Tuning()
             do {
@@ -150,7 +154,7 @@ actor AppStateContainer {
             } catch {
                 throw PlistError.unknownError
             }
-
+            
             return [standardTuning, dropDTuning, openDTuning]
         }
         
@@ -159,15 +163,15 @@ actor AppStateContainer {
         ///   - chordDictionary: dictionary of <chordName, fretIndicesString>
         ///   - parentTuning: the Tuning to which this set of Chords belongs
         /// - Returns: [Chord]
-        func convertToSetOfChords(chordDictionary: Dictionary<String, String>,
-                                    parentTuning: Tuning) -> Set<Chord>{
-            var chords = Set<Chord>()
+        func convertToArrayOfChords(chordDictionary: Dictionary<String, String>,
+                                    parentTuning: Tuning) -> [Chord] {
+            var chords = [Chord]()
             
             for entry in chordDictionary {
-                let chord = Chord(parentChordGroup: (parentTuning.activeChordGroup)!)
+                let chord = Chord()
                 chord.name = entry.key
                 chord.fretMap = entry.value
-                chords.insert(chord)
+                chords.append(chord)
             }
             
             return chords
@@ -185,12 +189,12 @@ actor AppStateContainer {
             
             for entry in dict {
                 // create new ChordGroupd
-                var chordGroup = ChordGroup()
+                let chordGroup = ChordGroup()
                 chordGroup.name = entry.key
-                chordGroup.availableChordNames = (entry.value).components(separatedBy: "-")
-                chordGroup.availableChords = getGroupsChords(chordGroup: chordGroup,
-                                                             parentTuning: parentTuning)
-                chordGroup.parentTuning = parentTuning
+                let chordNames = entry.value
+                chordGroup.availableChords = getGroupsChords(chordNames: chordNames,
+                                                             parentTuning: parentTuning,
+                                                             parentChordGroup: chordGroup)
                 if activeChordGroupIsSet == false {
                     parentTuning.activeChordGroup = chordGroup
                     activeChordGroupIsSet = true
@@ -207,20 +211,21 @@ actor AppStateContainer {
         ///   - chordGroup: Optional ChordGroup
         ///   - parentTuning: Optional Tuning to which this group belongs
         /// - Returns: array of Chords
-        func getGroupsChords(chordGroup: ChordGroup?,
-                             parentTuning: Tuning?) -> [Chord] {
+        func getGroupsChords(chordNames: String,
+                             parentTuning: Tuning?,
+                            parentChordGroup: ChordGroup) -> [Chord] {
+            let chorNameArray = chordNames.components(separatedBy: "-")
             var thisGroupsChords: [Chord] = []
             var activeChordIsSet = false
-            if let chordNames = chordGroup?.availableChordNames {
-                for chordName in chordNames {
-                    if let chord = getChord(name: chordName,
-                                            parentTuning: parentTuning) {
-                        thisGroupsChords.append(chord)
-                        
-                        if activeChordIsSet == false {
-                            chordGroup?.activeChord = chord
-                            activeChordIsSet = true
-                        }
+           
+            for chordName in chorNameArray {
+                if let chord = getChord(name: chordName,
+                                        parentTuning: parentTuning) {
+                    thisGroupsChords.append(chord)
+                    
+                    if activeChordIsSet == false {
+                        parentChordGroup.activeChord = chord
+                        activeChordIsSet = true
                     }
                 }
             }
@@ -235,9 +240,11 @@ actor AppStateContainer {
         /// - Returns: Chord specified by name in parentTuning
         func getChord(name: String,
                       parentTuning: Tuning?) -> Chord? {
-            return parentTuning?.chords.first {
+            let thisChord = parentTuning?.chords.first {
                 $0.name == name
             }
+            
+            return thisChord
         }
     }
 }

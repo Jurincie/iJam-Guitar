@@ -15,7 +15,7 @@ import OSLog
 //  top layer:  VStack() of 6 possibly-RedBall images evenly spaced over top half of the stringsView
 
 struct StringView: View {
-    @Query var appState: AppState
+    @Query var appStates: [AppState]
     let notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     let height: CGFloat
     var stringImageName: String = ""
@@ -30,6 +30,7 @@ struct StringView: View {
     }
         
     var body: some View {
+        let appState = appStates.first!
         let openNotesString = (appState.activeTuning?.stringNoteNames)
         if let openNotes: [String] = openNotesString?.components(separatedBy: ["-"]) {
             let fretBoxes: [FretBox] = getFretBoxArray(minFret: appState.minimumFret,
@@ -59,62 +60,65 @@ struct StringView: View {
     struct FretBoxView: View {
         let fretBox: FretBox
         let stringNumber: Int
-        @Query var appState: AppState
+        @Query var appStates: [AppState]
+        var fretIsFromChord = false
 
         var body: some View {
-            ZStack() {
-                // background
-                Button(action:{
-                    let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(appState.minimumFret)  fretBoxID: \(fretBox.id)")
-                    if currentFret == 0 && fretBox.id == 0 {
-                        // if nut tapped when string open => make string muted
-                        appState.currentFretIndexMap[6 - stringNumber] = -1
-                    } else if currentFret == fretBox.id {
-                        // tapped existing fret => make string open
-                        appState.currentFretIndexMap[6 - stringNumber] = 0
-                    } else {
-                        // tapped different fret
-                        appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
+            VStack {
+                ZStack() {
+                    // background
+                    Button(action:{
+                        let currentFret = appStates.first?.currentFretIndexMap[6 - stringNumber]
+                        
+                        if currentFret == 0 && fretBox.id == 0 {
+                            // if nut tapped when string open => make string muted
+                            appStates.first?.currentFretIndexMap[6 - stringNumber] = -1
+                        } else if currentFret == fretBox.id {
+                            // tapped existing fret => make string open
+                            appStates.first?.currentFretIndexMap[6 - stringNumber] = 0
+                        } else {
+                            // tapped different fret
+                            appStates.first?.currentFretIndexMap[6 - stringNumber] = fretBox.id
+                        }
+                    }){
+                        if(self.fretBox.id == 0)
+                        {
+                            // show a white circle on zeroFret with black text
+                            CircleView(color: Color.teal, lineWidth: 1.0)
+                        } else if appStates.first?.currentFretIndexMap[6 - stringNumber] == fretBox.id {
+                            // red ball on freted fretBox
+                            // yellow ball if not in the chord - meaning user tapped on different fret
+                            CircleView(color: fretIsFromChord ? Color.red : Color.yellow, lineWidth: 1.0)
+                        } else {
+                            CircleView()
+                        }
                     }
-                }){
-                    if(self.fretBox.id == 0)
-                    {
-                        // show a white circle on zeroFret with black text
-                        CircleView(color: Color.teal, lineWidth: 1.0)
-                    } else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
-                        // red ball on freted fretBox
-                        // yellow ball if not in the chord - meaning user tapped on different fret
-                        CircleView(color: fretIsFromChord(fretNumber: fretBox.id) ? Color.red : Color.yellow, lineWidth: 1.0)
+                    // foreground
+                    // show fretZero note names AND a (possibly) fretted fretBox
+                    if self.fretBox.id == 0 {
+                        Text(self.fretBox.title)
+                            .foregroundColor(Color.white)
+                            .font(.title3)
+                            .fixedSize()
                     } else {
-                        CircleView()
+                        let text = self.fretBox.id == appStates.first?.currentFretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
+                        Text(text)
+                            .foregroundColor(Color.black)
+                            .font(.title3)
+                            .fixedSize()
                     }
-                }
-                // foreground
-                // show fretZero note names AND a (possibly) fretted fretBox
-                if self.fretBox.id == 0 {
-                    Text(self.fretBox.title)
-                        .foregroundColor(Color.white)
-                        .font(.title3)
-                        .fixedSize()
-                } else {
-                    let text = self.fretBox.id == appState.currentFretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
-                    Text(text)
-                        .foregroundColor(Color.black)
-                        .font(.title3)
-                        .fixedSize()
                 }
             }
         }
+    }
+    
+    func fretIsFromChord(fretNumber: Int) -> Bool {
+        guard stringNumber < 6 && stringNumber >= 0 else { return true }
         
-        func fretIsFromChord(fretNumber: Int) -> Bool {
-            guard stringNumber < 6 && stringNumber >= 0 else { return true }
-            
-            let chordFretNumber = fretNumber
-            let currentFretNumber = appState.currentFretIndexMap[6 - stringNumber]
-            
-            return currentFretNumber == chordFretNumber
-        }
+        let chordFretNumber = fretNumber
+        let currentFretNumber = appStates.first?.currentFretIndexMap[6 - stringNumber]
+        
+        return currentFretNumber == chordFretNumber
     }
     
     struct FretBox: Identifiable  {
@@ -145,6 +149,7 @@ struct CircleView: View {
 
 extension StringView {
     func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
+        let appState = appStates.first!
         var fretBoxArray:[FretBox] = []
         let index = appState.currentFretIndexMap[6 - stringNumber]
         fretBoxArray.append(FretBox(id: 0,
@@ -161,6 +166,7 @@ extension StringView {
     }
     
     func getFretNoteTitle(openNote:String, offset:Int) -> String {
+        let appState = appStates.first!
         if let index = self.notes.firstIndex(of: openNote) {
             var finalIndex = index + offset + appState.capoPosition
             if finalIndex < 0 {

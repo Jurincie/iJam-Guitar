@@ -15,12 +15,12 @@ import XCTest
 @available(iOS 17.0, *)
 final class iJamViewModelTests: XCTestCase {
     // Given
-    @Query var appState: AppState
-    let viewModel = iJamViewModel.shared
+    @Query var appStates: [AppState]
     let tooBig = 20
     
     func test_iJamViewModel_getAvailableChordNames_returnsArrayOfTenStrings() {
         // When:
+        let appState = appStates.first!
         let chordNameArray: [String] = viewModel.getAvailableChordNames(activeChordGroup: appState.activeTuning?.activeChordGroup)
             
         // Then:
@@ -28,7 +28,7 @@ final class iJamViewModelTests: XCTestCase {
     }
    
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyFourElements() {
-        let audioManager = iJamAudioManager()
+        let audioManager = iJamAudioManager(appState: appStates.first!)
         
         // Then
         XCTAssertEqual(audioManager.noteNamesArray.count, 43)

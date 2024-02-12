@@ -1,11 +1,10 @@
 //
-//  IJamViewModelExtension.swift
+//  AppStateExtension.swift
 //  iJamGuitar
 //
-//  Created by Ron Jurincie on 4/2/23.
+//  Created by Ron Jurincie on 2/12/24.
 //
 
-import Foundation
 import SwiftData
 import SwiftUI
 
@@ -18,12 +17,15 @@ extension AppState
     func getTuning(name: String) -> Tuning? {
         var newTuning: Tuning? = nil
         
-        for tuning in tunings {
-            if tuning.name == name {
-                newTuning = tuning
-                break
+        if let tunings = tunings {
+            for tuning in tunings {
+                if tuning.name == name {
+                    newTuning = tuning
+                    break
+                }
             }
         }
+    
         return newTuning
     }
     
@@ -63,9 +65,13 @@ extension AppState
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {
         var tuningNames: [String] = []
-        for tuning in tunings {
-            tuningNames.append(tuning.name ?? "ERROR")
+        
+        if let tunings = tunings {
+            for tuning in tunings {
+                tuningNames.append(tuning.name ?? "ERROR")
+            }
         }
+        
         return tuningNames
     }
     

@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct iJamGuitarApp: App {
-    
+    var shouldCreateUserDefaults: Bool = !UserDefaults.standard.bool(forKey: "DataExists")
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(AppStateContainer.create())
+        .modelContainer(AppStateContainer.create(shouldCreateUserDefaults))
     }
 }
 

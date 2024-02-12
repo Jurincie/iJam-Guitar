@@ -10,19 +10,18 @@ import Foundation
 import SwiftData
 
 @Model
-final class Chord: Equatable {
-    var fretMap: String?
+final class Chord: Equatable, Hashable {
     @Attribute(.unique) var name: String?
-    @Relationship(inverse: \ChordGroup.self)
-    @Relationship(inverse: \Tuning.self)
-    var parentChordGroup: ChordGroup
-   
-    init(parentChordGroup: ChordGroup,
-         fretMap: String? = nil,
-         name: String? = nil) {
-        self.fretMap = fretMap
+    var fretMap: String?
+    
+    init(name: String? = nil,
+         fretMap: String? = nil) {
         self.name = name
-        self.parentChordGroup = parentChordGroup
+        self.fretMap = fretMap
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine([name])
     }
    
     static func == (lhs: Chord, rhs: Chord) -> Bool {

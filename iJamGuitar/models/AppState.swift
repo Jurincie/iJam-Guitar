@@ -11,23 +11,26 @@ import OSLog
 
 @Model
 final class AppState {
+    
     // Stored Properties
-    var showVolumeAlert = false
-    var showAudioPlayerInUseAlert = false
-    var showAudioNotAvailableAlert = false
-    var showAudioPlayerErrorAlert = false
-    let kDefaultVolume = 5.0
-    var minimumFret: Int = 0
-    var currentFretIndexMap: [Int] = []
-    var capoPosition: Int = 0
-    var isMuted: Bool = false
-    var volumeLevel: Double = 5.0
-    var selectedChordIndex: Int = 0
-    var savedVolumeLevel: Double = 5.0
+    var showVolumeAlert: Bool
+    var showAudioPlayerInUseAlert: Bool
+    var showAudioNotAvailableAlert: Bool
+    var showAudioPlayerErrorAlert: Bool
+    var isMuted: Bool
+    var currentFretIndexMap: [Int]
+    var capoPosition: Int
+    var minimumFret: Int
+    var selectedChordIndex: Int
+    var volumeLevel: Double
+    var savedVolumeLevel: Double
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var tunings: [Tuning]
-    @Relationship var activeTuning: Tuning?
+    @Relationship(deleteRule: .nullify)
+    var activeTuning: Tuning? = nil
+    
+    @Relationship(deleteRule: .cascade)
+    var tunings: [Tuning]?
     
     // Calculated Properties
     var activeChord: Chord? {
@@ -67,30 +70,27 @@ final class AppState {
     }
     
     init(
-        activeChord: Chord? = nil,
         showVolumeAlert: Bool = false,
         showAudioPlayerInUseAlert: Bool = false,
         showAudioNotAvailableAlert: Bool = false,
         showAudioPlayerErrorAlert: Bool = false,
-        minimumFret: Int = 0,
+        isMuted: Bool = false,
         currentFretIndexMap: [Int] = [],
         capoPosition: Int = 0,
-        isMuted: Bool = false,
-        volumeLevel: Double = 5.0,
+        minimumFret: Int = 0,
         selectedChordIndex: Int = 0,
+        volumeLevel: Double = 5.0,
         savedVolumeLevel: Double = 5.0) {
-            self.activeTuningName = activeTuningName
-            self.activeChord = activeChord
             self.showVolumeAlert = showVolumeAlert
             self.showAudioPlayerInUseAlert = showAudioPlayerInUseAlert
             self.showAudioNotAvailableAlert = showAudioNotAvailableAlert
             self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
-            self.minimumFret = minimumFret
+            self.isMuted = isMuted
             self.currentFretIndexMap = currentFretIndexMap
             self.capoPosition = capoPosition
-            self.isMuted = isMuted
-            self.volumeLevel = volumeLevel
+            self.minimumFret = minimumFret
             self.selectedChordIndex = selectedChordIndex
+            self.volumeLevel = volumeLevel
             self.savedVolumeLevel = savedVolumeLevel
         }
 }

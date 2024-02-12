@@ -10,11 +10,13 @@ import SwiftUI
 import OSLog
 
 struct FretNumbersView: View {
-    @Query var appState: AppState
+    @Query var appStates: [AppState]
     let width: CGFloat
     let height: CGFloat
      
     var body: some View {
+        let appState = appStates.first!
+        
         VStack(alignment: .leading) {
             // lowest row is for the nut / open string / capo position
             CapoPositionPickerView(capoPosition: Bindable(appState).capoPosition)

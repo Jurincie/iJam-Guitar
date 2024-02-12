@@ -12,7 +12,7 @@ import OSLog
 struct BottomView: View {
     let width: CGFloat
     let height: CGFloat
-    @Query var appState: AppState
+    @Query var appStates: [AppState]
     
     init(width: CGFloat, height: CGFloat) {
         self.width = width
@@ -20,6 +20,8 @@ struct BottomView: View {
     }
 
     var body: some View {
+        let appState = appStates.first!
+        
         ZStack() {
             Image("BottomView")
                 .resizable()

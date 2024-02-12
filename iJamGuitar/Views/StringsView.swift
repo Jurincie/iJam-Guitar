@@ -30,10 +30,10 @@ import OSLog
 /// Zone 12: right of String 1
 
 struct StringsView: View {
+    @Query var appStates: [AppState]
     @State private var dragLocation: CGPoint?
     let audioManager: iJamAudioManager
     var height: CGFloat
-    var appState: AppState
     var drag: some Gesture {
         DragGesture()
             .onEnded { _ in
@@ -46,15 +46,13 @@ struct StringsView: View {
             }
     }
     
-    init(height: CGFloat,
-         showVolumeAlert: Bool,
-         appState: AppState) {
+    init(height: CGFloat) {
         self.height = height
         self.audioManager = iJamAudioManager()
-        self.appState = appState
     }
     
     var body: some View {
+        let appState = appStates.first!
         HStack() {
             SixSpacerHStack()
             HStack(spacing:0) {
