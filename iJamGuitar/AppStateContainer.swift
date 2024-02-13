@@ -14,8 +14,15 @@ actor AppStateContainer {
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
         let schema = Schema([AppState.self])
         let configuration = ModelConfiguration()
-        let container = try! ModelContainer(for: schema,
-                                            configurations: configuration)
+        var container: ModelContainer
+        
+        do {
+            container = try ModelContainer(for: schema,
+                                                configurations: configuration)
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+        
         if shouldCreateDefaults {
             do {
                 try populateData()
@@ -30,6 +37,7 @@ actor AppStateContainer {
         return container
         
         func populateData() throws {
+            // THIS is the ONLY insert we need
             let appState = AppState()
             container.mainContext.insert(appState)
             
@@ -38,13 +46,12 @@ actor AppStateContainer {
             } catch {
                 throw PlistError.unknownError
             }
-            appState.activeTuning = appState.tunings?.first
+            appState.activeTuning = appState.tunings?.first(where: { chordGroup in
+                chordGroup.name == "Standard"
+            })
             appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
             appState.capoPosition = 0
-            appState.isMuted = false
-            appState.volumeLevel = 0.5
-            appState.activeTuning?.activeChordGroup?.availableChords = appState.getAvailableChords(appState.activeChordGroup,appState.activeTuning)
-            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeTuning?.activeChordGroup?.activeChord)
+            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
             
             setSelectedChordIndex(appState: appState)
         }
@@ -52,15 +59,17 @@ actor AppStateContainer {
         func setSelectedChordIndex(appState: AppState) {
             var chordIndex = 0
             
-            for chord in appState.availableChords {
-                if chord == appState.activeTuning?.activeChordGroup!.activeChord {
-                    break
+            if let availableChords = appState.activeChordGroup?.availableChords {
+                for chord in availableChords {
+                    if chord == appState.activeTuning?.activeChordGroup?.activeChord {
+                        break
+                    }
+                    chordIndex += 1
                 }
-                chordIndex += 1
+                chordIndex = min((appState.activeChordGroup?.availableChords.count ?? 0) - 1, appState.selectedChordIndex)
+                
+                appState.selectedChordIndex = chordIndex
             }
-            chordIndex = min(appState.availableChords.count - 1, appState.selectedChordIndex)
-            
-            appState.selectedChordIndex = chordIndex
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -88,9 +97,7 @@ actor AppStateContainer {
                 throw PlistError.badChordLibraryAddress
             }
             
-            let chords = convertToArrayOfChords(chordDictionary: thisChordGroupChordDictionary, parentTuning: tuning)
-            
-            tuning.chords.append(contentsOf: chords)
+            tuning.chordsDictionary = thisChordGroupChordDictionary
             
             guard let path = Bundle.main.path(forResource: chordGroupsPath, ofType: "plist"),
                   let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String]  else {
@@ -98,9 +105,7 @@ actor AppStateContainer {
             }
             
             let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, parentTuning: tuning)
-            
             tuning.chordGroups.append(contentsOf: chordGroups)
-            
             Logger.statistics.info("New tuning added")
         }
         
@@ -163,7 +168,8 @@ actor AppStateContainer {
         ///   - chordDictionary: dictionary of <chordName, fretIndicesString>
         ///   - parentTuning: the Tuning to which this set of Chords belongs
         /// - Returns: [Chord]
-        func convertToArrayOfChords(chordDictionary: Dictionary<String, String>,
+        func convertToArrayOfChords(chordString: String,
+                                    chordDictionary: Dictionary<String, String>,
                                     parentTuning: Tuning) -> [Chord] {
             var chords = [Chord]()
             
@@ -185,7 +191,6 @@ actor AppStateContainer {
         func convertToArrayOfChordGroups(dict: Dictionary<String,String>,
                                          parentTuning: Tuning) -> [ChordGroup] {
             var chordGroups: [ChordGroup] = []
-            var activeChordGroupIsSet = false
             
             for entry in dict {
                 // create new ChordGroupd
@@ -195,13 +200,11 @@ actor AppStateContainer {
                 chordGroup.availableChords = getGroupsChords(chordNames: chordNames,
                                                              parentTuning: parentTuning,
                                                              parentChordGroup: chordGroup)
-                if activeChordGroupIsSet == false {
-                    parentTuning.activeChordGroup = chordGroup
-                    activeChordGroupIsSet = true
-                }
                 
                 chordGroups.append(chordGroup)
             }
+            
+            parentTuning.activeChordGroup = chordGroups.first!
             
             return chordGroups
         }
@@ -214,13 +217,15 @@ actor AppStateContainer {
         func getGroupsChords(chordNames: String,
                              parentTuning: Tuning?,
                             parentChordGroup: ChordGroup) -> [Chord] {
+            guard parentTuning == parentTuning else { return [] }
+            
             let chorNameArray = chordNames.components(separatedBy: "-")
             var thisGroupsChords: [Chord] = []
             var activeChordIsSet = false
            
             for chordName in chorNameArray {
-                if let chord = getChord(name: chordName,
-                                        parentTuning: parentTuning) {
+                if let chord = getChord(chordNamesString: chordName,
+                                        chordDictionary: parentTuning!.chordsDictionary) {
                     thisGroupsChords.append(chord)
                     
                     if activeChordIsSet == false {
@@ -233,18 +238,25 @@ actor AppStateContainer {
             return thisGroupsChords
         }
         
-        /// This method returns the Chord specified by name for the parentTuning
+        /// This method returns the Chord specified by name for the parentTuning.chordDictionary
         /// - Parameters:
         ///   - name: name of the chord in this Tuning
-        ///   - parentTuning: the Tuning to which this chord belongs
-        /// - Returns: Chord specified by name in parentTuning
-        func getChord(name: String,
-                      parentTuning: Tuning?) -> Chord? {
-            let thisChord = parentTuning?.chords.first {
-                $0.name == name
+        ///   - chordDictionary: the ChordDict in parentTuning
+        /// - Returns: Chord specified by chordNamesString
+        func getChord(chordNamesString: String,
+                      chordDictionary: Dictionary<String, String>) -> Chord? {
+            let chordNames = chordNamesString.components(separatedBy: "-")
+            
+            for chordName in chordNames {
+                if let entry = chordDictionary.first(where: { (key: String, value: String) in
+                    chordName == key
+                }) {
+                    return Chord(name: chordName,
+                                 fretMap: entry.value)
+                }
             }
             
-            return thisChord
+            return nil
         }
     }
 }

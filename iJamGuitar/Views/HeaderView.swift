@@ -24,7 +24,7 @@ struct HeaderView: View {
             Spacer()
             ZStack() {
                 // Background
-                Image("HeaderView")
+                Image(.secondView)
                     .resizable()
                     .frame(width: width, height: height)
                 

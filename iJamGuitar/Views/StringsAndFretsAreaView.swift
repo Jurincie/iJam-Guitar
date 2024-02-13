@@ -17,10 +17,8 @@ import OSLog
 struct StringsAndFretsAreaView : View {
     let width: CGFloat
     let height: CGFloat
-    @Query var appStates: [AppState]
     
     var body: some View {
-        let appState = appStates.first!
         ZStack() {
             // BOTTOM layer
             VStack(spacing:0) {
@@ -34,7 +32,7 @@ struct StringsAndFretsAreaView : View {
                                     height: height / 2)
                 }
                 // display StringAreaView in Lower half
-                Image("StringAreaView")
+                Image(.stringAreaView)
                     .resizable()
                     .frame(width: width, 
                            height: height / 2,

@@ -143,7 +143,6 @@ struct CircleView: View {
             Circle()
                 .strokeBorder(.black, lineWidth: lineWidth)
         }
-        
     }
 }
 

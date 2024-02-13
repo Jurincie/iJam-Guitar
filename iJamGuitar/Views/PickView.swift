@@ -15,6 +15,7 @@ struct Pick: Identifiable  {
 }
 
 struct PickView: View {
+    @Query var appStates: [AppState]
     @State private var isAnimated: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
@@ -38,7 +39,6 @@ struct PickView: View {
 
 extension PickView {
     func PickButton() -> some View {
-        
         let button =  Button(action: {
             if appState.selectedChordIndex != pick.id || chordIsAltered(pick.id) {
                 withAnimation(.default) {
@@ -47,16 +47,18 @@ extension PickView {
                 makeChosenPicksChordActive()
             }
         }){
-            Image(getPickImageName(availableChords: appState.availableChords,
-                                   selectedChordIndex: appState.selectedChordIndex))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 100.0)
-                .padding(10)
-                .opacity(self.pick.title == kNoChordName ? 0.3 : 1.0)
-                .disabled(self.pick.title == kNoChordName)
+            if let availableChords = appState.activeChordGroup?.availableChords {
+                Image(getPickImageName(availableChords: availableChords,
+                                       selectedChordIndex: appState.selectedChordIndex))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 100.0)
+                    .padding(10)
+                    .opacity(self.pick.title == kNoChordName ? 0.3 : 1.0)
+                    .disabled(self.pick.title == kNoChordName)
+            }
         }
-        
+            
         return button
     }
     
@@ -76,7 +78,7 @@ extension PickView {
     }
     
     func chordIsAltered(_ chordIndex: Int) -> Bool {
-        let thisChord = appState.availableChords[chordIndex]
+        let thisChord = appState.activeChordGroup?.availableChords[chordIndex]
         return appState.currentFretIndexMap != appState.getFretIndexMap(chord: thisChord)
     }
     
@@ -88,8 +90,8 @@ extension PickView {
             guard self.pick.id < chordNames.count else { return }
             
             let newActiveChordName = chordNames[self.pick.id]
-            if let newActiveChord = appState.getChord(name: newActiveChordName,
-                                                       tuning: appState.activeTuning) {
+            if let newActiveChord = appStates.first?.getChord(name: newActiveChordName,
+                                                              tuning: appState.activeTuning) {
                 appState.activeTuning?.activeChordGroup?.activeChord = newActiveChord
                 appState.selectedChordIndex = self.pick.id
             }

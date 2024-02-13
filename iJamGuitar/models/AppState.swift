@@ -33,22 +33,9 @@ final class AppState {
     var tunings: [Tuning]?
     
     // Calculated Properties
-    var activeChord: Chord? {
-        get {
-            activeTuning?.activeChordGroup?.activeChord
-        }
-        
-        set { }
-    }
     var activeChordGroup: ChordGroup? {
         get {
             activeTuning?.activeChordGroup
-        }
-        set { }
-    }
-    var availableChords: [Chord] {
-        get {
-            activeChordGroup?.availableChords ?? []
         }
         set { }
     }

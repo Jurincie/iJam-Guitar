@@ -17,14 +17,14 @@ struct FretBoardView: View {
         // height is parents trueHeight / 2
         // since this covers bottom half of parent (StringsAndFretsAreaView)
         VStack() {
-            Image("Nut")
+            Image(.nut)
                 .resizable()
                 .frame(width: width, 
                        height: height / 6,
                        alignment: .top)
             Spacer()
         }
-        .background( Image("FretBoard")
+        .background( Image(.fretBoard)
             .resizable()
             .frame(width: width, 
                    height: height,

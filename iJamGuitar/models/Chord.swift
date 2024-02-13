@@ -21,7 +21,7 @@ final class Chord: Equatable, Hashable {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine([name])
+        hasher.combine([name, fretMap])
     }
    
     static func == (lhs: Chord, rhs: Chord) -> Bool {

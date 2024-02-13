@@ -55,9 +55,6 @@ extension AppState
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func setActiveChordGroup(newChordGroup: ChordGroup) {
         activeTuning?.activeChordGroup = newChordGroup
-        availableChords = getAvailableChords(newChordGroup, activeTuning)
-        activeTuning?.activeChordGroup = newChordGroup
-        activeChord = newChordGroup.activeChord
         selectedChordIndex = getSelectedChordButtonIndex()
     }
     
@@ -90,8 +87,8 @@ extension AppState
     }
   
     func getSelectedChordButtonIndex() -> Int {
-        if let activeChord = activeChord,
-           let activeChordIndex = availableChords.firstIndex(of: activeChord) {
+        if let activeChord = activeChordGroup?.activeChord,
+           let activeChordIndex = activeChordGroup?.availableChords.firstIndex(of: activeChord) {
             return activeChordIndex
         }
         return 0
@@ -140,12 +137,16 @@ extension AppState
     ///   - activeChordGroup: optional(activeChordGroup)
     ///   - activeTuning: optional(activeTuning
     /// - Returns: array of chords associated with activeChordGroup for activeTuning or empty array if anything goes wrong
-    func getAvailableChords(_ activeChordGroup: ChordGroup?, _ activeTuning: Tuning?) -> [Chord] {
+    func getAvailableChords(_ activeChordGroup: ChordGroup?, 
+                            _ activeTuning: Tuning?) -> [Chord] {
         var availableChords: [Chord] = []
         if let chordNames = activeChordGroup?.availableChordNames,
-           let activeTuning = activeTuning {
+           let chordDict = activeTuning?.chordsDictionary {
             for chordName in chordNames {
-                if let chord = getChord(name: chordName, tuning: activeTuning) {
+                if let entry = chordDict.first(where: { (key: String, value: String) in
+                    key == chordName
+                }) {
+                    let chord = Chord(name: entry.key, fretMap: entry.value)
                     availableChords.append(chord)
                 }
             }
@@ -161,13 +162,14 @@ extension AppState
     ///             which is nil if no chord with name in arg #1 exists in the optional(Tuning) in arg #2
     ///             otherwise it returns the new chord for the optional(Tuning) in arg #2 if tuning exists
     func getChord(name: String, tuning: Tuning?) -> Chord? {
-        if let chordArray: [Chord] = tuning?.chords {
-            for chord in chordArray {
-                if chord.name == name {
-                    return chord
-                }
-            }
+        if let chordDic = tuning?.chordsDictionary,
+           let entry = chordDic.first(where: { (key: String, value: String) in
+               name == key
+           }){
+            return Chord(name: entry.key,
+                              fretMap: entry.value)
         }
+        
         return nil
     }
     
@@ -175,7 +177,7 @@ extension AppState
     /// - Returns: Int of the lowest displayed fret above the nut
     /// Note: must be > the nut Int
     func getMinimumDisplayedFret() -> Int {
-        guard let fretChars = activeChord?.fretMap else { return 0 }
+        guard let fretChars = activeChordGroup?.activeChord?.fretMap else { return 0 }
         var highest = 0
         var thisFretVal = 0
         

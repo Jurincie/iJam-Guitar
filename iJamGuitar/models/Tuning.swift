@@ -15,12 +15,10 @@ final class Tuning: Hashable {
     var openNoteIndices: String
     var stringNoteNames: String
     var activeChordGroup: ChordGroup? = nil
+    var chordsDictionary = [String:String]()
     
     // Relationships
-    @Relationship(deleteRule: .cascade)
     var chordGroups = [ChordGroup]()
-    @Relationship(deleteRule: .cascade)
-    var chords = [Chord]()
     
     init(name: String? = nil,
          openNoteIndices: String = "",

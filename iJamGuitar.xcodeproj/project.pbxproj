@@ -207,20 +207,20 @@
 			isa = PBXGroup;
 			children = (
 				7AD667422B75CEF100FA6C6D /* ContentView.swift */,
-				7AD667442B75CEF100FA6C6D /* CapoPositionPickerView.swift */,
+				7AA07A7D2A0417E700AE87B3 /* HeaderView.swift */,
+				7AA07A772A0417E600AE87B3 /* TuningPickerView.swift */,
+				7A1CF6DB2B75D2B400F00AF1 /* ChordGroupPickerView.swift */,
 				7AD667472B75CEF100FA6C6D /* FretBoardView.swift */,
 				7AD667452B75CEF100FA6C6D /* StringsAndFretsAreaView.swift */,
 				7AD667432B75CEF100FA6C6D /* TopView.swift */,
 				7AD667462B75CEF100FA6C6D /* VolumeView.swift */,
 				7A9AF58B2B66FF7B00E37CDB /* PickView.swift */,
-				7AA07A7D2A0417E700AE87B3 /* HeaderView.swift */,
 				7AA07A792A0417E600AE87B3 /* StringView.swift */,
-				7AA07A772A0417E600AE87B3 /* TuningPickerView.swift */,
 				7AD6674E2B75CF5F00FA6C6D /* BottomView.swift */,
 				7A1CF6ED2B7883EB00F00AF1 /* FretNumbersView.swift */,
+				7AD667442B75CEF100FA6C6D /* CapoPositionPickerView.swift */,
 				7A1CF6EB2B7883E800F00AF1 /* ChordButtonsView.swift */,
 				7A1CF6EF2B7883EF00F00AF1 /* StringsView.swift */,
-				7A1CF6DB2B75D2B400F00AF1 /* ChordGroupPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -38,11 +38,6 @@ struct ContentView: View {
                    height:height)
         }
         .background(Color.black)
-        .ignoresSafeArea()
-        .onAppear() {
-            let state = AppState()
-            modelContext.insert(state)
-        }
     }
 }
 
