@@ -56,30 +56,29 @@ final class AppState {
         }
     }
     
-    init(
-        showVolumeAlert: Bool = false,
-        showAudioPlayerInUseAlert: Bool = false,
-        showAudioNotAvailableAlert: Bool = false,
-        showAudioPlayerErrorAlert: Bool = false,
-        isMuted: Bool = false,
-        currentFretIndexMap: [Int] = [],
-        capoPosition: Int = 0,
-        minimumFret: Int = 0,
-        selectedChordIndex: Int = 0,
-        volumeLevel: Double = 5.0,
-        savedVolumeLevel: Double = 5.0) {
-            self.showVolumeAlert = showVolumeAlert
-            self.showAudioPlayerInUseAlert = showAudioPlayerInUseAlert
-            self.showAudioNotAvailableAlert = showAudioNotAvailableAlert
-            self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
-            self.isMuted = isMuted
-            self.currentFretIndexMap = currentFretIndexMap
-            self.capoPosition = capoPosition
-            self.minimumFret = minimumFret
-            self.selectedChordIndex = selectedChordIndex
-            self.volumeLevel = volumeLevel
-            self.savedVolumeLevel = savedVolumeLevel
-        }
+    init(showVolumeAlert: Bool = false,
+         showAudioPlayerInUseAlert: Bool = false,
+         showAudioNotAvailableAlert: Bool = false,
+         showAudioPlayerErrorAlert: Bool = false,
+         isMuted: Bool = false,
+         currentFretIndexMap: [Int] = [],
+         capoPosition: Int = 0,
+         minimumFret: Int = 0,
+         selectedChordIndex: Int = 0,
+         volumeLevel: Double = 5.0,
+         savedVolumeLevel: Double = 5.0) {
+        self.showVolumeAlert = showVolumeAlert
+        self.showAudioPlayerInUseAlert = showAudioPlayerInUseAlert
+        self.showAudioNotAvailableAlert = showAudioNotAvailableAlert
+        self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
+        self.isMuted = isMuted
+        self.currentFretIndexMap = currentFretIndexMap
+        self.capoPosition = capoPosition
+        self.minimumFret = minimumFret
+        self.selectedChordIndex = selectedChordIndex
+        self.volumeLevel = volumeLevel
+        self.savedVolumeLevel = savedVolumeLevel
+    }
 }
 
 enum PlistError: Error {
