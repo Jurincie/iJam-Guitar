@@ -20,7 +20,7 @@ struct FretNumbersView: View {
         VStack(alignment: .leading) {
             // lowest row is for the nut / open string / capo position
             CapoPositionPickerView(capoPosition: Bindable(appState).capoPosition)
-                .frame(width: width, height: height / 6)
+                .frame(width: width, height: height / 6, alignment: .center)
                 .background(Color.accentColor)
                 .overlay(RoundedRectangle(cornerRadius:8)
                 .stroke(.white, lineWidth: 2))

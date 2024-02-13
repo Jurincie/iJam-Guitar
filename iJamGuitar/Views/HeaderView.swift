@@ -12,12 +12,6 @@ import OSLog
 struct HeaderView: View {
     let width: CGFloat
     let height: CGFloat
-    
-    init(width: CGFloat, 
-         height: CGFloat) {
-        self.width = width
-        self.height = height
-    }
 
     var body: some View {
         VStack {
@@ -30,12 +24,23 @@ struct HeaderView: View {
                 
                 // Foreground
                 VStack {
+                    Text(" ") // Hack
                     Spacer()
                     HStack() {
                         Spacer()
                         TuningPickerView()
+                            .frame(alignment: .trailing)
+                            .border(.white,
+                                    width: 2,
+                                    cornerRadius: 7)
+                            .padding(.top)
                         Spacer()
                         ChordGroupPickerView()
+                            .frame(alignment: .leading)
+                            .border(.white,
+                                    width: 2,
+                                    cornerRadius: 7)
+                            .padding(.top)
                         Spacer()
                     }
                     .padding()

@@ -30,15 +30,15 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fit)
                 BottomView(width: width,
                            height:height * 0.15)
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
             }
-            .dynamicTypeSize(...DynamicTypeSize.large)
+            .dynamicTypeSize(...DynamicTypeSize.large) // Clamps available sizes
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)
         }
-        .padding(.top)
         .background(Color.black)
+        .ignoresSafeArea()
     }
 }
 
