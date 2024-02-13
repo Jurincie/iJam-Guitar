@@ -37,6 +37,7 @@ struct ContentView: View {
             .frame(width:width,
                    height:height)
         }
+        .padding(.top)
         .background(Color.black)
     }
 }

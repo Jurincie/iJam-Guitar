@@ -105,7 +105,7 @@ extension AppState
     
     func getFretIndexMap(chord: Chord?) -> [Int] {
         var fretsArray : [Int] = []
-        if let fretMap = chord?.fretMap {
+        if let fretMap = chord?.fretMapString {
             for char in fretMap {
                 fretsArray.append(getFretFromChar(char))
             }
@@ -146,7 +146,7 @@ extension AppState
                 if let entry = chordDict.first(where: { (key: String, value: String) in
                     key == chordName
                 }) {
-                    let chord = Chord(name: entry.key, fretMap: entry.value)
+                    let chord = Chord(name: entry.key, fretMapString: entry.value)
                     availableChords.append(chord)
                 }
             }
@@ -167,7 +167,7 @@ extension AppState
                name == key
            }){
             return Chord(name: entry.key,
-                              fretMap: entry.value)
+                         fretMapString: entry.value)
         }
         
         return nil
@@ -177,7 +177,7 @@ extension AppState
     /// - Returns: Int of the lowest displayed fret above the nut
     /// Note: must be > the nut Int
     func getMinimumDisplayedFret() -> Int {
-        guard let fretChars = activeChordGroup?.activeChord?.fretMap else { return 0 }
+        guard let fretChars = activeChordGroup?.activeChord?.fretMapString else { return 0 }
         var highest = 0
         var thisFretVal = 0
         

@@ -12,20 +12,20 @@ import SwiftData
 @Model
 final class Chord: Equatable, Hashable {
     @Attribute(.unique) var name: String?
-    var fretMap: String?
+    var fretMapString: String?
     
     init(name: String? = nil,
-         fretMap: String? = nil) {
+         fretMapString: String? = nil) {
         self.name = name
-        self.fretMap = fretMap
+        self.fretMapString = fretMapString
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine([name, fretMap])
+        hasher.combine([name, fretMapString])
     }
    
     static func == (lhs: Chord, rhs: Chord) -> Bool {
-        lhs.name == rhs.name && lhs.fretMap == rhs.fretMap
+        lhs.name == rhs.name && lhs.fretMapString == rhs.fretMapString
     }
 }
     

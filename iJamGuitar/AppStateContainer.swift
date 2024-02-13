@@ -176,7 +176,7 @@ actor AppStateContainer {
             for entry in chordDictionary {
                 let chord = Chord()
                 chord.name = entry.key
-                chord.fretMap = entry.value
+                chord.fretMapString = entry.value
                 chords.append(chord)
             }
             
@@ -252,7 +252,7 @@ actor AppStateContainer {
                     chordName == key
                 }) {
                     return Chord(name: chordName,
-                                 fretMap: entry.value)
+                                 fretMapString: entry.value)
                 }
             }
             
