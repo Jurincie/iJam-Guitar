@@ -25,8 +25,7 @@ final class ChordGroup {
     var activeChord: Chord? = nil
     
     // Relationships
-    @Relationship(deleteRule: .cascade)
-    var availableChords = [Chord]()
+    @Relationship(deleteRule: .cascade) var availableChords = [Chord]()
     
     init(name: String = "") {
         self.name = name

@@ -213,7 +213,9 @@
 				7AA07A792A0417E600AE87B3 /* StringView.swift */,
 				7A1CF6ED2B7883EB00F00AF1 /* FretNumbersView.swift */,
 				7AD667442B75CEF100FA6C6D /* CapoPositionPickerView.swift */,
-				7AE502C82B7BF2FB008356D9 /* Unchecked Views */,
+				7A1CF6EF2B7883EF00F00AF1 /* StringsView.swift */,
+				7A1CF6EB2B7883E800F00AF1 /* ChordButtonsView.swift */,
+				7AD6674E2B75CF5F00FA6C6D /* BottomView.swift */,
 				7AD667422B75CEF100FA6C6D /* ContentView.swift */,
 				7AA07A7D2A0417E700AE87B3 /* HeaderView.swift */,
 				7AD667472B75CEF100FA6C6D /* FretBoardView.swift */,
@@ -221,16 +223,6 @@
 				7AD667432B75CEF100FA6C6D /* TopView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		7AE502C82B7BF2FB008356D9 /* Unchecked Views */ = {
-			isa = PBXGroup;
-			children = (
-				7A1CF6EF2B7883EF00F00AF1 /* StringsView.swift */,
-				7A1CF6EB2B7883E800F00AF1 /* ChordButtonsView.swift */,
-				7AD6674E2B75CF5F00FA6C6D /* BottomView.swift */,
-			);
-			path = "Unchecked Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

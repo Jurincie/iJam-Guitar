@@ -33,7 +33,6 @@ actor AppStateContainer {
             UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
         
-        
         return container
         
         func populateData() throws {
@@ -49,6 +48,7 @@ actor AppStateContainer {
             appState.activeTuning = appState.tunings?.first(where: { chordGroup in
                 chordGroup.name == "Standard"
             })
+            appState.activeChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
             appState.capoPosition = 0
             appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)

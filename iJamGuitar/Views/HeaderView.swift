@@ -46,7 +46,7 @@ struct HeaderView: View {
                     .padding()
                 }
             }
+            Spacer()
         }
-        
     }
 }

@@ -25,7 +25,7 @@ struct FretNumbersView: View {
                  .stroke(.white, lineWidth: 2))
              // next 5 rows span the chord - from minfret to minFret + 5)
              ForEach((0...4), id: \.self) {
-                 Text(String(appState.capoPosition + appState.minimumFret + Int($0)))
+                 Text(String(appState.capoPosition + appState.minimumFret + 1 + Int($0)))
                      .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                      .fontWeight(.semibold)
                      .frame(width: width, height: height / 6, alignment: .center)

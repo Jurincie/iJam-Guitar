@@ -53,11 +53,11 @@ extension AppState
     ///  Then sets the activeChord to the newChordGroup.activeChord
     ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
-    func setActiveChordGroup(newChordGroup: ChordGroup) {
-        activeTuning?.activeChordGroup = newChordGroup
-        selectedChordIndex = getSelectedChordButtonIndex()
-    }
-    
+//    func setActiveChordGroup(newChordGroup: ChordGroup) {
+//        activeTuning?.activeChordGroup = newChordGroup
+//        selectedChordIndex = getSelectedChordButtonIndex()
+//    }
+//    
     /// This method returns an array of names associated with available Tunings
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {

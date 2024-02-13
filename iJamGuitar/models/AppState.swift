@@ -26,11 +26,8 @@ final class AppState {
     var savedVolumeLevel: Double
     
     // Relationships
-    @Relationship(deleteRule: .nullify)
-    var activeTuning: Tuning? = nil
-    
-    @Relationship(deleteRule: .cascade)
-    var tunings: [Tuning]?
+    @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
+    @Relationship(deleteRule: .cascade) var tunings: [Tuning]?
     
     // Calculated Properties
     var activeChordGroup: ChordGroup? {
@@ -39,20 +36,14 @@ final class AppState {
         }
         set { }
     }
-    var activeTuningName: String {
-        get {
-            activeTuning?.name ?? "BAD Tuning Name"
-        }
-        set { 
+    var activeTuningName: String = "" {
+        didSet {
             activeTuning = getTuning(name: newValue)
         }
     }
-    var activeChordGroupName: String {
-        get {
-            activeTuning?.activeChordGroup?.name ?? "BAD ChordGroup Name"
-        }
-        set {
-            activeChordGroup = getChordGroup(name: newValue)
+    var activeChordGroupName: String = "" {
+        didSet{
+            activeTuning.activeChordGroup = getChordGroup(name: newValue)
         }
     }
     
@@ -78,6 +69,7 @@ final class AppState {
         self.selectedChordIndex = selectedChordIndex
         self.volumeLevel = volumeLevel
         self.savedVolumeLevel = savedVolumeLevel
+        self.activeTuningName = self.activeTuning?.name ?? ""
     }
 }
 

@@ -20,13 +20,13 @@ struct ContentView: View {
             
             VStack(spacing: 0) {
                 HeaderView(width: width,
-                           height: height * 0.10)
+                           height: height * 0.14)
                     .aspectRatio(contentMode: .fit)
                 TopView(width:width,
                         height:height * 0.25)
                     .aspectRatio(contentMode: .fit)
                 StringsAndFretsAreaView(width:width,
-                                        height:height * 0.50)
+                                        height:height * 0.46)
                     .aspectRatio(contentMode: .fit)
                 BottomView(width: width,
                            height:height * 0.15)
