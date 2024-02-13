@@ -29,8 +29,7 @@ struct BottomView: View {
                        height:height,
                        alignment:.topLeading)
             VStack() {
-                VolumeView(volumeAmount: appState.volumeLevel,
-                           isMuted: appState.isMuted)
+                VolumeView()
                     .padding(.horizontal, 40)
             }
         }

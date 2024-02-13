@@ -31,11 +31,9 @@ struct ChordButtonsView: View {
     }
             
     var body: some View {
-        let appState = appStates.first!
         LazyVGrid(columns: columns, spacing: mySpacing) {
                 ForEach(getPicks(), id: \.id) { pick in
-                    PickView(pick: pick, 
-                             appState: appState)
+                    PickView(pick: pick)
             }
         }
     }
