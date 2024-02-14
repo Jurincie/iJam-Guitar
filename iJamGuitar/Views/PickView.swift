@@ -62,17 +62,17 @@ extension PickView {
     func getPickImageName() -> String {
         var pickImageName = "BlankPick"
         if appStates.first!.selectedChordIndex == self.pick.id {
-            let thisChord = appStates.first!.activeChordGroup?.availableChords[self.pick.id]
+            let thisChord = appStates.first!.activeChordGroup?.availableChords?[self.pick.id]
             pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
         } else {
-            pickImageName = self.pick.id < appStates.first!.activeChordGroup?.availableChords.count ?? 0 ? "BlankPick" : "UndefinedPick"
+            pickImageName = self.pick.id < appStates.first!.activeChordGroup?.availableChords?.count ?? 0 ? "BlankPick" : "UndefinedPick"
         }
         
         return pickImageName
     }
     
     func chordIsAltered(_ chordIndex: Int) -> Bool {
-        let thisChord = appStates.first!.activeChordGroup?.availableChords[chordIndex]
+        let thisChord = appStates.first!.activeChordGroup?.availableChords?[chordIndex]
         return appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: thisChord)
     }
     
@@ -80,7 +80,7 @@ extension PickView {
     func makeChosenPicksChordActive() {
         isAnimated.toggle()
         
-        if let chordNames = appStates.first!.activeChordGroup?.availableChordNames {
+        if let chordNames = appStates.first!.activeChordGroup?.getAvailableChordNames() {
             guard self.pick.id < chordNames.count else { return }
             
             let newActiveChordName = chordNames[self.pick.id]

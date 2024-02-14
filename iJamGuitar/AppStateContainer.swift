@@ -31,14 +31,8 @@ actor AppStateContainer {
             }
             UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
-        
-        setPickerNames()
-        
-        return container
-        
-        func setPickerNames() {
             
-        }
+        return container
         
         func populateData() throws {
             // THIS is the ONLY insert we need
@@ -58,24 +52,23 @@ actor AppStateContainer {
             appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-            
-            setSelectedChordIndex(appState: appState)
+            appState.selectedChordIndex = getSelectedChordIndex(appState: appState)
         }
         
-        func setSelectedChordIndex(appState: AppState) {
+        func getSelectedChordIndex(appState: AppState) -> Int {
             var chordIndex = 0
             
-            if let availableChords = appState.activeChordGroup?.availableChords {
+            if let availableChords = appState.activeChordGroup?.availableChords  {
                 for chord in availableChords {
                     if chord == appState.activeTuning?.activeChordGroup?.activeChord {
                         break
                     }
                     chordIndex += 1
                 }
-                chordIndex = min((appState.activeChordGroup?.availableChords.count ?? 0) - 1, appState.selectedChordIndex)
-                
-                appState.selectedChordIndex = chordIndex
+                chordIndex = min(availableChords.count - 1, appState.selectedChordIndex)
             }
+            
+            return chordIndex
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -181,9 +174,7 @@ actor AppStateContainer {
             var chords = [Chord]()
             
             for entry in chordDictionary {
-                let chord = Chord()
-                chord.name = entry.key
-                chord.fretMapString = entry.value
+                let chord = Chord(name: entry.key, fretMapString: entry.value)
                 chords.append(chord)
             }
             
@@ -224,15 +215,15 @@ actor AppStateContainer {
         /// - Returns: array of Chords
         func getGroupsChords(chordNames: String,
                              parentTuning: Tuning?,
-                            parentChordGroup: ChordGroup) -> [Chord] {
+                            parentChordGroup: ChordGroup) -> [Chord]? {
             guard parentTuning == parentTuning else { return [] }
             
-            let chorNameArray = chordNames.components(separatedBy: "-")
+            let chordNameArray = chordNames.components(separatedBy: "-")
             var thisGroupsChords: [Chord] = []
             var activeChordIsSet = false
            
-            for chordName in chorNameArray {
-                if let chord = getChord(chordNamesString: chordName,
+            for chordName in chordNameArray {
+                if let chord = getChord(chordName: chordName,
                                         chordDictionary: parentTuning!.chordsDictionary) {
                     thisGroupsChords.append(chord)
                     
@@ -251,17 +242,17 @@ actor AppStateContainer {
         ///   - name: name of the chord in this Tuning
         ///   - chordDictionary: the ChordDict in parentTuning
         /// - Returns: Chord specified by chordNamesString
-        func getChord(chordNamesString: String,
+        func getChord(chordName: String,
                       chordDictionary: Dictionary<String, String>) -> Chord? {
-            let chordNames = chordNamesString.components(separatedBy: "-")
+            let entry = chordDictionary.first { (key: String, value: String) in
+                chordName == key
+            }
             
-            for chordName in chordNames {
-                if let entry = chordDictionary.first(where: { (key: String, value: String) in
-                    chordName == key
-                }) {
-                    return Chord(name: chordName,
-                                 fretMapString: entry.value)
-                }
+            if let entry = entry {
+                let newChord = Chord(name: entry.key, fretMapString: entry.value)
+                
+                assert(newChord.name != nil && newChord.fretMapString != nil, "Problem creting Chord!")
+                return newChord
             }
             
             return nil

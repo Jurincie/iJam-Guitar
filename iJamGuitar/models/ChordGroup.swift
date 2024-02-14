@@ -11,21 +11,12 @@ import SwiftData
 
 @Model
 final class ChordGroup {
-    // Calculated Property
-    var availableChordNames: [String] {
-        get {
-            availableChords.map() {
-                $0.name ?? ""
-            } 
-        }
-    }
-    
     // Stored Properties
     var name: String
     var activeChord: Chord? = nil
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var availableChords: [Chord]
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord]?
     
     init(name: String = "", 
          activeChord: Chord? = nil,
@@ -33,5 +24,11 @@ final class ChordGroup {
         self.name = name
         self.activeChord = activeChord
         self.availableChords = availableChords
+    }
+    
+    func getAvailableChordNames() -> [String] {
+        let names = (availableChords?.map { $0.name ?? "BAD NAME" }) ?? []
+        
+        return names
     }
 }

@@ -110,7 +110,7 @@ extension AppState
   
     func getSelectedChordButtonIndex() -> Int {
         if let activeChord = activeChordGroup?.activeChord,
-           let activeChordIndex = activeChordGroup?.availableChords.firstIndex(of: activeChord) {
+           let activeChordIndex = activeChordGroup?.availableChords?.firstIndex(of: activeChord) {
             return activeChordIndex
         }
         return 0
@@ -138,43 +138,45 @@ extension AppState
     /// Gets chord names for this chordGroup
     /// - Parameter activeChordGroup: the currently active chordGroup
     /// - Returns: array of chord names associated with activeChordGroup argument
-    func getAvailableChordNames(activeChordGroup: ChordGroup?) -> [String] {
-        if var availableChordNames: [String] = activeChordGroup?.availableChordNames {
-            
-            if availableChordNames.count == 10 {
-                return availableChordNames
-            }
-            for _ in availableChordNames.count...9 {
-                availableChordNames.append("NoChord")
-            }
-            
-            return availableChordNames
-        }
-        
-        return []
-    }
+//    func getAvailableChordNames(activeChordGroup: ChordGroup?) -> [String]? {
+//        if let availableChords = activeChordGroup?.availableChords {
+//            var availableChordNames: [String] = availableChords.map {
+//                $0.name ?? "NameERROR"
+//            }
+//            if availableChordNames.count == 10 {
+//                return availableChordNames
+//            }
+//            for _ in availableChordNames.count...9 {
+//                availableChordNames.append("NoChord")
+//            }
+//            
+//            return availableChordNames
+//        }
+//        
+//        return nil
+//    }
     
     /// Gets an array of chords that belong to the activeChordGroup in the activeTuning
     /// - Parameters:
     ///   - activeChordGroup: optional(activeChordGroup)
     ///   - activeTuning: optional(activeTuning
     /// - Returns: array of chords associated with activeChordGroup for activeTuning or empty array if anything goes wrong
-    func getAvailableChords(_ activeChordGroup: ChordGroup?, 
-                            _ activeTuning: Tuning?) -> [Chord] {
-        var availableChords: [Chord] = []
-        if let chordNames = activeChordGroup?.availableChordNames,
-           let chordDict = activeTuning?.chordsDictionary {
-            for chordName in chordNames {
-                if let entry = chordDict.first(where: { (key: String, value: String) in
-                    key == chordName
-                }) {
-                    let chord = Chord(name: entry.key, fretMapString: entry.value)
-                    availableChords.append(chord)
-                }
-            }
-        }
-        return availableChords
-    }
+//    func getAvailableChords(_ activeChordGroup: ChordGroup?, 
+//                            _ activeTuning: Tuning?) -> [Chord] {
+//        var availableChords: [Chord] = []
+//        if let chordNames =  activeChordGroup?.av
+//           let chordDict = activeTuning?.chordsDictionary {
+//            for chordName in chordNames {
+//                if let entry = chordDict.first(where: { (key: String, value: String) in
+//                    key == chordName
+//                }) {
+//                    let chord = Chord(name: entry.key, fretMapString: entry.value)
+//                    availableChords.append(chord)
+//                }
+//            }
+//        }
+//        return availableChords
+//    }
     
     /// Gets the chord associated with the name argument for the tuning argumen
     /// - Parameters:

@@ -17,7 +17,7 @@ struct ChordButtonsView: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
     func getPicks() -> [Pick] {
-        let chordNames:[String] = appStates.first!.getAvailableChordNames(activeChordGroup: appStates.first!.activeChordGroup)
+        let chordNames:[String] = appStates.first!.activeChordGroup?.getAvailableChordNames() ?? []
         var pickArray: [Pick] = []
         
         for index in 0..<10 {
