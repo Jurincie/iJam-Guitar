@@ -14,6 +14,7 @@ final class ChordGroup {
     // Stored Properties
     var name: String
     var activeChord: Chord? = nil
+    var availableChordNames: String = ""
     
     // Relationships
     @Relationship(deleteRule: .cascade) var availableChords: [Chord]?
@@ -27,8 +28,7 @@ final class ChordGroup {
     }
     
     func getAvailableChordNames() -> [String] {
-        let names = (availableChords?.map { $0.name ?? "BAD NAME" }) ?? []
-        
-        return names
+        let chordNames = availableChordNames.components(separatedBy: "-")
+        return chordNames
     }
 }

@@ -196,6 +196,7 @@ actor AppStateContainer {
                 let chordGroup = ChordGroup()
                 chordGroup.name = entry.key
                 let chordNames = entry.value
+                chordGroup.availableChordNames  = chordNames
                 chordGroup.availableChords = getGroupsChords(chordNames: chordNames,
                                                              parentTuning: parentTuning,
                                                              parentChordGroup: chordGroup)
