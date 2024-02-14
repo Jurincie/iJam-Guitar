@@ -16,7 +16,7 @@ final class ChordGroup {
         get {
             availableChords.map() {
                 $0.name ?? ""
-            }
+            } 
         }
     }
     
@@ -25,9 +25,13 @@ final class ChordGroup {
     var activeChord: Chord? = nil
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var availableChords = [Chord]()
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord]
     
-    init(name: String = "") {
+    init(name: String = "", 
+         activeChord: Chord? = nil,
+         availableChords: [Chord] = []) {
         self.name = name
+        self.activeChord = activeChord
+        self.availableChords = availableChords
     }
 }

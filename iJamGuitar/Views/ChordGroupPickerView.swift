@@ -16,16 +16,21 @@ struct ChordGroupPickerView: View {
         let appState = appStates.first!
          VStack {
              Menu {
-                 Picker("Chord Groups", selection: Bindable(appState).activeChordGroupName) {
-                     let chordGroupNames = appState.getActiveTuningChordGroupNames()
+                 Picker("Chord Groups", selection: Bindable(appState).pickerChordGroupName) {
+                     let chordGroupNames = appStates.first!.getActiveTuningChordGroupNames()
                      ForEach(chordGroupNames, id: \.self) {
                          Text($0)
                      }
                  }
                  .pickerStyle(.automatic)
                  .frame(maxWidth: .infinity)
+                 .onChange(of: appState.pickerChordGroupName) { oldValue, newValue in
+                     if let newChordGroup = appStates.first!.getChordGroup(name: newValue) {
+                         appStates.first!.makeNewChordGroupActive(newChordGroup: newChordGroup)
+                     }
+                 }
              } label: {
-                 Text(appState.activeChordGroupName)
+                 Text(appState.pickerChordGroupName)
                      .padding(10)
                      .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                      .fontWeight(.semibold)

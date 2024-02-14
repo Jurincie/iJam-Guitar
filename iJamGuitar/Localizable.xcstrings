@@ -4,9 +4,6 @@
     " " : {
 
     },
-    "%@" : {
-
-    },
     "%lld" : {
       "localizations" : {
         "de" : {
@@ -263,6 +260,7 @@
       }
     },
     "Tunings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

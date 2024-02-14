@@ -96,8 +96,6 @@ struct StringsView: View {
         .alert("Unknown Audio Player Error", isPresented: Bindable(appStates.first!).showAudioPlayerErrorAlert) {
             Button("OK", role: .cancel) { fatalError() }
         }
-        
-        
     }
     
     func playOpeningArpegio() async {
@@ -110,74 +108,16 @@ struct StringsView: View {
         Logger.viewCycle.debug("zoneBreaks: \(audioManager.zoneBreaks)")
     }
 }
-
-//            HStack(spacing:0) {
-//                StringView(height: height,
-//                           stringNumber: 6)
-//                .readFrame { newFrame in
-//                    audioManager.zoneBreaks[0] = (newFrame.maxX + newFrame.minX) / 2.0
-//                }
-//                Spacer()
-//                StringView(height: height,
-//                           stringNumber: 5)
-//                .readFrame { newFrame in
-//                    audioManager.zoneBreaks[1] = (newFrame.maxX + newFrame.minX) / 2.0
-//                }
-//                Spacer()
-//                StringView(height: height,
-//                           stringNumber: 4)
-//                .readFrame { newFrame in
-//                    audioManager.zoneBreaks[2] = (newFrame.maxX + newFrame.minX) / 2.0
-//                }
-//                Spacer()
-//            }
-
-
-//struct StringsView: View {
-//    @Query var appStates: [AppState]
-//    @State private var dragLocation: CGPoint?
-//    let audioManager: iJamAudioManager
-//    var height: CGFloat
-//    var drag: some Gesture {
-//        DragGesture()
-//            .onEnded { _ in
-//                audioManager.formerZone = -1
-//            }
-//            .onChanged { drag in
-//                dragLocation = drag.location
-//                audioManager.newDragLocation(dragLocation)
-//                Logger.viewCycle.debug("Drag[x] = \(drag.location.x)")
-//            }
-//    }
-//    
-//    init(height: CGFloat) {
-//        self.height = height
-//        self.audioManager = iJamAudioManager()
-//    }
-//    
-//    var body: some View {
-//        let appState = appStates.first!
     
-    struct SixSpacerHStack: View {
-        var body: some View {
-            HStack() {
-                ForEach(0...5, id: \.self) { _ in
-                    Spacer()
-                }
+struct SixSpacerHStack: View {
+    var body: some View {
+        HStack() {
+            ForEach(0...5, id: \.self) { _ in
+                Spacer()
             }
         }
     }
-//    
-//    func playOpeningArpegio() async {
-//        Logger.viewCycle.debug("ZoneBreaks: \(audioManager.zoneBreaks)")
-//        for string in 0...5 {
-//            audioManager.pickString(6 - string)
-//            try? await Task.sleep(nanoseconds: 50_000_000)
-//        }
-//        
-//        Logger.viewCycle.debug("zoneBreaks: \(audioManager.zoneBreaks)")
-//    }
-//}
+}
 
 
 

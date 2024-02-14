@@ -24,6 +24,8 @@ final class AppState {
     var selectedChordIndex: Int
     var volumeLevel: Double
     var savedVolumeLevel: Double
+    var pickerChordGroupName: String = ""
+    var pickerTuningName: String = ""
     
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
@@ -35,16 +37,6 @@ final class AppState {
             activeTuning?.activeChordGroup
         }
         set { }
-    }
-    var activeTuningName: String = "" {
-        didSet {
-            activeTuning = getTuning(name: newValue)
-        }
-    }
-    var activeChordGroupName: String = "" {
-        didSet{
-            activeTuning.activeChordGroup = getChordGroup(name: newValue)
-        }
     }
     
     init(showVolumeAlert: Bool = false,
@@ -69,7 +61,6 @@ final class AppState {
         self.selectedChordIndex = selectedChordIndex
         self.volumeLevel = volumeLevel
         self.savedVolumeLevel = savedVolumeLevel
-        self.activeTuningName = self.activeTuning?.name ?? ""
     }
 }
 

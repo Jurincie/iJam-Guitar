@@ -12,6 +12,12 @@ import OSLog
 struct HeaderView: View {
     let width: CGFloat
     let height: CGFloat
+    @Query var appStates: [AppState]
+    
+    init(width: CGFloat, height: CGFloat) {
+        self.width = width
+        self.height = height
+    }
 
     var body: some View {
         VStack {

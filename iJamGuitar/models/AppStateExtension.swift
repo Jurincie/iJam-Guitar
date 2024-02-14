@@ -10,6 +10,28 @@ import SwiftUI
 
 extension AppState
 {
+    /// - Parameter newTuning: newTuning
+    /// /// Description: When user selects NEW Tuning, we need to set:
+    /// /// activeTuning, activeChordGroup, activeChordGroupName and availableChords
+    /// /// fretIndexMap and selectedIndex based on the activeChord for this Tuning
+    /// /// Warning: Must set activeChordGroup prior to setting activeChordGroupName
+    func makeNewTuningActive(newTuning: Tuning) {
+        guard newTuning.activeChordGroup != nil else { return }
+        activeTuning = newTuning
+        selectedChordIndex = getSelectedChordButtonIndex()
+        pickerChordGroupName = activeChordGroup?.name ?? ""
+    }
+    
+    ///  This method sets the newly instantiated newChordGroup as the activeChordGroup.
+    ///  Then sets the availableChords to the chords associated with this newChordGroup.
+    ///  Then sets the activeChord to the newChordGroup.activeChord
+    ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
+    /// - Parameter newChordGroup: a recently instantiated newChordGroup
+    func makeNewChordGroupActive(newChordGroup: ChordGroup) {
+        activeTuning?.activeChordGroup = newChordGroup
+        selectedChordIndex = getSelectedChordButtonIndex()
+    }
+    
     /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
     /// - Parameter name: name-> The name selected by user in Tuning Picker

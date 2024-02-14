@@ -29,11 +29,16 @@ actor AppStateContainer {
             } catch {
                 print("FOUND ERROR")
             }
-            
             UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
         
+        setPickerNames()
+        
         return container
+        
+        func setPickerNames() {
+            
+        }
         
         func populateData() throws {
             // THIS is the ONLY insert we need
@@ -48,10 +53,11 @@ actor AppStateContainer {
             appState.activeTuning = appState.tunings?.first(where: { chordGroup in
                 chordGroup.name == "Standard"
             })
-            appState.activeChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
             appState.capoPosition = 0
             appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
+            appState.pickerTuningName = appState.activeTuning?.name ?? ""
+            appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             
             setSelectedChordIndex(appState: appState)
         }
@@ -104,7 +110,8 @@ actor AppStateContainer {
                 throw PlistError.badChordLibraryAddress
             }
             
-            let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, parentTuning: tuning)
+            let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, 
+                                                                        parentTuning: tuning)
             tuning.chordGroups.append(contentsOf: chordGroups)
             Logger.statistics.info("New tuning added")
         }
@@ -183,11 +190,12 @@ actor AppStateContainer {
             return chords
         }
         
-        /// This method builds NSMutableSet of ChordGroups for this parentTuning
+        /// This method builds an Array of ChordGroups
         /// - Parameters:
-        ///   - dict: [String: String]  dictionary of [ChordGroup.name, chordNamesString] which are used to build returned chordGroupsSet
+        ///   - dict: [String: String]  dictionary of [ChordGroup.name, chordNamesString]
+        ///             which are used to build returned chordGroupsSet
         ///   - parentTuning: the parentTuning to which this group belongs
-        /// - Returns: NSMutableSet of ChordGroups managed Objects
+        /// - Returns: Array of ChordGroups
         func convertToArrayOfChordGroups(dict: Dictionary<String,String>,
                                          parentTuning: Tuning) -> [ChordGroup] {
             var chordGroups: [ChordGroup] = []
