@@ -17,20 +17,17 @@ struct TuningPickerView: View {
         VStack {
             if let activeTuning = appState.activeTuning {
                 Menu {
-                    Picker("Chord Groups", selection: Bindable(appState).pickerTuningName) {
+                    Picker("Tunings", selection: Bindable(appState).pickerTuningName) {
                         let tuningNames = appStates.first!.getTuningNames()
                         ForEach(tuningNames, id: \.self) {
                             Text($0)
                         }
                     }
-                    
+                    .onChange(of: appState.pickerTuningName, { oldValue, newValue in
+                        debugPrint("new Tuning name: \(newValue)")
+                    })
                     .pickerStyle(.automatic)
                     .frame(maxWidth: .infinity)
-                    .onChange(of: appState.pickerTuningName) { oldValue, newValue in
-                        if let newTuning = appState.getTuning(name: newValue) {
-                            appStates.first!.makeNewTuningActive(newTuning: newTuning)
-                        }
-                    }
                 }
                 label: {
                     Text(activeTuning.name ?? "")

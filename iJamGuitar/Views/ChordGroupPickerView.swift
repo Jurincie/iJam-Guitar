@@ -10,6 +10,7 @@ import SwiftUI
 import OSLog
 
 struct ChordGroupPickerView: View {
+    @Environment(\.modelContext) var modelContext
     @Query var appStates: [AppState]
     
     var body: some View {
@@ -25,9 +26,8 @@ struct ChordGroupPickerView: View {
                  .pickerStyle(.automatic)
                  .frame(maxWidth: .infinity)
                  .onChange(of: appState.pickerChordGroupName) { oldValue, newValue in
-                     if let newChordGroup = appStates.first!.getChordGroup(name: newValue) {
-                         appStates.first!.makeNewChordGroupActive(newChordGroup: newChordGroup)
-                     }
+                     debugPrint("new ChordGroupName: \(newValue)")
+                     appState.activeTuning?.activeChordGroup = appState.getChordGroup(name: newValue)
                  }
              } label: {
                  Text(appState.pickerChordGroupName)

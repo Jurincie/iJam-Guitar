@@ -21,9 +21,13 @@ final class AppState {
     var currentFretIndexMap: [Int]
     var capoPosition: Int
     var minimumFret: Int
-    var selectedChordIndex: Int
     var volumeLevel: Double
     var savedVolumeLevel: Double
+    var selectedChordIndex: Int {
+        didSet {
+            Logger.debug("selectedChordIndex Changed")
+        }
+    }
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
     
@@ -36,7 +40,9 @@ final class AppState {
         get {
             activeTuning?.activeChordGroup
         }
-        set { }
+        set {
+            activeTuning?.activeChordGroup = newValue
+        }
     }
     
     init(showVolumeAlert: Bool = false,
@@ -61,6 +67,10 @@ final class AppState {
         self.selectedChordIndex = selectedChordIndex
         self.volumeLevel = volumeLevel
         self.savedVolumeLevel = savedVolumeLevel
+    }
+    
+    func setNewActiveChordFromPickIndex(_ index: Int) {
+        Logger.viewCycle.notice("setNewActiveChordFromPickIndex called for Index: \(index)")
     }
 }
 

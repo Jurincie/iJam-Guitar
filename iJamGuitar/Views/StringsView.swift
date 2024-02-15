@@ -33,7 +33,7 @@ struct StringsView: View {
     @Query var appStates: [AppState]
     @State private var dragLocation: CGPoint?
     let halfStringWidth = 10.0
-    let audioManager: iJamAudioManager
+    let audioManager = iJamAudioManager()
     var height: CGFloat
     var drag: some Gesture {
         DragGesture()
@@ -47,7 +47,6 @@ struct StringsView: View {
     
     init(height: CGFloat) {
         self.height = height
-        self.audioManager = iJamAudioManager()
     }
 
     var body: some View {

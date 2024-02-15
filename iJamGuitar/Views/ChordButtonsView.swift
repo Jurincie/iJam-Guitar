@@ -20,7 +20,7 @@ struct ChordButtonsView: View {
         let chordNames:[String] = appStates.first!.activeChordGroup?.getAvailableChordNames() ?? []
         var pickArray: [Pick] = []
         
-        for index in 0..<10 {
+        for index in 0..<chordNames.count {
             pickArray.append(Pick(id: index, title: chordNames[index],
                                   image:Image("UndefinedPick")))
         }

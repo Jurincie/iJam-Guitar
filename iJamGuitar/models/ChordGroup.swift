@@ -17,7 +17,11 @@ final class ChordGroup {
     var availableChordNames: String = ""
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var availableChords: [Chord]?
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord] {
+        didSet {
+            Logger.viewCycle.log("availableChords CHANGED")
+        }
+    }
     
     init(name: String = "", 
          activeChord: Chord? = nil,
@@ -28,7 +32,6 @@ final class ChordGroup {
     }
     
     func getAvailableChordNames() -> [String] {
-        let chordNames = availableChordNames.components(separatedBy: "-")
-        return chordNames
+        availableChordNames.components(separatedBy: "-")
     }
 }

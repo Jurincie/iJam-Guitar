@@ -12,8 +12,8 @@ import OSLog
 
 @Model
 final class Chord: Equatable, Hashable, CustomStringConvertible {
-    @Attribute(.unique) var name: String?
-    var fretMapString: String?
+    @Attribute(.unique) var name: String
+    var fretMapString: String = ""
     
     init(name: String,
          fretMapString: String) {
@@ -30,7 +30,7 @@ final class Chord: Equatable, Hashable, CustomStringConvertible {
     }
     
     var description: String {
-        return "name: " + (name ?? "ZZ") + "  FretMap: " + (fretMapString ?? "XX")
+        return "name: " + name + "  FretMap: " + fretMapString
     }
     
 }

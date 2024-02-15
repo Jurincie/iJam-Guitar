@@ -14,18 +14,20 @@ final class Tuning: Hashable {
     @Attribute(.unique) var name: String?
     var openNoteIndices: String
     var stringNoteNames: String
-    var activeChordGroup: ChordGroup? = nil
     var chordsDictionary = [String:String]()
+    var activeChordGroup: ChordGroup? = nil
     
     // Relationships
-    var chordGroups = [ChordGroup]()
+    @Relationship(deleteRule: .cascade) var chordGroups: [ChordGroup]
     
     init(name: String? = nil,
          openNoteIndices: String = "",
-         stringNoteNames: String = "") {
+         stringNoteNames: String = "",
+         chordGroups: [ChordGroup] = []) {
         self.name = name
         self.openNoteIndices = openNoteIndices
         self.stringNoteNames = stringNoteNames
+        self.chordGroups = chordGroups
     }
     
     static func == (lhs: Tuning, rhs: Tuning) -> Bool {

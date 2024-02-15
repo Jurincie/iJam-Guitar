@@ -18,7 +18,7 @@ actor AppStateContainer {
         
         do {
             container = try ModelContainer(for: schema,
-                                                configurations: configuration)
+                                           configurations: configuration)
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
@@ -29,6 +29,7 @@ actor AppStateContainer {
             } catch {
                 print("FOUND ERROR")
             }
+            
             UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
             
@@ -49,10 +50,10 @@ actor AppStateContainer {
             })
             appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
             appState.capoPosition = 0
-            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.selectedChordIndex = getSelectedChordIndex(appState: appState)
+            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
         }
         
         func getSelectedChordIndex(appState: AppState) -> Int {
@@ -199,7 +200,7 @@ actor AppStateContainer {
                 chordGroup.availableChordNames  = chordNames
                 chordGroup.availableChords = getGroupsChords(chordNames: chordNames,
                                                              parentTuning: parentTuning,
-                                                             parentChordGroup: chordGroup)
+                                                             parentChordGroup: chordGroup) ?? []
                 
                 chordGroups.append(chordGroup)
             }
@@ -251,8 +252,7 @@ actor AppStateContainer {
             
             if let entry = entry {
                 let newChord = Chord(name: entry.key, fretMapString: entry.value)
-                
-                assert(newChord.name != nil && newChord.fretMapString != nil, "Problem creting Chord!")
+            
                 return newChord
             }
             

@@ -18,7 +18,8 @@ extension AppState
     func makeNewTuningActive(newTuning: Tuning) {
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
-        selectedChordIndex = getSelectedChordButtonIndex()
+        selectedChordIndex = 0
+        activeTuning?.activeChordGroup?.activeChord = activeChordGroup?.availableChords.first
         pickerChordGroupName = activeChordGroup?.name ?? ""
     }
     
@@ -29,7 +30,7 @@ extension AppState
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func makeNewChordGroupActive(newChordGroup: ChordGroup) {
         activeTuning?.activeChordGroup = newChordGroup
-        selectedChordIndex = getSelectedChordButtonIndex()
+        selectedChordIndex = 0
     }
     
     /// This method takes a name associated with Tunings names
@@ -70,16 +71,6 @@ extension AppState
         return newChordGroup
     }
     
-    ///  This method sets the newly instantiated newChordGroup as the activeChordGroup.
-    ///  Then sets the availableChords to the chords associated with this newChordGroup.
-    ///  Then sets the activeChord to the newChordGroup.activeChord
-    ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
-    /// - Parameter newChordGroup: a recently instantiated newChordGroup
-//    func setActiveChordGroup(newChordGroup: ChordGroup) {
-//        activeTuning?.activeChordGroup = newChordGroup
-//        selectedChordIndex = getSelectedChordButtonIndex()
-//    }
-//    
     /// This method returns an array of names associated with available Tunings
     /// - Returns: an Array of Strings containing the names of the available Tunings.
     func getTuningNames() -> [String] {
@@ -110,7 +101,7 @@ extension AppState
   
     func getSelectedChordButtonIndex() -> Int {
         if let activeChord = activeChordGroup?.activeChord,
-           let activeChordIndex = activeChordGroup?.availableChords?.firstIndex(of: activeChord) {
+           let activeChordIndex = activeChordGroup?.availableChords.firstIndex(of: activeChord) {
             return activeChordIndex
         }
         return 0
