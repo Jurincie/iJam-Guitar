@@ -18,11 +18,7 @@ final class AppState {
     var showAudioPlayerErrorAlert: Bool
     var isMuted: Bool
     var currentFretIndexMap: [Int]
-    var capoPosition: Int {
-        didSet {
-            Logger.viewCycle.notice("--> New Capo Position: \(newValue)")
-        }
-    }
+    var capoPosition: Int
     var minimumFret: Int
     var volumeLevel: Double
     var savedVolumeLevel: Double
@@ -32,7 +28,7 @@ final class AppState {
 
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
-    @Relationship(deleteRule: .cascade) var tunings: [Tuning]?
+    @Relationship(deleteRule: .cascade) var tunings: [Tuning]
     
     // Calculated Properties
     var activeChordGroup: ChordGroup? {
@@ -66,6 +62,7 @@ final class AppState {
         self.selectedChordIndex = selectedChordIndex
         self.volumeLevel = volumeLevel
         self.savedVolumeLevel = savedVolumeLevel
+        self.tunings = [Tuning]()
     }
     
     func setNewActiveChordFromPickIndex(_ index: Int) {

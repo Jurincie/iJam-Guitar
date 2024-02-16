@@ -101,8 +101,8 @@ struct StringView: View {
                     } else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
                         // red ball on freted fretBox
                         // yellow ball if not in the chord - meaning user tapped on different fret
-                        let fretFromChord = true
-                        CircleView(color: fretFromChord ? .red : .yellow, lineWidth: 1.0)
+                        let fretInChord = true
+                        CircleView(color: fretInChord ? .red : .yellow, lineWidth: 1.0)
                     } else {
                         CircleView()
                     }
@@ -122,20 +122,6 @@ struct StringView: View {
                         .fixedSize()
                 }
             }
-        }
-        
-        func fretIsFromChord() -> Bool {
-            guard stringNumber < 6 && stringNumber >= 0 else { return true }
-         
-            if let activeChordFretMap = appStates.first!.activeChordGroup?.activeChord?.fretMapString {
-                let index = activeChordFretMap.index(activeChordFretMap.startIndex, offsetBy: (6 - stringNumber))
-                let chordFretNumber = appStates.first!.getFretFromChar(activeChordFretMap[index])
-                let currentFretNumber = appStates.first!.currentFretIndexMap[6 - stringNumber]
-                
-                return currentFretNumber == chordFretNumber ? true : false
-            }
-            
-            return true
         }
     }
 }

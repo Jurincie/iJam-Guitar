@@ -3,6 +3,54 @@
 <plist version="1.0">
 <dict>
 	<key>top-level-items</key>
-	<array/>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>104</string>
+					<key>StartingColumnNumber</key>
+					<string>46</string>
+					<key>StartingLineNumber</key>
+					<string>103</string>
+					<key>Timestamp</key>
+					<string>729738929.164623</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>iJamGuitar/Views/StringView.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>
+</string>
+				<key>leading</key>
+				<string>                        // red ball on freted fretBox
+                        // yellow ball if not in the chord - meaning user tapped on different fret
+                        let fretInChord = true</string>
+				<key>trailing</key>
+				<string>                        CircleView(color: fretInChord ? .red : .yellow, lineWidth: 1.0)
+                    } else {
+                        CircleView()
+</string>
+			</dict>
+			<key>title</key>
+			<string>FIX THIS</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
 </dict>
 </plist>

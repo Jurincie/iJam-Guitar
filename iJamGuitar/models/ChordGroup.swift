@@ -13,20 +13,18 @@ import SwiftData
 final class ChordGroup {
     // Stored Properties
     var name: String
-    var activeChord: Chord? = nil
-    var availableChordNames: String = ""
+    var availableChordNames: String
+    var activeChord: Chord?
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var availableChords: [Chord] {
-        didSet {
-            Logger.viewCycle.log("availableChords CHANGED")
-        }
-    }
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord]
     
-    init(name: String = "", 
+    init(name: String = "",
+         availableChordNames: String = "",
          activeChord: Chord? = nil,
          availableChords: [Chord] = []) {
         self.name = name
+        self.availableChordNames = availableChordNames
         self.activeChord = activeChord
         self.availableChords = availableChords
     }

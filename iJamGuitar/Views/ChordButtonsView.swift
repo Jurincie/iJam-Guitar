@@ -46,7 +46,7 @@ struct ChordButtonsView: View {
 //    
 //    func getPicks() -> [Pick] {
 //        let appState = appStates.first!
-//        let thisChordGroup: ChordGroup? = appState.getChordGroup(name: appState.activeChordGroupName)
+//        let thisChordGroup: ChordGroup? = appState.createChordGroup(name: appState.activeChordGroupName)
 //        let chordNames:[String] = appState.getAvailableChordNames(activeChordGroup: thisChordGroup)
 //        var pickArray: [Pick] = []
 //        

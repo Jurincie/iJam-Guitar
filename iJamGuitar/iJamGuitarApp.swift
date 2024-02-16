@@ -12,7 +12,7 @@ struct iJamGuitarApp: App {
     var shouldCreateUserDefaults: Bool = !UserDefaults.standard.bool(forKey: "DataExists")
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TestSwiftDataView()
         }.modelContainer(AppStateContainer.create(shouldCreateUserDefaults))
     }
 }
