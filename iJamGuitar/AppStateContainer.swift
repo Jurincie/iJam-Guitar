@@ -245,9 +245,10 @@ actor AppStateContainer {
                                            chordDictionary: parentTuning!.chordsDictionary) {
                     thisGroupsChords.append(chord)
                 }
-//                parentChordGroup.activeChord = thisGroupsChords.first
             }
             
+            parentChordGroup.activeChord = thisGroupsChords.first
+
             return thisGroupsChords
         }
         
