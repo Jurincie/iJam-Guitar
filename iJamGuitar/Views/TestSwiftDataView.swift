@@ -52,6 +52,12 @@ struct TestSwiftDataView: View {
                 Text("ActiveChordGroup: " + (appState.activeChordGroup?.name ?? "ERROR"))
                 Spacer()
             }
+            
+            Button("Randomize active chord Group") {
+                appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.randomElement()
+            }
+            .buttonStyle(.borderedProminent)
+            .frame(maxWidth: .infinity)
         }
         .padding()
     }

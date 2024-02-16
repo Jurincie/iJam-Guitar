@@ -236,6 +236,9 @@
         }
       }
     },
+    "Randomize active chord Group" : {
+
+    },
     "Tuning: %@" : {
       "extractionState" : "stale",
       "localizations" : {

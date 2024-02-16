@@ -65,25 +65,13 @@ actor AppStateContainer {
             } catch {
                 throw PlistError.unknownError
             }
-            
-//            appState.tunings.append(standardTuning)
-//            appState.tunings.append(dropDTuning)
             appState.activeTuning = standardTuning
             appState.tunings.append(contentsOf: [standardTuning, dropDTuning])
             container.mainContext.insert(appState)
-        
-//            do {
-//                appState.tunings = try createTuningsFromPlists()
-//            } catch {
-//                throw PlistError.unknownError
-//            }
-//            appState.activeTuning = appState.tunings?.first(where: { chordGroup in
-//                chordGroup.name == "Standard"
-//            })
-//            appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first
-//            appState.pickerTuningName = appState.activeTuning?.name ?? ""
-//            appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-//            appState.selectedChordIndex = getSelectedChordIndex(appState: appState)
+            appState.pickerTuningName = appState.activeTuning?.name ?? ""
+            appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
+            appState.selectedChordIndex = getSelectedChordIndex(appState: appState)
+
 //            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
         }
         
