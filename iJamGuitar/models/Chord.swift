@@ -11,7 +11,7 @@ import SwiftData
 import OSLog
 
 @Model
-final class Chord: Equatable, Hashable, CustomStringConvertible {
+final class Chord {
     @Attribute(.unique) var name: String
     var fretMapString: String = ""
     
@@ -20,19 +20,24 @@ final class Chord: Equatable, Hashable, CustomStringConvertible {
         self.name = name
         self.fretMapString = fretMapString
     }
-    
+}
+
+extension Chord: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine([name, fretMapString])
     }
-   
+}
+
+extension Chord: Equatable {
     static func == (lhs: Chord, rhs: Chord) -> Bool {
         lhs.name == rhs.name && lhs.fretMapString == rhs.fretMapString
     }
-    
+}
+
+extension Chord: CustomStringConvertible {
     var description: String {
         return "name: " + name + "  FretMap: " + fretMapString
     }
-    
 }
     
         

@@ -11,7 +11,6 @@ import OSLog
 
 @Model
 final class AppState {
-    
     // Stored Properties
     var showVolumeAlert: Bool
     var showAudioPlayerInUseAlert: Bool
@@ -19,18 +18,18 @@ final class AppState {
     var showAudioPlayerErrorAlert: Bool
     var isMuted: Bool
     var currentFretIndexMap: [Int]
-    var capoPosition: Int
+    var capoPosition: Int {
+        didSet {
+            Logger.viewCycle.notice("--> New Capo Position: \(newValue)")
+        }
+    }
     var minimumFret: Int
     var volumeLevel: Double
     var savedVolumeLevel: Double
-    var selectedChordIndex: Int {
-        didSet {
-            Logger.debug("selectedChordIndex Changed")
-        }
-    }
+    var selectedChordIndex: Int
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
-    
+
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
     @Relationship(deleteRule: .cascade) var tunings: [Tuning]?

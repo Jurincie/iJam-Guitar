@@ -12,7 +12,7 @@ import SwiftData
 actor AppStateContainer {
     @MainActor
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
-        let schema = Schema([AppState.self])
+        let schema = Schema([AppState.self, ChordGroup.self, Chord.self, Tuning.self])
         let configuration = ModelConfiguration()
         var container: ModelContainer
         
@@ -37,6 +37,7 @@ actor AppStateContainer {
         
         func populateData() throws {
             // THIS is the ONLY insert we need
+            // as we are preloading our data
             let appState = AppState()
             container.mainContext.insert(appState)
             

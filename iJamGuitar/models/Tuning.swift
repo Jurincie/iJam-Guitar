@@ -10,14 +10,15 @@ import Foundation
 import SwiftData
  
 @Model
-final class Tuning: Hashable {
+final class Tuning {
+    // Stored Properties
     @Attribute(.unique) var name: String?
     var openNoteIndices: String
     var stringNoteNames: String
     var chordsDictionary = [String:String]()
     var activeChordGroup: ChordGroup? = nil
     
-    // Relationships
+    // Relationship
     @Relationship(deleteRule: .cascade) var chordGroups: [ChordGroup]
     
     init(name: String? = nil,
@@ -29,11 +30,15 @@ final class Tuning: Hashable {
         self.stringNoteNames = stringNoteNames
         self.chordGroups = chordGroups
     }
-    
+}
+
+extension Tuning: Equatable {
     static func == (lhs: Tuning, rhs: Tuning) -> Bool {
         lhs.name == rhs.name
     }
-    
+}
+
+extension Tuning: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine([name, openNoteIndices, stringNoteNames])
     }

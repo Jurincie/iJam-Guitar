@@ -10,34 +10,36 @@ import SwiftUI
 import OSLog
 
 struct TuningPickerView: View {
+    @Environment(\.modelContext) var modelContext
     @Query var appStates: [AppState]
     
     var body: some View {
         let appState = appStates.first!
         VStack {
-            if let activeTuning = appState.activeTuning {
-                Menu {
-                    Picker("Tunings", selection: Bindable(appState).pickerTuningName) {
-                        let tuningNames = appStates.first!.getTuningNames()
-                        ForEach(tuningNames, id: \.self) {
-                            Text($0)
-                        }
+            Menu {
+                Picker("Tunings", selection: Bindable(appState).pickerTuningName) {
+                    let tuningNames = appStates.first!.getTuningNames()
+                    ForEach(tuningNames, id: \.self) {
+                        Text($0)
                     }
-                    .onChange(of: appState.pickerTuningName, { oldValue, newValue in
-                        debugPrint("new Tuning name: \(newValue)")
-                    })
-                    .pickerStyle(.automatic)
-                    .frame(maxWidth: .infinity)
                 }
-                label: {
-                    Text(activeTuning.name ?? "")
-                        .padding(10)
-                        .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
-                        .fontWeight(.semibold)
-                        .background(Color.accentColor)
-                        .foregroundColor(Color.white)
-                        .shadow(color: .white , radius: 2.0)
-                }
+                .onChange(of: appState.pickerTuningName, { oldValue, newValue in
+                    Logger.viewCycle.notice("new Tuning name: \(newValue)")
+                    if let newTuning = appState.getTuning(name: newValue) {
+                        appState.makeNewTuningActive(newTuning: newTuning)
+                    }
+                })
+                .pickerStyle(.automatic)
+                .frame(maxWidth: .infinity)
+            }
+            label: {
+                Text(appState.pickerTuningName )
+                    .padding(10)
+                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                    .fontWeight(.semibold)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color.white)
+                    .shadow(color: .white , radius: 2.0)
             }
         }
     }

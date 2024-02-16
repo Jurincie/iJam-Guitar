@@ -19,8 +19,8 @@ extension AppState
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
         selectedChordIndex = 0
-        activeTuning?.activeChordGroup?.activeChord = activeChordGroup?.availableChords.first
         pickerChordGroupName = activeChordGroup?.name ?? ""
+        pickerTuningName = activeTuning?.name ?? ""
     }
     
     ///  This method sets the newly instantiated newChordGroup as the activeChordGroup.
@@ -31,6 +31,7 @@ extension AppState
     func makeNewChordGroupActive(newChordGroup: ChordGroup) {
         activeTuning?.activeChordGroup = newChordGroup
         selectedChordIndex = 0
+        pickerTuningName = activeTuning?.name ?? ""
     }
     
     /// This method takes a name associated with Tunings names
