@@ -53,8 +53,23 @@ actor AppStateContainer {
                 throw PlistError.unknownError
             }
             
-            appState.tunings.append(standardTuning)
+            // Drop-D Tuning
+            let dropDTuning = Tuning()
+            do {
+                try setupTuning(tuning: dropDTuning,
+                                tuningName: "Drop D",
+                                openIndices: "2-9-14-19-23-28",
+                                noteNames: "D-A-D-G-B-E",
+                                chordLibraryPath: "DropD_ChordLibrary",
+                                chordGroupsPath: "DropDTuningChordGroups")
+            } catch {
+                throw PlistError.unknownError
+            }
+            
+//            appState.tunings.append(standardTuning)
+//            appState.tunings.append(dropDTuning)
             appState.activeTuning = standardTuning
+            appState.tunings.append(contentsOf: [standardTuning, dropDTuning])
             container.mainContext.insert(appState)
         
 //            do {
