@@ -7,12 +7,13 @@
 
 import Foundation
 import OSLog
+import SwiftUI
 import SwiftData
 
 actor AppStateContainer {
     @MainActor
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
-        let schema = Schema([AppState.self, ChordGroup.self, Chord.self, Tuning.self])
+        let schema = Schema([AppState.self])
         let configuration = ModelConfiguration()
         var container: ModelContainer
         
@@ -76,7 +77,7 @@ actor AppStateContainer {
         }
         
         func getSelectedChordIndex(appState: AppState) -> Int {
-            var chordIndex = 0
+            let chordIndex = 0
             
 //            if let availableChords = appState.activeChordGroup?.availableChords  {
 //                for chord in availableChords {
@@ -215,44 +216,24 @@ actor AppStateContainer {
             for entry in dict {
                 // create new ChordGroupd
                 let chordGroup = ChordGroup()
-
+                
                 chordGroup.name = entry.key
                 let chordNames = entry.value
                 chordGroup.availableChordNames = chordNames
+                let chordNameArray = chordNames.components(separatedBy: "-")
+                
+                for chordName in chordNameArray {
+                    if let chord = createChord(chordName: chordName,
+                                               chordDictionary: parentTuning.chordsDictionary) {
+                        chord.chordGroup = chordGroup
+                    }
+                }
                 
                 chordGroups.append(chordGroup)
-                chordGroup.availableChords = getGroupsChords(chordNames: chordNames,
-                                                             parentTuning: parentTuning,
-                                                             parentChordGroup: chordGroup) ?? []
             }
             
             parentTuning.activeChordGroup = chordGroups.first
             return chordGroups
-        }
-        
-        /// This method builds a NSMutableSet of chordGroups available Chords
-        /// - Parameters:
-        ///   - chordGroup: Optional ChordGroup
-        ///   - parentTuning: Optional Tuning to which this group belongs
-        /// - Returns: array of Chords
-        func getGroupsChords(chordNames: String,
-                             parentTuning: Tuning?,
-                            parentChordGroup: ChordGroup) -> [Chord]? {
-            guard parentTuning == parentTuning else { return [] }
-            
-            let chordNameArray = chordNames.components(separatedBy: "-")
-            var thisGroupsChords: [Chord] = []
-           
-//            for chordName in chordNameArray {
-//                if let chord = createChord(chordName: chordName,
-//                                           chordDictionary: parentTuning!.chordsDictionary) {
-//                    thisGroupsChords.append(chord)
-//                }
-//            }
-            
-//            parentChordGroup.activeChord = thisGroupsChords.first
-
-            return thisGroupsChords
         }
         
         /// This method returns the Chord specified by name for the parentTuning.chordDictionary

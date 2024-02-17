@@ -19,16 +19,14 @@ final class Tuning {
     var activeChordGroup: ChordGroup? = nil
     
     // Relationship
-    @Relationship(deleteRule: .cascade) var chordGroups: [ChordGroup]
+    @Relationship(deleteRule: .cascade) var chordGroups = [ChordGroup]()
     
     init(name: String? = nil,
          openNoteIndices: String = "",
-         stringNoteNames: String = "",
-         chordGroups: [ChordGroup] = []) {
+         stringNoteNames: String = "") {
         self.name = name
         self.openNoteIndices = openNoteIndices
         self.stringNoteNames = stringNoteNames
-        self.chordGroups = chordGroups
     }
 }
 

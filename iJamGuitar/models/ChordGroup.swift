@@ -17,16 +17,12 @@ final class ChordGroup {
     var activeChord: Chord?
     
     // Relationships
-    @Relationship(deleteRule: .cascade) var availableChords: [Chord]
+    @Relationship(deleteRule: .cascade) var availableChords: [Chord]?
     
     init(name: String = "",
-         availableChordNames: String = "",
-         activeChord: Chord? = nil,
-         availableChords: [Chord] = []) {
+         availableChordNames: String = "") {
         self.name = name
         self.availableChordNames = availableChordNames
-        self.activeChord = activeChord
-        self.availableChords = availableChords
     }
     
     func getAvailableChordNames() -> [String] {

@@ -30,6 +30,9 @@
         }
       }
     },
+    "ActiveChordGroup:" : {
+
+    },
     "Another App is using the Audio Player" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -91,6 +94,9 @@
     "Capo Position: %lld" : {
 
     },
+    "Change Chord Group" : {
+
+    },
     "Chord Groups" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -119,6 +125,9 @@
           }
         }
       }
+    },
+    "Chords are available:" : {
+
     },
     "CREATE NEW CHORD GROUP" : {
       "extractionState" : "stale",
@@ -207,6 +216,9 @@
         }
       }
     },
+    "No" : {
+
+    },
     "OK" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -235,9 +247,6 @@
           }
         }
       }
-    },
-    "Randomize active chord Group" : {
-
     },
     "Tuning: %@" : {
       "extractionState" : "stale",
@@ -327,6 +336,9 @@
       }
     },
     "Volume: %lf" : {
+
+    },
+    "YES" : {
 
     }
   },

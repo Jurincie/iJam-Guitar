@@ -12,8 +12,12 @@ import OSLog
 
 @Model
 final class Chord {
-    @Attribute(.unique) var name: String
+    // Stored Properties
+    var name: String
     var fretMapString: String = ""
+    
+    // Relationship
+    @Relationship(inverse: \ChordGroup.availableChords) var chordGroup: ChordGroup?
     
     init(name: String,
          fretMapString: String) {
