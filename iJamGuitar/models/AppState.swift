@@ -59,10 +59,8 @@ final class AppState {
                 return highest < 6 ? 1 : max(1, highest - 4)
             }
             
+            Logger.viewCycle.debug("Could NOT calculate minimumFret")
             return 0
-        }
-        set {
-            minimumFret = newValue
         }
     }
     
