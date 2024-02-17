@@ -71,25 +71,8 @@ actor AppStateContainer {
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-            appState.selectedChordIndex = getSelectedChordIndex(appState: appState)
-
-//            appState.currentFretIndexMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
-        }
-        
-        func getSelectedChordIndex(appState: AppState) -> Int {
-            let chordIndex = 0
-            
-//            if let availableChords = appState.activeChordGroup?.availableChords  {
-//                for chord in availableChords {
-//                    if chord == appState.activeTuning?.activeChordGroup?.activeChord {
-//                        break
-//                    }
-//                    chordIndex += 1
-//                }
-//                chordIndex = min(availableChords.count - 1, appState.selectedChordIndex)
-//            }
-            
-            return chordIndex
+            appState.selectedChordIndex = 0
+            appState.minimumFret = 1
         }
         
         /// This method sets all needed values for Tuning identified by tuningName

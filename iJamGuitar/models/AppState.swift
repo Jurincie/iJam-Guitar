@@ -17,7 +17,6 @@ final class AppState {
     var showAudioNotAvailableAlert: Bool
     var showAudioPlayerErrorAlert: Bool
     var isMuted: Bool
-    var currentFretIndexMap: [Int]
     var capoPosition: Int
     var minimumFret: Int
     var volumeLevel: Double
@@ -39,13 +38,17 @@ final class AppState {
             activeTuning?.activeChordGroup = newValue
         }
     }
+    var currentFretIndexMap: [Int] {
+        get {
+            getFretIndexMap(chord: activeChordGroup?.activeChord)
+        }
+    }
     
     init(showVolumeAlert: Bool = false,
          showAudioPlayerInUseAlert: Bool = false,
          showAudioNotAvailableAlert: Bool = false,
          showAudioPlayerErrorAlert: Bool = false,
          isMuted: Bool = false,
-         currentFretIndexMap: [Int] = [],
          capoPosition: Int = 0,
          minimumFret: Int = 0,
          selectedChordIndex: Int = 0,
@@ -56,7 +59,6 @@ final class AppState {
         self.showAudioNotAvailableAlert = showAudioNotAvailableAlert
         self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
         self.isMuted = isMuted
-        self.currentFretIndexMap = currentFretIndexMap
         self.capoPosition = capoPosition
         self.minimumFret = minimumFret
         self.selectedChordIndex = selectedChordIndex

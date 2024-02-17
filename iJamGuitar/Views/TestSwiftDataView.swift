@@ -70,8 +70,20 @@ struct TestSwiftDataView: View {
             .frame(maxWidth: .infinity)
             
             activeChordView()
+            fretMapView()
         }
         .padding()
+    }
+}
+
+struct fretMapView: View {
+    @Query var appStates: [AppState]
+    var body: some View {
+        HStack {
+            Text("FretMap:")
+            Spacer()
+            Text(appStates.first!.activeChordGroup?.activeChord?.fretMapString ?? "Error-22")
+        }
     }
 }
 

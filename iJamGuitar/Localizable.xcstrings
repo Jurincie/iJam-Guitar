@@ -190,6 +190,9 @@
         }
       }
     },
+    "FretMap:" : {
+
+    },
     "Master Volume is OFF" : {
       "extractionState" : "stale",
       "localizations" : {
