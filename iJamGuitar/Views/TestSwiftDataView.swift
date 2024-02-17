@@ -68,8 +68,24 @@ struct TestSwiftDataView: View {
             }
             .buttonStyle(.borderedProminent)
             .frame(maxWidth: .infinity)
+            
+            activeChordView()
         }
         .padding()
+    }
+}
+
+struct activeChordView: View {
+    @Query var appStates: [AppState]
+    
+    var body: some View {
+        let appState = appStates.first!
+        let activeChordName: String = appState.activeChordGroup?.activeChord?.name ?? "Error"
+        HStack {
+            Text("ActiveChord:")
+            Spacer()
+            Text(activeChordName)
+        }
     }
 }
 
@@ -81,7 +97,7 @@ struct availableChordsView: View {
         HStack {
             Text("Chords are available:")
             Spacer()
-            if let chordsAreAvailable = appState.activeChordGroup?.availableChords {
+            if appState.activeChordGroup?.availableChords != nil {
                 Text("YES")
             } else {
                 Text("No")

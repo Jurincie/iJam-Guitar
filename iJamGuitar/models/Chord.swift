@@ -18,6 +18,7 @@ final class Chord {
     
     // Relationship
     @Relationship(inverse: \ChordGroup.availableChords) var chordGroup: ChordGroup?
+    @Relationship(inverse: \ChordGroup.activeChord) var group: ChordGroup?
     
     init(name: String,
          fretMapString: String) {

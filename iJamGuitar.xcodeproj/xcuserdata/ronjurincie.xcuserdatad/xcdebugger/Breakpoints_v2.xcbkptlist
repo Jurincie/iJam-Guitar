@@ -746,109 +746,16 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "60CF0246-9A18-4988-8222-34581622FE38"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/AppStateContainer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "convertToArrayOfChords(chordDictionary:parentTuning:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "convertToArrayOfChordGroups(dict:parentTuning:)"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "convertToArrayOfChords(chordDictionary:parentTuning:)"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5 - 667d1d751a5fb679"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "1148">
-               </Location>
-               <Location
-                  uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5 - 667d1d751a5fb679"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "1068">
-               </Location>
-               <Location
-                  uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5 - 667d1d751a5fb679"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "1128">
-               </Location>
-               <Location
-                  uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5 - 667d1d751a5fb679"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "1200">
-               </Location>
-               <Location
-                  uuid = "8F9AAA44-D34F-48DB-9794-F3568B30E8D5 - 667d1d751a5fb618"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "1048">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -861,10 +768,74 @@
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "createChord(chordName:chordDictionary:)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5CE068D8-994D-4D1D-9C27-BFAF4D03A1D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/TestSwiftDataView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D90CE27-53DD-4AB5-BEE7-06D8B890E15C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/AppStateContainer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "convertToArrayOfChordGroups(dict:parentTuning:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "1D90CE27-53DD-4AB5-BEE7-06D8B890E15C - 667d1d751a5fb618"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "231"
+                  endingLineNumber = "231"
+                  offsetFromSymbolStart = "1160">
+               </Location>
+               <Location
+                  uuid = "1D90CE27-53DD-4AB5-BEE7-06D8B890E15C - 667d1d751a5fb618"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static iJamGuitar.AppStateContainer.create(Swift.Bool) -&gt; SwiftData.ModelContainer.convertToArrayOfChordGroups(dict: Swift.Dictionary&lt;Swift.String, Swift.String&gt;, parentTuning: iJamGuitar.Tuning) -&gt; Swift.Array&lt;iJamGuitar.ChordGroup&gt;"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/AppStateContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "231"
+                  endingLineNumber = "231"
+                  offsetFromSymbolStart = "1032">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

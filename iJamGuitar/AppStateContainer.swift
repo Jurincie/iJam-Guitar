@@ -222,10 +222,16 @@ actor AppStateContainer {
                 chordGroup.availableChordNames = chordNames
                 let chordNameArray = chordNames.components(separatedBy: "-")
                 
+                var activeChordSet = false
                 for chordName in chordNameArray {
                     if let chord = createChord(chordName: chordName,
                                                chordDictionary: parentTuning.chordsDictionary) {
                         chord.chordGroup = chordGroup
+                        
+                        if activeChordSet == false {
+                            chord.group = chordGroup
+                            activeChordSet = true
+                        }
                     }
                 }
                 
