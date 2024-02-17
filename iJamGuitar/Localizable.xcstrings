@@ -97,6 +97,9 @@
     "Capo Position: %lld" : {
 
     },
+    "Change Chord" : {
+
+    },
     "Change Chord Group" : {
 
     },
@@ -344,7 +347,7 @@
     "Volume: %lf" : {
 
     },
-    "YES" : {
+    "Yes" : {
 
     }
   },

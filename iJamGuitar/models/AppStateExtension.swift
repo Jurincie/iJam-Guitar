@@ -123,49 +123,6 @@ extension AppState
         return fretsArray
     }
     
-    /// Gets chord names for this chordGroup
-    /// - Parameter activeChordGroup: the currently active chordGroup
-    /// - Returns: array of chord names associated with activeChordGroup argument
-//    func getAvailableChordNames(activeChordGroup: ChordGroup?) -> [String]? {
-//        if let availableChords = activeChordGroup?.availableChords {
-//            var availableChordNames: [String] = availableChords.map {
-//                $0.name ?? "NameERROR"
-//            }
-//            if availableChordNames.count == 10 {
-//                return availableChordNames
-//            }
-//            for _ in availableChordNames.count...9 {
-//                availableChordNames.append("NoChord")
-//            }
-//            
-//            return availableChordNames
-//        }
-//        
-//        return nil
-//    }
-    
-    /// Gets an array of chords that belong to the activeChordGroup in the activeTuning
-    /// - Parameters:
-    ///   - activeChordGroup: optional(activeChordGroup)
-    ///   - activeTuning: optional(activeTuning
-    /// - Returns: array of chords associated with activeChordGroup for activeTuning or empty array if anything goes wrong
-//    func getAvailableChords(_ activeChordGroup: ChordGroup?, 
-//                            _ activeTuning: Tuning?) -> [Chord] {
-//        var availableChords: [Chord] = []
-//        if let chordNames =  activeChordGroup?.av
-//           let chordDict = activeTuning?.chordsDictionary {
-//            for chordName in chordNames {
-//                if let entry = chordDict.first(where: { (key: String, value: String) in
-//                    key == chordName
-//                }) {
-//                    let chord = Chord(name: entry.key, fretMapString: entry.value)
-//                    availableChords.append(chord)
-//                }
-//            }
-//        }
-//        return availableChords
-//    }
-    
     /// Gets the chord associated with the name argument for the tuning argumen
     /// - Parameters:
     ///   - name: the name of the new chord
@@ -184,39 +141,4 @@ extension AppState
         
         return nil
     }
-    
-    /// This function calculates and returns the lowest displayed fret above the nut for the activeChord in the activeChordGroup in the activeTuning
-    /// - Returns: Int of the lowest displayed fret above the nut
-    /// Note: must be > the nut Int
-    func getMinimumDisplayedFret() -> Int {
-        return 1
-    }
-//        guard let fretChars = activeChordGroup?.activeChord?.fretMapString else { return 0 }
-//        var highest = 0
-//        var thisFretVal = 0
-//        
-//        for char in fretChars {
-//            switch char {
-//                // span does NOT include open string nor muted strings
-//            case "x":
-//                break
-//            case "A":
-//                thisFretVal = 11
-//            case "B":
-//                thisFretVal = 12
-//            case "C":
-//                thisFretVal = 13
-//            case "D":
-//                thisFretVal = 14
-//            default:
-//                if let intValue = char.wholeNumberValue {
-//                    thisFretVal = intValue
-//                } else {
-//                    thisFretVal = 0
-//                }
-//            }
-//            highest = max(highest, thisFretVal)
-//        }
-//        
-//        return highest < 6 ? 1 : max(1, highest - 4)    }
 }

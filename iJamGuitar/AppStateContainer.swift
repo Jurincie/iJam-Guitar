@@ -72,7 +72,6 @@ actor AppStateContainer {
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.selectedChordIndex = 0
-            appState.minimumFret = 1
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -204,19 +203,18 @@ actor AppStateContainer {
                 let chordNames = entry.value
                 chordGroup.availableChordNames = chordNames
                 let chordNameArray = chordNames.components(separatedBy: "-")
+                var availableChordsArray = chordNameArray.map({ chordName in
+                    createChord(chordName: chordName,
+                                chordDictionary: parentTuning.chordsDictionary)!
+                })
                 
-                var activeChordSet = false
-                for chordName in chordNameArray {
-                    if let chord = createChord(chordName: chordName,
-                                               chordDictionary: parentTuning.chordsDictionary) {
-                        chord.chordGroup = chordGroup
-                        
-                        if activeChordSet == false {
-                            chord.group = chordGroup
-                            activeChordSet = true
-                        }
-                    }
+                // set activeChord for this group
+                if let activeChord = availableChordsArray.randomElement() {
+                    activeChord.group = chordGroup
                 }
+                
+                // fill availableChords
+                chordGroup.availableChords.append(contentsOf: availableChordsArray)
                 
                 chordGroups.append(chordGroup)
             }

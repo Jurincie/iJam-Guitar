@@ -71,6 +71,20 @@ struct TestSwiftDataView: View {
             
             activeChordView()
             fretMapView()
+            availableChordsView()
+            Button("Change Chord") {
+                guard let available = appState.activeChordGroup?.availableChords,
+                      available.count > 0 else { return }
+                if let activeChord = appState.activeChordGroup?.activeChord {
+                    var newChord = activeChord
+                    while newChord == activeChord {
+                        newChord = available.randomElement()!
+                    }
+                    appState.activeChordGroup?.activeChord = newChord
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .frame(maxWidth: .infinity)
         }
         .padding()
     }
@@ -110,7 +124,7 @@ struct availableChordsView: View {
             Text("Chords are available:")
             Spacer()
             if appState.activeChordGroup?.availableChords != nil {
-                Text("YES")
+                Text((appState.activeChordGroup?.availableChords.count)! > 0 ? "Yes" : "No")
             } else {
                 Text("No")
             }
