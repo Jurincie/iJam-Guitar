@@ -20,7 +20,6 @@ final class AppState {
     var capoPosition: Int
     var volumeLevel: Double
     var savedVolumeLevel: Double
-    var selectedChordIndex: Int
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
 
@@ -29,6 +28,15 @@ final class AppState {
     @Relationship(deleteRule: .cascade) var tunings: [Tuning]
     
     // Calculated Properties
+    var selectedChordIndex: Int {
+        if let chord = activeChordGroup?.activeChord {
+            if let index = activeChordGroup?.availableChords.firstIndex(of: chord) {
+                return index
+            }
+        }
+        Logger.viewCycle.debug("Faild to set selectedChordIndex")
+        return 0
+    }
     var activeChordGroup: ChordGroup? {
         get {
             activeTuning?.activeChordGroup
@@ -41,6 +49,7 @@ final class AppState {
         get {
             getFretIndexMap(chord: activeChordGroup?.activeChord)
         }
+        set {}
     }
     var minimumFret: Int {
         get {
@@ -52,9 +61,10 @@ final class AppState {
                 
                 for char in fretChars {
                     thisFretVal = getFretFromChar(char)
+                    if thisFretVal > highest {
+                        highest = thisFretVal
+                    }
                 }
-                
-                highest = max(highest, thisFretVal)
                 
                 return highest < 6 ? 1 : max(1, highest - 4)
             }
@@ -70,7 +80,6 @@ final class AppState {
          showAudioPlayerErrorAlert: Bool = false,
          isMuted: Bool = false,
          capoPosition: Int = 0,
-         selectedChordIndex: Int = 0,
          volumeLevel: Double = 5.0,
          savedVolumeLevel: Double = 5.0) {
         self.showVolumeAlert = showVolumeAlert
@@ -79,14 +88,9 @@ final class AppState {
         self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
         self.isMuted = isMuted
         self.capoPosition = capoPosition
-        self.selectedChordIndex = selectedChordIndex
         self.volumeLevel = volumeLevel
         self.savedVolumeLevel = savedVolumeLevel
         self.tunings = [Tuning]()
-    }
-    
-    func setNewActiveChordFromPickIndex(_ index: Int) {
-        Logger.viewCycle.notice("setNewActiveChordFromPickIndex called for Index: \(index)")
     }
 }
 

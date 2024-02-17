@@ -1,8 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " " : {
+
+    },
     "%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -30,14 +32,7 @@
         }
       }
     },
-    "ActiveChord:" : {
-
-    },
-    "ActiveChordGroup:" : {
-
-    },
     "Another App is using the Audio Player" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -66,7 +61,6 @@
       }
     },
     "Capo Position" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -94,17 +88,7 @@
         }
       }
     },
-    "Capo Position: %lld" : {
-
-    },
-    "Change Chord" : {
-
-    },
-    "Change Chord Group" : {
-
-    },
     "Chord Groups" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -131,9 +115,6 @@
           }
         }
       }
-    },
-    "Chords are available:" : {
-
     },
     "CREATE NEW CHORD GROUP" : {
       "extractionState" : "stale",
@@ -193,11 +174,7 @@
         }
       }
     },
-    "FretMap:" : {
-
-    },
     "Master Volume is OFF" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -225,11 +202,7 @@
         }
       }
     },
-    "No" : {
-
-    },
     "OK" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -287,7 +260,6 @@
       }
     },
     "Tunings" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -316,7 +288,6 @@
       }
     },
     "Unknown Audio Player Error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -343,12 +314,6 @@
           }
         }
       }
-    },
-    "Volume: %lf" : {
-
-    },
-    "Yes" : {
-
     }
   },
   "version" : "1.0"

@@ -18,7 +18,6 @@ extension AppState
     func makeNewTuningActive(newTuning: Tuning) {
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
-        selectedChordIndex = 0
         pickerChordGroupName = activeChordGroup?.name ?? ""
         pickerTuningName = activeTuning?.name ?? ""
     }
@@ -30,7 +29,6 @@ extension AppState
     /// - Parameter newChordGroup: a recently instantiated newChordGroup
     func makeNewChordGroupActive(newChordGroup: ChordGroup) {
         activeTuning?.activeChordGroup = newChordGroup
-        selectedChordIndex = 0
         pickerTuningName = activeTuning?.name ?? ""
     }
     
@@ -49,25 +47,6 @@ extension AppState
         }
     
         return newTuning
-    }
-    
-    ///  This method instantiates and returns a new ChordGroup based upon the name parameter.
-    ///     if no such ChordGroup with that name exists, this method returns nil
-    /// - Parameter name: name-> The name selected by user in ChordGroup Picker
-    /// - Returns: Optional(ChordGroup)
-    func createChordGroup(name: String) -> ChordGroup? {
-        var newChordGroup: ChordGroup? = nil
-                
-        if let chordGroups = activeTuning?.chordGroups {
-            for case let chordGroup in chordGroups {
-                if chordGroup.name == name {
-                    newChordGroup = chordGroup
-                    break
-                }
-            }
-        }
-        
-        return newChordGroup
     }
     
     /// This method returns an array of names associated with available Tunings

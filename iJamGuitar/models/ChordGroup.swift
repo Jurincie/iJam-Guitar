@@ -16,6 +16,11 @@ final class ChordGroup {
     var availableChordNames: String
     var activeChord: Chord?
     
+    // Computed Properties
+    var availableChordNamesArray: [String] {
+        availableChordNames.components(separatedBy: "-")
+    }
+    
     // Relationships
     @Relationship(deleteRule: .cascade) var availableChords = [Chord]()
     
@@ -25,7 +30,11 @@ final class ChordGroup {
         self.availableChordNames = availableChordNames
     }
     
-    func getAvailableChordNames() -> [String] {
-        availableChordNames.components(separatedBy: "-")
+    
+}
+
+extension ChordGroup: CustomStringConvertible {
+    var description: String {
+        return "name: \(name)\nactiveChord: \(String(describing: activeChord?.name))"
     }
 }

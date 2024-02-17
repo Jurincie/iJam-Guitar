@@ -13,6 +13,21 @@
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */; };
 		7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7FBC202B72DE1D00BD5567 /* AppState.swift */; };
 		7A86A0CF2B4B0928004E67CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */; };
+		7A8E96C62B8122B1001A0699 /* ChordButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */; };
+		7A8E96C72B8122B1001A0699 /* PickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96B72B8122B0001A0699 /* PickView.swift */; };
+		7A8E96C82B8122B1001A0699 /* TuningPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96B82B8122B0001A0699 /* TuningPickerView.swift */; };
+		7A8E96C92B8122B1001A0699 /* StringsAndFretsAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */; };
+		7A8E96CA2B8122B1001A0699 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BA2B8122B0001A0699 /* HeaderView.swift */; };
+		7A8E96CB2B8122B1001A0699 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BB2B8122B0001A0699 /* BottomView.swift */; };
+		7A8E96CD2B8122B1001A0699 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BD2B8122B0001A0699 /* ContentView.swift */; };
+		7A8E96CE2B8122B1001A0699 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BE2B8122B0001A0699 /* ChordGroupPickerView.swift */; };
+		7A8E96CF2B8122B1001A0699 /* StringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BF2B8122B0001A0699 /* StringsView.swift */; };
+		7A8E96D02B8122B1001A0699 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C02B8122B1001A0699 /* TopView.swift */; };
+		7A8E96D12B8122B1001A0699 /* CapoPositionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */; };
+		7A8E96D22B8122B1001A0699 /* FretBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C22B8122B1001A0699 /* FretBoardView.swift */; };
+		7A8E96D32B8122B1001A0699 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C32B8122B1001A0699 /* VolumeView.swift */; };
+		7A8E96D42B8122B1001A0699 /* FretNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */; };
+		7A8E96D52B8122B1001A0699 /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C52B8122B1001A0699 /* StringView.swift */; };
 		7AA07A262A040F6A00AE87B3 /* iJamGuitarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */; };
 		7AA07A2A2A040F6B00AE87B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A292A040F6B00AE87B3 /* Assets.xcassets */; };
 		7AA07A2D2A040F6B00AE87B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */; };
@@ -25,7 +40,6 @@
 		7AA07A732A04177100AE87B3 /* StandardTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */; };
 		7AA07A742A04177100AE87B3 /* DropD_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */; };
 		7AA07A752A04177100AE87B3 /* StandardTuning_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */; };
-		7AC875692B7EF3F100F6C35E /* TestSwiftDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC875682B7EF3F100F6C35E /* TestSwiftDataView.swift */; };
 		7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C282B1BAC820032DABD /* Chord.swift */; };
 		7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C292B1BAC820032DABD /* ChordGroup.swift */; };
 		7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C2A2B1BAC820032DABD /* Tuning.swift */; };
@@ -50,6 +64,21 @@
 		7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarTests.swift; sourceTree = "<group>"; };
 		7A7FBC202B72DE1D00BD5567 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordButtonsView.swift; sourceTree = "<group>"; };
+		7A8E96B72B8122B0001A0699 /* PickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
+		7A8E96B82B8122B0001A0699 /* TuningPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
+		7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsAndFretsAreaView.swift; sourceTree = "<group>"; };
+		7A8E96BA2B8122B0001A0699 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		7A8E96BB2B8122B0001A0699 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		7A8E96BD2B8122B0001A0699 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7A8E96BE2B8122B0001A0699 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
+		7A8E96BF2B8122B0001A0699 /* StringsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsView.swift; sourceTree = "<group>"; };
+		7A8E96C02B8122B1001A0699 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapoPositionPickerView.swift; sourceTree = "<group>"; };
+		7A8E96C22B8122B1001A0699 /* FretBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretBoardView.swift; sourceTree = "<group>"; };
+		7A8E96C32B8122B1001A0699 /* VolumeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
+		7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretNumbersView.swift; sourceTree = "<group>"; };
+		7A8E96C52B8122B1001A0699 /* StringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		7AA07A222A040F6A00AE87B3 /* iJamGuitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJamGuitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarApp.swift; sourceTree = "<group>"; };
 		7AA07A292A040F6B00AE87B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +92,6 @@
 		7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuningChordGroups.plist; path = iJamGuitar/Plists/StandardTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = DropD_ChordLibrary.plist; path = iJamGuitar/Plists/DropD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuning_ChordLibrary.plist; path = iJamGuitar/Plists/StandardTuning_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
-		7AC875682B7EF3F100F6C35E /* TestSwiftDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSwiftDataView.swift; sourceTree = "<group>"; };
 		7AE86C282B1BAC820032DABD /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
 		7AE86C2A2B1BAC820032DABD /* Tuning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuning.swift; sourceTree = "<group>"; };
@@ -178,7 +206,21 @@
 		7AA07A762A0417C800AE87B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7AC875682B7EF3F100F6C35E /* TestSwiftDataView.swift */,
+				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
+				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
+				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
+				7A8E96BE2B8122B0001A0699 /* ChordGroupPickerView.swift */,
+				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
+				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
+				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
+				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
+				7A8E96B72B8122B0001A0699 /* PickView.swift */,
+				7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */,
+				7A8E96BF2B8122B0001A0699 /* StringsView.swift */,
+				7A8E96C52B8122B1001A0699 /* StringView.swift */,
+				7A8E96C02B8122B1001A0699 /* TopView.swift */,
+				7A8E96B82B8122B0001A0699 /* TuningPickerView.swift */,
+				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,17 +346,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8E96D42B8122B1001A0699 /* FretNumbersView.swift in Sources */,
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
 				7AE86C302B1D15E90032DABD /* Logger.swift in Sources */,
+				7A8E96C72B8122B1001A0699 /* PickView.swift in Sources */,
+				7A8E96CE2B8122B1001A0699 /* ChordGroupPickerView.swift in Sources */,
+				7A8E96C82B8122B1001A0699 /* TuningPickerView.swift in Sources */,
+				7A8E96C92B8122B1001A0699 /* StringsAndFretsAreaView.swift in Sources */,
 				7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */,
+				7A8E96C62B8122B1001A0699 /* ChordButtonsView.swift in Sources */,
+				7A8E96CF2B8122B1001A0699 /* StringsView.swift in Sources */,
 				7A1636982B7AC3E3000506A8 /* AppStateExtension.swift in Sources */,
+				7A8E96CD2B8122B1001A0699 /* ContentView.swift in Sources */,
 				7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */,
 				7AA07A262A040F6A00AE87B3 /* iJamGuitarApp.swift in Sources */,
 				7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */,
 				7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */,
 				7A1CF6F22B79380400F00AF1 /* AppStateContainer.swift in Sources */,
 				7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */,
-				7AC875692B7EF3F100F6C35E /* TestSwiftDataView.swift in Sources */,
+				7A8E96D22B8122B1001A0699 /* FretBoardView.swift in Sources */,
+				7A8E96D52B8122B1001A0699 /* StringView.swift in Sources */,
+				7A8E96D02B8122B1001A0699 /* TopView.swift in Sources */,
+				7A8E96CB2B8122B1001A0699 /* BottomView.swift in Sources */,
+				7A8E96D32B8122B1001A0699 /* VolumeView.swift in Sources */,
+				7A8E96D12B8122B1001A0699 /* CapoPositionPickerView.swift in Sources */,
+				7A8E96CA2B8122B1001A0699 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

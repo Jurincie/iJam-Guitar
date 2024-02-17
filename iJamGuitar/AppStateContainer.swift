@@ -71,7 +71,6 @@ actor AppStateContainer {
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-            appState.selectedChordIndex = 0
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -203,13 +202,13 @@ actor AppStateContainer {
                 let chordNames = entry.value
                 chordGroup.availableChordNames = chordNames
                 let chordNameArray = chordNames.components(separatedBy: "-")
-                var availableChordsArray = chordNameArray.map({ chordName in
+                let availableChordsArray = chordNameArray.map({ chordName in
                     createChord(chordName: chordName,
                                 chordDictionary: parentTuning.chordsDictionary)!
                 })
                 
                 // set activeChord for this group
-                if let activeChord = availableChordsArray.randomElement() {
+                if let activeChord = availableChordsArray.first {
                     activeChord.group = chordGroup
                 }
                 

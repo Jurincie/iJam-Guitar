@@ -11,7 +11,7 @@ import OSLog
 
 struct Pick: Identifiable  {
     var id: Int
-    var title: String
+    var chord: Chord
     var image:Image
 }
 
@@ -27,9 +27,9 @@ struct PickView: View {
             PickButton()
             
             // top layer
-            Text(self.pick.title == kNoChordName ? "" : self.pick.title)
+            Text(pick.chord.name == kNoChordName ? "" : pick.chord.name)
                 .foregroundColor(Color.white)
-                .font(.custom("Arial Rounded MT Bold", size: getFontSize(targetString: self.pick.title)))
+                .font(.headline)
                 .fontWeight(.bold)
         }
         .cornerRadius(10.0)
@@ -40,18 +40,15 @@ struct PickView: View {
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
-            let fretMapChanged = chordIsAltered()
-            if appStates.first!.selectedChordIndex != pick.id || fretMapChanged {
-               appStates.first!.setNewActiveChordFromPickIndex(pick.id)
-            }
+            appStates.first!.activeChordGroup?.activeChord = pick.chord
         }){
             Image(getPickImageName())
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 100.0)
                 .padding(10)
-                .opacity(self.pick.title == kNoChordName ? 0.3 : 1.0)
-                .disabled(self.pick.title == kNoChordName)
+                .opacity(pick.chord.name == kNoChordName ? 0.3 : 1.0)
+                .disabled(pick.chord.name == kNoChordName)
         }
         
         return button
@@ -59,12 +56,13 @@ extension PickView {
     
     // returns approprieate imageName for pickButton or "BlankPick" on failure
     func getPickImageName() -> String {
+        let numberAvailableChords = appStates.first!.activeChordGroup?.availableChords.count
         var pickImageName = "BlankPick"
-        if appStates.first!.selectedChordIndex == pick.id {
-            let thisChord = appStates.first!.activeChordGroup?.availableChords[pick.id]
-            pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: thisChord) ? "ModifiedPick" : "ActivePick"
+        
+        if appStates.first!.activeChordGroup?.activeChord == pick.chord {
+            pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: pick.chord) ? "ModifiedPick" : "ActivePick"
         } else {
-            pickImageName = pick.id < appStates.first!.activeChordGroup?.availableChords.count ?? 0 ? "BlankPick" : "UndefinedPick"
+            pickImageName = pick.id < numberAvailableChords ?? 0 ? "BlankPick" : "UndefinedPick"
         }
         
         return pickImageName
@@ -76,17 +74,6 @@ extension PickView {
         }
         
         return false
-    }
-
-    /// Calculates an appropriate font size depending on device and length of targetString
-    func getFontSize(targetString: String) -> Double {
-        switch targetString.count {
-        case 1:     return UIDevice.current.userInterfaceIdiom == .pad ? 28.0 : 22.0
-        case 2:     return UIDevice.current.userInterfaceIdiom == .pad ? 26.0 : 20.0
-        case 3:     return UIDevice.current.userInterfaceIdiom == .pad ? 24.0 : 18.0
-        case 4,5:   return UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 14.0
-        default:    return UIDevice.current.userInterfaceIdiom == .pad ? 14.0 : 10.0
-        }
     }
 }
 

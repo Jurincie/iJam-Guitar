@@ -73,6 +73,11 @@ struct StringView: View {
         @Query var appStates: [AppState]
         let fretBox: FretBox
         let stringNumber: Int
+        
+        init(fretBox: FretBox, stringNumber: Int) {
+            self.fretBox = fretBox
+            self.stringNumber = stringNumber
+        }
 
         var body: some View {
             let appState = appStates.first!
@@ -94,28 +99,31 @@ struct StringView: View {
                         appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
                     }
                 }){
-                    if(self.fretBox.id == 0)
-                    {
+                    if(fretBox.id == 0) {
                         // show a white circle on zeroFret with black text
                         CircleView(color: Color.teal, lineWidth: 1.0)
                     } else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
                         // red ball on freted fretBox
                         // yellow ball if not in the chord - meaning user tapped on different fret
-                        let fretInChord = true
-                        CircleView(color: fretInChord ? .red : .yellow, lineWidth: 1.0)
-                    } else {
+                        let currentFret = appState.currentFretIndexMap[6 - stringNumber]
+                        let chordsFretMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
+                        let chordsFret = chordsFretMap[6 - stringNumber]
+                            CircleView(color: currentFret == chordsFret ? .red : .yellow, lineWidth: 1.0)
+                        } else {
+                        // show clearColor circle
+                        // this way we can still react to taps
                         CircleView()
                     }
                 }
                 // foreground
                 // show fretZero note names AND a (possibly) fretted fretBox
-                if self.fretBox.id == 0 {
-                    Text(self.fretBox.title)
+                if fretBox.id == 0 {
+                    Text(fretBox.title)
                         .foregroundColor(Color.white)
                         .font(.title3)
                         .fixedSize()
                 } else {
-                    let text = self.fretBox.id == appState.currentFretIndexMap[6 - stringNumber] ? self.fretBox.title : ""
+                    let text = fretBox.id == appState.currentFretIndexMap[6 - stringNumber] ? fretBox.title : ""
                     Text(text)
                         .foregroundColor(Color.black)
                         .font(.title3)
@@ -125,6 +133,8 @@ struct StringView: View {
         }
     }
 }
+
+
 
 struct CircleView: View {
     let color: Color
@@ -154,7 +164,7 @@ extension StringView {
                                     title: index == -1 ?
                                     "X" : getFretNoteTitle(openNote: openStringNote,
                                                            offset: 0)))
-        for index in Range(1...5) {
+        for index in Range(0...4) {
             let title = getFretNoteTitle(openNote: openStringNote,
                                          offset: index + minFret)
             fretBoxArray.append(FretBox(id: minFret + index,
