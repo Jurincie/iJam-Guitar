@@ -208,8 +208,9 @@
 			children = (
 				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
 				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
-				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
 				7A8E96BE2B8122B0001A0699 /* ChordGroupPickerView.swift */,
+				7A8E96B82B8122B0001A0699 /* TuningPickerView.swift */,
+				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
 				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
 				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
 				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
@@ -219,7 +220,6 @@
 				7A8E96BF2B8122B0001A0699 /* StringsView.swift */,
 				7A8E96C52B8122B1001A0699 /* StringView.swift */,
 				7A8E96C02B8122B1001A0699 /* TopView.swift */,
-				7A8E96B82B8122B0001A0699 /* TuningPickerView.swift */,
 				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
 			);
 			path = Views;

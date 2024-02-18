@@ -22,16 +22,6 @@ extension AppState
         pickerTuningName = activeTuning?.name ?? ""
     }
     
-    ///  This method sets the newly instantiated newChordGroup as the activeChordGroup.
-    ///  Then sets the availableChords to the chords associated with this newChordGroup.
-    ///  Then sets the activeChord to the newChordGroup.activeChord
-    ///  Then sets the selectedIndex via getSelectedChordButtonIndex()
-    /// - Parameter newChordGroup: a recently instantiated newChordGroup
-    func makeNewChordGroupActive(newChordGroup: ChordGroup) {
-        activeTuning?.activeChordGroup = newChordGroup
-        pickerTuningName = activeTuning?.name ?? ""
-    }
-    
     /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
     /// - Parameter name: name-> The name selected by user in Tuning Picker

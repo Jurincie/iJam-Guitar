@@ -25,7 +25,9 @@ struct ChordGroupPickerView: View {
                  .pickerStyle(.automatic)
                  .frame(maxWidth: .infinity)
                  .onChange(of: appState.pickerChordGroupName) { oldValue, newValue in
-                     debugPrint("new ChordGroupName: \(newValue)")
+                     appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first(where: { chordGroup in
+                         chordGroup.name == newValue
+                     })
                  }
              } label: {
                  Text(appState.pickerChordGroupName)

@@ -86,7 +86,7 @@ struct StringView: View {
                 // background
                 Button(action:{
                     let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(appState.minimumFret)  fretBoxID: \(fretBox.id)")
+                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(appState.minimumFret)  newFret: \(fretBox.id)")
                     
                     if currentFret == 0 && fretBox.id == 0 {
                         // if nut tapped when string open => make string muted
@@ -98,6 +98,7 @@ struct StringView: View {
                         // tapped different fret
                         appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
                     }
+                    Logger.viewCycle.debug("--> \(appState.currentFretIndexMap)")
                 }){
                     if(fretBox.id == 0) {
                         // show a white circle on zeroFret with black text

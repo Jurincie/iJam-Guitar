@@ -28,6 +28,14 @@ final class AppState {
     @Relationship(deleteRule: .cascade) var tunings: [Tuning]
     
     // Calculated Properties
+    var currentFretIndexMap: [Int] {
+        get {
+            getFretIndexMap(chord: activeChordGroup?.activeChord)
+        }
+        set {
+            Logger.viewCycle.debug("adjustedMap: \(newValue)")
+        }
+    }
     var selectedChordIndex: Int {
         if let chord = activeChordGroup?.activeChord {
             if let index = activeChordGroup?.availableChords.firstIndex(of: chord) {
@@ -45,12 +53,6 @@ final class AppState {
             activeTuning?.activeChordGroup = newValue
         }
     }
-    var currentFretIndexMap: [Int] {
-        get {
-            getFretIndexMap(chord: activeChordGroup?.activeChord)
-        }
-        set {}
-    }
     var minimumFret: Int {
         get {
             if let activeChord = activeChordGroup?.activeChord {
@@ -66,7 +68,8 @@ final class AppState {
                     }
                 }
                 
-                return highest < 6 ? 1 : max(1, highest - 4)
+                let lowest = highest - 4
+                return highest < 6 ? 1 : max(1, lowest)
             }
             
             Logger.viewCycle.debug("Could NOT calculate minimumFret")

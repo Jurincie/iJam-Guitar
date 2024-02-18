@@ -12,6 +12,7 @@ import OSLog
 struct HeaderView: View {
     let width: CGFloat
     let height: CGFloat
+    @State private var showCreateChordGroupSheet = false
     @Query var appStates: [AppState]
     
     init(width: CGFloat, height: CGFloat) {
@@ -47,6 +48,17 @@ struct HeaderView: View {
                                     width: 2,
                                     cornerRadius: 7)
                             .padding(.top)
+                        Spacer()
+                        Button {
+                            showCreateChordGroupSheet.toggle()
+                        } label: {
+                            VStack {
+                                Spacer()
+                                Image(systemName: "plus.circle")
+                                    .font(.title)
+                            }
+                        }
+
                         Spacer()
                     }
                     .padding()

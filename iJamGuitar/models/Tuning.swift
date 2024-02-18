@@ -41,3 +41,9 @@ extension Tuning: Hashable {
         hasher.combine([name, openNoteIndices, stringNoteNames])
     }
 }
+
+extension Tuning: CustomStringConvertible {
+    var description: String {
+        "Name: \(name ?? "") activeChordGroup: \(activeChordGroup?.name ?? "")"
+    }
+}
