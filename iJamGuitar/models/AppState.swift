@@ -22,6 +22,7 @@ final class AppState {
     var savedVolumeLevel: Double
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
+    var fretIndicesString: String = "000000"
 
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
@@ -30,7 +31,7 @@ final class AppState {
     // Calculated Properties
     var currentFretIndexMap: [Int] {
         get {
-            getFretIndexMap(chord: activeChordGroup?.activeChord)
+            getFretIndexMap(fretMapString: fretIndicesString)
         }
         set {
             Logger.viewCycle.debug("adjustedMap: \(newValue)")

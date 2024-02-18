@@ -82,12 +82,10 @@ extension AppState
         }
     }
     
-    func getFretIndexMap(chord: Chord?) -> [Int] {
+    func getFretIndexMap(fretMapString: String) -> [Int] {
         var fretsArray : [Int] = []
-        if let fretMap = chord?.fretMapString {
-            for char in fretMap {
-                fretsArray.append(getFretFromChar(char))
-            }
+        for char in fretMapString {
+            fretsArray.append(getFretFromChar(char))
         }
         return fretsArray
     }

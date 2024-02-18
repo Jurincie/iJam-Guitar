@@ -40,6 +40,7 @@ struct PickView: View {
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
+            appStates.first!.fretIndicesString = pick.chord.fretMapString
             appStates.first!.activeChordGroup?.activeChord = pick.chord
         }){
             Image(getPickImageName())
@@ -60,7 +61,7 @@ extension PickView {
         var pickImageName = "BlankPick"
         
         if appStates.first!.activeChordGroup?.activeChord == pick.chord {
-            pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: pick.chord) ? "ModifiedPick" : "ActivePick"
+            pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString) ? "ModifiedPick" : "ActivePick"
         } else {
             pickImageName = pick.id < numberAvailableChords ?? 0 ? "BlankPick" : "UndefinedPick"
         }
@@ -69,9 +70,9 @@ extension PickView {
     }
     
     func chordIsAltered() -> Bool {
-        if let thisChord = appStates.first!.activeChordGroup?.availableChords[pick.id] {
-            return appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(chord: thisChord)
-        }
+//        if let thisChord = appStates.first!.activeChordGroup?.availableChords[pick.id] {
+//            return appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(fretMapString: thisChord.fretMapString)
+//        }
         
         return false
     }

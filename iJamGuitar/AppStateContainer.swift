@@ -71,6 +71,7 @@ actor AppStateContainer {
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
+            appState.fretIndicesString = "x32010"
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -208,8 +209,16 @@ actor AppStateContainer {
                 })
                 
                 // set activeChord for this group
-                if let activeChord = availableChordsArray.first {
-                    activeChord.group = chordGroup
+                if chordGroup.name == "Key of C" {
+                    if let activeChord = availableChordsArray.first(where: { chord in
+                        chord.name == "C"
+                    }) {
+                        activeChord.group = chordGroup
+                    }
+                } else {
+                    if let activeChord = availableChordsArray.first {
+                        activeChord.group = chordGroup
+                    }
                 }
                 
                 // fill availableChords
@@ -218,7 +227,9 @@ actor AppStateContainer {
                 chordGroups.append(chordGroup)
             }
             
-            parentTuning.activeChordGroup = chordGroups.first
+            parentTuning.activeChordGroup = chordGroups.first(where: { chordGroup in
+                chordGroup.name == "Key of C"
+            })
             return chordGroups
         }
         

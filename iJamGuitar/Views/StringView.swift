@@ -78,64 +78,91 @@ struct StringView: View {
             self.fretBox = fretBox
             self.stringNumber = stringNumber
         }
-
+        
         var body: some View {
             let appState = appStates.first!
             
             ZStack() {
                 // background
-                Button(action:{
-                    let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-                    Logger.statistics.notice("currentFret: \(currentFret)  minFret: \(appState.minimumFret)  newFret: \(fretBox.id)")
-                    
-                    if currentFret == 0 && fretBox.id == 0 {
-                        // if nut tapped when string open => make string muted
-                        appState.currentFretIndexMap[6 - stringNumber] = -1
-                    } else if currentFret == fretBox.id {
-                        // tapped existing fret => make string open
-                        appState.currentFretIndexMap[6 - stringNumber] = 0
-                    } else {
-                        // tapped different fret
-                        appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
-                    }
-                    Logger.viewCycle.debug("--> \(appState.currentFretIndexMap)")
-                }){
-                    if(fretBox.id == 0) {
-                        // show a white circle on zeroFret with black text
-                        CircleView(color: Color.teal, lineWidth: 1.0)
-                    } else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
-                        // red ball on freted fretBox
-                        // yellow ball if not in the chord - meaning user tapped on different fret
-                        let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-                        let chordsFretMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
-                        let chordsFret = chordsFretMap[6 - stringNumber]
-                            CircleView(color: currentFret == chordsFret ? .red : .yellow, lineWidth: 1.0)
-                        } else {
-                        // show clearColor circle
-                        // this way we can still react to taps
-                        CircleView()
-                    }
-                }
-                // foreground
-                // show fretZero note names AND a (possibly) fretted fretBox
-                if fretBox.id == 0 {
-                    Text(fretBox.title)
-                        .foregroundColor(Color.white)
-                        .font(.title3)
-                        .fixedSize()
-                } else {
-                    let text = fretBox.id == appState.currentFretIndexMap[6 - stringNumber] ? fretBox.title : ""
-                    Text(text)
-                        .foregroundColor(Color.black)
-                        .font(.title3)
-                        .fixedSize()
-                }
+                BackgroundView(stringNumber: stringNumber, fretNumber: fretBox.id)
+                ForegroundView(fretNumber: fretBox.id,
+                               title: fretBox.title,
+                               stringNumber: stringNumber)
             }
+        }
+    }
+//                    else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
+//                        // red ball on freted fretBox
+//                        // yellow ball if not in the chord - meaning user tapped on different fret
+//                        let currentFret = appState.currentFretIndexMap[6 - stringNumber]
+//                        let chordsFretMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
+//                        let chordsFret = chordsFretMap[6 - stringNumber]
+//                            CircleView(color: currentFret == chordsFret ? .red : .yellow, lineWidth: 1.0)
+//                        } else {
+//                        // show clearColor circle
+//                        // this way we can still react to taps
+//                        CircleView()
+//                    }
+//                }
+
+}
+
+struct ForegroundView: View {
+    @Query var appStates: [AppState]
+    let fretNumber: Int
+    let title: String
+    let stringNumber: Int
+    
+    var body: some View {
+        let appState = appStates.first!
+        // foreground
+        // show fretZero note names AND a (possibly) fretted fretBox
+        if fretNumber == 0 {
+            Text(title)
+                .foregroundColor(Color.white)
+                .font(.title3)
+                .fixedSize()
+        } else {
+            let text = fretNumber == appState.currentFretIndexMap[6 - stringNumber] ? title : ""
+            Text(text)
+                .foregroundColor(Color.black)
+                .font(.title3)
+                .fixedSize()
         }
     }
 }
 
-
+struct BackgroundView: View {
+    @Query var appStates: [AppState]
+    let stringNumber: Int
+    let fretNumber: Int
+    
+    var body: some View {
+        let appState = appStates.first!
+        Button(action:{
+//            let currentFret = appState.currentFretIndexMap[6 - stringNumber]
+//            
+//            if currentFret == 0 && fretNumber == 0 {
+//                // if nut tapped when string open => make string muted
+////                appState.currentFretIndexMap[6 - stringNumber] = -1
+//            } else if currentFret == fretNumber {
+//                // tapped existing fret => make string open
+////                appState.currentFretIndexMap[6 - stringNumber] = 0
+//            } else {
+//                // tapped different fret
+////                appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
+//            }
+//            Logger.viewCycle.debug("--> \(appState.currentFretIndexMap)")
+        }){
+            if(fretNumber == 0) {
+                // show a white circle on zeroFret with black text
+                CircleView(color: Color.teal, lineWidth: 1.0)
+            } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
+                CircleView(color: Color.red, lineWidth: 1.0)
+            }
+        }
+    }
+}
 
 struct CircleView: View {
     let color: Color
