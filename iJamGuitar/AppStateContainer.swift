@@ -71,7 +71,7 @@ actor AppStateContainer {
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-            appState.fretIndicesString = "x32010"
+            appState.currentFretIndexMap = [-1, 3, 2, 0, 1, 0]
         }
         
         /// This method sets all needed values for Tuning identified by tuningName

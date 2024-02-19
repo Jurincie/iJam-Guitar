@@ -40,8 +40,8 @@ struct PickView: View {
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
-            appStates.first!.fretIndicesString = pick.chord.fretMapString
             appStates.first!.activeChordGroup?.activeChord = pick.chord
+            appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
         }){
             Image(getPickImageName())
                 .resizable()

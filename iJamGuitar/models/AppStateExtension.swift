@@ -18,10 +18,12 @@ extension String {
 extension AppState
 {
     func fretBelongsInChord(stringNumber: Int, newFretNumber: Int) -> Bool {
-        let charForTappedFret = fretIndicesString[6 - stringNumber]
-        let charFromChordForThisString = activeChordGroup?.activeChord?.fretMapString[6 - stringNumber]
+        let fretForTappedFret = currentFretIndexMap[6 - stringNumber]
         
-        return charForTappedFret == charFromChordForThisString
+        let chordMap = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
+        let fretFromChordForThisString = chordMap[6 - stringNumber]
+        
+        return fretForTappedFret == fretFromChordForThisString
     }
     
     /// - Parameter newTuning: newTuning
@@ -92,6 +94,8 @@ extension AppState
         case "A": return 10
         case "B": return 11
         case "C": return 12
+        case "D": return 13
+        case "E": return 14
         default: return char.wholeNumberValue ?? -1
         }
     }

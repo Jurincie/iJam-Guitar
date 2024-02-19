@@ -28,6 +28,9 @@ struct ChordGroupPickerView: View {
                      appState.activeTuning?.activeChordGroup = appState.activeTuning?.chordGroups.first(where: { chordGroup in
                          chordGroup.name == newValue
                      })
+                     if let fretMapString = appState.activeChordGroup?.activeChord?.fretMapString {
+                         appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: appState.activeChordGroup?.activeChord?.fretMapString ?? "")
+                     }
                  }
              } label: {
                  Text(appState.pickerChordGroupName)

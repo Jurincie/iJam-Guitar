@@ -139,14 +139,8 @@ struct BackgroundView: View {
         Button(action:{
             // get the current appState.fretIndicesString
             // replace the nth character
-            let n = 6 - stringNumber
-            let newValue = fretNumber == 0 && appState.currentFretIndexMap[6 - stringNumber] == 0 ? -1 : fretNumber == appState.currentFretIndexMap[6 - stringNumber] ? 0 : fretNumber
-            let newChar = getCharForFretNumber(newValue)
-            let oldString = appState.fretIndicesString
-            
-            let newString = oldString.prefix(n) + String(newChar) + oldString.dropFirst(n + 1)
-            
-            appState.fretIndicesString = String(newString)
+            let index = 6 - stringNumber
+            appState.currentFretIndexMap[index] = fretNumber
         }){
             if(fretNumber == 0) {
                 // show a white circle on zeroFret with black text
@@ -212,13 +206,12 @@ extension StringView {
 
 func getCharForFretNumber(_ number: Int) -> String {
     switch(number) {
-    case -1: return "x"
     case 0...9: return String(number)
-    case 10: return "a"
-    case 11: return "b"
-    case 12: return "c"
-    case 13: return "d"
-    case 14: return "e"
+    case 10: return "A"
+    case 11: return "B"
+    case 12: return "C"
+    case 13: return "D"
+    case 14: return "E"
     default: return "x"
     }
 }
