@@ -34,8 +34,16 @@ extension AppState
     func makeNewTuningActive(newTuning: Tuning) {
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
-        pickerTuningName = activeTuning?.name ?? ""
+        pickerTuningName = newTuning.name ?? "ERROR"
         pickerChordGroupName = activeChordGroup?.name ?? ""
+    }
+    
+    func makeChordGroupActive(newChordGroup: ChordGroup) {
+        activeTuning?.activeChordGroup = newChordGroup
+        
+        let fretMap = getFretIndexMap(fretMapString: newChordGroup.activeChord?.fretMapString ?? "")
+        
+        currentFretIndexMap = fretMap
     }
     
     /// This method takes a name associated with Tunings names

@@ -29,7 +29,7 @@ struct ChordGroupPickerView: View {
                          chordGroup.name == newValue
                      })
                      if let fretMapString = appState.activeChordGroup?.activeChord?.fretMapString {
-                         appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: appState.activeChordGroup?.activeChord?.fretMapString ?? "")
+                         appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: fretMapString)
                      }
                  }
              } label: {
