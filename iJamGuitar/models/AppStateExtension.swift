@@ -34,8 +34,8 @@ extension AppState
     func makeNewTuningActive(newTuning: Tuning) {
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
-        pickerChordGroupName = activeChordGroup?.name ?? ""
         pickerTuningName = activeTuning?.name ?? ""
+        pickerChordGroupName = activeChordGroup?.name ?? ""
     }
     
     /// This method takes a name associated with Tunings names

@@ -136,15 +136,24 @@ struct BackgroundView: View {
     
     var body: some View {
         let appState = appStates.first!
-        Button(action:{
+        Button(action: {
+            let index = 6 - stringNumber
+            var correctedFret = fretNumber
+            
+            let currentFret = appState.currentFretIndexMap[index]
+            if  currentFret == 0 && fretNumber == 0 {
+                correctedFret = -1
+            } else if appState.currentFretIndexMap[index] == fretNumber {
+                correctedFret = 0
+            }
+            
             // get the current appState.fretIndicesString
             // replace the nth character
-            let index = 6 - stringNumber
-            appState.currentFretIndexMap[index] = fretNumber
+            appState.currentFretIndexMap[index] = correctedFret
         }){
             if(fretNumber == 0) {
                 // show a white circle on zeroFret with black text
-                CircleView(color: Color.teal, lineWidth: 1.0)
+                CircleView(color: Color.black.opacity(0.8))
             } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
                 CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
             } else {
