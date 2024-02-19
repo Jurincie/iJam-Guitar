@@ -68,13 +68,5 @@ extension PickView {
         
         return pickImageName
     }
-    
-    func chordIsAltered() -> Bool {
-//        if let thisChord = appStates.first!.activeChordGroup?.availableChords[pick.id] {
-//            return appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(fretMapString: thisChord.fretMapString)
-//        }
-        
-        return false
-    }
 }
 

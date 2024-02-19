@@ -5,11 +5,25 @@
 //  Created by Ron Jurincie on 2/12/24.
 //
 
+import Foundation
 import SwiftData
 import SwiftUI
 
+extension String {
+    subscript (i: Int) -> Character {
+        return self[index(startIndex, offsetBy: i)]
+    }
+}
+
 extension AppState
 {
+    func fretBelongsInChord(stringNumber: Int, newFretNumber: Int) -> Bool {
+        let charForTappedFret = fretIndicesString[6 - stringNumber]
+        let charFromChordForThisString = activeChordGroup?.activeChord?.fretMapString[6 - stringNumber]
+        
+        return charForTappedFret == charFromChordForThisString
+    }
+    
     /// - Parameter newTuning: newTuning
     /// /// Description: When user selects NEW Tuning, we need to set:
     /// /// activeTuning, activeChordGroup, activeChordGroupName and availableChords

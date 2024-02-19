@@ -58,8 +58,6 @@ struct HeaderView: View {
                                     .font(.title)
                             }
                         }
-
-                        Spacer()
                     }
                     .padding()
                 }

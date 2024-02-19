@@ -70,7 +70,6 @@ struct StringView: View {
     }
     
     struct FretBoxView: View {
-        @Query var appStates: [AppState]
         let fretBox: FretBox
         let stringNumber: Int
         
@@ -80,11 +79,9 @@ struct StringView: View {
         }
         
         var body: some View {
-            let appState = appStates.first!
-            
             ZStack() {
                 // background
-                BackgroundView(stringNumber: stringNumber, fretNumber: fretBox.id)
+                BackgroundView(fretNumber: fretBox.id, stringNumber: stringNumber)
                 ForegroundView(fretNumber: fretBox.id,
                                title: fretBox.title,
                                stringNumber: stringNumber)
@@ -134,31 +131,30 @@ struct ForegroundView: View {
 
 struct BackgroundView: View {
     @Query var appStates: [AppState]
+    var fretNumber: Int
     let stringNumber: Int
-    let fretNumber: Int
     
     var body: some View {
         let appState = appStates.first!
         Button(action:{
-//            let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-//            
-//            if currentFret == 0 && fretNumber == 0 {
-//                // if nut tapped when string open => make string muted
-////                appState.currentFretIndexMap[6 - stringNumber] = -1
-//            } else if currentFret == fretNumber {
-//                // tapped existing fret => make string open
-////                appState.currentFretIndexMap[6 - stringNumber] = 0
-//            } else {
-//                // tapped different fret
-////                appState.currentFretIndexMap[6 - stringNumber] = fretBox.id
-//            }
-//            Logger.viewCycle.debug("--> \(appState.currentFretIndexMap)")
+            // get the current appState.fretIndicesString
+            // replace the nth character
+            let n = 6 - stringNumber
+            let newValue = fretNumber == 0 && appState.currentFretIndexMap[6 - stringNumber] == 0 ? -1 : fretNumber == appState.currentFretIndexMap[6 - stringNumber] ? 0 : fretNumber
+            let newChar = getCharForFretNumber(newValue)
+            let oldString = appState.fretIndicesString
+            
+            let newString = oldString.prefix(n) + String(newChar) + oldString.dropFirst(n + 1)
+            
+            appState.fretIndicesString = String(newString)
         }){
             if(fretNumber == 0) {
                 // show a white circle on zeroFret with black text
                 CircleView(color: Color.teal, lineWidth: 1.0)
             } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
-                CircleView(color: Color.red, lineWidth: 1.0)
+                CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
+            } else {
+                CircleView(color: Color.clear, lineWidth: 0)
             }
         }
     }
@@ -214,4 +210,16 @@ extension StringView {
     }
 }
 
+func getCharForFretNumber(_ number: Int) -> String {
+    switch(number) {
+    case -1: return "x"
+    case 0...9: return String(number)
+    case 10: return "a"
+    case 11: return "b"
+    case 12: return "c"
+    case 13: return "d"
+    case 14: return "e"
+    default: return "x"
+    }
+}
 
