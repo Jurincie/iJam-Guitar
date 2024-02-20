@@ -18,7 +18,7 @@ enum InitializeErrors: Error {
     case UnknownError
 }
 
-struct FramePreferenceKey: PreferenceKey {
+struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGRect = CGRectZero
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
 }

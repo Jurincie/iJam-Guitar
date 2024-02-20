@@ -46,6 +46,7 @@ extension PickView {
             }
             appStates.first!.activeChordGroup?.activeChord = pick.chord
             appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
+            isTapped.toggle()
         }){
             Image(getPickImageName())
                 .resizable()

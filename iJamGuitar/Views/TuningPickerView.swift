@@ -38,10 +38,10 @@ struct TuningPickerView: View {
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
-                    .shadow(color: .white , radius: 2.0)
             }
         }
         .frame(alignment: .leading)
+        .shadow(color: .white , radius: 12.0)
         .border(.white,
                 width: 2)
         .cornerRadius(5)

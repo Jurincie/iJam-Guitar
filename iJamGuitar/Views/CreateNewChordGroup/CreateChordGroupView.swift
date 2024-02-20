@@ -13,7 +13,7 @@ struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
     @State private var chordGroupNameExistsAlert = false
-    @State private var selectedChords: [Chord?] = Array(repeating: nil, 
+    @State private var selectedChords: [Chord?] = Array(repeating: nil,
                                                         count: 10)
     @State private var chordGroupName: String = ""
     @State private var currentTuning: Tuning?
@@ -28,43 +28,39 @@ struct CreateChordGroupView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.blue, .white, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .opacity(0.6)
-
+            
             VStack {
                 Spacer()
-                Text("Enter GroupName")
-                    .font(.title)
                 TextField("Enter Group Name", text: $chordGroupName)
                     .cornerRadius(10)
                     .autocorrectionDisabled()
                     .border(.black, width: 1)
                     .padding()
                     .padding(.horizontal)
+                Text("Select Tuning:")
+                    .font(.headline)
                 VStack {
-                    Text("Select Tuning:")
-                        .font(.headline)
-                    VStack {
-                        Menu {
-                            Picker("Tunings", selection: $currentTuning) {
-                                ForEach(appStates.first!.getTuningNames(), id: \.self) {
-                                    Text($0)
-                                        .fixedSize()
-                                }
+                    Menu {
+                        Picker("Tunings", selection: $currentTuning) {
+                            ForEach(appStates.first!.getTuningNames(), id: \.self) {
+                                Text($0)
+                                    .fixedSize()
                             }
-                            .pickerStyle(.automatic)
-                            .frame(maxWidth: .infinity)
-                        } label: {
-                            Text("TESTING")
-                                .padding(10)
-                                .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
-                                .fontWeight(.semibold)
-                                .background(Color.accentColor)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10.0)
-                                .shadow(color: .white , radius: 2.0)
-                                .fixedSize()
                         }
+                        .pickerStyle(.automatic)
+                        .frame(maxWidth: .infinity)
+                    } label: {
+                        Text("TESTING")
+                            .padding(10)
+                            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                            .fontWeight(.semibold)
+                            .background(Color.accentColor)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10.0)
+                            .shadow(color: .white , radius: 2.0)
+                            .fixedSize()
                     }
-                 }
+                }
                 .padding()
                 .border(.black, width: 1)
                 .cornerRadius(10)
@@ -99,12 +95,12 @@ struct CreateChordGroupView: View {
         .ignoresSafeArea()
         .dynamicTypeSize(...DynamicTypeSize.large)
     }
-        
-
+    
+    
     func getUndefinedPicks() -> [Pick] {
         var pickArray = [Pick]()
         for index in 0..<10 {
-            pickArray.append(Pick(id: index, 
+            pickArray.append(Pick(id: index,
                                   chord: Chord(name: "", fretMapString: ""),
                                   image: Image(index == selectedChordIndex ? .activePick : .blankPick)))
         }

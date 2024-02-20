@@ -787,8 +787,8 @@
             filePath = "iJamGuitar/Views/CreateNewChordGroup/PickView2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "PickButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -803,8 +803,8 @@
             filePath = "iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "getUndefinedPicks()"
             landmarkType = "7">
          </BreakpointContent>

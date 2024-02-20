@@ -13,10 +13,10 @@ extension View {
         background(
             GeometryReader { geometryProxy in
                 Color.clear
-                    .preference(key: FramePreferenceKey.self,
+                    .preference(key: SizePreferenceKey.self,
                                 value: geometryProxy.frame(in: .global))
             }
         )
-        .onPreferenceChange(FramePreferenceKey.self, perform: onChange)
+        .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
 }

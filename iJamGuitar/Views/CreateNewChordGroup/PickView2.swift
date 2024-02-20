@@ -12,7 +12,7 @@ import OSLog
 struct PickView2: View {
     @Query var appStates: [AppState]
     @Binding var selectedChordIndex: Int
-    @State private var isAnimated: Bool = false
+    @State private var isTapped: Bool = false
     let kNoChordName = "NoChord"
     var pick: Pick
     
@@ -27,6 +27,7 @@ struct PickView2: View {
                 .font(.headline)
                 .fontWeight(.bold)
         }
+        .scaleEffect(isTapped ? 2.0 : 1.0)
         .cornerRadius(10.0)
     }
 }
@@ -34,7 +35,11 @@ struct PickView2: View {
 extension PickView2 {
     func PickButton() -> some View {
         let button =  Button(action: {
+            withAnimation(.default) {
+                isTapped.toggle()
+            }
             selectedChordIndex = pick.id
+            isTapped.toggle()
         }){
             Image(getPickImageName())
                 .resizable()
