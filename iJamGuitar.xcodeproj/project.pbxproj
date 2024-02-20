@@ -42,6 +42,7 @@
 		7ACEB16F2B842DA800E85A41 /* PickView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB16E2B842DA800E85A41 /* PickView2.swift */; };
 		7ACEB1722B84329100E85A41 /* TuningPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB1712B84329100E85A41 /* TuningPickerView.swift */; };
 		7ACEB1742B84343E00E85A41 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */; };
+		7ACEB1792B845A2C00E85A41 /* ZoomInOutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB1782B845A2C00E85A41 /* ZoomInOutModifier.swift */; };
 		7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C282B1BAC820032DABD /* Chord.swift */; };
 		7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C292B1BAC820032DABD /* ChordGroup.swift */; };
 		7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C2A2B1BAC820032DABD /* Tuning.swift */; };
@@ -95,7 +96,8 @@
 		7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChordGroupView.swift; sourceTree = "<group>"; };
 		7ACEB16E2B842DA800E85A41 /* PickView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView2.swift; sourceTree = "<group>"; };
 		7ACEB1712B84329100E85A41 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
-		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
+		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChordGroupPickerView.swift; path = "Top Level/ChordGroupPickerView.swift"; sourceTree = "<group>"; };
+		7ACEB1782B845A2C00E85A41 /* ZoomInOutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomInOutModifier.swift; sourceTree = "<group>"; };
 		7AE86C282B1BAC820032DABD /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
 		7AE86C2A2B1BAC820032DABD /* Tuning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuning.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */,
 				7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */,
 				7A1CF6F12B79380300F00AF1 /* AppStateContainer.swift */,
+				7ACEB1752B84545A00E85A41 /* Modifiers */,
 				7A9AF58F2B68419900E37CDB /* models */,
 				7AA07A762A0417C800AE87B3 /* Views */,
 				7A302E4D2A1FD25B005864F4 /* Extensions */,
@@ -211,7 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				7ACEB16D2B842D5100E85A41 /* Top Level */,
+				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
 				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
+				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
 				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
 				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
 				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
@@ -228,8 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
-				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
-				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
 				7A8E96C02B8122B1001A0699 /* TopView.swift */,
 				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
 				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
@@ -245,6 +248,14 @@
 				7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */,
 			);
 			path = CreateNewChordGroup;
+			sourceTree = "<group>";
+		};
+		7ACEB1752B84545A00E85A41 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7ACEB1782B845A2C00E85A41 /* ZoomInOutModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +392,7 @@
 				7A1636982B7AC3E3000506A8 /* AppStateExtension.swift in Sources */,
 				7ACEB16C2B8422F400E85A41 /* CreateChordGroupView.swift in Sources */,
 				7A8E96CD2B8122B1001A0699 /* ContentView.swift in Sources */,
+				7ACEB1792B845A2C00E85A41 /* ZoomInOutModifier.swift in Sources */,
 				7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */,
 				7AA07A262A040F6A00AE87B3 /* iJamGuitarApp.swift in Sources */,
 				7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */,

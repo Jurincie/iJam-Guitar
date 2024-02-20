@@ -17,7 +17,8 @@ struct Pick: Identifiable  {
 
 struct PickView: View {
     @Query var appStates: [AppState]
-    @State private var isAnimated: Bool = false
+    @State private var isTapped: Bool = false
+    @State private var scaleValue = 1.0
     let kNoChordName = "NoChord"
     var pick: Pick
     
@@ -33,13 +34,13 @@ struct PickView: View {
                 .fontWeight(.bold)
         }
         .cornerRadius(10.0)
-        .scaleEffect(isAnimated ? 2.0 : 1.0)
     }
 }
 
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
+            isTapped.toggle()
             appStates.first!.activeChordGroup?.activeChord = pick.chord
             appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
         }){
@@ -51,7 +52,7 @@ extension PickView {
                 .opacity(pick.chord.name == kNoChordName ? 0.3 : 1.0)
                 .disabled(pick.chord.name == kNoChordName)
         }
-        
+
         return button
     }
     

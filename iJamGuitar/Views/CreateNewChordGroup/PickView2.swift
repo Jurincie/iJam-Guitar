@@ -49,9 +49,8 @@ extension PickView2 {
     }
     
     func getPickImageName() -> String {
-        var pickImageName = "BlankPick"
+        let pickImageName = "BlankPick"
         
-    
         return pickImageName
     }
 }
