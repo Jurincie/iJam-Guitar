@@ -11,15 +11,18 @@ import SwiftUI
 
 struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
+    @Query var appStates: [AppState]
     @State private var chordGroupNameExistsAlert = false
-    @State private var selectedChords: [Chord?] = Array(repeating: nil, count: 10)
+    @State private var selectedChords: [Chord?] = Array(repeating: nil, 
+                                                        count: 10)
     @State private var chordGroupName: String = ""
     @State private var currentTuning: Tuning?
     @State private var selectedChordIndex = 0
-    var chordNames: [String]
-    var activeChordName: String
+    var chordNames = [String]()
+    var activeChordName: String = ""
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
+    @State private var activeButtonIndex = 0
     
     var body: some View {
         ZStack {
@@ -28,21 +31,21 @@ struct CreateChordGroupView: View {
 
             VStack {
                 Spacer()
-                Text("New Group Name")
+                Text("Enter GroupName")
                     .font(.title)
                 TextField("Enter Group Name", text: $chordGroupName)
+                    .cornerRadius(10)
                     .autocorrectionDisabled()
+                    .border(.black, width: 1)
                     .padding()
-                    .border(.black, width: 1, cornerRadius: 20)
                     .padding(.horizontal)
-                Spacer()
                 VStack {
                     Text("Select Tuning:")
                         .font(.headline)
                     VStack {
                         Menu {
                             Picker("Tunings", selection: $currentTuning) {
-                                ForEach(appState.getTuningNames(), id: \.self) {
+                                ForEach(appStates.first!.getTuningNames(), id: \.self) {
                                     Text($0)
                                         .fixedSize()
                                 }
@@ -50,7 +53,7 @@ struct CreateChordGroupView: View {
                             .pickerStyle(.automatic)
                             .frame(maxWidth: .infinity)
                         } label: {
-                            Text("\(appState.activeTuningName)")
+                            Text("TESTING")
                                 .padding(10)
                                 .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                                 .fontWeight(.semibold)
@@ -63,14 +66,15 @@ struct CreateChordGroupView: View {
                     }
                  }
                 .padding()
-                .border(.black, width: 1, cornerRadius: 10)
+                .border(.black, width: 1)
+                .cornerRadius(10)
                 Spacer()
                 Text("Tap on picks to select chords below")
                     .font(.headline)
                 LazyVGrid(columns: columns,
                           spacing: mySpacing) {
                     ForEach(getUndefinedPicks(), id: \.id) { pick in
-                        PickView(pick: pick)
+                        PickView2(selectedChordIndex: $selectedChordIndex, pick: pick)
                     }
                 }
                 Spacer()
@@ -98,11 +102,10 @@ struct CreateChordGroupView: View {
         
 
     func getUndefinedPicks() -> [Pick] {
-        var pickArray: [Pick] = []
-        
+        var pickArray = [Pick]()
         for index in 0..<10 {
             pickArray.append(Pick(id: index, 
-                                  title: "",
+                                  chord: Chord(name: "", fretMapString: ""),
                                   image: Image(index == selectedChordIndex ? .activePick : .blankPick)))
         }
         

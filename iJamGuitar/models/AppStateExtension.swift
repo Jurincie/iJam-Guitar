@@ -37,27 +37,14 @@ extension AppState
         pickerTuningName = newTuning.name ?? "ERROR"
         pickerChordGroupName = activeChordGroup?.name ?? ""
     }
-    
-    func makeChordGroupActive(newChordGroup: ChordGroup) {
-        activeTuning?.activeChordGroup = newChordGroup
-        
-        let fretMap = getFretIndexMap(fretMapString: newChordGroup.activeChord?.fretMapString ?? "")
-        
-        currentFretIndexMap = fretMap
-    }
-    
+
     /// This method takes a name associated with Tunings names
     /// and returns an associated Tuning if able, otherwise is return nil
     /// - Parameter name: name-> The name selected by user in Tuning Picker
     /// - Returns:Tuning associated with Name
     func getTuning(name: String) -> Tuning? {
-        var newTuning: Tuning? = nil
-    
-        for tuning in tunings {
-            if tuning.name == name {
-                newTuning = tuning
-                break
-            }
+        let newTuning = tunings.first { tuning in
+            tuning.name == name
         }
     
         return newTuning

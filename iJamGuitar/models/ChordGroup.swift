@@ -16,12 +16,12 @@ final class ChordGroup {
     var availableChordNames: String
     var activeChord: Chord?
     
-    // Computed Properties
+    // Computed Property
     var availableChordNamesArray: [String] {
         availableChordNames.components(separatedBy: "-")
     }
     
-    // Relationships
+    // Relationship
     @Relationship(deleteRule: .cascade) var availableChords = [Chord]()
     
     init(name: String = "",
@@ -29,8 +29,6 @@ final class ChordGroup {
         self.name = name
         self.availableChordNames = availableChordNames
     }
-    
-    
 }
 
 extension ChordGroup: CustomStringConvertible {

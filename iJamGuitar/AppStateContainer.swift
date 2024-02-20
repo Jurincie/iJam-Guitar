@@ -227,9 +227,13 @@ actor AppStateContainer {
                 chordGroups.append(chordGroup)
             }
             
-            parentTuning.activeChordGroup = chordGroups.first(where: { chordGroup in
-                chordGroup.name == "Key of C"
-            })
+            if parentTuning.name == "Standard" {
+                parentTuning.activeChordGroup = chordGroups.first(where: { chordGroup in
+                    chordGroup.name == "Key of C" })
+            } else if parentTuning.name == "Drop D" {
+                parentTuning.activeChordGroup = chordGroups.first
+            }
+        
             return chordGroups
         }
         

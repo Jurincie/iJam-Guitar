@@ -153,7 +153,7 @@ struct BackgroundView: View {
         }){
             if(fretNumber == 0) {
                 // show a white circle on zeroFret with black text
-                CircleView(color: Color.gray)
+                CircleView(color: Color.black.opacity(0.85))
             } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
                 CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
             } else {

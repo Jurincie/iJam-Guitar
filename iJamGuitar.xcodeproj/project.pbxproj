@@ -38,6 +38,10 @@
 		7AA07A732A04177100AE87B3 /* StandardTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */; };
 		7AA07A742A04177100AE87B3 /* DropD_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */; };
 		7AA07A752A04177100AE87B3 /* StandardTuning_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */; };
+		7ACEB16C2B8422F400E85A41 /* CreateChordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */; };
+		7ACEB16F2B842DA800E85A41 /* PickView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB16E2B842DA800E85A41 /* PickView2.swift */; };
+		7ACEB1722B84329100E85A41 /* TuningPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB1712B84329100E85A41 /* TuningPickerView.swift */; };
+		7ACEB1742B84343E00E85A41 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */; };
 		7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C282B1BAC820032DABD /* Chord.swift */; };
 		7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C292B1BAC820032DABD /* ChordGroup.swift */; };
 		7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C2A2B1BAC820032DABD /* Tuning.swift */; };
@@ -88,6 +92,10 @@
 		7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuningChordGroups.plist; path = iJamGuitar/Plists/StandardTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = DropD_ChordLibrary.plist; path = iJamGuitar/Plists/DropD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
 		7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuning_ChordLibrary.plist; path = iJamGuitar/Plists/StandardTuning_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
+		7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChordGroupView.swift; sourceTree = "<group>"; };
+		7ACEB16E2B842DA800E85A41 /* PickView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView2.swift; sourceTree = "<group>"; };
+		7ACEB1712B84329100E85A41 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
+		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
 		7AE86C282B1BAC820032DABD /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
 		7AE86C2A2B1BAC820032DABD /* Tuning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuning.swift; sourceTree = "<group>"; };
@@ -202,21 +210,41 @@
 		7AA07A762A0417C800AE87B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
-				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
-				7A8E96C02B8122B1001A0699 /* TopView.swift */,
+				7ACEB16D2B842D5100E85A41 /* Top Level */,
 				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
 				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
 				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
 				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
 				7A8E96B72B8122B0001A0699 /* PickView.swift */,
-				7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */,
 				7A8E96BF2B8122B0001A0699 /* StringsView.swift */,
 				7A8E96C52B8122B1001A0699 /* StringView.swift */,
-				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
 				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
+				7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7ACEB16D2B842D5100E85A41 /* Top Level */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
+				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
+				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
+				7A8E96C02B8122B1001A0699 /* TopView.swift */,
+				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
+				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
+				7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */,
+			);
+			path = "Top Level";
+			sourceTree = "<group>";
+		};
+		7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */ = {
+			isa = PBXGroup;
+			children = (
+				7ACEB16E2B842DA800E85A41 /* PickView2.swift */,
+				7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */,
+			);
+			path = CreateNewChordGroup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,13 +370,16 @@
 			files = (
 				7A8E96D42B8122B1001A0699 /* FretNumbersView.swift in Sources */,
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
+				7ACEB1742B84343E00E85A41 /* ChordGroupPickerView.swift in Sources */,
 				7AE86C302B1D15E90032DABD /* Logger.swift in Sources */,
 				7A8E96C72B8122B1001A0699 /* PickView.swift in Sources */,
 				7A8E96C92B8122B1001A0699 /* StringsAndFretsAreaView.swift in Sources */,
 				7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */,
 				7A8E96C62B8122B1001A0699 /* ChordButtonsView.swift in Sources */,
+				7ACEB1722B84329100E85A41 /* TuningPickerView.swift in Sources */,
 				7A8E96CF2B8122B1001A0699 /* StringsView.swift in Sources */,
 				7A1636982B7AC3E3000506A8 /* AppStateExtension.swift in Sources */,
+				7ACEB16C2B8422F400E85A41 /* CreateChordGroupView.swift in Sources */,
 				7A8E96CD2B8122B1001A0699 /* ContentView.swift in Sources */,
 				7AE86C2C2B1BAC820032DABD /* Chord.swift in Sources */,
 				7AA07A262A040F6A00AE87B3 /* iJamGuitarApp.swift in Sources */,
@@ -357,6 +388,7 @@
 				7A1CF6F22B79380400F00AF1 /* AppStateContainer.swift in Sources */,
 				7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */,
 				7A8E96D22B8122B1001A0699 /* FretBoardView.swift in Sources */,
+				7ACEB16F2B842DA800E85A41 /* PickView2.swift in Sources */,
 				7A8E96D52B8122B1001A0699 /* StringView.swift in Sources */,
 				7A8E96D02B8122B1001A0699 /* TopView.swift in Sources */,
 				7A8E96CB2B8122B1001A0699 /* BottomView.swift in Sources */,
