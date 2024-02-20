@@ -34,13 +34,16 @@ struct PickView: View {
                 .fontWeight(.bold)
         }
         .cornerRadius(10.0)
+        .scaleEffect(isTapped ? 2.0 : 1.0)
     }
 }
 
 extension PickView {
     func PickButton() -> some View {
         let button =  Button(action: {
-            isTapped.toggle()
+            withAnimation(.default) {
+                isTapped.toggle()
+            }
             appStates.first!.activeChordGroup?.activeChord = pick.chord
             appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
         }){

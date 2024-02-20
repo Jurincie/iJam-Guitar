@@ -771,8 +771,8 @@
             filePath = "iJamGuitar/Views/PickView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "PickButton()"
             landmarkType = "7">
          </BreakpointContent>
