@@ -1,5 +1,5 @@
 //
-//  ChordGroupPickerView.swift
+//  .swift
 //  iJamGuitar
 //
 //  Created by Ron Jurincie on 2/19/24.
@@ -50,8 +50,8 @@ struct ChordGroupPickerView: View {
         }
         .frame(alignment: .leading)
         .border(.white,
-                width: 2)
-        .cornerRadius(5)
+                width: 4)
+        .cornerRadius(8)
         .padding(.top)
     }
     

@@ -43,8 +43,8 @@ struct TuningPickerView: View {
         .frame(alignment: .leading)
         .shadow(color: .white , radius: 12.0)
         .border(.white,
-                width: 2)
-        .cornerRadius(5)
+                width: 4)
+        .cornerRadius(8)
         .padding(.top)
     }
 }

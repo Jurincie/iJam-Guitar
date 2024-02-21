@@ -16,25 +16,12 @@ enum Tunings: String {
 }
 
 struct HeaderView: View {
-    func getChordGroupNamesForTuning(name: String) -> [String] {
-        var array = [String]()
-        let thisTuning = appStates.first!.tunings.first { tuning in
-            tuning.name == name
-        }
-        if let chordGroups = thisTuning?.chordGroups {
-            for chordGroup in chordGroups {
-                array.append(chordGroup.name)
-            }
-        }
-        
-        return array
-    }
-    
     @Query private var appStates: [AppState]
     @State private var showCreateChordGroupSheet = false
     @State private var tuningName: String = ""
     @State private var chordGroupName: String = ""
     @State private var chordGroupNames = [String]()
+    let backgroundImage = (Image(.thirdView))
     let width: CGFloat
     let height: CGFloat
     
@@ -45,45 +32,62 @@ struct HeaderView: View {
     }
     
     var body: some View {
+        Spacer()
         VStack {
-            Spacer()
-            ZStack() {
-                // Background
-                Image(.secondView)
-                    .resizable()
-                    .frame(width: width, height: height)
-                // Foreground
-                VStack {
-                    Text(" ") // Hack
+            HStack {
+                HStack() {
                     Spacer()
-                    HStack() {
-                        Spacer()
-                        TuningPickerView(tuningName: $tuningName, 
-                                         chordGroupName: $chordGroupName)
-                        Spacer()
-                        ChordGroupPickerView(chordGroupName: $chordGroupName)
-                        Spacer()
-                        Button {
-                            showCreateChordGroupSheet.toggle()
-                        } label: {
-                            VStack {
-                                Spacer()
-                                Spacer()
-                                Image(systemName: "plus.circle")
-                                    .font(.title)
-                                Spacer()
-                            }
+                    TuningPickerView(tuningName: $tuningName, chordGroupName: $chordGroupName)
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    ChordGroupPickerView(chordGroupName: $chordGroupName)
+                    Spacer()
+                    Button {
+                        showCreateChordGroupSheet.toggle()
+                    } label: {
+                        VStack {
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Image(systemName: "plus.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                            Spacer()
                         }
                     }
-                    .padding()
                 }
-                .sheet(isPresented: $showCreateChordGroupSheet) {
-                    CreateChordGroupView()
-                }
+                .padding(.vertical)
+                .frame(height: 80)
             }
-            Spacer()
+        }
+        .background(backgroundImage
+            .resizable()
+            .scaledToFill()
+            .frame(width: width, height: height))
+    
+        .sheet(isPresented: $showCreateChordGroupSheet) {
+            CreateChordGroupView()
         }
     }
+    
+    func getChordGroupNamesForTuning(name: String) -> [String] {
+        var chordGroupNameArray = [String]()
+        let thisTuning = appStates.first!.tunings.first { tuning in
+            tuning.name == name
+        }
+        if let chordGroups = thisTuning?.chordGroups {
+            for chordGroup in chordGroups {
+                chordGroupNameArray.append(chordGroup.name)
+            }
+        }
+        
+        return chordGroupNameArray
+    }
+}
+
+#Preview {
+    return HeaderView(width: .infinity, height: 200)
 }
 
 

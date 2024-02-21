@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " " : {
-
-    },
     "%lld" : {
       "localizations" : {
         "de" : {
@@ -90,6 +87,9 @@
           }
         }
       }
+    },
+    "Choose up to 10 of the chords below" : {
+
     },
     "Chord Groups" : {
       "localizations" : {
@@ -204,6 +204,9 @@
         }
       }
     },
+    "No Chords Selected" : {
+
+    },
     "OK" : {
       "localizations" : {
         "de" : {
@@ -232,16 +235,10 @@
         }
       }
     },
-    "Select Tuning:" : {
+    "Slected Tuning already has a ChordGroup with this name" : {
 
     },
     "SUBMIT" : {
-
-    },
-    "Tap on picks to select chords below" : {
-
-    },
-    "TESTING" : {
 
     },
     "Tuning: %@" : {
@@ -328,6 +325,9 @@
           }
         }
       }
+    },
+    "You need to Enter a name for New Chord Group" : {
+
     }
   },
   "version" : "1.0"

@@ -11,52 +11,25 @@ import OSLog
 
 struct PickView2: View {
     @Query var appStates: [AppState]
-    @Binding var selectedChordIndex: Int
-    @State private var isTapped: Bool = false
+    @Binding var selectedChords: [Chord]
+    
     let kNoChordName = "NoChord"
     var pick: Pick
     
     var body: some View {
         ZStack() {
             // background
-            PickButton()
+            Image(pick.id < selectedChords.count ? .activePick : .blankPick)
+                .resizable()
+                .scaledToFill()
             
             // foreground
-            Text(pick.chord.name == kNoChordName ? "" : pick.chord.name)
+            Text(pick.id >= selectedChords.count ? "" : selectedChords[pick.id].name)
                 .foregroundColor(Color.white)
                 .font(.headline)
                 .fontWeight(.bold)
         }
-        .scaleEffect(isTapped ? 2.0 : 1.0)
         .cornerRadius(10.0)
-    }
-}
-
-extension PickView2 {
-    func PickButton() -> some View {
-        let button =  Button(action: {
-            withAnimation(.default) {
-                isTapped.toggle()
-            }
-            selectedChordIndex = pick.id
-            isTapped.toggle()
-        }){
-            Image(getPickImageName())
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 100.0)
-                .padding(10)
-                .opacity(pick.chord.name == kNoChordName ? 0.3 : 1.0)
-                .disabled(pick.chord.name == kNoChordName)
-        }
-        
-        return button
-    }
-    
-    func getPickImageName() -> String {
-        let pickImageName = "BlankPick"
-        
-        return pickImageName
     }
 }
 
