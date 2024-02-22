@@ -65,6 +65,7 @@ struct HeaderView: View {
             }
             .padding()
             .frame(maxHeight: 80)
+            .frame(width: width)
         }
         .background(backgroundImage
             .resizable()

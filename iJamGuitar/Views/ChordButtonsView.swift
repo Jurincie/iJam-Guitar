@@ -21,7 +21,7 @@ struct ChordButtonsView: View {
         var chordNames = appStates.first!.activeChordGroup?.availableChordNamesArray
         // append "NoChord" to fill chordNames to 10
         if let numberNames = chordNames?.count {
-            for index in numberNames..<10 {
+            for _ in numberNames..<10 {
                 chordNames?.append("NoChord")
             }
         }
