@@ -20,7 +20,7 @@ struct StringsAndFretsAreaView : View {
     
     var body: some View {
         ZStack() {
-            // BOTTOM layer
+            // Background layer
             VStack(spacing:0) {
                 // display frets in Top half
                 HStack(spacing:0) {
@@ -39,7 +39,7 @@ struct StringsAndFretsAreaView : View {
                            alignment: .top)
             }
             
-            // TOP layer
+            // Foreground layer
             StringsView(width: width,
                         height: height)
         }
