@@ -40,7 +40,8 @@ struct StringsAndFretsAreaView : View {
             }
             
             // TOP layer
-            StringsView(height: height)
+            StringsView(width: width,
+                        height: height)
         }
     }
 }

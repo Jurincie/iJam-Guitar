@@ -34,8 +34,7 @@ struct HeaderView: View {
         Spacer()
         ZStack() {
             // Background
-            Image("HeaderView")
-                .resizable()
+            Color(.black)
                 .frame(width: width, height: height)
             
             // Foreground
@@ -63,8 +62,23 @@ struct HeaderView: View {
                         .cornerRadius(7)
                         .padding(.top)
                     Spacer()
+                    Button(action: {
+                        showCreateChordGroupSheet.toggle()
+                    }, label: {
+                        VStack {
+                            Spacer()
+                            Spacer()
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.white)
+                                .font(.largeTitle)
+                            Spacer()
+                        }
+                    })
                 }
                 .padding()
+                .sheet(isPresented: $showCreateChordGroupSheet) {
+                    CreateChordGroupView()
+                }
             }
         }
     }
@@ -107,9 +121,7 @@ struct HeaderView: View {
 //            .scaledToFill()
 //            .frame(width: width, height: height)
 //            .opacity(0.60))
-//        .sheet(isPresented: $showCreateChordGroupSheet) {
-//            CreateChordGroupView()
-//        }
+        
 //    }
     
     func getChordGroupNamesForTuning(name: String) -> [String] {

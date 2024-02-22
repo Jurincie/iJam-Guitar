@@ -32,11 +32,16 @@ import OSLog
 struct StringsView: View {
     @Query var appStates: [AppState]
     @State private var dragLocation: CGPoint?
-    let audioManager = iJamAudioManager()
-    var height: CGFloat
-    let kNoFret = -1
     @State private var formerZone = -1
     @State private var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
+    
+    // Stored Properties
+    let audioManager = iJamAudioManager()
+    var height: CGFloat
+    var width: CGFloat
+    let kNoFret = -1
+    
+    // Computed Property
     var drag: some Gesture {
         DragGesture()
             .onEnded { _ in formerZone = -1 }
@@ -46,7 +51,8 @@ struct StringsView: View {
             }
     }
     
-    init(height: CGFloat) {
+    init(width: CGFloat, height: CGFloat) {
+        self.width = width
         self.height = height
     }
     

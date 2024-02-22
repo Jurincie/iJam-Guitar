@@ -382,10 +382,10 @@
             filePath = "iJamGuitar/Views/HeaderView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "getChordGroupNamesForTuning(name:)"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "E14C6DF5-16DE-4760-8F02-ACE0286E1F0D - a90f9139b0ff264e"
@@ -462,6 +462,21 @@
                   endingLineNumber = "72"
                   offsetFromSymbolStart = "248">
                </Location>
+               <Location
+                  uuid = "E14C6DF5-16DE-4760-8F02-ACE0286E1F0D - aa19cbcea6d5eaa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.HeaderView.getChordGroupNamesForTuning(name: Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/HeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "248">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -475,8 +490,10 @@
             filePath = "iJamGuitar/Views/HeaderView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114">
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "HeaderView"
+            landmarkType = "14">
             <Locations>
                <Location
                   uuid = "6A853D2D-A000-4C1E-B10F-59E902FD8A68 - 7dc36fd2e10eb851"
@@ -507,6 +524,21 @@
                   startingLineNumber = "114"
                   endingLineNumber = "114"
                   offsetFromSymbolStart = "2548">
+               </Location>
+               <Location
+                  uuid = "6A853D2D-A000-4C1E-B10F-59E902FD8A68 - aa19cbcea6d5ea41"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.HeaderView.getChordGroupNamesForTuning(name: Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/HeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "228">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -570,6 +602,21 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"
                   endingLineNumber = "55"
+                  offsetFromSymbolStart = "484">
+               </Location>
+               <Location
+                  uuid = "D64A308E-4106-4F58-9A60-C97F8D613610 - 45d5714ea127baa4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in iJamGuitar.AvailablePickView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
                   offsetFromSymbolStart = "484">
                </Location>
             </Locations>
@@ -737,17 +784,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2893D0CC-BE99-4302-929B-A8D1C5390EE8"
+            uuid = "0BE4FA34-7174-4E29-9C46-43423FC5B563"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/ContentView.swift"
+            filePath = "iJamGuitar/Views/StringsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "init(width:height:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0BE4FA34-7174-4E29-9C46-43423FC5B563 - dd35cabc8ee60638"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.StringsView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/StringsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "964">
+               </Location>
+               <Location
+                  uuid = "0BE4FA34-7174-4E29-9C46-43423FC5B563 - bf6ba14f7d24f822"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.StringsView.init(width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat) -&gt; iJamGuitar.StringsView"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/StringsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "644">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
