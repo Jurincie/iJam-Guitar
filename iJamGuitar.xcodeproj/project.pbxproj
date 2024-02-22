@@ -100,7 +100,7 @@
 		7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChordGroupView.swift; sourceTree = "<group>"; };
 		7ACEB16E2B842DA800E85A41 /* PickView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView2.swift; sourceTree = "<group>"; };
 		7ACEB1712B84329100E85A41 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
-		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
+		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChordGroupPickerView.swift; path = "Top Level/ChordGroupPickerView.swift"; sourceTree = "<group>"; };
 		7ACEB1782B845A2C00E85A41 /* ZoomInOutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomInOutModifier.swift; sourceTree = "<group>"; };
 		7AE86C282B1BAC820032DABD /* Chord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
@@ -217,7 +217,13 @@
 		7AA07A762A0417C800AE87B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7ACEB16D2B842D5100E85A41 /* Top Level */,
+				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
+				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
+				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
+				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
+				7A8E96C02B8122B1001A0699 /* TopView.swift */,
+				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
+				7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */,
 				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
 				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
 				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
@@ -229,20 +235,6 @@
 				7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		7ACEB16D2B842D5100E85A41 /* Top Level */ = {
-			isa = PBXGroup;
-			children = (
-				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
-				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
-				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
-				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
-				7A8E96C02B8122B1001A0699 /* TopView.swift */,
-				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
-				7A8E96B92B8122B0001A0699 /* StringsAndFretsAreaView.swift */,
-			);
-			path = "Top Level";
 			sourceTree = "<group>";
 		};
 		7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */ = {
@@ -612,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;
@@ -645,7 +637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;

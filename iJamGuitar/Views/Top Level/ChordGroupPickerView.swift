@@ -56,6 +56,11 @@ struct ChordGroupPickerView: View {
         .padding(.top)
     }
     
+    func deleteChordGroup() {
+        Logger.viewCycle.debug("Here we delete a chord group")
+        Logger.viewCycle.debug("Do not allow LAST remaining group to be deletee")
+    }
+    
     func getChordGroupNamesForTuning(name: String) -> [String] {
         var array = [String]()
         let thisTuning = appStates.first!.tunings.first { tuning in
