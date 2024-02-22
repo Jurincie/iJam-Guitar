@@ -14,6 +14,7 @@ struct ChordGroupPickerView: View {
     @Query var appStates: [AppState]
     @Binding var chordGroupName: String
     var height: CGFloat
+    var width: CGFloat
     
     var body: some View {
         VStack {
@@ -23,7 +24,10 @@ struct ChordGroupPickerView: View {
                     ForEach(chordGroupNames, id: \.self) {
                         Text($0)
                     }
+                    .onDelete(perform: deleteChordGroup)
                 }
+                .pickerStyle(.automatic)
+                .frame(maxWidth: width)
                 .onChange(of: chordGroupName, { oldValue, newValue in
                     Logger.viewCycle.notice("new ChordGroupname: \(newValue)")
                     appStates.first!.pickerChordGroupName = newValue
@@ -37,8 +41,6 @@ struct ChordGroupPickerView: View {
                         appStates.first!.currentFretIndexMap = fretMap
                     }
                 })
-                .pickerStyle(.automatic)
-                .frame(maxWidth: .infinity)
             } label: {
                 Text(appStates.first!.pickerChordGroupName)
                     .padding()
@@ -46,17 +48,16 @@ struct ChordGroupPickerView: View {
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
-                    .shadow(color: .white , radius: 2.0)
             }
         }
-        .frame(height: height, alignment: .leading)
+        .frame(maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 36)
         .border(.white,
                 width: 3)
         .cornerRadius(8)
-        .padding(.top)
     }
     
-    func deleteChordGroup() {
+    func deleteChordGroup(at offsets: IndexSet) {
+        appStates.first!.activeTuning?.chordGroups.remove(atOffsets: offsets)
         Logger.viewCycle.debug("Here we delete a chord group")
         Logger.viewCycle.debug("Do not allow LAST remaining group to be deletee")
     }

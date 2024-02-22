@@ -36,6 +36,7 @@ struct AvailableChordsGridView: View {
                 }
             }
         }
+        .scrollBounceBehavior(.always)
         .contentMargins(.trailing, 20, for: .scrollContent)
         .scrollIndicatorsFlash(onAppear: true)
         .padding()

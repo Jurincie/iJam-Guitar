@@ -21,6 +21,7 @@ struct PickView: View {
     @State private var scaleValue = 1.0
     let kNoChordName = "NoChord"
     var pick: Pick
+    var chord = Chord(name: "", fretMapString: "")
     
     var body: some View {
         ZStack() {

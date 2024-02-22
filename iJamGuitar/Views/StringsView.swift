@@ -55,7 +55,6 @@ struct StringsView: View {
         HStack(spacing:0) {
             SixHorizontalSpacers()
             SixHorizontalSpacers()
-            
             ForEach(0...5, id: \.self) { index in
                 StringView(height: height,
                            stringNumber: 6 - index)
@@ -63,7 +62,6 @@ struct StringsView: View {
                     zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
                 }
             }
-            
             SixHorizontalSpacers()
             SixHorizontalSpacers()
         }
@@ -134,15 +132,9 @@ extension StringsView {
             Logger.viewCycle.notice("====> In New Zone: \(zone)")
             
             if formerZone >= 0 && appStates.first!.isMuted == false {
-                //                 if audioManager.AVAudioSession.sharedInstance().outputVolume == 0.0 {
-                //                     appStates.first!.showVolumeAlert = true
-                //                 } else {
-                
                 let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
                 pickString(stringToPlay)
-                //                 }
             }
-            
             formerZone = zone
         }
     }

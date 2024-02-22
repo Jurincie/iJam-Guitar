@@ -16,12 +16,17 @@ struct ChordButtonsView: View {
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
-    
     func getPicks() -> [Pick] {
-        let chordNames = appStates.first!.activeChordGroup?.availableChordNamesArray
         var pickArray = [Pick]()
+        var chordNames = appStates.first!.activeChordGroup?.availableChordNamesArray
+        // append "NoChord" to fill chordNames to 10
+        if let numberNames = chordNames?.count {
+            for index in numberNames..<10 {
+                chordNames?.append("NoChord")
+            }
+        }
         
-        for index in 0..<(chordNames?.count ?? 0) {
+        for index in 0..<10 {
             let title = chordNames?[index] ?? ""
             if let thisChord = appStates.first!.activeChordGroup?.availableChords.first(where: { chord in
                 chord.name == title }) {
@@ -30,6 +35,12 @@ struct ChordButtonsView: View {
                                       image:Image("UndefinedPick")))
             }
         }
+        
+//        for index in 0..<10 {
+//            pickArray.append(Pick(id: index,
+//                                  chord: newChord,
+//                                  image:Image("UndefinedPick")))
+//        }
         
         return pickArray
     }

@@ -204,7 +204,7 @@ actor AppStateContainer {
                 
                 let chordNameArray = chordNames.components(separatedBy: "-")
                 // append "NoChord" with inactivePickImage for remaing of 10
-                for index in chordNameArray.count..<10 {
+                for _ in chordNameArray.count..<10 {
                     chordNames.append("NoChord")
                 }
                 let availableChordsArray = chordNameArray.map({ chordName in
@@ -213,7 +213,7 @@ actor AppStateContainer {
                 })
                 
                 // append NoChords to availableChordsArray to fill 10
-                for index in availableChordsArray.count..<10 {
+                for _ in availableChordsArray.count..<10 {
                     
                 }
                 

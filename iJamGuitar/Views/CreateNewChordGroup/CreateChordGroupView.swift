@@ -154,6 +154,9 @@ extension CreateChordGroupView {
         appStates.first!.activeTuning?.chordGroups.append(newChordGroup)
         appStates.first!.activeTuning?.activeChordGroup = newChordGroup
         appStates.first!.pickerChordGroupName = newChordGroup.name
+        let fretMap = appStates.first!.getFretIndexMap(fretMapString: newChordGroup.activeChord?.fretMapString ?? "")
+        appStates.first!.currentFretIndexMap = fretMap
+        
         
         if let fretMapString = newChordGroup.activeChord?.fretMapString {
             appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: fretMapString)

@@ -33,12 +33,23 @@ struct HeaderView: View {
     
     var body: some View {
         VStack {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                Spacer()
+            }
             HStack() {
                 Spacer()
-                TuningPickerView(tuningName: $tuningName, chordGroupName: $chordGroupName, height: height / 4)
+                TuningPickerView(tuningName: $tuningName,
+                                 chordGroupName: $chordGroupName,
+                                 height: height,
+                                 width: width)
+                
+                .fixedSize()
                 Spacer()
                 Spacer()
-                ChordGroupPickerView(chordGroupName: $chordGroupName, height: height / 4)
+                ChordGroupPickerView(chordGroupName: $chordGroupName,
+                                     height: height,
+                                     width: width)
+                    .fixedSize()
                 Spacer()
                 Spacer()
                 Button {
@@ -46,25 +57,20 @@ struct HeaderView: View {
                 } label: {
                     VStack {
                         Spacer()
-                        Spacer()
-                        Spacer()
                         Image(systemName: "plus.circle")
                             .font(.largeTitle)
                             .foregroundColor(.white)
-                        Spacer()
                     }
                 }
             }
-            .padding(.vertical)
+            .padding()
             .frame(maxHeight: 80)
         }
-        .padding()
         .background(backgroundImage
             .resizable()
             .scaledToFill()
             .frame(width: width, height: height)
             .opacity(0.60))
-        
         .sheet(isPresented: $showCreateChordGroupSheet) {
             CreateChordGroupView()
         }
