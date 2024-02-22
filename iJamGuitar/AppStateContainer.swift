@@ -198,15 +198,24 @@ actor AppStateContainer {
             for entry in dict {
                 // create new ChordGroupd
                 let chordGroup = ChordGroup()
-                
-                chordGroup.name = entry.key
-                let chordNames = entry.value
+                var chordNames = entry.value
                 chordGroup.availableChordNames = chordNames
+                chordGroup.name = entry.key
+                
                 let chordNameArray = chordNames.components(separatedBy: "-")
+                // append "NoChord" with inactivePickImage for remaing of 10
+                for index in chordNameArray.count..<10 {
+                    chordNames.append("NoChord")
+                }
                 let availableChordsArray = chordNameArray.map({ chordName in
                     createChord(chordName: chordName,
                                 chordDictionary: parentTuning.chordsDictionary)!
                 })
+                
+                // append NoChords to availableChordsArray to fill 10
+                for index in availableChordsArray.count..<10 {
+                    
+                }
                 
                 // set activeChord for this group
                 if chordGroup.name == "Key of C" {
@@ -245,12 +254,17 @@ actor AppStateContainer {
         func createChord(chordName: String,
                       chordDictionary: Dictionary<String, String>) -> Chord? {
             var newChord: Chord?
-            let entry = chordDictionary.first { (key: String, value: String) in
-                chordName == key
-            }
             
-            if let entry = entry {
-                newChord = Chord(name: entry.key, fretMapString: entry.value)
+            if chordName == "NoChord" {
+                newChord = Chord(name: "NoChord", fretMapString: "xxxxxx")
+            } else {
+                let entry = chordDictionary.first { (key: String, value: String) in
+                    chordName == key
+                }
+                
+                if let entry = entry {
+                    newChord = Chord(name: entry.key, fretMapString: entry.value)
+                }
             }
             
             return newChord
