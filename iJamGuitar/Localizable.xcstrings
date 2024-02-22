@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " " : {
 
     },
@@ -241,10 +244,16 @@
     "Please Select a Tuning" : {
 
     },
+    "Select a Tuning (Above)" : {
+
+    },
     "Slected Tuning already has a ChordGroup with this name" : {
 
     },
     "SUBMIT" : {
+
+    },
+    "To load available chords" : {
 
     },
     "Tuning: %@" : {

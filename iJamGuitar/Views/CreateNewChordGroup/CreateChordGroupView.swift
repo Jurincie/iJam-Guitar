@@ -37,6 +37,15 @@ struct CreateChordGroupView: View {
                 .padding()
                 .padding(.horizontal)
             VStack {
+                LazyVGrid(columns: columns,
+                          spacing: 8) {
+                    ForEach(getUndefinedPicks(), id: \.id) { pick in
+                        PickView2(selectedChords: $selectedChords, pick: pick)
+                    }
+                }
+                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 of the chords below")
+                    .font(.headline)
+                
                 Menu {
                     Picker("Tunings", selection: $selectedTuningName) {
                         ForEach(appStates.first!.getTuningNames(), id: \.self) {
@@ -69,16 +78,7 @@ struct CreateChordGroupView: View {
                 }
                 .cornerRadius(10)
                 .padding()
-                
-                LazyVGrid(columns: columns,
-                          spacing: 8) {
-                    ForEach(getUndefinedPicks(), id: \.id) { pick in
-                        PickView2(selectedChords: $selectedChords, pick: pick)
-                    }
-                }
-                Text("Choose up to 10 of the chords below")
-                    .font(.headline)
-                
+                Spacer()
                 AvailableChordsGridView(tuning: Bindable<AppState>(appStates.first!).activeTuning,
                                         selectedChords: $selectedChords,
                                         tuningSelected: selectedTuningName != "Select a Tuning")

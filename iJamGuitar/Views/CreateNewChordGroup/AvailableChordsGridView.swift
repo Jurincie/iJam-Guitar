@@ -16,32 +16,49 @@ struct AvailableChordsGridView: View {
     var tuningSelected: Bool
     
     var body: some View {
-        let appState = appStates.first!
-        let chordDictionary: [String:String] = appState.activeTuning!.chordsDictionary
-        let columns = Array(repeating: GridItem(.flexible()), count: 4)
-        let keys = chordDictionary.map{$0.key}
-        let values = chordDictionary.map {$0.value}
-        
-        // sort tuple array
-        let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
-            tuple1.0 < tuple2.0
+        if tuningSelected == false {
+            VStack {
+                Spacer()
+                Text("Select a Tuning (Above)")
+                    .font(.title)
+                Text("To load available chords")
+                    .font(.title)
+                Spacer()
+            }
+            .padding()
+            .border(.black, width: 4)
         }
-        
-        ScrollView(.vertical) {
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(0..<keyValues.count, id: \.self) { index in
-                    AvailablePickView(selectedChords: $selectedChords, 
-                                      name: tuningSelected ? keyValues[index].0 : "",
-                                      fretMapString: tuningSelected ? keyValues[index].1 : "")
+        else {
+            let appState = appStates.first!
+            let chordDictionary: [String:String] = appState.activeTuning!.chordsDictionary
+            let columns = Array(repeating: GridItem(.flexible()), count: 4)
+            let keys = chordDictionary.map{$0.key}
+            let values = chordDictionary.map {$0.value}
+            
+            // sort tuple array
+            let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+                tuple1.0 < tuple2.0
+            }
+            
+            ScrollView(.vertical) {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(0..<keyValues.count, id: \.self) { index in
+                        AvailablePickView(selectedChords: $selectedChords,
+                                          name: tuningSelected ? keyValues[index].0 : "",
+                                          fretMapString: tuningSelected ? keyValues[index].1 : "")
+                    }
+                    .scrollTargetLayout()
                 }
             }
+            .scrollTargetBehavior(.viewAligned)
+            .scrollIndicatorsFlash(onAppear: true)
+            .scrollBounceBehavior(.always)
+            .contentMargins(.trailing, 20, for: .scrollContent)
+            .scrollIndicatorsFlash(onAppear: true)
+            .padding()
+            .border(.black, width: 4)
+            .cornerRadius(12)
         }
-        .scrollBounceBehavior(.always)
-        .contentMargins(.trailing, 20, for: .scrollContent)
-        .scrollIndicatorsFlash(onAppear: true)
-        .padding()
-        .border(.black, width: 4)
-        .cornerRadius(12)
     }
 }
 
@@ -83,8 +100,10 @@ struct AvailablePickView: View {
                 VStack(spacing: 5) {
                     Spacer()
                     Text(name)
+                        .font(.title)
                         .bold()
                     Text(fretMapString)
+                        .font(.headline)
                     Spacer()
                 }
                 .font(.caption)

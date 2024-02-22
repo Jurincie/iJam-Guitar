@@ -38,7 +38,6 @@ struct StringsView: View {
     // Stored Properties
     let audioManager = iJamAudioManager()
     var height: CGFloat
-    var width: CGFloat
     let kNoFret = -1
     
     // Computed Property
@@ -51,24 +50,53 @@ struct StringsView: View {
             }
     }
     
-    init(width: CGFloat, height: CGFloat) {
-        self.width = width
+    init(height: CGFloat) {
         self.height = height
     }
     
     var body: some View {
-        let appState = appStates.first!
-        HStack(spacing:0) {
+        var appState = appStates.first!
+        HStack() {
             SixHorizontalSpacers()
-            SixHorizontalSpacers()
-            ForEach(0...5, id: \.self) { index in
+            HStack(spacing:0) {
                 StringView(height: height,
-                           stringNumber: 6 - index)
+                           stringNumber: 6)
                 .readFrame { newFrame in
-                    zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
+                    zoneBreaks[0] = (newFrame.maxX + newFrame.minX) / 2.0
+                }
+                Spacer()
+                StringView(height: height,
+                           stringNumber: 5)
+                .readFrame { newFrame in
+                    zoneBreaks[1] = (newFrame.maxX + newFrame.minX) / 2.0
+                }
+                Spacer()
+                StringView(height: height,
+                           stringNumber: 4)
+                .readFrame { newFrame in
+                    zoneBreaks[2] = (newFrame.maxX + newFrame.minX) / 2.0
+                }
+                Spacer()
+            }
+            HStack() {
+                StringView(height: height,
+                           stringNumber: 3)
+                .readFrame { newFrame in
+                    zoneBreaks[3] = (newFrame.maxX + newFrame.minX) / 2.0
+                }
+                Spacer()
+                StringView(height: height,
+                           stringNumber: 2)
+                .readFrame { newFrame in
+                    zoneBreaks[4] = (newFrame.maxX + newFrame.minX) / 2.0
+                }
+                Spacer()
+                StringView(height: height,
+                           stringNumber: 1)
+                .readFrame { newFrame in
+                    zoneBreaks[5] = (newFrame.maxX + newFrame.minX) / 2.0
                 }
             }
-            SixHorizontalSpacers()
             SixHorizontalSpacers()
         }
         .task({ await playOpeningArpegio() })
@@ -78,13 +106,14 @@ struct StringsView: View {
                isPresented: Bindable(appState).showVolumeAlert) {
             Button("OK", role: .cancel) { appState.showVolumeAlert = false }
         }
-        .alert("Another App is using the Audio Player",
-              isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
-           Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
+               .alert("Another App is using the Audio Player",
+                      isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
+                   Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
                }
-        .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
-          Button("OK", role: .cancel) { fatalError() }
-        }
+                      .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
+                          Button("OK", role: .cancel) { fatalError() }
+                      }
+        
     }
     
     struct SixHorizontalSpacers: View {
@@ -178,5 +207,21 @@ extension StringsView {
         Logger.viewCycle.debug("-----> zoneBreaks: \(zoneBreaks)")
     }
 }
+
+//    var body: some View {
+//        let appState = appStates.first!
+//        HStack {
+//            SixHorizontalSpacers()
+//            HStack(spacing:0) {
+//                ForEach(0...5, id: \.self) { index in
+//                    StringView(height: height,
+//                               stringNumber: 6 - index)
+//                    .readFrame { newFrame in
+//                        zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
+//                    }
+//                }
+//                SixHorizontalSpacers()
+////                SixHorizontalSpacers()
+//            }
 
 
