@@ -15,7 +15,7 @@ struct BottomView: View {
 
     var body: some View {
         ZStack() {
-            Image("BottomView")
+            Image(.bottomView)
                 .resizable()
                 .frame(width:width,
                        height:height,

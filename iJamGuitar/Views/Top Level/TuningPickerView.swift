@@ -12,6 +12,7 @@ import SwiftUI
 struct TuningPickerView: View {
     @Binding var tuningName: String
     @Binding var chordGroupName: String
+    var height: CGFloat
     @Query var appStates: [AppState]
     var body: some View {
         VStack {
@@ -40,7 +41,7 @@ struct TuningPickerView: View {
                     .foregroundColor(Color.white)
             }
         }
-        .frame(alignment: .leading)
+        .frame(height: height, alignment: .leading)
         .shadow(color: .white , radius: 12.0)
         .border(.white,
                 width: 4)

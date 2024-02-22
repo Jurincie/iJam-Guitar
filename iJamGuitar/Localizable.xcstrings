@@ -235,6 +235,9 @@
         }
       }
     },
+    "Please Select a Tuning" : {
+
+    },
     "Slected Tuning already has a ChordGroup with this name" : {
 
     },

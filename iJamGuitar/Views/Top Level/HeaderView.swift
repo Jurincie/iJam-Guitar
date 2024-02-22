@@ -21,7 +21,7 @@ struct HeaderView: View {
     @State private var tuningName: String = ""
     @State private var chordGroupName: String = ""
     @State private var chordGroupNames = [String]()
-    let backgroundImage = (Image(.thirdView))
+    let backgroundImage = Image(.thirdView)
     let width: CGFloat
     let height: CGFloat
     
@@ -32,40 +32,39 @@ struct HeaderView: View {
     }
     
     var body: some View {
-        Spacer()
         VStack {
-            HStack {
-                HStack() {
-                    Spacer()
-                    TuningPickerView(tuningName: $tuningName, chordGroupName: $chordGroupName)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    ChordGroupPickerView(chordGroupName: $chordGroupName)
-                    Spacer()
-                    Button {
-                        showCreateChordGroupSheet.toggle()
-                    } label: {
-                        VStack {
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Image(systemName: "plus.circle")
-                                .font(.largeTitle)
-                                .foregroundColor(.white)
-                            Spacer()
-                        }
+            HStack() {
+                Spacer()
+                TuningPickerView(tuningName: $tuningName, chordGroupName: $chordGroupName, height: height / 4)
+                Spacer()
+                Spacer()
+                ChordGroupPickerView(chordGroupName: $chordGroupName, height: height / 4)
+                Spacer()
+                Spacer()
+                Button {
+                    showCreateChordGroupSheet.toggle()
+                } label: {
+                    VStack {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Image(systemName: "plus.circle")
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
+                        Spacer()
                     }
                 }
-                .padding(.vertical)
-                .frame(height: 80)
             }
+            .padding(.vertical)
+            .frame(maxHeight: 80)
         }
+        .padding()
         .background(backgroundImage
             .resizable()
             .scaledToFill()
-            .frame(width: width, height: height))
-    
+            .frame(width: width, height: height)
+            .opacity(0.60))
+        
         .sheet(isPresented: $showCreateChordGroupSheet) {
             CreateChordGroupView()
         }

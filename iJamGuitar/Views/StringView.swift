@@ -88,20 +88,6 @@ struct StringView: View {
             }
         }
     }
-//                    else if appState.currentFretIndexMap[6 - stringNumber] == fretBox.id {
-//                        // red ball on freted fretBox
-//                        // yellow ball if not in the chord - meaning user tapped on different fret
-//                        let currentFret = appState.currentFretIndexMap[6 - stringNumber]
-//                        let chordsFretMap = appState.getFretIndexMap(chord: appState.activeChordGroup?.activeChord)
-//                        let chordsFret = chordsFretMap[6 - stringNumber]
-//                            CircleView(color: currentFret == chordsFret ? .red : .yellow, lineWidth: 1.0)
-//                        } else {
-//                        // show clearColor circle
-//                        // this way we can still react to taps
-//                        CircleView()
-//                    }
-//                }
-
 }
 
 struct ForegroundView: View {
@@ -122,7 +108,6 @@ struct ForegroundView: View {
         } else {
             let text = fretNumber == appState.currentFretIndexMap[6 - stringNumber] ? title : ""
             Text(text)
-                .foregroundColor(Color.black)
                 .font(.title3)
                 .fixedSize()
         }
@@ -152,8 +137,8 @@ struct BackgroundView: View {
             appState.currentFretIndexMap[index] = correctedFret
         }){
             if(fretNumber == 0) {
-                // show a white circle on zeroFret with black text
-                CircleView(color: Color.primary)
+                // show a gray circle on zeroFret with black text
+                CircleView(color: Color.gray)
             } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
                 CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
             } else {

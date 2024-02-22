@@ -33,6 +33,12 @@ extension Chord: Hashable {
     }
 }
 
+extension Chord: Comparable {
+    static func < (lhs: Chord, rhs: Chord) -> Bool {
+        lhs.name < rhs.name
+    }
+}
+
 extension Chord: Equatable {
     static func == (lhs: Chord, rhs: Chord) -> Bool {
         lhs.name == rhs.name && lhs.fretMapString == rhs.fretMapString

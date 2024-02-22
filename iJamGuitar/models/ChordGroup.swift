@@ -26,13 +26,13 @@ final class ChordGroup {
     
     init(name: String = "",
          availableChordNames: String = "") {
-        self.name = name
         self.availableChordNames = availableChordNames
+        self.name = name
     }
 }
 
 extension ChordGroup: CustomStringConvertible {
     var description: String {
-        return "name: \(name)\nactiveChord: \(String(describing: activeChord?.name))"
+        return "name: \(name)   activeChord: \(String(describing: activeChord?.name))"
     }
 }

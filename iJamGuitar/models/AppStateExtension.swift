@@ -121,4 +121,21 @@ extension AppState
         
         return nil
     }
+    
+    func getAvailableChords(dictionary: Dictionary<String,String>) -> [Chord] {
+        var availableChords = [Chord]()
+        let keys = dictionary.map{$0.key}
+        let values = dictionary.map {$0.value}
+        
+        let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+            tuple1.0 < tuple2.0
+        }
+        
+        for entry in keyValues {
+            let newChord = Chord(name: entry.0, fretMapString: entry.1)
+            availableChords.append(newChord)
+        }
+        
+        return availableChords
+    }
 }

@@ -13,6 +13,7 @@ import SwiftUI
 struct ChordGroupPickerView: View {
     @Query var appStates: [AppState]
     @Binding var chordGroupName: String
+    var height: CGFloat
     
     var body: some View {
         VStack {
@@ -48,9 +49,9 @@ struct ChordGroupPickerView: View {
                     .shadow(color: .white , radius: 2.0)
             }
         }
-        .frame(alignment: .leading)
+        .frame(height: height, alignment: .leading)
         .border(.white,
-                width: 4)
+                width: 3)
         .cornerRadius(8)
         .padding(.top)
     }

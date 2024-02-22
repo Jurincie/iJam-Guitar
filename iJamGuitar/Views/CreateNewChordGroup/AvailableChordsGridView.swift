@@ -11,7 +11,9 @@ import SwiftUI
 
 struct AvailableChordsGridView: View {
     @Query var appStates: [AppState]
+    @Binding var tuning: Tuning?
     @Binding var selectedChords: [Chord]
+    var tuningSelected: Bool
     
     var body: some View {
         let appState = appStates.first!
@@ -20,10 +22,17 @@ struct AvailableChordsGridView: View {
         let keys = chordDictionary.map{$0.key}
         let values = chordDictionary.map {$0.value}
         
+        // sort tuple array
+        let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+            tuple1.0 < tuple2.0
+        }
+        
         ScrollView(.vertical) {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(0..<keys.count, id: \.self) { index in
-                    AvailablePickView(selectedChords: $selectedChords, name: keys[index], fretMapString: values[index])
+                ForEach(0..<keyValues.count, id: \.self) { index in
+                    AvailablePickView(selectedChords: $selectedChords, 
+                                      name: tuningSelected ? keyValues[index].0 : "",
+                                      fretMapString: tuningSelected ? keyValues[index].1 : "")
                 }
             }
         }
