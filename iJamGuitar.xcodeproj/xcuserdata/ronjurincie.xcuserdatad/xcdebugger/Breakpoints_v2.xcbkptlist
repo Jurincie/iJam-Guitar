@@ -382,10 +382,10 @@
             filePath = "iJamGuitar/Views/HeaderView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "getChordGroupNamesForTuning(name:)"
-            landmarkType = "7">
+            landmarkType = "9">
             <Locations>
                <Location
                   uuid = "E14C6DF5-16DE-4760-8F02-ACE0286E1F0D - a90f9139b0ff264e"

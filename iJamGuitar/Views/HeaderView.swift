@@ -30,52 +30,87 @@ struct HeaderView: View {
         self.width = width
         self.height = height
     }
-    
     var body: some View {
-        VStack {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                Spacer()
-            }
-            HStack() {
-                Spacer()
-                TuningPickerView(tuningName: $tuningName,
-                                 chordGroupName: $chordGroupName,
-                                 height: height,
-                                 width: width)
-                
-                .fixedSize()
-                Spacer()
-                Spacer()
-                ChordGroupPickerView(chordGroupName: $chordGroupName,
+        Spacer()
+        ZStack() {
+            // Background
+            Image("HeaderView")
+                .resizable()
+                .frame(width: width, height: height)
+            
+            // Foreground
+            VStack {
+                Text(" ")
+                HStack() {
+                    Spacer()
+                    TuningPickerView(tuningName: $tuningName,
+                                     chordGroupName: $chordGroupName,
                                      height: height,
                                      width: width)
-                    .fixedSize()
-                Spacer()
-                Spacer()
-                Button {
-                    showCreateChordGroupSheet.toggle()
-                } label: {
-                    VStack {
-                        Spacer()
-                        Image(systemName: "plus.circle")
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
-                    }
+                        .frame(alignment: .trailing)
+                        .border(.white,
+                                width: 2)
+                        .cornerRadius(7)
+                        .padding(.top)
+                    Spacer()
+                    ChordGroupPickerView(chordGroupName: $chordGroupName,
+                                         height: height,
+                                         width: width)
+
+                        .frame(alignment: .leading)
+                        .border(.white,
+                                width: 2)
+                        .cornerRadius(7)
+                        .padding(.top)
+                    Spacer()
                 }
+                .padding()
             }
-            .padding()
-            .frame(maxHeight: 80)
-            .frame(width: width)
-        }
-        .background(backgroundImage
-            .resizable()
-            .scaledToFill()
-            .frame(width: width, height: height)
-            .opacity(0.60))
-        .sheet(isPresented: $showCreateChordGroupSheet) {
-            CreateChordGroupView()
         }
     }
+    
+//    var body: some View {
+//        VStack {
+//            if UIDevice.current.userInterfaceIdiom == .phone {
+//                Spacer()
+//            }
+//            HStack() {
+//                Spacer()
+//                TuningPickerView(tuningName: $tuningName,
+//                                 chordGroupName: $chordGroupName,
+//                                 height: height,
+//                                 width: width)
+//
+//                .fixedSize()
+//                Spacer()
+//                Spacer()
+//                    .fixedSize()
+//                Spacer()
+//                Spacer()
+//                Button {
+//                    showCreateChordGroupSheet.toggle()
+//                } label: {
+//                    VStack {
+//                        Spacer()
+//                        Image(systemName: "plus.circle")
+//                            .font(.largeTitle)
+//                            .foregroundColor(.white)
+//                    }
+//                }
+//            }
+//            .padding()
+//            .frame(maxHeight: 80)
+//            .frame(width: width)
+//        }
+//        .background(backgroundImage
+//            .resizable()
+//            .scaledToFill()
+//            .frame(width: width, height: height)
+//            .opacity(0.60))
+//        .sheet(isPresented: $showCreateChordGroupSheet) {
+//            CreateChordGroupView()
+//        }
+//    }
     
     func getChordGroupNamesForTuning(name: String) -> [String] {
         var chordGroupNameArray = [String]()
@@ -93,7 +128,7 @@ struct HeaderView: View {
 }
 
 #Preview {
-    return HeaderView(width: .infinity, height: 200)
+    return HeaderView(width: .infinity, 
+                      height: 200)
 }
-
 
