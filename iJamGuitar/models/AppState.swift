@@ -23,22 +23,12 @@ final class AppState {
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
     var currentFretIndexMap: [Int] = []
-//    var fretIndicesString: String = "000000"
 
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
     @Relationship(deleteRule: .cascade) var tunings: [Tuning]
     
     // Calculated Properties
-    var selectedChordIndex: Int {
-        if let chord = activeChordGroup?.activeChord {
-            if let index = activeChordGroup?.availableChords.firstIndex(of: chord) {
-                return index
-            }
-        }
-        Logger.viewCycle.debug("Faild to set selectedChordIndex")
-        return 0
-    }
     var activeChordGroup: ChordGroup? {
         get {
             activeTuning?.activeChordGroup
@@ -47,6 +37,7 @@ final class AppState {
             activeTuning?.activeChordGroup = newValue
         }
     }
+    
     var minimumFret: Int {
         get {
             if let activeChord = activeChordGroup?.activeChord {

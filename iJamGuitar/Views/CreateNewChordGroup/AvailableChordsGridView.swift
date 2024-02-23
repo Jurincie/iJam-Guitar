@@ -14,15 +14,16 @@ struct AvailableChordsGridView: View {
     @Binding var tuning: Tuning?
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
+    var multiLineNotice = """
+    Select a Tuning (Above)
+    to load available chords
+    """
     
     var body: some View {
         if tuningSelected == false {
             VStack {
                 Spacer()
-                Text("Select a Tuning (Above)")
-                    .font(.title)
-                Text("To load available chords")
-                    .font(.title)
+                Text(multiLineNotice)
                 Spacer()
             }
             .padding()
@@ -30,34 +31,37 @@ struct AvailableChordsGridView: View {
         }
         else {
             let appState = appStates.first!
-            let chordDictionary: [String:String] = appState.activeTuning!.chordsDictionary
-            let columns = Array(repeating: GridItem(.flexible()), count: 4)
-            let keys = chordDictionary.map{$0.key}
-            let values = chordDictionary.map {$0.value}
             
-            // sort tuple array
-            let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
-                tuple1.0 < tuple2.0
-            }
-            
-            ScrollView(.vertical) {
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(0..<keyValues.count, id: \.self) { index in
-                        AvailablePickView(selectedChords: $selectedChords,
-                                          name: tuningSelected ? keyValues[index].0 : "",
-                                          fretMapString: tuningSelected ? keyValues[index].1 : "")
-                    }
-                    .scrollTargetLayout()
+            if let chordDictionary: [String:String] = appState.activeTuning?.chordsDictionary {
+                let columns = Array(repeating: GridItem(.flexible()), count: 4)
+                let keys = chordDictionary.map{$0.key}
+                let values = chordDictionary.map {$0.value}
+                
+                // sort tuple array
+                let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+                    tuple1.0 < tuple2.0
                 }
+                
+                ScrollView(.vertical) {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(0..<keyValues.count, id: \.self) { index in
+                            AvailablePickView(selectedChords: $selectedChords,
+                                              name: tuningSelected ? keyValues[index].0 : "",
+                                              fretMapString: tuningSelected ? keyValues[index].1 : "")
+                        }
+                        .scrollTargetLayout()
+                    }
+                }
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicatorsFlash(onAppear: true)
+                .scrollBounceBehavior(.always)
+                .contentMargins(.trailing, 20, for: .scrollContent)
+                .scrollIndicatorsFlash(onAppear: true)
+                .padding()
+                .border(.black, width: 4)
+                .cornerRadius(12)
             }
-            .scrollTargetBehavior(.viewAligned)
-            .scrollIndicatorsFlash(onAppear: true)
-            .scrollBounceBehavior(.always)
-            .contentMargins(.trailing, 20, for: .scrollContent)
-            .scrollIndicatorsFlash(onAppear: true)
-            .padding()
-            .border(.black, width: 4)
-            .cornerRadius(12)
+
         }
     }
 }
@@ -100,10 +104,10 @@ struct AvailablePickView: View {
                 VStack(spacing: 5) {
                     Spacer()
                     Text(name)
-                        .font(.title)
+                        .font(.caption)
                         .bold()
                     Text(fretMapString)
-                        .font(.headline)
+                        .font(.caption)
                     Spacer()
                 }
                 .font(.caption)
@@ -112,7 +116,3 @@ struct AvailablePickView: View {
         }
     }
 }
-
-//#Preview {
-//    AvailableChordsGridView(selectedChords: [])
-//}

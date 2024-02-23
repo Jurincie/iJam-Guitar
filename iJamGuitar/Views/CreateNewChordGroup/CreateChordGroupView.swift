@@ -43,7 +43,7 @@ struct CreateChordGroupView: View {
                         PickView2(selectedChords: $selectedChords, pick: pick)
                     }
                 }
-                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 of the chords below")
+                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 chords (below)")
                     .font(.headline)
                 
                 Menu {
@@ -105,7 +105,7 @@ struct CreateChordGroupView: View {
                         if let selectedTuning: Tuning = appStates.first!.tunings.first(where: { tuning in
                             tuning.name == selectedTuningName
                         }) {
-                            if let _ = selectedTuning.chordsDictionary.keys.first(where: { $0.contains(newChordGroupName) }) {
+                            if let _ = selectedTuning.chordGroups.first(where: { $0.name.contains(newChordGroupName) }) {
                                 showChordGroupNameExistsAlert.toggle()
                             } else {
                                 addNewChordGroup(selectedTuning: selectedTuning)
@@ -147,21 +147,21 @@ extension CreateChordGroupView {
         
         let newChordGroup = ChordGroup(name: newChordGroupName,
                                        availableChordNames: chordNamesString)
-        let selectedChords = appStates.first!.getAvailableChords(dictionary: selectedTuning.chordsDictionary)
-        newChordGroup.activeChord = selectedChords.first
-        newChordGroup.availableChords = selectedChords
-        
-        appStates.first!.activeTuning?.chordGroups.append(newChordGroup)
-        appStates.first!.activeTuning?.activeChordGroup = newChordGroup
-        appStates.first!.pickerChordGroupName = newChordGroup.name
-        let fretMap = appStates.first!.getFretIndexMap(fretMapString: newChordGroup.activeChord?.fretMapString ?? "")
-        appStates.first!.currentFretIndexMap = fretMap
-        
-        
-        if let fretMapString = newChordGroup.activeChord?.fretMapString {
+        newChordGroup.availableChords.append(contentsOf: selectedChords)
+        if let firstChord = selectedChords.first {
+            firstChord.group = newChordGroup
+            
+            let fretMapString = firstChord.fretMapString
             appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: fretMapString)
             Logger.viewCycle.debug("Just Created New ChordGroup: \(newChordGroupName)")
         }
+    
+        appStates.first!.activeTuning = selectedTuning
+        appStates.first!.activeTuning?.chordGroups.append(newChordGroup)
+        appStates.first!.activeTuning?.activeChordGroup = newChordGroup
+        appStates.first!.pickerChordGroupName = newChordGroup.name
+
+        try? modelContext.save()
     }
     
     func getUndefinedPicks() -> [Pick] {

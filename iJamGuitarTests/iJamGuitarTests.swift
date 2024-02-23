@@ -14,9 +14,19 @@ import XCTest
 
 @available(iOS 17.0, *)
 final class iJamAppStateTests: XCTestCase {
-    // Given
     @Query var appStates: [AppState]
-   
+    
+    override func setUp() async throws {
+    }
+    
+    override func tearDown() {
+        
+    }
+//    
+//    func testAppState() {
+//        let appState = appStates.first!
+//    }
+    
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyThreeElements() {
         let audioManager = iJamAudioManager()
         

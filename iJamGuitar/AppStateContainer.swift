@@ -212,11 +212,6 @@ actor AppStateContainer {
                                 chordDictionary: parentTuning.chordsDictionary)!
                 })
                 
-                // append NoChords to availableChordsArray to fill 10
-                for _ in availableChordsArray.count..<10 {
-                    
-                }
-                
                 // set activeChord for this group
                 if chordGroup.name == "Key of C" {
                     if let activeChord = availableChordsArray.first(where: { chord in

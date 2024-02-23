@@ -94,7 +94,7 @@
         }
       }
     },
-    "Choose up to 10 of the chords below" : {
+    "Choose up to 10 chords (below)" : {
 
     },
     "Chord Groups" : {
@@ -244,16 +244,10 @@
     "Please Select a Tuning" : {
 
     },
-    "Select a Tuning (Above)" : {
-
-    },
     "Slected Tuning already has a ChordGroup with this name" : {
 
     },
     "SUBMIT" : {
-
-    },
-    "To load available chords" : {
 
     },
     "Tuning: %@" : {
