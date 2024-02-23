@@ -32,7 +32,7 @@ import OSLog
 struct StringsView: View {
     @Query var appStates: [AppState]
     @State private var dragLocation: CGPoint?
-    @State private var formerZone = -1
+    @State var formerZone = -1
     @State private var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
     
     // Stored Properties

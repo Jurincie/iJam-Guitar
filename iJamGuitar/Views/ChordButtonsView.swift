@@ -35,13 +35,7 @@ struct ChordButtonsView: View {
                                       image:Image("UndefinedPick")))
             }
         }
-        
-//        for index in 0..<10 {
-//            pickArray.append(Pick(id: index,
-//                                  chord: newChord,
-//                                  image:Image("UndefinedPick")))
-//        }
-        
+
         return pickArray
     }
             
