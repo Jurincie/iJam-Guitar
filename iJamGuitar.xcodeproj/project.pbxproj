@@ -89,14 +89,14 @@
 		7AA07A292A040F6B00AE87B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7AA07A5C2A0416EB00AE87B3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = iJamGuitar/Extensions/Extensions.swift; sourceTree = SOURCE_ROOT; };
-		7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenDTuningChordGroups.plist; path = iJamGuitar/Plists/OpenDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenGTuningChordGroups.plist; path = iJamGuitar/Plists/OpenGTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenG_ChordLibrary.plist; path = iJamGuitar/Plists/OpenG_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A692A04177000AE87B3 /* OpenD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = OpenD_ChordLibrary.plist; path = iJamGuitar/Plists/OpenD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A6A2A04177000AE87B3 /* DropDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = DropDTuningChordGroups.plist; path = iJamGuitar/Plists/DropDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuningChordGroups.plist; path = iJamGuitar/Plists/StandardTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = DropD_ChordLibrary.plist; path = iJamGuitar/Plists/DropD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
-		7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = StandardTuning_ChordLibrary.plist; path = iJamGuitar/Plists/StandardTuning_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = OpenDTuningChordGroups.plist; path = PLists/OpenDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = OpenGTuningChordGroups.plist; path = PLists/OpenGTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = OpenG_ChordLibrary.plist; path = PLists/OpenG_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A692A04177000AE87B3 /* OpenD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = OpenD_ChordLibrary.plist; path = PLists/OpenD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A6A2A04177000AE87B3 /* DropDTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DropDTuningChordGroups.plist; path = PLists/DropDTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = StandardTuningChordGroups.plist; path = PLists/StandardTuningChordGroups.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DropD_ChordLibrary.plist; path = PLists/DropD_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
+		7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = StandardTuning_ChordLibrary.plist; path = PLists/StandardTuning_ChordLibrary.plist; sourceTree = SOURCE_ROOT; };
 		7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChordGroupView.swift; sourceTree = "<group>"; };
 		7ACEB16E2B842DA800E85A41 /* PickView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView2.swift; sourceTree = "<group>"; };
 		7ACEB1712B84329100E85A41 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
@@ -143,6 +143,21 @@
 			path = iJamGuitarTests;
 			sourceTree = "<group>";
 		};
+		7A43C7472B8BE016006D08EF /* PLists */ = {
+			isa = PBXGroup;
+			children = (
+				7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */,
+				7AA07A6A2A04177000AE87B3 /* DropDTuningChordGroups.plist */,
+				7AA07A692A04177000AE87B3 /* OpenD_ChordLibrary.plist */,
+				7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */,
+				7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */,
+				7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */,
+				7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */,
+				7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */,
+			);
+			path = PLists;
+			sourceTree = "<group>";
+		};
 		7A9AF58F2B68419900E37CDB /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,7 +173,7 @@
 		7AA07A192A040F6A00AE87B3 = {
 			isa = PBXGroup;
 			children = (
-				7AA07A652A04175200AE87B3 /* Property Lists */,
+				7A43C7472B8BE016006D08EF /* PLists */,
 				7AA07A242A040F6A00AE87B3 /* iJamGuitar */,
 				7A3AD0022B1FFE5F003EEF9A /* iJamGuitarTests */,
 				7AA07A232A040F6A00AE87B3 /* Products */,
@@ -197,21 +212,6 @@
 				7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7AA07A652A04175200AE87B3 /* Property Lists */ = {
-			isa = PBXGroup;
-			children = (
-				7AA07A6C2A04177100AE87B3 /* DropD_ChordLibrary.plist */,
-				7AA07A6A2A04177000AE87B3 /* DropDTuningChordGroups.plist */,
-				7AA07A692A04177000AE87B3 /* OpenD_ChordLibrary.plist */,
-				7AA07A662A04177000AE87B3 /* OpenDTuningChordGroups.plist */,
-				7AA07A682A04177000AE87B3 /* OpenG_ChordLibrary.plist */,
-				7AA07A672A04177000AE87B3 /* OpenGTuningChordGroups.plist */,
-				7AA07A6D2A04177100AE87B3 /* StandardTuning_ChordLibrary.plist */,
-				7AA07A6B2A04177100AE87B3 /* StandardTuningChordGroups.plist */,
-			);
-			path = "Property Lists";
 			sourceTree = "<group>";
 		};
 		7AA07A762A0417C800AE87B3 /* Views */ = {

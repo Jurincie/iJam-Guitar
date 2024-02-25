@@ -182,10 +182,12 @@ extension StringsView {
         
         let fretPosition = appStates.first!.currentFretIndexMap[6 - stringToPlay]
         if fretPosition > kNoFret {
+            if UIDevice().volume == 0 {
+                
+            }
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
                 let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition
                 let noteToPlayName = audioManager.noteNamesArray[index]
-                
                 let volume = appStates.first!.volumeLevel
                 Logger.viewCycle.debug("playing string: \(stringToPlay)")
                 do {
