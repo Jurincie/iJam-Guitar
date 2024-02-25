@@ -43,14 +43,11 @@ struct CreateChordGroupView: View {
                         PickView2(selectedChords: $selectedChords, pick: pick)
                     }
                 }
-                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 chords (below)")
-                    .font(.headline)
-                
                 Menu {
                     Picker("Tunings", selection: $selectedTuningName) {
                         ForEach(appStates.first!.getTuningNames(), id: \.self) {
                             Text($0)
-                                .fixedSize()
+                                .font(.caption)
                         }
                     }
                     .pickerStyle(.automatic)
@@ -79,6 +76,9 @@ struct CreateChordGroupView: View {
                 .cornerRadius(10)
                 .padding()
                 Spacer()
+                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 chords (below)")
+                    .font(.headline)
+                    .foregroundColor(.black)
                 AvailableChordsGridView(tuning: Bindable<AppState>(appStates.first!).activeTuning,
                                         selectedChords: $selectedChords,
                                         tuningSelected: selectedTuningName != "Select a Tuning")
