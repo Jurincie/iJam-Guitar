@@ -178,13 +178,14 @@ extension StringsView {
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) {
-        let openNotes = appStates.first!.activeTuning?.openNoteIndices.components(separatedBy: "-")
+        guard audioManager.isVolumeLevelZero == false else {
+            appStates.first!.showVolumeAlert.toggle()
+            return
+        }
         
+        let openNotes = appStates.first!.activeTuning?.openNoteIndices.components(separatedBy: "-")
         let fretPosition = appStates.first!.currentFretIndexMap[6 - stringToPlay]
         if fretPosition > kNoFret {
-            if audioManager.AVAudioSession.sharedInstance().outputVolume == 0.0 {
-                
-            }
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
                 let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition
                 let noteToPlayName = audioManager.noteNamesArray[index]

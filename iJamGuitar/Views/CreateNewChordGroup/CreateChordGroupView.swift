@@ -61,7 +61,7 @@ struct CreateChordGroupView: View {
                             .background(Color.accentColor)
                             .foregroundColor(Color.white)
                             .shadow(color: .white , radius: 2.0)
-                            .modifier(BlinkingModifier(duration:0.7))
+                            .modifier(BlinkingModifier(duration:0.5))
                         
                     } else {
                         Text(selectedTuningName)

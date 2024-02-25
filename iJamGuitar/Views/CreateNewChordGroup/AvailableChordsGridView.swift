@@ -26,6 +26,7 @@ struct AvailableChordsGridView: View {
                 Text(multiLineNotice)
                 Spacer()
             }
+            .foregroundColor(.black)
             .padding()
             .border(.black, width: 4)
         }
