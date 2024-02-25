@@ -182,7 +182,7 @@ extension StringsView {
         
         let fretPosition = appStates.first!.currentFretIndexMap[6 - stringToPlay]
         if fretPosition > kNoFret {
-            if UIDevice().volume == 0 {
+            if audioManager.AVAudioSession.sharedInstance().outputVolume == 0.0 {
                 
             }
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {

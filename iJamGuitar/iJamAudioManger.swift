@@ -65,6 +65,10 @@ class iJamAudioManager {
             }
         }
     }
+    
+    func isVolumeZero() -> Bool {
+        return AVAudioSession().shared.outputVolume == 0
+    }
 
     func playWaveFile(noteName: String,
                       stringNumber: Int,
