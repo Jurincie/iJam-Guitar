@@ -11,9 +11,10 @@ import SwiftUI
 
 struct AvailableChordsGridView: View {
     @Query var appStates: [AppState]
-    @Binding var tuning: Tuning?
+    @Binding var selectedTuningName: String
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
+   
     var multiLineNotice = """
     Select a Tuning (Above)
     to load available chords
@@ -31,10 +32,10 @@ struct AvailableChordsGridView: View {
             .border(.black, width: 4)
         }
         else {
-            let appState = appStates.first!
-            
-            if let chordDictionary: [String:String] = appState.activeTuning?.chordsDictionary {
-                let columns = Array(repeating: GridItem(.flexible()), count: 4)
+            let tuning = appStates.first!.tunings.first { tuning in
+                tuning.name == selectedTuningName
+            }
+            if let chordDictionary: [String:String] = tuning?.chordsDictionary {
                 let keys = chordDictionary.map{$0.key}
                 let values = chordDictionary.map {$0.value}
                 
@@ -42,6 +43,7 @@ struct AvailableChordsGridView: View {
                 let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
                     tuple1.0 < tuple2.0
                 }
+                let columns = Array(repeating: GridItem(.flexible()), count: 4)
                 
                 ScrollView(.vertical) {
                     LazyVGrid(columns: columns, spacing: 10) {

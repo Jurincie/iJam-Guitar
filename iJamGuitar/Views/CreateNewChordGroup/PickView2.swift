@@ -32,8 +32,3 @@ struct PickView2: View {
         .cornerRadius(10.0)
     }
 }
-
-//
-//#Preview {
-//    CreateChordGroupPickView()
-//}
