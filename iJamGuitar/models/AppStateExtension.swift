@@ -19,7 +19,6 @@ extension AppState
 {
     func fretBelongsInChord(stringNumber: Int, newFretNumber: Int) -> Bool {
         let fretForTappedFret = currentFretIndexMap[6 - stringNumber]
-        
         let chordMap = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
         let fretFromChordForThisString = chordMap[6 - stringNumber]
         
@@ -27,15 +26,15 @@ extension AppState
     }
     
     /// - Parameter newTuning: newTuning
-    /// /// Description: When user selects NEW Tuning, we need to set:
-    /// /// activeTuning, activeChordGroup, activeChordGroupName and availableChords
-    /// /// fretIndexMap and selectedIndex based on the activeChord for this Tuning
-    /// /// Warning: Must set activeChordGroup prior to setting activeChordGroupName
+    ///  Description: When user selects NEW Tuning, we need to set:
+    ///  activeTuning, pickerTuningName, pickerChordGroupName
+    ///  currentFretIndexMap
     func makeNewTuningActive(newTuning: Tuning) {
         guard newTuning.activeChordGroup != nil else { return }
         activeTuning = newTuning
         pickerTuningName = newTuning.name ?? "ERROR"
         pickerChordGroupName = activeChordGroup?.name ?? ""
+        currentFretIndexMap = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
     }
 
     /// This method takes a name associated with Tunings names
@@ -74,14 +73,6 @@ extension AppState
         }
     
         return chordGroupNames
-    }
-  
-    func getSelectedChordButtonIndex() -> Int {
-//        if let activeChord = activeChordGroup?.activeChord,
-//           let activeChordIndex = activeChordGroup?.availableChords.firstIndex(of: activeChord) {
-//            return activeChordIndex
-//        }
-        return 0
     }
     
     func getFretFromChar(_ char: Character) -> Int {
