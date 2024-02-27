@@ -26,10 +26,23 @@ struct TuningPickerView: View {
                 .onChange(of: tuningName, { oldValue, newValue in
                     Logger.viewCycle.notice("new Tuning name: \(newValue)")
                     if let newTuning = appStates.first!.getTuning(name: newValue) {
-                        chordGroupName = newTuning.activeChordGroup?.name ?? "Error-12"
-                        appStates.first!.makeNewTuningActive(newTuning: newTuning)
+                        if let activeGroup = newTuning.activeChordGroup {
+                            chordGroupName =  activeGroup.name
+                            appStates.first!.makeNewTuningActive(newTuning: newTuning)
+                        } else {
+                            newTuning.activeChordGroup = newTuning.chordGroups.first
+                            chordGroupName =  newTuning.activeChordGroup?.name ?? ""
+                            appStates.first!.makeNewTuningActive(newTuning: newTuning)
+                        }
                     }
                 })
+//                .onChange(of: tuningName, { oldValue, newValue in
+//                    Logger.viewCycle.notice("new Tuning name: \(newValue)")
+//                    if let newTuning = appStates.first!.getTuning(name: newValue) {
+//                        chordGroupName = newTuning.activeChordGroup?.name ?? "Error-12"
+//                        appStates.first!.makeNewTuningActive(newTuning: newTuning)
+//                    }
+//                })
             } label: {
                 Text(appStates.first!.pickerTuningName)
                     .padding()
