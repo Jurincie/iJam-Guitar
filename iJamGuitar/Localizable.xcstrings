@@ -4,9 +4,6 @@
     "" : {
 
     },
-    " " : {
-
-    },
     "%lld" : {
       "localizations" : {
         "de" : {
@@ -126,7 +123,6 @@
       }
     },
     "CREATE NEW CHORD GROUP" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

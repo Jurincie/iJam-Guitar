@@ -13,8 +13,6 @@ import SwiftUI
 struct ChordGroupPickerView: View {
     @Query var appStates: [AppState]
     @Binding var chordGroupName: String
-    var height: CGFloat
-    var width: CGFloat
     
     var body: some View {
         VStack {
@@ -27,7 +25,6 @@ struct ChordGroupPickerView: View {
                     .onDelete(perform: deleteChordGroup)
                 }
                 .pickerStyle(.automatic)
-                .frame(maxWidth: width)
                 .onChange(of: chordGroupName, { oldValue, newValue in
                     Logger.viewCycle.notice("new ChordGroupname: \(newValue)")
                     appStates.first!.pickerChordGroupName = newValue

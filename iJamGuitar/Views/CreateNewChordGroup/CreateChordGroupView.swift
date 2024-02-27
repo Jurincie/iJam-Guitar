@@ -28,7 +28,9 @@ struct CreateChordGroupView: View {
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 10.0 : 5.0
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            Text("CREATE NEW CHORD GROUP")
+                .font(.title)
             Spacer()
             TextField("Enter Group Name", text: $newChordGroupName)
                 .textFieldStyle(.roundedBorder)
@@ -88,6 +90,7 @@ struct CreateChordGroupView: View {
                 Button(action: {
                     dismiss()
                 }, label: { Text("CANCEL")})
+                .frame(alignment: .bottom)
                 .frame(maxWidth: .infinity)
                 .buttonStyle(.borderedProminent)
                 Spacer()

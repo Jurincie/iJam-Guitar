@@ -12,8 +12,6 @@ import SwiftUI
 struct TuningPickerView: View {
     @Binding var tuningName: String
     @Binding var chordGroupName: String
-    var height: CGFloat
-    var width: CGFloat
     @Query var appStates: [AppState]
     var body: some View {
         VStack {
@@ -25,7 +23,6 @@ struct TuningPickerView: View {
                     }
                 }
                 .pickerStyle(.automatic)
-                .frame(maxWidth: width)
                 .onChange(of: tuningName, { oldValue, newValue in
                     Logger.viewCycle.notice("new Tuning name: \(newValue)")
                     if let newTuning = appStates.first!.getTuning(name: newValue) {
@@ -36,7 +33,7 @@ struct TuningPickerView: View {
             } label: {
                 Text(appStates.first!.pickerTuningName)
                     .padding()
-                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                    .font(.caption)
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
