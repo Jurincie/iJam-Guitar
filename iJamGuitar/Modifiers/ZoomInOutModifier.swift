@@ -23,7 +23,7 @@ struct ZoomInOutViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.gesture(DragGesture(minimumDistance: 0)
                 .onChanged { event in
-                    guard !self.hasEnded else { return }
+                    guard self.hasEnded == false else { return }
 
                     if self.hasBegun == false {
                         self.hasBegun = true
@@ -34,7 +34,7 @@ struct ZoomInOutViewModifier: ViewModifier {
                     }
                 }
                 .onEnded { event in
-                    if !self.hasEnded {
+                    if self.hasEnded == false {
                         let success = !self.isTooFar(event.translation)
                         self.touchEnd(success)
                     }

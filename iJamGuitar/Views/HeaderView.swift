@@ -43,6 +43,12 @@ struct HeaderView: View {
                     .cornerRadius(7)
                     .padding(.top)
                 Spacer()
+                ChordGroupPickerView(chordGroupName: $chordGroupName)
+                    .border(.white,
+                            width: 2)
+                    .cornerRadius(7)
+                    .padding(.top)
+                Spacer()
                 Button(action: {
                     showCreateChordGroupSheet.toggle()
                 }, label: {
@@ -51,19 +57,13 @@ struct HeaderView: View {
                         .font(.largeTitle)
                         .padding(.top)
                 })
-                Spacer()
-                ChordGroupPickerView(chordGroupName: $chordGroupName)
-                    .border(.white,
-                            width: 2)
-                    .cornerRadius(7)
-                    .padding(.top)
-                Spacer()
             }
             .sheet(isPresented: $showCreateChordGroupSheet) {
                 CreateChordGroupView()
             }
             Spacer()
         }
+        .frame(maxWidth: .infinity)
         .background() {
             Color(.black)
                 .frame(width: width, height: height)
@@ -71,8 +71,10 @@ struct HeaderView: View {
     }
     
     func getChordGroupNamesForTuning(name: String) -> [String] {
+        guard let appState = appStates.first else { return [] }
+        
         var chordGroupNameArray = [String]()
-        let thisTuning = appStates.first!.tunings.first { tuning in
+        let thisTuning = appState.tunings.first { tuning in
             tuning.name == name
         }
         if let chordGroups = thisTuning?.chordGroups {

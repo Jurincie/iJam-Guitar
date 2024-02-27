@@ -36,17 +36,10 @@ struct TuningPickerView: View {
                         }
                     }
                 })
-//                .onChange(of: tuningName, { oldValue, newValue in
-//                    Logger.viewCycle.notice("new Tuning name: \(newValue)")
-//                    if let newTuning = appStates.first!.getTuning(name: newValue) {
-//                        chordGroupName = newTuning.activeChordGroup?.name ?? "Error-12"
-//                        appStates.first!.makeNewTuningActive(newTuning: newTuning)
-//                    }
-//                })
             } label: {
                 Text(appStates.first!.pickerTuningName)
                     .padding()
-                    .font(.caption)
+                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)

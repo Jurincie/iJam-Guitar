@@ -15,7 +15,7 @@ struct AvailableChordsGridView: View {
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
    
-    var multiLineNotice = """
+    var selectTuningString = """
     Select a Tuning (Above)
     to load available chords
     """
@@ -24,7 +24,7 @@ struct AvailableChordsGridView: View {
         if tuningSelected == false {
             VStack {
                 Spacer()
-                Text(multiLineNotice)
+                Text(selectTuningString)
                 Spacer()
             }
             .foregroundColor(.black)
