@@ -13,6 +13,7 @@
 		7A22F44E2B86F4F600D60D77 /* BlinkingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22F44D2B86F4F600D60D77 /* BlinkingModifier.swift */; };
 		7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */; };
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */; };
+		7A42EA832B91389C00A36BFF /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A42EA822B91389C00A36BFF /* PreviewContainer.swift */; };
 		7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7FBC202B72DE1D00BD5567 /* AppState.swift */; };
 		7A86A0CF2B4B0928004E67CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */; };
 		7A8E96C62B8122B1001A0699 /* ChordButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */; };
@@ -69,6 +70,7 @@
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
 		7A3AD0012B1FFE5F003EEF9A /* iJamGuitarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AD0032B1FFE5F003EEF9A /* iJamGuitarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarTests.swift; sourceTree = "<group>"; };
+		7A42EA822B91389C00A36BFF /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		7A7FBC202B72DE1D00BD5567 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7A86A0CE2B4B0928004E67CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordButtonsView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				7AA07A2C2A040F6B00AE87B3 /* Preview Assets.xcassets */,
+				7A42EA822B91389C00A36BFF /* PreviewContainer.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */,
 				7AA07A602A0416EC00AE87B3 /* Extensions.swift in Sources */,
 				7A1CF6F22B79380400F00AF1 /* AppStateContainer.swift in Sources */,
+				7A42EA832B91389C00A36BFF /* PreviewContainer.swift in Sources */,
 				7A7FBC212B72DE1D00BD5567 /* AppState.swift in Sources */,
 				7A8E96D22B8122B1001A0699 /* FretBoardView.swift in Sources */,
 				7ACEB16F2B842DA800E85A41 /* PickView2.swift in Sources */,
@@ -604,7 +608,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 151;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;
@@ -621,7 +625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.5;
+				MARKETING_VERSION = 9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.iJamGuitar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -640,7 +644,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 151;
 				DEVELOPMENT_ASSET_PATHS = "\"iJamGuitar/Preview Content\"";
 				DEVELOPMENT_TEAM = J5T6Z5N38H;
 				ENABLE_PREVIEWS = YES;
@@ -657,7 +661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.5;
+				MARKETING_VERSION = 9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.iJamGuitar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";

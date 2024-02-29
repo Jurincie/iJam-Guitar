@@ -14,7 +14,7 @@ struct AvailableChordsGridView: View {
     @Binding var selectedTuningName: String
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
-   
+    
     var multiLineNotice = """
     Select a Tuning (Above)
     to load available chords
@@ -49,7 +49,6 @@ struct AvailableChordsGridView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(0..<keyValues.count, id: \.self) { index in
                             AvailablePickView(selectedChords: $selectedChords,
-//                                              selectedTuningName: $selectedTuningName,
                                               name: tuningSelected ? keyValues[index].0 : "",
                                               fretMapString: tuningSelected ? keyValues[index].1 : "")
                         }
@@ -65,7 +64,7 @@ struct AvailableChordsGridView: View {
                 .border(.black, width: 4)
                 .cornerRadius(12)
             }
-
+            
         }
     }
 }
@@ -79,7 +78,7 @@ struct AvailablePickView: View {
     
     // Computed Properties
     var isActive: Bool {
-        if let found = selectedChords.firstIndex(where: { chord in
+        if let _ = selectedChords.firstIndex(where: { chord in
             chord.name == name
         }) {
             return true
@@ -91,31 +90,29 @@ struct AvailablePickView: View {
     }
     
     var body: some View {
-        Button {
-            if (isActive == false && canAddPicks == false) {
-                // ignore tap
-            } else {
-                if isActive == false {
-                    // user tapped on inactive pick
+        Button(action: {
+            // only react to tap on inactivePicks
+            // if selectedChords < 10 (is not full)
+            if isActive == false {
+                // user tapped on inactive pick
+                if canAddPicks {
                     // append chord from this name and fretMapString
-                    let chord = Chord(name: name,
-                                      fretMapString: fretMapString)
+                    let chord = Chord(name: name, fretMapString: fretMapString)
                     selectedChords.append(chord)
                     Logger.viewCycle.debug("Added Chord: \(chord.name)")
-                } else {
-                    // User tapped on an active pick
-                    if let index = selectedChords.firstIndex(where: { chord in
-                        chord.name == name
-                    }) {
-                        // remove this pick chord
-                        let name = selectedChords[index].name
-                        selectedChords.remove(at: index)
-                        Logger.viewCycle.debug("Removed Chord: \(name)")
-                    }
+                }
+            } else {
+                // User tapped on an active pick
+                if let index = selectedChords.firstIndex(where: { chord in
+                    chord.name == name
+                }) {
+                    // remove this pick chord
+                    let name = selectedChords[index].name
+                    selectedChords.remove(at: index)
+                    Logger.viewCycle.debug("Removed Chord: \(name)")
                 }
             }
-            
-        } label: {
+        }, label: {
             ZStack {
                 Image(isActive ? .activePick : .blankPick)
                     .resizable()
@@ -134,6 +131,6 @@ struct AvailablePickView: View {
                 .font(.caption)
                 .foregroundColor(.white)
             }
-        }
+        })
     }
 }

@@ -34,8 +34,6 @@ struct HeaderView: View {
         VStack {
             Spacer()
             Spacer()
-            Spacer()
-            Spacer()
             HStack {
                 Spacer()
                 TuningPickerView(tuningName: $tuningName,
@@ -87,8 +85,9 @@ struct HeaderView: View {
 }
 
 #Preview {
-    return HeaderView(width: .infinity, 
+    HeaderView(width: 500,
                       height: 200)
+        .modelContainer(for: AppState.self)
 }
 
 

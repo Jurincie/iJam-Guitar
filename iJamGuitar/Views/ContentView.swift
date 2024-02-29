@@ -44,14 +44,18 @@ struct ContentView: View {
 
 #Preview {
     return ContentView()
+        .modelContainer(AppStateContainer.create(true))
         .preferredColorScheme(.dark)
 }
 
 #Preview {
     return ContentView()
+        .modelContainer(AppStateContainer.create(true))
         .preferredColorScheme(.light)
 }
+
 #Preview {
     return ContentView()
+        .modelContainer(AppStateContainer.create(true))
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }

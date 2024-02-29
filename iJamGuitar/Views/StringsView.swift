@@ -55,7 +55,7 @@ struct StringsView: View {
     }
     
     var body: some View {
-        var appState = appStates.first!
+        let appState = appStates.first!
         HStack() {
             SixHorizontalSpacers()
             HStack(spacing:0) {

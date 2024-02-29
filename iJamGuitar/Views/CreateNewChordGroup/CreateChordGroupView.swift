@@ -127,7 +127,7 @@ struct CreateChordGroupView: View {
             .padding(.horizontal)
         }
         .padding()
-        .background(LinearGradient(colors: [.yellow, .white, .gray], startPoint: .bottomLeading, endPoint: .topTrailing)
+        .background(LinearGradient(colors: [.yellow, .white, .blue], startPoint: .bottomLeading, endPoint: .topTrailing)
         )
         .alert("Please Select a Tuning", isPresented: $showNameTuningUndefinedAlert) {
             Button("OK", role: .cancel) { }
