@@ -49,6 +49,7 @@ struct AvailableChordsGridView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(0..<keyValues.count, id: \.self) { index in
                             AvailablePickView(selectedChords: $selectedChords,
+//                                              selectedTuningName: $selectedTuningName,
                                               name: tuningSelected ? keyValues[index].0 : "",
                                               fretMapString: tuningSelected ? keyValues[index].1 : "")
                         }
@@ -70,26 +71,43 @@ struct AvailableChordsGridView: View {
 }
 
 struct AvailablePickView: View {
-    @State private var isActive: Bool = false
     @Binding var selectedChords: [Chord]
+    
+    // Stored Properties
     let name: String
     let fretMapString: String
     
+    // Computed Properties
+    var isActive: Bool {
+        if let found = selectedChords.firstIndex(where: { chord in
+            chord.name == name
+        }) {
+            return true
+        }
+        return false
+    }
+    var canAddPicks: Bool {
+        selectedChords.count < 10
+    }
+    
     var body: some View {
         Button {
-            if (isActive == false && selectedChords.count >= 10) {
+            if (isActive == false && canAddPicks == false) {
+                // ignore tap
             } else {
-                isActive.toggle()
-                
-                if isActive {
+                if isActive == false {
+                    // user tapped on inactive pick
+                    // append chord from this name and fretMapString
                     let chord = Chord(name: name,
                                       fretMapString: fretMapString)
                     selectedChords.append(chord)
                     Logger.viewCycle.debug("Added Chord: \(chord.name)")
                 } else {
+                    // User tapped on an active pick
                     if let index = selectedChords.firstIndex(where: { chord in
                         chord.name == name
                     }) {
+                        // remove this pick chord
                         let name = selectedChords[index].name
                         selectedChords.remove(at: index)
                         Logger.viewCycle.debug("Removed Chord: \(name)")

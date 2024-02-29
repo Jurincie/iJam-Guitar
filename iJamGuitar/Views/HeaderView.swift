@@ -34,10 +34,18 @@ struct HeaderView: View {
         VStack {
             Spacer()
             Spacer()
+            Spacer()
+            Spacer()
             HStack {
                 Spacer()
                 TuningPickerView(tuningName: $tuningName,
                                  chordGroupName: $chordGroupName)
+                    .border(.white,
+                            width: 2)
+                    .cornerRadius(7)
+                    .padding(.top)
+                Spacer()
+                ChordGroupPickerView(chordGroupName: $chordGroupName)
                     .border(.white,
                             width: 2)
                     .cornerRadius(7)
@@ -51,13 +59,6 @@ struct HeaderView: View {
                         .font(.largeTitle)
                         .padding(.top)
                 })
-                Spacer()
-                ChordGroupPickerView(chordGroupName: $chordGroupName)
-                    .border(.white,
-                            width: 2)
-                    .cornerRadius(7)
-                    .padding(.top)
-                Spacer()
             }
             .sheet(isPresented: $showCreateChordGroupSheet) {
                 CreateChordGroupView()

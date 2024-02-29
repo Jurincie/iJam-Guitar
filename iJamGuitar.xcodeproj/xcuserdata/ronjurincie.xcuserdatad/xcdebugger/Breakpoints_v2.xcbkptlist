@@ -158,8 +158,8 @@
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "AppStateContainer"
             landmarkType = "3">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "create(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -381,43 +381,13 @@
             filePath = "iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "3B745BA7-5E8E-452B-BE1A-1F255900A1BA - 8ebc640b8f04d513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "2012">
-               </Location>
-               <Location
-                  uuid = "3B745BA7-5E8E-452B-BE1A-1F255900A1BA - 8ebc640b8f04d513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "2272">
-               </Location>
-               <Location
-                  uuid = "3B745BA7-5E8E-452B-BE1A-1F255900A1BA - 61ea3882b98fc95e"
+                  uuid = "3B745BA7-5E8E-452B-BE1A-1F255900A1BA - 61ea3882b98fc9f3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -427,72 +397,24 @@
                   urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "2692">
+               </Location>
+               <Location
+                  uuid = "3B745BA7-5E8E-452B-BE1A-1F255900A1BA - 61ea3882b98fc9f3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
                   offsetFromSymbolStart = "2272">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0987B563-F99A-47AA-9B73-8279AA34C893"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "0987B563-F99A-47AA-9B73-8279AA34C893 - 127a385e5de06120"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "1376">
-               </Location>
-               <Location
-                  uuid = "0987B563-F99A-47AA-9B73-8279AA34C893 - 8b4d87ba9323a9f2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Text, SwiftUI.Spacer)&gt; in iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "128">
-               </Location>
-               <Location
-                  uuid = "0987B563-F99A-47AA-9B73-8279AA34C893 - 127a385e5de06120"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "1312">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -507,168 +429,10 @@
             filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "5A59F0E2-739A-4E3F-B098-35A52EF143E8 - 45d5714ea127a64c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in iJamGuitar.AvailablePickView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "804">
-               </Location>
-               <Location
-                  uuid = "5A59F0E2-739A-4E3F-B098-35A52EF143E8 - 45d5714ea127a64c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in iJamGuitar.AvailablePickView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "484">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "86F8D147-D621-482F-B4DC-16855B93266E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "86F8D147-D621-482F-B4DC-16855B93266E - 242438b54c42b007"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #6 () -&gt; SwiftUI.LazyVGrid&lt;&lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0&gt; in iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "292">
-               </Location>
-               <Location
-                  uuid = "86F8D147-D621-482F-B4DC-16855B93266E - 3e1d12bc18d53cff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0 in closure #6 () -&gt; SwiftUI.LazyVGrid&lt;&lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0&gt; in iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "348">
-               </Location>
-               <Location
-                  uuid = "86F8D147-D621-482F-B4DC-16855B93266E - 127a385e5de06408"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "4616">
-               </Location>
-               <Location
-                  uuid = "86F8D147-D621-482F-B4DC-16855B93266E - 242438b54c42b007"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #6 () -&gt; SwiftUI.LazyVGrid&lt;&lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0&gt; in iJamGuitar.AvailableChordsGridView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "268">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9C172807-A9DF-4372-A4A3-99C961F9BBB1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/TuningPickerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "9C172807-A9DF-4372-A4A3-99C961F9BBB1 - ed695a726b7f0823"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.String, Swift.String) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: (&#x3c4;_1_0, &#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.Menu&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: (&#x3c4;_1_0, &#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0&gt; in iJamGuitar.TuningPickerView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/TuningPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "500">
-               </Location>
-               <Location
-                  uuid = "9C172807-A9DF-4372-A4A3-99C961F9BBB1 - ed695a726b7f0823"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.String, Swift.String) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: (&#x3c4;_1_0, &#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.Menu&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: (&#x3c4;_1_0, &#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0&gt; in iJamGuitar.TuningPickerView.body.getter : some"
-                  moduleName = "iJamGuitar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/TuningPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "568">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -681,8 +445,8 @@
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "create(_:)"
             landmarkType = "7">
             <Locations>
@@ -717,6 +481,198 @@
                   offsetFromSymbolStart = "2644">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A11BA40-D886-48D0-8A56-6E935D6C319F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58FBF072-F9DD-45CE-B5C4-B865EA9C0A5F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF2813C1-FDE9-4908-9B21-B3A52703FE2C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "CF2813C1-FDE9-4908-9B21-B3A52703FE2C - c4bc83d11902cada"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "972">
+               </Location>
+               <Location
+                  uuid = "CF2813C1-FDE9-4908-9B21-B3A52703FE2C - d4912382b7914fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.String, Swift.String) -&gt; () in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6845C5E4-7278-4E52-9A38-E6DA91A85A86"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "6845C5E4-7278-4E52-9A38-E6DA91A85A86 - b78f7f349f48b554"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "6845C5E4-7278-4E52-9A38-E6DA91A85A86 - 3412c6ff007adbd0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (iJamGuitar.Pick) -&gt; iJamGuitar.PickView2 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;iJamGuitar.Pick&gt;, Swift.Int, iJamGuitar.PickView2&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, iJamGuitar.AvailableChordsGridView)&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in iJamGuitar.CreateChordGroupView.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "324">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "776A8F84-CE03-45CF-B46D-E77955D11B3C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/PickView2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "776A8F84-CE03-45CF-B46D-E77955D11B3C - 4c18fbde269e7d24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.PickView2.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/PickView2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "776A8F84-CE03-45CF-B46D-E77955D11B3C - e7858119eee655d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.scaledToFill() -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt; in iJamGuitar.PickView2.body.getter : some"
+                  moduleName = "iJamGuitar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iJamGuitar/iJamGuitar/Views/CreateNewChordGroup/PickView2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "256">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B5877FA5-3FA5-4756-BFA3-327B71693B61"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJamGuitar/Views/CreateNewChordGroup/AvailableChordsGridView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

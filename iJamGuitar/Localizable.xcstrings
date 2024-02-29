@@ -122,7 +122,11 @@
         }
       }
     },
+    "Create Chord Group" : {
+
+    },
     "CREATE NEW CHORD GROUP" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

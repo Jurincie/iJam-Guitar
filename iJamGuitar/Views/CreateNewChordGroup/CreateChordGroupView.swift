@@ -29,12 +29,13 @@ struct CreateChordGroupView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("CREATE NEW CHORD GROUP")
-                .font(.title)
+            Text("Create Chord Group")
+                .font(.headline)
             Spacer()
             TextField("Enter Group Name", text: $newChordGroupName)
-                .textFieldStyle(.roundedBorder)
+                .textFieldStyle(CustomTextFieldStyle())
                 .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
                 .border(.black, width: 1)
                 .padding()
                 .padding(.horizontal)
@@ -52,6 +53,9 @@ struct CreateChordGroupView: View {
                                 .font(.caption)
                         }
                     }
+                    .onChange(of: selectedTuningName, { oldValue, newValue in
+                        selectedChords.removeAll()
+                    })
                     .pickerStyle(.automatic)
                     .frame(maxWidth: .infinity)
                 } label: {
@@ -120,7 +124,7 @@ struct CreateChordGroupView: View {
                 .frame(maxWidth: .infinity)
                 .buttonStyle(.borderedProminent)
             }
-            .padding()
+            .padding(.horizontal)
         }
         .padding()
         .background(LinearGradient(colors: [.yellow, .white, .gray], startPoint: .bottomLeading, endPoint: .topTrailing)
@@ -175,6 +179,18 @@ extension CreateChordGroupView {
         }
         
         return pickArray
+    }
+}
+
+struct CustomTextFieldStyle : TextFieldStyle {
+    public func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .font(.caption) // set the inner Text Field Font
+            .padding(5) // Set the inner Text Field Padding
+            //Give it some style
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .strokeBorder(Color.primary.opacity(0.5), lineWidth: 1))
     }
 }
 
