@@ -1,5 +1,5 @@
 //
-//  ZoomInOutModifier.swift
+//  GrowToSizeModifier.swift
 //  iJamGuitar
 //
 //  Created by Ron Jurincie on 2/19/24.
@@ -8,10 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct ZoomInOutViewModifier: ViewModifier {
+struct GrowToSizeModifier: ViewModifier {
+    // Closures
     let touchBegan: () -> Void
     let touchEnd: (Bool) -> Void
 
+    // State Properties
     @State private var hasBegun = false
     @State private var hasEnded = false
 
@@ -47,6 +49,6 @@ struct ZoomInOutViewModifier: ViewModifier {
 extension View {
     func onTouchGesture(touchBegan: @escaping () -> Void,
                       touchEnd: @escaping (Bool) -> Void) -> some View {
-        modifier(ZoomInOutViewModifier(touchBegan: touchBegan, touchEnd: touchEnd))
+        modifier(GrowToSizeModifier(touchBegan: touchBegan, touchEnd: touchEnd))
     }
 }

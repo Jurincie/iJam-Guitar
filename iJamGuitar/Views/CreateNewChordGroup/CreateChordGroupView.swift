@@ -102,8 +102,6 @@ struct CreateChordGroupView: View {
                     guard selectedTuningName != "Select a Tuning" else {  showNameTuningUndefinedAlert.toggle()
                         return
                     }
-                    
-                    Logger.viewCycle.debug("Create New ChordGroup Here")
                     if newChordGroupName.count == 0 {
                         showNameFieldEmptyAlert.toggle()
                     } else if selectedChords.count == 0 {
@@ -127,8 +125,10 @@ struct CreateChordGroupView: View {
             .padding(.horizontal)
         }
         .padding()
-        .background(LinearGradient(colors: [.yellow, .white, .blue], startPoint: .bottomLeading, endPoint: .topTrailing)
-        )
+        .background(Image(.topView)
+            .resizable()
+            .scaledToFill()
+            .opacity(0.2))
         .alert("Please Select a Tuning", isPresented: $showNameTuningUndefinedAlert) {
             Button("OK", role: .cancel) { }
         }

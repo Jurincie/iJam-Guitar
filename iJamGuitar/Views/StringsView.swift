@@ -58,43 +58,11 @@ struct StringsView: View {
         let appState = appStates.first!
         HStack() {
             SixHorizontalSpacers()
-            HStack(spacing:0) {
+            ForEach(0..<6) { index in
                 StringView(height: height,
-                           stringNumber: 6)
+                           stringNumber: 6 - index)
                 .readFrame { newFrame in
-                    zoneBreaks[0] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(height: height,
-                           stringNumber: 5)
-                .readFrame { newFrame in
-                    zoneBreaks[1] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(height: height,
-                           stringNumber: 4)
-                .readFrame { newFrame in
-                    zoneBreaks[2] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-            }
-            HStack() {
-                StringView(height: height,
-                           stringNumber: 3)
-                .readFrame { newFrame in
-                    zoneBreaks[3] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(height: height,
-                           stringNumber: 2)
-                .readFrame { newFrame in
-                    zoneBreaks[4] = (newFrame.maxX + newFrame.minX) / 2.0
-                }
-                Spacer()
-                StringView(height: height,
-                           stringNumber: 1)
-                .readFrame { newFrame in
-                    zoneBreaks[5] = (newFrame.maxX + newFrame.minX) / 2.0
+                    zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
                 }
             }
             SixHorizontalSpacers()

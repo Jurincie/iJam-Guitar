@@ -23,7 +23,6 @@ struct AvailableChordsGridView: View {
     var body: some View {
         if tuningSelected == false {
             VStack {
-                Spacer()
                 Text(multiLineNotice)
                 Spacer()
             }
@@ -91,8 +90,6 @@ struct AvailablePickView: View {
     
     var body: some View {
         Button(action: {
-            // only react to tap on inactivePicks
-            // if selectedChords < 10 (is not full)
             if isActive == false {
                 // user tapped on inactive pick
                 if canAddPicks {

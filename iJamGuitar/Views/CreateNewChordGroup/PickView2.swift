@@ -12,8 +12,6 @@ import OSLog
 struct PickView2: View {
     @Query var appStates: [AppState]
     @Binding var selectedChords: [Chord]
-    
-    let kNoChordName = "NoChord"
     var pick: Pick
     
     var body: some View {

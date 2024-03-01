@@ -14,18 +14,37 @@ import XCTest
 
 @available(iOS 17.0, *)
 final class iJamAppStateTests: XCTestCase {
-    @Query var appStates: [AppState]
-    
+    var appState: AppState?
     override func setUp() async throws {
+        appState = AppState()
     }
     
-    override func tearDown() {
+    override func tearDown() { }
+    
+    func test_getTuningNames() {
+        let chordGroupNamesString = appState?.tunings.reduce(into: "", { $0 += $1.name! + "-" })
+        let chorGroupNamesArray = chordGroupNamesString?.components(separatedBy: "-")
         
+        if let first = appState?.tunings.first {
+            XCTAssertTrue(((chorGroupNamesArray?.contains(first.name ?? "xxx")) != nil))
+        }
     }
-//    
-//    func testAppState() {
-//        let appState = appStates.first!
-//    }
+    
+    func test_getFretFromCharWorksForAllCases() {
+        let characters: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+        let enumeratedCharacters = characters.enumerated()
+        
+        // Then
+        // Test all legid values
+        for pair in enumeratedCharacters {
+            XCTAssertEqual(pair.0, appState?.getFretFromChar(pair.1))
+        }
+        
+        // test bad values
+        XCTAssertEqual(-1, appState?.getFretFromChar(Character("X")))
+        XCTAssertEqual(-1, appState?.getFretFromChar(Character("#")))
+        XCTAssertEqual(-1, appState?.getFretFromChar(Character("$")))
+    }
     
     func test_iJamAudioManager_noteNamesArray_shouldHaveFortyThreeElements() {
         let audioManager = iJamAudioManager()
@@ -65,34 +84,5 @@ final class iJamAppStateTests: XCTestCase {
 
         // Then
         XCTAssertEqual(zone, -1)
-    }
-    
-    func getSpan(fretMap: String) -> Int {
-        var maxFret: Int = 0
-        var minFret: Int = Int.max
-        
-        for char in fretMap {
-            if char != "x" && char != "0" {
-                let fret = appStates.first!.getFretFromChar(char)
-                maxFret = max(maxFret, fret)
-                minFret = min(minFret, fret)
-            }
-        }
-        
-        let span = minFret >= Int.max ? maxFret : maxFret - minFret
-        
-        return span
-    }
-    
-    func doesChordMeetRequirements(_ chord: Chord) -> Bool {
-        if chord.fretMapString.count != 6 {
-            return false
-        }
-        let span = getSpan(fretMap: chord.fretMapString)
-        if span < 0 || span > 5 {
-            return false
-        }
-    
-        return true
     }
 }

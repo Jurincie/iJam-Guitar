@@ -32,7 +32,7 @@ struct ContentView: View {
                            height:height * 0.11)
                 .aspectRatio(contentMode: .fit)
             }
-            .dynamicTypeSize(...DynamicTypeSize.large) // Clamps available sizes
+            .dynamicTypeSize(...DynamicTypeSize.xLarge)
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)
@@ -44,18 +44,18 @@ struct ContentView: View {
 
 #Preview {
     return ContentView()
-        .modelContainer(AppStateContainer.create(true))
+        .modelContainer(AppStateContainer.create(false))
         .preferredColorScheme(.dark)
 }
 
 #Preview {
     return ContentView()
-        .modelContainer(AppStateContainer.create(true))
+        .modelContainer(AppStateContainer.create(false))
         .preferredColorScheme(.light)
 }
 
 #Preview {
     return ContentView()
-        .modelContainer(AppStateContainer.create(true))
+        .modelContainer(AppStateContainer.create(false))
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }

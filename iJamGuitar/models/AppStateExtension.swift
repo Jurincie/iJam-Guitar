@@ -82,6 +82,7 @@ extension AppState
         case "C": return 12
         case "D": return 13
         case "E": return 14
+        case "F": return 15
         default: return char.wholeNumberValue ?? -1
         }
     }
