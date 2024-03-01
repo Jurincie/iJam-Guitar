@@ -43,7 +43,7 @@ struct CreateChordGroupView: View {
                 LazyVGrid(columns: columns,
                           spacing: 8) {
                     ForEach(getUndefinedPicks(), id: \.id) { pick in
-                        PickView2(selectedChords: $selectedChords, pick: pick)
+                        CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
                     }
                 }
                 Menu {

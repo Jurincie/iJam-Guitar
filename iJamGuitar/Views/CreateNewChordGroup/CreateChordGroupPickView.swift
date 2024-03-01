@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 import OSLog
 
-struct PickView2: View {
+struct CreateChordGroupPickView: View {
     @Query var appStates: [AppState]
     @Binding var selectedChords: [Chord]
     var pick: Pick
@@ -22,7 +22,7 @@ struct PickView2: View {
                 .scaledToFill()
             
             // foreground
-            Text(pick.id >= selectedChords.count ? "" : selectedChords[pick.id].name)
+            Text(pick.id < selectedChords.count ? selectedChords[pick.id].name : "")
                 .foregroundColor(Color.white)
                 .font(.headline)
                 .fontWeight(.bold)
