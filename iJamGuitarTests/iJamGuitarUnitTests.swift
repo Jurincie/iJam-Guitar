@@ -23,7 +23,6 @@ final class iJamAppStateUnitTests: XCTestCase {
     
     override func tearDown() { }
     
-    
     func test_fretBelongsInChordForProperSuccess() {
         // When
         let fretMapString = appState?.activeChordGroup?.activeChord?.fretMapString
@@ -31,13 +30,12 @@ final class iJamAppStateUnitTests: XCTestCase {
         if  let char1 = fretMapString?[5],
             let char2 = fretMapString?[4],
             let firstStringFret = appState?.getFretFromChar(char1),
-            let secondStringFret = appState?.getFretFromChar(char2){
+            let secondStringFret = appState?.getFretFromChar(char2) {
             // Then
-            XCTAssertTrue(((appState?.fretBelongsInChord(stringNumber: 1,
-                                                          newFretNumber: firstStringFret)) != nil))
-            
-            XCTAssertTrue(((appState?.fretBelongsInChord(stringNumber: 2,
-                                                          newFretNumber: secondStringFret)) != nil))
+            XCTAssertEqual(appState?.fretBelongsInChord(stringNumber: 1,
+                                                          newFretNumber: firstStringFret), true)
+            XCTAssertEqual(appState?.fretBelongsInChord(stringNumber: 2,
+                                                        newFretNumber: secondStringFret), true)
         }
     }
     
@@ -58,12 +56,13 @@ final class iJamAppStateUnitTests: XCTestCase {
     
     func test_getTuningNames() {
         // When
-        let chordGroupNamesString = appState?.tunings.reduce(into: "", { $0 += $1.name! + "-" })
-        let chorGroupNamesArray = chordGroupNamesString?.components(separatedBy: "-")
+        let chorGroupNamesArray = appState?.tunings.map { tuning in
+            tuning.name
+        }
         
         // Then
         if let first = appState?.tunings.first {
-            XCTAssertTrue(((chorGroupNamesArray?.contains(first.name ?? "xxx")) != nil))
+            XCTAssertEqual(chorGroupNamesArray?.contains(first.name ?? "xxx"), true)
             XCTAssertEqual(chorGroupNamesArray?.count,  appState?.tunings.count)
         }
     }
