@@ -14,15 +14,15 @@ final class ChordGroup {
     // Stored Properties
     var name: String
     var availableChordNames: String
-    var activeChord: Chord?
     
     // Computed Property
     var availableChordNamesArray: [String] {
         availableChordNames.components(separatedBy: "-")
     }
     
-    // Relationship
+    // Relationships
     @Relationship(deleteRule: .cascade) var availableChords = [Chord]()
+    @Relationship(deleteRule: .nullify) var activeChord: Chord?
     
     init(name: String = "",
          availableChordNames: String = "") {

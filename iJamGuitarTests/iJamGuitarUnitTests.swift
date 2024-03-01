@@ -1,5 +1,5 @@
 //
-//  iJamGuitarTests.swift
+//  iJamAppStateUnitTests.swift
 //  iJamAppStateTests
 //
 //  Created by Ron Jurincie on 12/5/23.
@@ -13,20 +13,58 @@ import XCTest
 @testable import iJamGuitar
 
 @available(iOS 17.0, *)
-final class iJamAppStateTests: XCTestCase {
+final class iJamAppStateUnitTests: XCTestCase {
     var appState: AppState?
+    
     override func setUp() async throws {
+        // Given
         appState = AppState()
     }
     
     override func tearDown() { }
     
+    
+    func test_fretBelongsInChordForProperSuccess() {
+        // When
+        let fretMapString = appState?.activeChordGroup?.activeChord?.fretMapString
+        
+        if  let char1 = fretMapString?[5],
+            let char2 = fretMapString?[4],
+            let firstStringFret = appState?.getFretFromChar(char1),
+            let secondStringFret = appState?.getFretFromChar(char2){
+            // Then
+            XCTAssertTrue(((appState?.fretBelongsInChord(stringNumber: 1,
+                                                          newFretNumber: firstStringFret)) != nil))
+            
+            XCTAssertTrue(((appState?.fretBelongsInChord(stringNumber: 2,
+                                                          newFretNumber: secondStringFret)) != nil))
+        }
+    }
+    
+    func test_fretBelongsInChordForProperFailure() {
+        // When
+        let fretMapString = appState?.activeChordGroup?.activeChord?.fretMapString
+        
+        if  let char = fretMapString?[5],
+            let firstStringFret = appState?.getFretFromChar(char) {
+            // Then
+            XCTAssertFalse(((appState?.fretBelongsInChord(stringNumber: 1,
+                                                          newFretNumber: firstStringFret + 1)) != nil))
+            
+            XCTAssertFalse(((appState?.fretBelongsInChord(stringNumber: 1,
+                                                          newFretNumber: firstStringFret + 2)) != nil))
+        }
+    }
+    
     func test_getTuningNames() {
+        // When
         let chordGroupNamesString = appState?.tunings.reduce(into: "", { $0 += $1.name! + "-" })
         let chorGroupNamesArray = chordGroupNamesString?.components(separatedBy: "-")
         
+        // Then
         if let first = appState?.tunings.first {
             XCTAssertTrue(((chorGroupNamesArray?.contains(first.name ?? "xxx")) != nil))
+            XCTAssertEqual(chorGroupNamesArray?.count,  appState?.tunings.count)
         }
     }
     

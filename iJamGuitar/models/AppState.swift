@@ -37,7 +37,6 @@ final class AppState {
             activeTuning?.activeChordGroup = newValue
         }
     }
-    
     var minimumFret: Int {
         get {
             if let activeChord = activeChordGroup?.activeChord {
