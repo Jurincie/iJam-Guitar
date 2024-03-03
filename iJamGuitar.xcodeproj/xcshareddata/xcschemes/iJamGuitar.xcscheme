@@ -45,7 +45,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AD9112F2B93EBF000055738"
+               BlueprintIdentifier = "7AD911422B93F22700055738"
                BuildableName = "iJamGuitarUITests.xctest"
                BlueprintName = "iJamGuitarUITests"
                ReferencedContainer = "container:iJamGuitar.xcodeproj">

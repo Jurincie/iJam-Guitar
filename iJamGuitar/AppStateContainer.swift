@@ -36,6 +36,9 @@ actor AppStateContainer {
             
         return container
         
+        /// Only called on INITIAL launch
+        /// Builds AppState, ChordGroups, Tunings and Chords from Plists
+        /// - Throws: PlistError on failurez
         func populateData() throws {
             // THIS is the ONLY insert we need
             // as we are preloading our data
@@ -98,6 +101,11 @@ actor AppStateContainer {
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
+            
+            // we hardwire this to a C chord, ONLY because we force:
+            //  activeChordGroup to be "Key of C" AND activeChord to be "C"
+            //  on INITIAL launch
+            //  If this ever changes --> set dynamically
             appState.currentFretIndexMap = [-1, 3, 2, 0, 1, 0]
         }
         
