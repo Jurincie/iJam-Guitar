@@ -7,7 +7,6 @@
 
 import AVFAudio
 import SwiftData
-import SwiftUI
 import XCTest
 
 @testable import iJamGuitar
@@ -21,7 +20,9 @@ final class iJamAppStateUnitTests: XCTestCase {
         appState = AppState()
     }
     
-    override func tearDown() { }
+    override func tearDown() {
+        appState = nil
+    }
     
     func test_fretBelongsInChordForProperSuccess() {
         // When
@@ -33,7 +34,7 @@ final class iJamAppStateUnitTests: XCTestCase {
             let secondStringFret = appState?.getFretFromChar(char2) {
             // Then
             XCTAssertEqual(appState?.fretBelongsInChord(stringNumber: 1,
-                                                          newFretNumber: firstStringFret), true)
+                                                        newFretNumber: firstStringFret), true)
             XCTAssertEqual(appState?.fretBelongsInChord(stringNumber: 2,
                                                         newFretNumber: secondStringFret), true)
         }
@@ -46,11 +47,11 @@ final class iJamAppStateUnitTests: XCTestCase {
         if  let char = fretMapString?[5],
             let firstStringFret = appState?.getFretFromChar(char) {
             // Then
-            XCTAssertFalse(((appState?.fretBelongsInChord(stringNumber: 1,
-                                                          newFretNumber: firstStringFret + 1)) != nil))
+            XCTAssertEqual(false, appState?.fretBelongsInChord(stringNumber: 1,
+                                                              newFretNumber: firstStringFret + 1))
             
-            XCTAssertFalse(((appState?.fretBelongsInChord(stringNumber: 1,
-                                                          newFretNumber: firstStringFret + 2)) != nil))
+            XCTAssertEqual(false, appState?.fretBelongsInChord(stringNumber: 1,
+                                                          newFretNumber: firstStringFret + 2))
         }
     }
     
@@ -110,7 +111,7 @@ final class iJamAppStateUnitTests: XCTestCase {
         
         for _ in 0...30 {
             thisAudioPlayer = audioManager.audioPlayerArray[Int.random(in: 0..<6)]
-            XCTAssertTrue(((thisAudioPlayer?.isKind(of: AVAudioPlayer.self)) != nil))
+            XCTAssertEqual(true, thisAudioPlayer?.isKind(of: AVAudioPlayer.self))
         }
     }
     

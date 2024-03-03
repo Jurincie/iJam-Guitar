@@ -8,13 +8,35 @@
 import OSLog
 import SwiftData
 import SwiftUI
+import Foundation
+
+struct TextFieldView: View {
+    @Binding var newChordGroupName: String
+    @FocusState private var isChordNewChordGroupNameFocused: Bool
+
+    var body: some View {
+        TextField("Enter Group Name", text: $newChordGroupName)
+            .focused($isChordNewChordGroupNameFocused)
+            .textFieldStyle(CustomTextFieldStyle())
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .border(.black, width: 1)
+            .padding()
+            .padding(.horizontal)
+            .onAppear() {
+                // set first responder here
+                isChordNewChordGroupNameFocused = true
+            }
+    }
+}
 
 struct CreateChordGroupView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
-    
+        
     // State Properties
+    @State private var shouldAnimate = false
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
@@ -32,13 +54,8 @@ struct CreateChordGroupView: View {
             Text("Create Chord Group")
                 .font(.headline)
             Spacer()
-            TextField("Enter Group Name", text: $newChordGroupName)
-                .textFieldStyle(CustomTextFieldStyle())
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.never)
-                .border(.black, width: 1)
-                .padding()
-                .padding(.horizontal)
+            TextFieldView(newChordGroupName: $newChordGroupName)
+                
             VStack {
                 LazyVGrid(columns: columns,
                           spacing: 8) {
@@ -46,6 +63,7 @@ struct CreateChordGroupView: View {
                         CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
                     }
                 }
+                
                 Menu {
                     Picker("Tunings", selection: $selectedTuningName) {
                         ForEach(appStates.first!.getTuningNames(), id: \.self) {
@@ -58,29 +76,29 @@ struct CreateChordGroupView: View {
                     })
                     .pickerStyle(.automatic)
                     .frame(maxWidth: .infinity)
-                } label: {
-                    if selectedTuningName == "Select a Tuning" {
-                        Text(selectedTuningName)
-                            .padding()
-                            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
-                            .fontWeight(.semibold)
-                            .background(Color.accentColor)
-                            .foregroundColor(Color.white)
-                            .shadow(color: .white , radius: 2.0)
-                            .modifier(BlinkingModifier(duration:0.5))
-                        
-                    } else {
-                        Text(selectedTuningName)
-                            .padding()
-                            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
-                            .fontWeight(.semibold)
-                            .background(Color.accentColor)
-                            .foregroundColor(Color.white)
-                            .shadow(color: .white , radius: 2.0)
-                    }
                 }
-                .cornerRadius(10)
-                .padding()
+            label: {
+                if selectedTuningName == "Select a Tuning" {
+                    Text(selectedTuningName)
+                        .padding()
+                        .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                        .fontWeight(.semibold)
+                        .background(Color.accentColor)
+                        .foregroundColor(Color.white)
+                        .shadow(color: .white , radius: 2.0)
+                } else {
+                    Text(selectedTuningName)
+                        .padding()
+                        .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                        .fontWeight(.semibold)
+                        .background(Color.accentColor)
+                        .foregroundColor(Color.white)
+                        .shadow(color: .white , radius: 2.0)
+                }
+            }
+            .modifier(BlinkingModifier(duration:0.5))
+            .cornerRadius(10)
+            .padding()
                 Spacer()
                 Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 chords (below)")
                     .font(.headline)
@@ -185,13 +203,18 @@ extension CreateChordGroupView {
 struct CustomTextFieldStyle : TextFieldStyle {
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .font(.caption) // set the inner Text Field Font
+            .font(.title) // set the inner Text Field Font
             .padding(5) // Set the inner Text Field Padding
-            //Give it some style
+        //Give it some style
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .strokeBorder(Color.primary.opacity(0.5), lineWidth: 1))
     }
+}
+
+struct AnimationValues {
+    var scale = 1.0
+    var verticalStretch = 1.0
 }
 
 

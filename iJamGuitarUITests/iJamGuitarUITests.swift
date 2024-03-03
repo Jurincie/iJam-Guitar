@@ -1,21 +1,25 @@
 //
 //  iJamGuitarUITests.swift
-//  iJamGuitarTests
+//  iJamGuitarUITests
 //
-//  Created by Ron Jurincie on 2/29/24.
+//  Created by Ron Jurincie on 3/2/24.
 //
 
+import OSLog
 import XCTest
 
 final class iJamGuitarUITests: XCTestCase {
-
+    var app = XCUIApplication()
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        app.launch()
+        
+        // set things like interface orientation - required for your tests.
     }
 
     override func tearDownWithError() throws {
@@ -23,11 +27,21 @@ final class iJamGuitarUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // When
+        let addButton = app.buttons["Add"]
+       
+        // Then
+        XCTAssert(addButton.exists)
+        addButton.tap()
+        
+        // When
+        let cancelButton = app.buttons["CANCEL"]
+        
+         // Then
+        XCTAssert(cancelButton.exists)
+        cancelButton.tap()
+    
+        XCTAssert(addButton.exists)
     }
 
     func testLaunchPerformance() throws {

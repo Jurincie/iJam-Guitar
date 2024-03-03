@@ -30,7 +30,10 @@ extension AppState
     ///  activeTuning, pickerTuningName, pickerChordGroupName
     ///  currentFretIndexMap
     func makeNewTuningActive(newTuning: Tuning) {
-        guard newTuning.activeChordGroup != nil else { return }
+        // shouldn't be needed but just in case
+        if newTuning.activeChordGroup == nil {
+            activeTuning?.activeChordGroup = activeTuning?.chordGroups.first
+        }
         activeTuning = newTuning
         pickerTuningName = newTuning.name ?? "ERROR"
         pickerChordGroupName = activeChordGroup?.name ?? ""

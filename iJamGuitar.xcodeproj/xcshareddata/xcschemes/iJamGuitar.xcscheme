@@ -40,6 +40,17 @@
                ReferencedContainer = "container:iJamGuitar.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7AD9112F2B93EBF000055738"
+               BuildableName = "iJamGuitarUITests.xctest"
+               BlueprintName = "iJamGuitarUITests"
+               ReferencedContainer = "container:iJamGuitar.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

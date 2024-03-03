@@ -13,20 +13,15 @@ import SwiftData
 final class Tuning {
     // Stored Properties
     @Attribute(.unique) var name: String?
-    var openNoteIndices: String
-    var stringNoteNames: String
+    var openNoteIndices: String = ""
+    var stringNoteNames: String = ""
     var chordsDictionary = [String:String]()
     var activeChordGroup: ChordGroup? = nil
     
     // Relationship
     @Relationship(deleteRule: .cascade) var chordGroups = [ChordGroup]()
     
-    init(name: String? = nil,
-         openNoteIndices: String = "",
-         stringNoteNames: String = "") {
-        self.name = name
-        self.openNoteIndices = openNoteIndices
-        self.stringNoteNames = stringNoteNames
+    init() {
     }
 }
 

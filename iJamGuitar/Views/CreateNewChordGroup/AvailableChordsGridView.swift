@@ -15,15 +15,12 @@ struct AvailableChordsGridView: View {
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
     
-    var multiLineNotice = """
-    Select a Tuning (Above)
-    to load available chords
-    """
-    
     var body: some View {
         if tuningSelected == false {
             VStack {
-                Text(multiLineNotice)
+                Text("Select Tuning Above")
+                    .bold()
+                    .font(.title)
                 Spacer()
             }
             .foregroundColor(.black)
@@ -55,7 +52,6 @@ struct AvailableChordsGridView: View {
                     }
                 }
                 .scrollTargetBehavior(.viewAligned)
-                .scrollIndicatorsFlash(onAppear: true)
                 .scrollBounceBehavior(.always)
                 .contentMargins(.trailing, 20, for: .scrollContent)
                 .scrollIndicatorsFlash(onAppear: true)

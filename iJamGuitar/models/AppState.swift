@@ -12,21 +12,26 @@ import OSLog
 @Model
 final class AppState {
     // Stored Properties
-    var showVolumeAlert: Bool
-    var showAudioPlayerInUseAlert: Bool
-    var showAudioNotAvailableAlert: Bool
-    var showAudioPlayerErrorAlert: Bool
-    var isMuted: Bool
-    var capoPosition: Int
-    var volumeLevel: Double
-    var savedVolumeLevel: Double
+    var isMuted: Bool = false
+    var showVolumeAlert: Bool = false
+    var showAudioPlayerInUseAlert: Bool = false
+    var showAudioNotAvailableAlert: Bool = false
+    var showAudioPlayerErrorAlert: Bool = false
+    var capoPosition: Int = 0
+    var volumeLevel: Double = 5.0
+    var savedVolumeLevel: Double = 5.0
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
+    
+    // currentFretIndexMap represents the CURRENT fret for each string
+    // which may have changed from original chord via tapping on frets
     var currentFretIndexMap: [Int] = []
 
+    init() {}
+    
     // Relationships
     @Relationship(deleteRule: .nullify) var activeTuning: Tuning? = nil
-    @Relationship(deleteRule: .cascade) var tunings: [Tuning]
+    @Relationship(deleteRule: .cascade) var tunings: [Tuning] = []
     
     // Calculated Properties
     var activeChordGroup: ChordGroup? {
@@ -59,25 +64,6 @@ final class AppState {
             Logger.viewCycle.debug("Could NOT calculate minimumFret")
             return 0
         }
-    }
-    
-    init(showVolumeAlert: Bool = false,
-         showAudioPlayerInUseAlert: Bool = false,
-         showAudioNotAvailableAlert: Bool = false,
-         showAudioPlayerErrorAlert: Bool = false,
-         isMuted: Bool = false,
-         capoPosition: Int = 0,
-         volumeLevel: Double = 5.0,
-         savedVolumeLevel: Double = 5.0) {
-        self.showVolumeAlert = showVolumeAlert
-        self.showAudioPlayerInUseAlert = showAudioPlayerInUseAlert
-        self.showAudioNotAvailableAlert = showAudioNotAvailableAlert
-        self.showAudioPlayerErrorAlert = showAudioPlayerErrorAlert
-        self.isMuted = isMuted
-        self.capoPosition = capoPosition
-        self.volumeLevel = volumeLevel
-        self.savedVolumeLevel = savedVolumeLevel
-        self.tunings = [Tuning]()
     }
 }
 
