@@ -24,7 +24,7 @@ struct TextFieldView: View {
             .padding()
             .padding(.horizontal)
             .onAppear() {
-                // set first responder here
+                // bocome first responder here
                 isChordNewChordGroupNameFocused = true
             }
     }
@@ -55,7 +55,6 @@ struct CreateChordGroupView: View {
                 .font(.headline)
             Spacer()
             TextFieldView(newChordGroupName: $newChordGroupName)
-                
             VStack {
                 LazyVGrid(columns: columns,
                           spacing: 8) {
@@ -63,7 +62,7 @@ struct CreateChordGroupView: View {
                         CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
                     }
                 }
-                
+                Divider()
                 Menu {
                     Picker("Tunings", selection: $selectedTuningName) {
                         ForEach(appStates.first!.getTuningNames(), id: \.self) {
@@ -85,7 +84,8 @@ struct CreateChordGroupView: View {
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
                         .foregroundColor(Color.white)
-                        .shadow(color: .white , radius: 2.0)
+                        .shadow(color: .white, radius: 2.0)
+                        .modifier(BlinkingModifier(duration:0.5))
                 } else {
                     Text(selectedTuningName)
                         .padding()
@@ -93,10 +93,9 @@ struct CreateChordGroupView: View {
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
                         .foregroundColor(Color.white)
-                        .shadow(color: .white , radius: 2.0)
+                        .shadow(color: .white, radius: 2.0)
                 }
             }
-            .modifier(BlinkingModifier(duration:0.5))
             .cornerRadius(10)
             .padding()
                 Spacer()
@@ -150,7 +149,7 @@ struct CreateChordGroupView: View {
         .alert("Please Select a Tuning", isPresented: $showNameTuningUndefinedAlert) {
             Button("OK", role: .cancel) { }
         }
-        .alert("You need to Enter a name for New Chord Group", isPresented: $showNameFieldEmptyAlert) {
+        .alert("Enter a name for new ChordGroup", isPresented: $showNameFieldEmptyAlert) {
             Button("OK", role: .cancel) { }
         }
         .alert("No Chords Selected", isPresented: $showNoChordsSelectedAlert) {

@@ -56,7 +56,6 @@ struct HeaderView: View {
                         .foregroundColor(.white)
                         .font(.largeTitle)
                         .padding(.top)
-                        .tag("plus.circle")
                 })
             }
             .sheet(isPresented: $showCreateChordGroupSheet) {

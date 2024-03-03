@@ -154,6 +154,9 @@
         }
       }
     },
+    "Enter a name for new ChordGroup" : {
+
+    },
     "Enter Group Name" : {
       "localizations" : {
         "de" : {
@@ -337,9 +340,6 @@
           }
         }
       }
-    },
-    "You need to Enter a name for New Chord Group" : {
-
     }
   },
   "version" : "1.0"
