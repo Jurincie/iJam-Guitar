@@ -36,11 +36,13 @@ struct CreateChordGroupView: View {
     @Query var appStates: [AppState]
         
     // State Properties
-    @State private var shouldAnimate = false
+    
+    // Alert States
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
     @State private var showNameTuningUndefinedAlert = false
+    
     @State private var selectedChords = [Chord]()
     @State private var newChordGroupName: String = ""
     @State var selectedTuningName: String = "Select a Tuning"

@@ -41,13 +41,11 @@ struct HeaderView: View {
                     .border(.white,
                             width: 2)
                     .cornerRadius(7)
-                    .padding(.top)
                 Spacer()
                 ChordGroupPickerView(chordGroupName: $chordGroupName)
                     .border(.white,
                             width: 2)
                     .cornerRadius(7)
-                    .padding(.top)
                 Spacer()
                 Button(action: {
                     showCreateChordGroupSheet.toggle()
@@ -55,14 +53,13 @@ struct HeaderView: View {
                     Image(systemName: "plus.circle")
                         .foregroundColor(.white)
                         .font(.largeTitle)
-                        .padding(.top)
                 })
             }
             .sheet(isPresented: $showCreateChordGroupSheet) {
                 CreateChordGroupView()
             }
-            Spacer()
         }
+        .border(.clear)
         .background() {
             Color(.black)
                 .frame(width: width, height: height)

@@ -15,6 +15,7 @@ struct TuningPickerView: View {
     @Query var appStates: [AppState]
     var body: some View {
         VStack {
+            Spacer()
             Menu {
                 Picker("Tunings", selection: $tuningName) {
                     let tuningNames = appStates.first!.getTuningNames()
@@ -44,6 +45,7 @@ struct TuningPickerView: View {
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
             }
+            Spacer()
         }
         .frame(maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 36)
         .border(.white,

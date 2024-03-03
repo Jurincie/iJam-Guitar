@@ -16,6 +16,7 @@ struct ChordGroupPickerView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Menu {
                 Picker("Chord Groups", selection: $chordGroupName) {
                     let chordGroupNames = getChordGroupNamesForTuning(name: appStates.first!.activeTuning?.name ?? "")
@@ -46,6 +47,7 @@ struct ChordGroupPickerView: View {
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)
             }
+            Spacer()
         }
         .frame(maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 36)
         .border(.white,
