@@ -60,7 +60,7 @@ struct StringView: View {
             .background(Image(stringImageName)
                 .resizable()
                 .frame(width:20, height:height, alignment:.topLeading)
-                .opacity(appStates.first!.currentFretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0))
+                .opacity(appStates.first!.currentFretPositions[6 - stringNumber] == -1 ? 0.3 : 1.0))
         }
     }
  
@@ -106,7 +106,7 @@ struct ForegroundView: View {
                 .font(.title3)
                 .fixedSize()
         } else {
-            let text = fretNumber == appState.currentFretIndexMap[6 - stringNumber] ? title : ""
+            let text = fretNumber == appState.currentFretPositions[6 - stringNumber] ? title : ""
             Text(text)
                 .font(.title3)
                 .fixedSize()
@@ -125,21 +125,21 @@ struct BackgroundView: View {
             let index = 6 - stringNumber
             var correctedFret = fretNumber
             
-            let currentFret = appState.currentFretIndexMap[index]
+            let currentFret = appState.currentFretPositions[index]
             if  currentFret == 0 && fretNumber == 0 {
                 correctedFret = -1
-            } else if appState.currentFretIndexMap[index] == fretNumber {
+            } else if appState.currentFretPositions[index] == fretNumber {
                 correctedFret = 0
             }
             
             // get the current appState.fretIndicesString
             // replace the nth character
-            appState.currentFretIndexMap[index] = correctedFret
+            appState.currentFretPositions[index] = correctedFret
         }){
             if(fretNumber == 0) {
                 // show a gray circle on zeroFret with black text
                 CircleView(color: Color.teal)
-            } else if fretNumber == appState.currentFretIndexMap[6 - stringNumber] {
+            } else if fretNumber == appState.currentFretPositions[6 - stringNumber] {
                 CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
             } else {
                 CircleView(color: Color.clear, lineWidth: 0)
@@ -171,7 +171,7 @@ extension StringView {
     func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
         let appState = appStates.first!
         var fretBoxArray:[FretBox] = []
-        let index = appState.currentFretIndexMap[6 - stringNumber]
+        let index = appState.currentFretPositions[6 - stringNumber]
         fretBoxArray.append(FretBox(id: 0,
                                     title: index == -1 ?
                                     "X" : getFretNoteTitle(openNote: openStringNote,

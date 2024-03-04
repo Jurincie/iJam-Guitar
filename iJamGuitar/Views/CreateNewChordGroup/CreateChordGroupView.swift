@@ -20,7 +20,7 @@ struct TextFieldView: View {
             .textFieldStyle(CustomTextFieldStyle())
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
-            .border(.black, width: 1)
+            .border(.black, width: 2)
             .padding()
             .padding(.horizontal)
             .onAppear() {
@@ -176,7 +176,7 @@ extension CreateChordGroupView {
             firstChord.group = newChordGroup
             
             let fretMapString = firstChord.fretMapString
-            appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: fretMapString)
+            appStates.first!.currentFretPositions = appStates.first!.getFretIndexMap(fretMapString: fretMapString)
         }
         appStates.first!.activeTuning = selectedTuning
         appStates.first!.activeTuning?.chordGroups.append(newChordGroup)

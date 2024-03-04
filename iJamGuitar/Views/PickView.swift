@@ -46,7 +46,7 @@ extension PickView {
                 isTapped.toggle()
             }
             appStates.first!.activeChordGroup?.activeChord = pick.chord
-            appStates.first!.currentFretIndexMap = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
+            appStates.first!.currentFretPositions = appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString)
             isTapped.toggle()
         }){
             Image(getPickImageName())
@@ -67,7 +67,7 @@ extension PickView {
         var pickImageName = "BlankPick"
         
         if appStates.first!.activeChordGroup?.activeChord == pick.chord {
-            pickImageName = appStates.first!.currentFretIndexMap != appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString) ? "ModifiedPick" : "ActivePick"
+            pickImageName = appStates.first!.currentFretPositions != appStates.first!.getFretIndexMap(fretMapString: pick.chord.fretMapString) ? "ModifiedPick" : "ActivePick"
         } else {
             pickImageName = pick.id < numberAvailableChords ?? 0 ? "BlankPick" : "UndefinedPick"
         }

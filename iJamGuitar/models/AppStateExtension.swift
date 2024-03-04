@@ -18,7 +18,7 @@ extension String {
 extension AppState
 {
     func fretBelongsInChord(stringNumber: Int, newFretNumber: Int) -> Bool {
-        let fretForTappedFret = currentFretIndexMap[6 - stringNumber]
+        let fretForTappedFret = currentFretPositions[6 - stringNumber]
         let chordMap = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
         let fretFromChordForThisString = chordMap[6 - stringNumber]
         
@@ -37,7 +37,7 @@ extension AppState
         activeTuning = newTuning
         pickerTuningName = newTuning.name ?? "ERROR"
         pickerChordGroupName = activeChordGroup?.name ?? ""
-        currentFretIndexMap = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
+        currentFretPositions = getFretIndexMap(fretMapString: activeChordGroup?.activeChord?.fretMapString ?? "")
     }
 
     /// This method takes a name associated with Tunings names

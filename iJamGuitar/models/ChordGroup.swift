@@ -33,6 +33,6 @@ final class ChordGroup {
 
 extension ChordGroup: CustomStringConvertible {
     var description: String {
-        return "name: \(name)   activeChord: \(String(describing: activeChord?.name))"
+        return "name: \(name) <--> activeChord: \(String(describing: activeChord?.name))"
     }
 }

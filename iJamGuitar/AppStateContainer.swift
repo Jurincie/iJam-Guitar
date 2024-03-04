@@ -106,7 +106,7 @@ actor AppStateContainer {
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
             //  If this ever changes --> set dynamically
-            appState.currentFretIndexMap = [-1, 3, 2, 0, 1, 0]
+            appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
         }
         
         /// This method sets all needed values for Tuning identified by tuningName

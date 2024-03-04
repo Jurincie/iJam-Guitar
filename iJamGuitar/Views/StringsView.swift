@@ -152,7 +152,7 @@ extension StringsView {
         }
         
         let openNotes = appStates.first!.activeTuning?.openNoteIndices.components(separatedBy: "-")
-        let fretPosition = appStates.first!.currentFretIndexMap[6 - stringToPlay]
+        let fretPosition = appStates.first!.currentFretPositions[6 - stringToPlay]
         if fretPosition > kNoFret {
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
                 let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition

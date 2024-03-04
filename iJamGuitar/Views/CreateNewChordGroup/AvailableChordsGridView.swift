@@ -31,11 +31,12 @@ struct AvailableChordsGridView: View {
             let tuning = appStates.first!.tunings.first { tuning in
                 tuning.name == selectedTuningName
             }
+            
             if let chordDictionary: [String:String] = tuning?.chordsDictionary {
                 let keys = chordDictionary.map{$0.key}
                 let values = chordDictionary.map {$0.value}
                 
-                // sort tuple array
+                // create then sort tuple array
                 let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
                     tuple1.0 < tuple2.0
                 }

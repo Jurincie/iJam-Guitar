@@ -36,7 +36,7 @@ struct ChordGroupPickerView: View {
                         
                         let fretMap = appStates.first!.getFretIndexMap(fretMapString: newChordGroup.activeChord?.fretMapString ?? "")
                         
-                        appStates.first!.currentFretIndexMap = fretMap
+                        appStates.first!.currentFretPositions = fretMap
                     }
                 })
             } label: {
