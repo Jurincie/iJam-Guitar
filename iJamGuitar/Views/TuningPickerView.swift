@@ -53,7 +53,3 @@ struct TuningPickerView: View {
         .cornerRadius(8)
     }
 }
-
-//#Preview {
-//    TuningPickerView()
-//}

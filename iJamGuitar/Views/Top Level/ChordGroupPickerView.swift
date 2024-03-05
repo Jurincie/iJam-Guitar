@@ -75,7 +75,3 @@ struct ChordGroupPickerView: View {
         return array
     }
 }
-
-//#Preview {
-//    ChordGroupPickerView(chordGroupName: Binding<"Key of G">)
-//}

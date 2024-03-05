@@ -38,9 +38,7 @@ final class AppState {
         get {
             activeTuning?.activeChordGroup
         }
-        set {
-            activeTuning?.activeChordGroup = newValue
-        }
+        set { }
     }
     
     var minimumFret: Int {
@@ -60,10 +58,10 @@ final class AppState {
                 
                 let lowest = highest - 4
                 return highest < 6 ? 1 : max(1, lowest)
+            } else {
+                Logger.viewCycle.debug("Could NOT calculate minimumFret")
+                return 0
             }
-            
-            Logger.viewCycle.debug("Could NOT calculate minimumFret")
-            return 0
         }
     }
 }

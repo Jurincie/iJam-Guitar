@@ -173,26 +173,10 @@ extension StringsView {
     func playOpeningArpegio() async {
         for string in 0...5 {
             pickString(6 - string)
-            try? await Task.sleep(nanoseconds: 0_100_000_000)
+            try? await Task.sleep(nanoseconds: 50_000_000)
         }
         Logger.viewCycle.debug("-----> zoneBreaks: \(zoneBreaks)")
     }
 }
-
-//    var body: some View {
-//        let appState = appStates.first!
-//        HStack {
-//            SixHorizontalSpacers()
-//            HStack(spacing:0) {
-//                ForEach(0...5, id: \.self) { index in
-//                    StringView(height: height,
-//                               stringNumber: 6 - index)
-//                    .readFrame { newFrame in
-//                        zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
-//                    }
-//                }
-//                SixHorizontalSpacers()
-////                SixHorizontalSpacers()
-//            }
 
 

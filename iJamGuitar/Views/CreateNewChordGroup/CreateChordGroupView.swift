@@ -21,8 +21,8 @@ struct TextFieldView: View {
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
             .border(.black, width: 2)
-            .padding()
             .padding(.horizontal)
+            .font(.headline)
             .onAppear() {
                 // bocome first responder here
                 isChordNewChordGroupNameFocused = true
@@ -51,11 +51,15 @@ struct CreateChordGroupView: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 10.0 : 5.0
     
+    // Calculated Property
+    var tuningSelected: Bool {
+        selectedTuningName != "Select a Tuning"
+    }
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("Create Chord Group")
-                .font(.headline)
-            Spacer()
+                .font(.caption)
             TextFieldView(newChordGroupName: $newChordGroupName)
             VStack {
                 LazyVGrid(columns: columns,
@@ -79,7 +83,7 @@ struct CreateChordGroupView: View {
                     .frame(maxWidth: .infinity)
                 }
             label: {
-                if selectedTuningName == "Select a Tuning" {
+                if tuningSelected == false {
                     Text(selectedTuningName)
                         .padding()
                         .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
@@ -99,17 +103,15 @@ struct CreateChordGroupView: View {
                 }
             }
             .cornerRadius(10)
-            .padding()
-                Spacer()
-                Text(selectedTuningName == "Select a Tuning" ? "" : "Choose up to 10 chords (below)")
+//            .padding()
+                Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
                     .font(.headline)
                     .foregroundColor(.black)
                 AvailableChordsGridView(selectedTuningName: $selectedTuningName,
                                         selectedChords: $selectedChords,
                                         tuningSelected: selectedTuningName != "Select a Tuning")
             }
-            Spacer()
-            HStack {
+             HStack {
                 Button(action: {
                     dismiss()
                 }, label: { Text("CANCEL")})
