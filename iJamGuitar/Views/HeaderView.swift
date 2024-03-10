@@ -56,6 +56,7 @@ struct HeaderView: View {
             }
             .sheet(isPresented: $showCreateChordGroupSheet) {
                 CreateChordGroupView()
+                    .presentationBackground(.thinMaterial)
             }
         }
         .border(.clear)
