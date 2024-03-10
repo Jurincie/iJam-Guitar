@@ -35,13 +35,12 @@ struct HeaderView: View {
             Spacer()
             Spacer()
             HStack {
-                Spacer()
                 TuningPickerView(tuningName: $tuningName,
                                  chordGroupName: $chordGroupName)
                     .border(.white,
                             width: 2)
                     .cornerRadius(7)
-                Spacer()
+                    .padding(.horizontal)
                 ChordGroupPickerView(chordGroupName: $chordGroupName)
                     .border(.white,
                             width: 2)

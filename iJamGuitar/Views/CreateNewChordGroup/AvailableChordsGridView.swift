@@ -19,9 +19,9 @@ struct AvailableChordsGridView: View {
         if tuningSelected == false {
             VStack {
                 Text("Select Tuning Above")
+                    .frame(alignment: .top)
                     .bold()
                     .font(.title)
-                Spacer()
             }
             .foregroundColor(.black)
             .padding()
@@ -71,47 +71,41 @@ struct AvailablePickView: View {
     // Stored Properties
     let name: String
     let fretMapString: String
+    @State private var isSelected = false
     
-    // Computed Properties
-    var isActive: Bool {
-        if let _ = selectedChords.firstIndex(where: { chord in
-            chord.name == name
-        }) {
-            return true
-        }
-        return false
-    }
     var canAddPicks: Bool {
         selectedChords.count < 10
     }
     
     var body: some View {
         Button(action: {
-            if isActive == false {
-                // user tapped on inactive pick
+            if isSelected == false {
+                // user tapped on unselected pick
                 if canAddPicks {
                     // append chord from this name and fretMapString
                     let chord = Chord(name: name, fretMapString: fretMapString)
                     selectedChords.append(chord)
+                    isSelected = true
                     Logger.viewCycle.debug("Added Chord: \(chord.name)")
                 }
             } else {
-                // User tapped on an active pick
+                // User tapped on an selected pick
                 if let index = selectedChords.firstIndex(where: { chord in
                     chord.name == name
                 }) {
                     // remove this pick chord
                     let name = selectedChords[index].name
                     selectedChords.remove(at: index)
+                    isSelected = false
                     Logger.viewCycle.debug("Removed Chord: \(name)")
                 }
             }
         }, label: {
             ZStack {
-                Image(isActive ? .activePick : .blankPick)
+                // Backgroune
+                Image(isSelected ? .activePick : .blankPick)
                     .resizable()
                     .scaledToFill()
-                
                 // Foreground
                 VStack(spacing: 5) {
                     Spacer()

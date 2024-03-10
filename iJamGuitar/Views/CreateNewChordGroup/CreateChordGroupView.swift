@@ -59,7 +59,7 @@ struct CreateChordGroupView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("Create Chord Group")
-                .font(.caption)
+                .font(.headline)
             TextFieldView(newChordGroupName: $newChordGroupName)
             VStack {
                 LazyVGrid(columns: columns,
@@ -103,10 +103,9 @@ struct CreateChordGroupView: View {
                 }
             }
             .cornerRadius(10)
-//            .padding()
                 Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                 AvailableChordsGridView(selectedTuningName: $selectedTuningName,
                                         selectedChords: $selectedChords,
                                         tuningSelected: selectedTuningName != "Select a Tuning")
@@ -145,6 +144,7 @@ struct CreateChordGroupView: View {
             }
             .padding(.horizontal)
         }
+        .frame(maxHeight: .infinity)
         .padding()
         .background(Image(.topView)
             .resizable()

@@ -67,21 +67,22 @@ struct StringsView: View {
             }
             Spacer()
         }
-        .task({ await playOpeningArpegio() })
+        .task({ 
+            guard appStates.first!.isMuted == false else { return }
+            await playOpeningArpegio() })
         .contentShape(Rectangle())
         .gesture(drag)
         .alert("Master Volume is OFF",
                isPresented: Bindable(appState).showVolumeAlert) {
             Button("OK", role: .cancel) { appState.showVolumeAlert = false }
         }
-               .alert("Another App is using the Audio Player",
-                      isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
-                   Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
-               }
-                      .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
-                          Button("OK", role: .cancel) { fatalError() }
-                      }
-        
+        .alert("Another App is using the Audio Player",
+              isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
+           Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
+        }
+        .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
+          Button("OK", role: .cancel) { fatalError() }
+        }
     }
 }
 
@@ -161,7 +162,6 @@ extension StringsView {
     }
     
     func playOpeningArpegio() async {
-        guard appStates.first!.isMuted == false else { return }
         for string in 0...5 {
             pickString(6 - string)
             try? await Task.sleep(nanoseconds: 50_000_000)
