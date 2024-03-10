@@ -57,7 +57,7 @@ struct StringsView: View {
     var body: some View {
         let appState = appStates.first!
         HStack() {
-            SixHorizontalSpacers()
+            Spacer()
             ForEach(0..<6) { index in
                 StringView(height: height,
                            stringNumber: 6 - index)
@@ -65,7 +65,7 @@ struct StringsView: View {
                     zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
                 }
             }
-            SixHorizontalSpacers()
+            Spacer()
         }
         .task({ await playOpeningArpegio() })
         .contentShape(Rectangle())
@@ -82,16 +82,6 @@ struct StringsView: View {
                           Button("OK", role: .cancel) { fatalError() }
                       }
         
-    }
-    
-    struct SixHorizontalSpacers: View {
-        var body: some View {
-            HStack() {
-                ForEach(0...5, id: \.self) { _ in
-                    Spacer()
-                }
-            }
-        }
     }
 }
 
@@ -171,6 +161,7 @@ extension StringsView {
     }
     
     func playOpeningArpegio() async {
+        guard appStates.first!.isMuted == false else { return }
         for string in 0...5 {
             pickString(6 - string)
             try? await Task.sleep(nanoseconds: 50_000_000)
