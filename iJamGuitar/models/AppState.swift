@@ -24,7 +24,7 @@ final class AppState {
     var pickerTuningName: String = ""
     
     // currentFretPositions represents the CURRENT fret position for each string
-    // which may have changed via tapping on frets from when latest chord loaded
+    // which may have changed via tapping on frets from when latest chord change
     var currentFretPositions: [Int] = []
 
     init() {}
@@ -40,7 +40,6 @@ final class AppState {
         }
         set { }
     }
-    
     var minimumFret: Int {
         get {
             if let activeChord = activeChordGroup?.activeChord {

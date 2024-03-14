@@ -72,7 +72,7 @@ struct StringsView: View {
             await playOpeningArpegio() })
         .contentShape(Rectangle())
         .gesture(drag)
-        .alert("Master Volume is OFF",
+        .alert("Device Volume is OFF",
                isPresented: Bindable(appState).showVolumeAlert) {
             Button("OK", role: .cancel) { appState.showVolumeAlert = false }
         }
@@ -120,7 +120,7 @@ extension StringsView {
     /// - Parameter location:- the current location of the drag in global co-ordinates
     func newDragLocation(_ location: CGPoint?) {
         guard let location =  location else { return }
-        Logger.viewCycle.debug("Drag[x] = \(location.x)")
+//        Logger.viewCycle.debug("Drag[x] = \(location.x)")
         let zone = getZone(loc: location)
         if zone != formerZone {
             Logger.viewCycle.notice("====> In New Zone: \(zone)")

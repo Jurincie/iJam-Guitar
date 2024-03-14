@@ -154,6 +154,9 @@
         }
       }
     },
+    "Device Volume is OFF" : {
+
+    },
     "Enter a name for new ChordGroup" : {
 
     },
@@ -186,6 +189,7 @@
       }
     },
     "Master Volume is OFF" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

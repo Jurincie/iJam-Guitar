@@ -30,12 +30,14 @@ struct CapoPositionPickerView: View {
     }
         
     func getCapoLabel() -> some View {
+        let isIpad = UserDefaults.standard.bool(forKey: "IsIpad")
         return Text("\(appStates.first!.capoPosition)")
-            .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .callout)
+            .font(isIpad ? .title2 : .callout)
+            .font(isIpad ? .title2 : .callout)
             .fontWeight(.semibold)
             .padding()
             .background(Color.clear)
-            .foregroundColor(Color.white)
+            .foregroundColor(Color.primary)
             .cornerRadius(4.0)
             .shadow(color: .white , radius: 2.0)
     }

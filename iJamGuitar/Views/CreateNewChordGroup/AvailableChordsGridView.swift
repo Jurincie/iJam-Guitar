@@ -23,7 +23,7 @@ struct AvailableChordsGridView: View {
                     .bold()
                     .font(.title)
             }
-            .foregroundColor(.black)
+            .foregroundColor(.primary)
             .padding()
             .border(.black, width: 4)
         }
@@ -117,7 +117,7 @@ struct AvailablePickView: View {
                     Spacer()
                 }
                 .font(.caption)
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
             }
         })
     }

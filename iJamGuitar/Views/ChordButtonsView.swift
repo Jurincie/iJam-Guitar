@@ -13,7 +13,6 @@ struct ChordButtonsView: View {
     @Query var appStates: [AppState]
     let width: CGFloat
     let height: CGFloat
-    let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 18.0 : 12.0
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
     func getPicks() -> [Pick] {
@@ -40,6 +39,7 @@ struct ChordButtonsView: View {
     }
             
     var body: some View {
+        let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 18.0 : 12.0
         let pickArray = getPicks()
         LazyVGrid(columns: columns, spacing:mySpacing) {
                 ForEach(pickArray, id: \.id) { pick in

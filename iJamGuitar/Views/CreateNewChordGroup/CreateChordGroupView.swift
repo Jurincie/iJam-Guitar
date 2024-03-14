@@ -12,21 +12,15 @@ import Foundation
 
 struct TextFieldView: View {
     @Binding var newChordGroupName: String
-    @FocusState private var isChordNewChordGroupNameFocused: Bool
 
     var body: some View {
         TextField("Enter Group Name", text: $newChordGroupName)
-            .focused($isChordNewChordGroupNameFocused)
             .textFieldStyle(CustomTextFieldStyle())
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
             .border(.black, width: 2)
             .padding(.horizontal)
             .font(.headline)
-            .onAppear() {
-                // bocome first responder here
-                isChordNewChordGroupNameFocused = true
-            }
     }
 }
 
@@ -34,22 +28,21 @@ struct CreateChordGroupView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
-        
-    // State Properties
     
-    // Alert States
+    // Alert State Properties
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
     @State private var showNameTuningUndefinedAlert = false
     
+    // State Properties
     @State private var selectedChords = [Chord]()
     @State private var newChordGroupName: String = ""
     @State var selectedTuningName: String = "Select a Tuning"
     
     // Stored Properties
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    let mySpacing = UIDevice.current.userInterfaceIdiom == .pad ? 10.0 : 5.0
+    let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 10.0 : 5.0
     
     // Calculated Property
     var tuningSelected: Bool {
@@ -77,6 +70,8 @@ struct CreateChordGroupView: View {
                         }
                     }
                     .onChange(of: selectedTuningName, { oldValue, newValue in
+                        // when user changes tuning selection
+                        //  -> remove all the selectedChords from earlier tuning
                         selectedChords.removeAll()
                     })
                     .pickerStyle(.automatic)
@@ -86,19 +81,19 @@ struct CreateChordGroupView: View {
                 if tuningSelected == false {
                     Text(selectedTuningName)
                         .padding()
-                        .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.primary)
                         .shadow(color: .white, radius: 2.0)
                         .modifier(BlinkingModifier(duration:0.5))
                 } else {
                     Text(selectedTuningName)
                         .padding()
-                        .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.primary)
                         .shadow(color: .white, radius: 2.0)
                 }
             }

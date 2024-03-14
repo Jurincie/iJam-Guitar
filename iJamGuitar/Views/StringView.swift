@@ -102,7 +102,7 @@ struct ForegroundView: View {
         // show fretZero note names AND a (possibly) fretted fretBox
         if fretNumber == 0 {
             Text(title)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.primary)
                 .font(.title3)
                 .fixedSize()
         } else {

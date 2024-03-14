@@ -17,6 +17,7 @@ enum Tunings: String {
 
 struct HeaderView: View {
     @Query private var appStates: [AppState]
+    
     @State private var showCreateChordGroupSheet = false
     @State private var tuningName: String = ""
     @State private var chordGroupName: String = ""

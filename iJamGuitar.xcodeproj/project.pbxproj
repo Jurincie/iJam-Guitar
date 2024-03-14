@@ -260,8 +260,8 @@
 		7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */ = {
 			isa = PBXGroup;
 			children = (
-				7ACEB16E2B842DA800E85A41 /* CreateChordGroupPickView.swift */,
 				7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */,
+				7ACEB16E2B842DA800E85A41 /* CreateChordGroupPickView.swift */,
 				7A22F4492B8549F300D60D77 /* AvailableChordsGridView.swift */,
 			);
 			path = CreateNewChordGroup;

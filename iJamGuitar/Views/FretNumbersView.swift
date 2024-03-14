@@ -28,11 +28,11 @@ struct FretNumbersView: View {
             // next 5 rows span the chord - from minfret to minFret + 5)
             ForEach((0...4), id: \.self) {
                 Text(String(appState.capoPosition + appState.minimumFret + Int($0)))
-                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                    .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                     .fontWeight(.semibold)
                     .frame(width: width, height: height / 6, alignment: .center)
                     .background(Color.gray)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.primary)
                     .border(Color.white)
             }
         }

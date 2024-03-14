@@ -13,6 +13,7 @@ struct TuningPickerView: View {
     @Binding var tuningName: String
     @Binding var chordGroupName: String
     @Query var appStates: [AppState]
+    
     var body: some View {
         VStack {
             Spacer()
@@ -40,16 +41,15 @@ struct TuningPickerView: View {
             } label: {
                 Text(appStates.first!.pickerTuningName)
                     .padding()
-                    .font(UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .caption)
+                    .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                     .fontWeight(.semibold)
                     .background(Color.accentColor)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.primary)
             }
             Spacer()
         }
-        .frame(maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 36)
-        .border(.white,
-                width: 3)
+        .frame(maxHeight: UserDefaults.standard.bool(forKey: "IsIpad") ? 48 : 36)
+        .border(.white, width: 3)
         .cornerRadius(8)
     }
 }

@@ -23,7 +23,7 @@ struct CreateChordGroupPickView: View {
             
             // foreground
             Text(pick.id < selectedChords.count ? selectedChords[pick.id].name : "")
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.primary)
                 .font(.headline)
                 .fontWeight(.bold)
         }

@@ -11,7 +11,6 @@ import OSLog
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
-    var x: CGFloat = 0.0
     
     var body: some View {
         GeometryReader { geo in
@@ -32,25 +31,31 @@ struct ContentView: View {
                            height:height * 0.11)
                 .aspectRatio(contentMode: .fit)
             }
-            .dynamicTypeSize(...DynamicTypeSize.xLarge)
+            .dynamicTypeSize(...DynamicTypeSize.medium)
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)
         }
         .background(Color.black)
         .ignoresSafeArea()
+        .onAppear() {
+            let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+            UserDefaults.standard.setValue(isIpad, forKey: "IsIpad")
+        }
     }
 }
 
 #Preview {
     return ContentView()
         .modelContainer(AppStateContainer.create(false))
+        .environment(\.sizeCategory, .accessibilityMedium)
         .preferredColorScheme(.dark)
 }
 
 #Preview {
     return ContentView()
         .modelContainer(AppStateContainer.create(false))
+        .environment(\.sizeCategory, .accessibilityExtraLarge)
         .preferredColorScheme(.light)
 }
 
@@ -58,4 +63,5 @@ struct ContentView: View {
     return ContentView()
         .modelContainer(AppStateContainer.create(false))
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+        .preferredColorScheme(.dark)
 }
