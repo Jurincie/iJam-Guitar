@@ -23,7 +23,7 @@ struct AvailableChordsGridView: View {
                     .bold()
                     .font(.title)
             }
-            .foregroundColor(.primary)
+            .foregroundColor(.white)
             .padding()
             .border(.black, width: 4)
         }
@@ -54,7 +54,7 @@ struct AvailableChordsGridView: View {
                 }
                 .scrollTargetBehavior(.viewAligned)
                 .scrollBounceBehavior(.always)
-                .contentMargins(.trailing, 20, for: .scrollContent)
+                .contentMargins(.horizontal, 20, for: .scrollContent)
                 .scrollIndicatorsFlash(onAppear: true)
                 .padding()
                 .border(.black, width: 4)
@@ -117,8 +117,13 @@ struct AvailablePickView: View {
                     Spacer()
                 }
                 .font(.caption)
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
             }
         })
+        .onChange(of: selectedChords) {
+            if selectedChords.count == 0 {
+                isSelected = false
+            }
+        }
     }
 }

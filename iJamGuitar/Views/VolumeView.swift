@@ -26,7 +26,7 @@ struct VolumeView: View {
             .resizable()
             .frame(width: imageWidth, height: imageWidth)
             .shadow(radius: 10)
-            .foregroundColor(Color.primary)
+            .foregroundColor(Color.white)
             .padding(10)
     }
     

@@ -25,10 +25,10 @@ struct ContentView: View {
                         height:height * 0.25)
                 .aspectRatio(contentMode: .fit)
                 StringsAndFretsAreaView(width:width,
-                                        height:height * 0.50)
+                                        height:height * 0.47)
                 .aspectRatio(contentMode: .fit)
                 BottomView(width: width,
-                           height:height * 0.11)
+                           height:height * 0.14)
                 .aspectRatio(contentMode: .fit)
             }
             .dynamicTypeSize(...DynamicTypeSize.medium)
