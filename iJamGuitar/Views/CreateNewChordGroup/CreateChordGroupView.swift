@@ -52,7 +52,7 @@ struct CreateChordGroupView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("Create Chord Group")
-                .font(.headline)
+                .font(.title)
             TextFieldView(newChordGroupName: $newChordGroupName)
             VStack {
                 LazyVGrid(columns: columns,
