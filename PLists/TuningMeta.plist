@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>TuningName</key>
+		<string>Standard</string>
+		<key>NoteNames</key>
+		<string>E-A-D-G-B-E</string>
+		<key>OpenNoteIndices</key>
+		<string>4-9-14-19-23-28</string>
+		<key>ChordLibraryName</key>
+		<string>StandardTuning_ChordLibrary</string>
+		<key>ChordGroupName</key>
+		<string>StandardTuningChordGroups</string>
+	</dict>
+	<dict>
+		<key>TuningName</key>
+		<string>Drop D&quot;</string>
+		<key>NoteNames</key>
+		<string>D-A-D-G-B-E</string>
+		<key>OpenNoteIndices</key>
+		<string>2-9-14-19-23-28</string>
+		<key>ChordLibraryName</key>
+		<string>DropD_ChordLibrary</string>
+		<key>ChordGroupName</key>
+		<string>DropDTuningChordGroups</string>
+	</dict>
+	<dict>
+		<key>TuningName</key>
+		<string>Open D</string>
+		<key>NoteNames</key>
+		<string>D-A-D-F#-A-D</string>
+		<key>OpenNoteIndices</key>
+		<string>2-9-14-18-21-26</string>
+		<key>ChordLibraryName</key>
+		<string>penD_ChordLibrary&quot;</string>
+		<key>ChordGroupName</key>
+		<string>OpenDTuningChordGroups</string>
+	</dict>
+	<dict>
+		<key>TuningName</key>
+		<string>Open G</string>
+		<key>NoteNames</key>
+		<string>D-G-D-G-B-D</string>
+		<key>OpenNoteIndices</key>
+		<string>2-7-14-19-23-26</string>
+		<key>ChordLibraryName</key>
+		<string>OpenG_ChordLibrary</string>
+		<key>ChordGroupName</key>
+		<string>OpenGTuningChordGroups</string>
+	</dict>
+</array>
+</plist>
