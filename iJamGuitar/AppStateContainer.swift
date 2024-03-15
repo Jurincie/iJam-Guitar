@@ -16,6 +16,7 @@ actor AppStateContainer {
         let schema = Schema([AppState.self])
         let configuration = ModelConfiguration()
         var container: ModelContainer
+        var tuningsArray = [Tuning]()
         
         do {
             container = try ModelContainer(for: schema,
@@ -33,7 +34,7 @@ actor AppStateContainer {
             
             UserDefaults.standard.setValue(true, forKey: "DataExists")
         }
-            
+        
         return container
         
         /// Only called on INITIAL launch
@@ -45,67 +46,66 @@ actor AppStateContainer {
             let appState = AppState()
             
             // Standard Tuning
-            let standardTuning = Tuning()
             do {
-                try setupTuning(tuning: standardTuning,
-                                tuningName: "Standard",
-                                openIndices: "4-9-14-19-23-28",
-                                noteNames: "E-A-D-G-B-E",
-                                chordLibraryFileName: "StandardTuning_ChordLibrary",
-                                chordGroupsFileName: "StandardTuningChordGroups")
+                let standardTuning = try createTuning(tuningName: "Standard",
+                                                      openIndices: "4-9-14-19-23-28",
+                                                      noteNames: "E-A-D-G-B-E",
+                                                      chordLibraryFileName: "StandardTuning_ChordLibrary",
+                                                      chordGroupsFileName: "StandardTuningChordGroups")
+                tuningsArray.append(standardTuning)
+                appState.activeTuning = standardTuning
             } catch {
                 throw PlistError.unknownError
             }
             
             // Drop-D Tuning
-            let dropDTuning = Tuning()
             do {
-                try setupTuning(tuning: dropDTuning,
-                                tuningName: "Drop D",
-                                openIndices: "2-9-14-19-23-28",
-                                noteNames: "D-A-D-G-B-E",
-                                chordLibraryFileName: "DropD_ChordLibrary",
-                                chordGroupsFileName: "DropDTuningChordGroups")
+                let dropDTuning = try createTuning(tuningName: "Drop D",
+                                                   openIndices: "2-9-14-19-23-28",
+                                                   noteNames: "D-A-D-G-B-E",
+                                                   chordLibraryFileName: "DropD_ChordLibrary",
+                                                   chordGroupsFileName: "DropDTuningChordGroups")
+                tuningsArray.append(dropDTuning)
             } catch {
                 throw PlistError.unknownError
             }
             
             // Open D Tuning
-            let openDTuning = Tuning()
             do {
-                try setupTuning(tuning: openDTuning,
-                                tuningName: "Open D",
-                                openIndices: "2-9-14-18-21-26",
-                                noteNames: "D-A-D-F#-A-D",
-                                chordLibraryFileName: "OpenD_ChordLibrary",
-                                chordGroupsFileName: "OpenDTuningChordGroups")
+                let openDTuning = try createTuning(tuningName: "Open D",
+                                                   openIndices: "2-9-14-18-21-26",
+                                                   noteNames: "D-A-D-F#-A-D",
+                                                   chordLibraryFileName: "OpenD_ChordLibrary",
+                                                   chordGroupsFileName: "OpenDTuningChordGroups")
+                tuningsArray.append(openDTuning)
+                
             } catch {
                 throw PlistError.unknownError
             }
             
             // Open G Tuning
-            let openGTuning = Tuning()
             do {
-                try setupTuning(tuning: openGTuning,
-                                tuningName: "Open G",
-                                openIndices: "2-7-14-19-23-26",
-                                noteNames: "D-G-D-G-B-D",
-                                chordLibraryFileName: "OpenG_ChordLibrary",
-                                chordGroupsFileName: "OpenGTuningChordGroups")
+                let openGTuning = try createTuning(
+                    tuningName: "Open G",
+                    openIndices: "2-7-14-19-23-26",
+                    noteNames: "D-G-D-G-B-D",
+                    chordLibraryFileName: "OpenG_ChordLibrary",
+                    chordGroupsFileName: "OpenGTuningChordGroups")
+                tuningsArray.append(openGTuning)
+                
             } catch {
                 throw PlistError.unknownError
             }
-            
-            appState.activeTuning = standardTuning
-            appState.tunings.append(contentsOf: [standardTuning, dropDTuning, openDTuning, openGTuning])
+            appState.tunings.append(contentsOf: tuningsArray)            
             container.mainContext.insert(appState)
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             
-            // we hardwire this to a C chord, ONLY because we force:
+            // BECAUSE cannot set currentFretPositions dynamically due to a bug in SwiftData
+            //  we hardwire this to a C chord, ONLY because we force:
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
-            //  If this ever changes --> set dynamically
+            //  If this ever changes --> deal with it
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
         }
         
@@ -119,31 +119,33 @@ actor AppStateContainer {
         ///   - noteNames: noteNames is an array of the noteNames
         ///   - chordLibraryFileName: pathName for this Tuning's chords Dictionary
         ///   - chordGroupsFileName: pathName for this Tuning's chordGroups Dictionary
-        func setupTuning(tuning: Tuning,
-                         tuningName: String,
-                         openIndices: String,
-                         noteNames: String,
-                         chordLibraryFileName: String,
-                         chordGroupsFileName: String) throws {
-            tuning.name = tuningName
-            tuning.openNoteIndices = openIndices
-            tuning.stringNoteNames = noteNames
+        func createTuning(tuningName: String,
+                          openIndices: String,
+                          noteNames: String,
+                          chordLibraryFileName: String,
+                          chordGroupsFileName: String) throws -> Tuning {
+            let newTuning = Tuning()
+            newTuning.name = tuningName
+            newTuning.openNoteIndices = openIndices
+            newTuning.stringNoteNames = noteNames
             
             guard let path = Bundle.main.path(forResource: chordLibraryFileName, ofType: "plist"),
                   let thisChordGroupChordDictionary = NSDictionary(contentsOfFile: path) as? [String: String]  else {
                 throw PlistError.badChordLibraryAddress
             }
-            tuning.chordsDictionary = thisChordGroupChordDictionary
+            newTuning.chordsDictionary = thisChordGroupChordDictionary
             
             guard let path = Bundle.main.path(forResource: chordGroupsFileName, ofType: "plist"),
                   let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String]  else {
                 throw PlistError.badChordLibraryAddress
             }
             
-            let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict, 
-                                                                        parentTuning: tuning)
-            tuning.chordGroups.append(contentsOf: chordGroups)
+            let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict,
+                                                                        parentTuning: newTuning)
+            newTuning.chordGroups.append(contentsOf: chordGroups)
             Logger.statistics.info("New tuning added")
+            
+            return newTuning
         }
         
         /// This method builds an Array of ChordGroups
@@ -197,7 +199,7 @@ actor AppStateContainer {
             } else if parentTuning.name == "Drop D" {
                 parentTuning.activeChordGroup = chordGroups.first
             }
-        
+            
             return chordGroups
         }
         
@@ -207,7 +209,7 @@ actor AppStateContainer {
         ///   - chordDictionary: the ChordDict in parentTuning
         /// - Returns: Chord specified by chordNamesString
         func createChord(chordName: String,
-                      chordDictionary: Dictionary<String, String>) -> Chord? {
+                         chordDictionary: Dictionary<String, String>) -> Chord? {
             var newChord: Chord?
             
             if chordName == "NoChord" {
