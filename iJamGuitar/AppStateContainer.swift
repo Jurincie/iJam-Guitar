@@ -17,6 +17,7 @@ actor AppStateContainer {
         let configuration = ModelConfiguration()
         var container: ModelContainer
         var tuningsArray = [Tuning]()
+        var standardTuning: Tuning?
         
         do {
             container = try ModelContainer(for: schema,
@@ -65,7 +66,7 @@ actor AppStateContainer {
                                                           chordLibraryFileName: chordLibraryFileName,
                                                           chordGroupsFileName: chordGroupsFileName)
                          if newTuning.name == "Standard" {
-                             appState.activeTuning = newTuning
+                             standardTuning = newTuning
                          }
                          tuningsArray.append(newTuning)
                      } catch {
@@ -79,10 +80,12 @@ actor AppStateContainer {
             //  on INITIAL launch
             //  If this ever changes --> deal with it
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
-            
-            appState.tunings.append(contentsOf: tuningsArray)
+            appState.tunings = tuningsArray
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
+            appState.pickerTuningName = "Standard"
+            appState.pickerChordGroupName = "Key of C"
+            appState.activeTuning = standardTuning
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -166,14 +169,13 @@ actor AppStateContainer {
                 
                 // fill availableChords
                 chordGroup.availableChords.append(contentsOf: availableChordsArray)
-                
                 chordGroups.append(chordGroup)
             }
             
             if parentTuning.name == "Standard" {
                 parentTuning.activeChordGroup = chordGroups.first(where: { chordGroup in
                     chordGroup.name == "Key of C" })
-            } else if parentTuning.name == "Drop D" {
+            } else {
                 parentTuning.activeChordGroup = chordGroups.first
             }
             
