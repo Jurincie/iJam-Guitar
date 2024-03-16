@@ -16,7 +16,7 @@
 	</dict>
 	<dict>
 		<key>TuningName</key>
-		<string>Drop D&quot;</string>
+		<string>Drop D</string>
 		<key>NoteNames</key>
 		<string>D-A-D-G-B-E</string>
 		<key>OpenNoteIndices</key>
@@ -34,7 +34,7 @@
 		<key>OpenNoteIndices</key>
 		<string>2-9-14-18-21-26</string>
 		<key>ChordLibraryName</key>
-		<string>penD_ChordLibrary&quot;</string>
+		<string>OpenD_ChordLibrary</string>
 		<key>ChordGroupName</key>
 		<string>OpenDTuningChordGroups</string>
 	</dict>

@@ -68,5 +68,6 @@ final class AppState {
 enum PlistError: Error {
     case badChordGroupsLibraryAddress
     case badChordLibraryAddress
+    case badTuningMetaAddress
     case unknownError
 }

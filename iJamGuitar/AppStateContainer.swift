@@ -44,69 +44,45 @@ actor AppStateContainer {
             // THIS is the ONLY insert we need
             // as we are preloading our data
             let appState = AppState()
-            
-            // Standard Tuning
-            do {
-                let standardTuning = try createTuning(tuningName: "Standard",
-                                                      openIndices: "4-9-14-19-23-28",
-                                                      noteNames: "E-A-D-G-B-E",
-                                                      chordLibraryFileName: "StandardTuning_ChordLibrary",
-                                                      chordGroupsFileName: "StandardTuningChordGroups")
-                tuningsArray.append(standardTuning)
-                appState.activeTuning = standardTuning
-            } catch {
-                throw PlistError.unknownError
+            defer {
+                container.mainContext.insert(appState)
             }
             
-            // Drop-D Tuning
-            do {
-                let dropDTuning = try createTuning(tuningName: "Drop D",
-                                                   openIndices: "2-9-14-19-23-28",
-                                                   noteNames: "D-A-D-G-B-E",
-                                                   chordLibraryFileName: "DropD_ChordLibrary",
-                                                   chordGroupsFileName: "DropDTuningChordGroups")
-                tuningsArray.append(dropDTuning)
-            } catch {
-                throw PlistError.unknownError
-            }
-            
-            // Open D Tuning
-            do {
-                let openDTuning = try createTuning(tuningName: "Open D",
-                                                   openIndices: "2-9-14-18-21-26",
-                                                   noteNames: "D-A-D-F#-A-D",
-                                                   chordLibraryFileName: "OpenD_ChordLibrary",
-                                                   chordGroupsFileName: "OpenDTuningChordGroups")
-                tuningsArray.append(openDTuning)
-                
-            } catch {
-                throw PlistError.unknownError
-            }
-            
-            // Open G Tuning
-            do {
-                let openGTuning = try createTuning(
-                    tuningName: "Open G",
-                    openIndices: "2-7-14-19-23-26",
-                    noteNames: "D-G-D-G-B-D",
-                    chordLibraryFileName: "OpenG_ChordLibrary",
-                    chordGroupsFileName: "OpenGTuningChordGroups")
-                tuningsArray.append(openGTuning)
-                
-            } catch {
-                throw PlistError.unknownError
-            }
-            appState.tunings.append(contentsOf: tuningsArray)            
-            container.mainContext.insert(appState)
-            appState.pickerTuningName = appState.activeTuning?.name ?? ""
-            appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
-            
+            // open the TuningMeta Plist
+             guard let path = Bundle.main.path(forResource: "TuningMeta", ofType: "plist") else {return}
+             if let arrayOfDictionaries: [Dictionary<String,String>] = NSArray(contentsOfFile: path)  as? [Dictionary<String, String>] {
+                 // iterate arrayRoot: (array of dictionaries)
+                 for dict in arrayOfDictionaries {
+                     let tuningName = dict["TuningName"]!
+                     let openNoteIndices = dict["OpenNoteIndices"]!
+                     let noteNames = dict["NoteNames"]!
+                     let chordLibraryFileName = dict["ChordLibraryName"]!
+                     let chordGroupsFileName = dict["ChordGroupName"]!
+                     do {
+                         let newTuning = try createTuning(tuningName: tuningName,
+                                                          openIndices: openNoteIndices,
+                                                          noteNames: noteNames,
+                                                          chordLibraryFileName: chordLibraryFileName,
+                                                          chordGroupsFileName: chordGroupsFileName)
+                         if newTuning.name == "Standard" {
+                             appState.activeTuning = newTuning
+                         }
+                         tuningsArray.append(newTuning)
+                     } catch {
+                         throw PlistError.unknownError
+                     }
+                 }
+             }
             // BECAUSE cannot set currentFretPositions dynamically due to a bug in SwiftData
             //  we hardwire this to a C chord, ONLY because we force:
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
             //  If this ever changes --> deal with it
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
+            
+            appState.tunings.append(contentsOf: tuningsArray)
+            appState.pickerTuningName = appState.activeTuning?.name ?? ""
+            appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -143,6 +119,7 @@ actor AppStateContainer {
             let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict,
                                                                         parentTuning: newTuning)
             newTuning.chordGroups.append(contentsOf: chordGroups)
+           
             Logger.statistics.info("New tuning added")
             
             return newTuning
