@@ -15,25 +15,26 @@ struct FretNumbersView: View {
     let height: CGFloat
 
     var body: some View {
-        let appState = appStates.first!
-        VStack(alignment: .leading, spacing:0) {
-            
-            // lowest row is for the nut / open string / capo position
-            CapoPositionPickerView()
-                .frame(width: width, height: height / 6, alignment: .center)
-                .background(Color.accentColor)
-                .overlay(RoundedRectangle(cornerRadius:8)
-                    .stroke(.white, lineWidth: 2))
-            
-            // next 5 rows span the chord - from minfret to minFret + 5)
-            ForEach((0...4), id: \.self) {
-                Text(String(appState.capoPosition + appState.minimumFret + Int($0)))
-                    .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                    .fontWeight(.semibold)
+        if let appState = appStates.first {
+            VStack(alignment: .leading, spacing:0) {
+                
+                // lowest row is for the nut / open string / capo position
+                CapoPositionPickerView()
                     .frame(width: width, height: height / 6, alignment: .center)
-                    .background(Color.gray)
-                    .foregroundColor(Color.primary)
-                    .border(Color.white)
+                    .background(Color.accentColor)
+                    .overlay(RoundedRectangle(cornerRadius:8)
+                        .stroke(.white, lineWidth: 2))
+                
+                // next 5 rows span the chord - from minfret to minFret + 5)
+                ForEach((0...4), id: \.self) {
+                    Text(String(appState.capoPosition + appState.minimumFret + Int($0)))
+                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                        .fontWeight(.semibold)
+                        .frame(width: width, height: height / 6, alignment: .center)
+                        .background(Color.gray)
+                        .foregroundColor(Color.primary)
+                        .border(Color.white)
+                }
             }
         }
     }

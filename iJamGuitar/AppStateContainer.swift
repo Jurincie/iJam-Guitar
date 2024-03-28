@@ -10,6 +10,9 @@ import OSLog
 import SwiftUI
 import SwiftData
 
+///  This actor enables us to pre-load data from Plists on INITIAL LAUNCH
+/// - Parameter shouldCreateDefaults: Bool
+/// - Returns: ModelContainer -> An object that manages an app's schema and model storage configuration.
 actor AppStateContainer {
     @MainActor
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
@@ -74,11 +77,13 @@ actor AppStateContainer {
                      }
                  }
              }
-            // BECAUSE cannot set currentFretPositions dynamically due to a bug in SwiftData
-            //  we hardwire this to a C chord, ONLY because we force:
+            
+            // BECAUSE cannot set currentFretPositions dynamically
+            //  due to a what is likely a SwiftData bug
+            //  we hardwire this to a C chord, ONLY because we already forced:
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
-            //  If this ever changes --> deal with it
+            //  If this ever changes --> make provsions
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
             appState.tunings = tuningsArray
             appState.pickerTuningName = appState.activeTuning?.name ?? ""

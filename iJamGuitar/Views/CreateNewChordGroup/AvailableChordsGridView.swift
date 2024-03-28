@@ -52,7 +52,6 @@ struct AvailableChordsGridView: View {
                         .scrollTargetLayout()
                     }
                 }
-                .scrollTargetBehavior(.viewAligned)
                 .scrollBounceBehavior(.always)
                 .contentMargins(.horizontal, 20, for: .scrollContent)
                 .scrollIndicatorsFlash(onAppear: true)

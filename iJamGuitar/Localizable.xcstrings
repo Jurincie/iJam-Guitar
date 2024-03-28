@@ -61,7 +61,32 @@
       }
     },
     "CANCEL" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "STORNIEREN"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CANCELAR"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ANNULER"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        }
+      }
     },
     "Capo Position" : {
       "localizations" : {
@@ -92,7 +117,32 @@
       }
     },
     "Choose up to 10 chords (below)" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wählen Sie bis zu 10 Akkorde (unten)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elija hasta 10 acordes (abajo)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez jusqu'à 10 accords (ci-dessous)"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最大 10 個のコードを選択します (下記)"
+          }
+        }
+      }
     },
     "Chord Groups" : {
       "localizations" : {
@@ -105,7 +155,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grupos de acordes"
+            "value" : "Grupos de Acordes"
           }
         },
         "fr" : {
@@ -123,42 +173,88 @@
       }
     },
     "Create Chord Group" : {
-
-    },
-    "CREATE NEW CHORD GROUP" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEUE AKKORDGRUPPE ERSTELLEN"
+            "value" : "Akkordgruppe Erstellen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREAR NUEVO GRUPO DE ACORDES"
+            "value" : "Crear Grupo de Acordes"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NOUVEAU GROUPE D'ACCORDS"
+            "value" : "Créer un groupe d'accords"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新しいコードグループの作成"
+            "value" : "コードグループの作成"
           }
         }
       }
     },
     "Device Volume is OFF" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Gerätelautstärke ist AUS"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El volumen del dispositivo está apagado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le volume de l'appareil est désactivé"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デバイスの音量がオフになっています"
+          }
+        }
+      }
     },
     "Enter a name for new ChordGroup" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie einen Namen für die neue Akkordgruppe ein"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingrese un nombre para el nuevo grupo de acordes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez un nom pour le nouveau ChordGroup"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しい ChordGroup の名前を入力してください"
+          }
+        }
+      }
     },
     "Enter Group Name" : {
       "localizations" : {
@@ -188,37 +284,62 @@
         }
       }
     },
-    "Master Volume is OFF" : {
-      "extractionState" : "stale",
+    "Key" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Gerätelautstärke ist AUS"
+            "value" : "Vorzeichen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "El volumen del dispositivo está apagado"
+            "value" : "Firma Clave"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le volume de l'appareil est désactivé"
+            "value" : "Signature Clé"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "デバイスの音量がオフになっています"
+            "value" : "調号"
           }
         }
       }
     },
     "No Chords Selected" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Akkorde Ausgewählt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay acordes seleccionados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun accord sélectionné"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コードが選択されていません"
+          }
+        }
+      }
     },
     "OK" : {
       "localizations" : {
@@ -249,42 +370,123 @@
       }
     },
     "Please Select a Tuning" : {
-
-    },
-    "Select Tuning Above" : {
-
-    },
-    "Slected Tuning already has a ChordGroup with this name" : {
-
-    },
-    "SUBMIT" : {
-
-    },
-    "Tuning: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abstimmung"
+            "value" : "Bitte wählen Sie eine Stimmung aus"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afinación:"
+            "value" : "Por favor seleccione una afinación"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Réglage: %@"
+            "value" : "Veuillez sélectionner un réglage"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "チューニング: %@"
+            "value" : "チューニングを選択してください"
+          }
+        }
+      }
+    },
+    "Select Tuning Above" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wählen Sie oben Tuning aus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccione Sintonización arriba"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionnez le réglage ci-dessus"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上でチューニングを選択してください"
+          }
+        }
+      }
+    },
+    "Selected Tuning already has a ChordGroup with this name" : {
+
+    },
+    "Slected Tuning already has a ChordGroup with this name" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausgewählte Stimmung hat bereits eine Akkordgruppe mit diesem Namen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected Tuning already has a chordGroup with this name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La afinación seleccionada ya tiene un grupo de acordes con este nombre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accordage sélectionné a déjà un groupe d'accords portant ce nom"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択したチューニングにはすでにこの名前のコードグループがあります"
+          }
+        }
+      }
+    },
+    "SUBMIT" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EINREICHEN"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ENTREGAR"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SOUMETTRE"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提出する"
           }
         }
       }

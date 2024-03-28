@@ -19,9 +19,11 @@ struct TuningPickerView: View {
             Spacer()
             Menu {
                 Picker("Tunings", selection: $tuningName) {
-                    let tuningNames = appStates.first!.getTuningNames()
-                    ForEach(tuningNames, id: \.self) {
-                        Text($0)
+                    if let appState = appStates.first {
+                        let tuningNames = appState.getTuningNames()
+                        ForEach(tuningNames, id: \.self) {
+                            Text($0)
+                        }
                     }
                 }
                 .pickerStyle(.automatic)
@@ -39,12 +41,14 @@ struct TuningPickerView: View {
                     }
                 })
             } label: {
-                Text(appStates.first!.pickerTuningName)
-                    .padding()
-                    .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                    .fontWeight(.semibold)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color.primary)
+                if let appState = appStates.first {
+                    Text(appState.pickerTuningName)
+                        .padding()
+                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                        .fontWeight(.semibold)
+                        .background(Color.accentColor)
+                        .foregroundColor(Color.primary)
+                }
             }
             Spacer()
         }

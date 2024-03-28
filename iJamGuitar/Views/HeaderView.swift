@@ -83,8 +83,7 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(width: 500,
-               height: 200)
+    HeaderView(width: 500, height: 200)
     .modelContainer(for: AppState.self)
 }
 

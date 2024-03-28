@@ -14,29 +14,6 @@ struct ChordButtonsView: View {
     let width: CGFloat
     let height: CGFloat
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    
-    func getPicks() -> [Pick] {
-        var pickArray = [Pick]()
-        var chordNames = appStates.first!.activeChordGroup?.availableChordNamesArray
-        // append "NoChord" to fill chordNames to 10
-        if let numberNames = chordNames?.count {
-            for _ in numberNames..<10 {
-                chordNames?.append("NoChord")
-            }
-        }
-        
-        for index in 0..<10 {
-            let title = chordNames?[index] ?? ""
-            if let thisChord = appStates.first!.activeChordGroup?.availableChords.first(where: { chord in
-                chord.name == title }) {
-                pickArray.append(Pick(id: index,
-                                      chord: thisChord,
-                                      image:Image("UndefinedPick")))
-            }
-        }
-
-        return pickArray
-    }
             
     var body: some View {
         let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 18.0 : 12.0
@@ -46,6 +23,32 @@ struct ChordButtonsView: View {
                     PickView(pick: pick)
             }
         }
+    }
+}
+
+extension ChordButtonsView {
+    func getPicks() -> [Pick] {
+        var pickArray = [Pick]()
+        if let appState = appStates.first {
+            var chordNames = appState.activeChordGroup?.availableChordNamesArray
+            // append "NoChord" to fill chordNames to 10
+            if let numberNames = chordNames?.count {
+                for _ in numberNames..<10 {
+                    chordNames?.append("NoChord")
+                }
+            }
+            
+            for index in 0..<10 {
+                let title = chordNames?[index] ?? ""
+                if let thisChord = appStates.first!.activeChordGroup?.availableChords.first(where: { chord in
+                    chord.name == title }) {
+                    pickArray.append(Pick(id: index,
+                                          chord: thisChord,
+                                          image:Image("UndefinedPick")))
+                }
+            }
+        }
+        return pickArray
     }
 }
 

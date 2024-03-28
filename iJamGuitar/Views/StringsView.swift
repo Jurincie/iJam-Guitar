@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 import OSLog
 
+
 ///  StringsView
 ///  is responsible for displaying the 6 StringView views
 ///  and obtaining the bounds of each of the strings via their Anchor Preferences
@@ -55,33 +56,34 @@ struct StringsView: View {
     }
     
     var body: some View {
-        let appState = appStates.first!
-        HStack() {
-            Spacer()
-            ForEach(0..<6) { index in
-                StringView(height: height,
-                           stringNumber: 6 - index)
-                .readFrame { newFrame in
-                    zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
+        if let appState = appStates.first {
+            HStack() {
+                Spacer()
+                ForEach(0..<6) { index in
+                    StringView(height: height,
+                               stringNumber: 6 - index)
+                    .readFrame { newFrame in
+                        zoneBreaks[index] = (newFrame.maxX + newFrame.minX) / 2.0
+                    }
                 }
+                Spacer()
             }
-            Spacer()
-        }
-        .task({ 
-            guard appStates.first!.isMuted == false else { return }
-            await playOpeningArpegio() })
-        .contentShape(Rectangle())
-        .gesture(drag)
-        .alert("Device Volume is OFF",
-               isPresented: Bindable(appState).showVolumeAlert) {
-            Button("OK", role: .cancel) { appState.showVolumeAlert = false }
-        }
-        .alert("Another App is using the Audio Player",
-              isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
-           Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
-        }
-        .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
-          Button("OK", role: .cancel) { fatalError() }
+            .task({
+                guard appStates.first!.isMuted == false else { return }
+                await playOpeningArpegio() })
+            .contentShape(Rectangle())
+            .gesture(drag)
+            .alert("Device Volume is OFF",
+                   isPresented: Bindable(appState).showVolumeAlert) {
+                Button("OK", role: .cancel) { appState.showVolumeAlert = false }
+            }
+            .alert("Another App is using the Audio Player",
+                  isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
+               Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
+            }
+            .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
+              Button("OK", role: .cancel) { fatalError() }
+            }
         }
     }
 }
@@ -166,7 +168,29 @@ extension StringsView {
             pickString(6 - string)
             try? await Task.sleep(nanoseconds: 50_000_000)
         }
-        Logger.viewCycle.debug("-----> zoneBreaks: \(zoneBreaks)")
+        
+        Logger.viewCycle.debug("zoneBreaks: \(zoneBreaks)")
+    }
+}
+
+// This PreferenceKey and View extension:
+//  allow StringsView to determine where to place the Guitar-Strings
+struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGRect = CGRectZero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
+}
+
+extension View {
+    func readFrame(onChange: @escaping (CGRect) -> ()) -> some View {
+        background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self,
+                                value: geometryProxy.frame(in: .global))
+            }
+        )
+        .onPreferenceChange(SizePreferenceKey.self, 
+                            perform: onChange)
     }
 }
 

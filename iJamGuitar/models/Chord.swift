@@ -27,16 +27,11 @@ final class Chord {
     }
 }
 
-extension Chord: Hashable {}
-extension Chord: Equatable {}
-
-extension Chord: Comparable {
+extension Chord: Hashable, Equatable {}
+extension Chord: Comparable, CustomStringConvertible  {
     static func < (lhs: Chord, rhs: Chord) -> Bool {
         lhs.name < rhs.name
     }
-}
-
-extension Chord: CustomStringConvertible {
     var description: String {
         return "name: " + name + "  FretMap: " + fretMapString
     }

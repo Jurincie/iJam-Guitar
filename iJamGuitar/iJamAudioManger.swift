@@ -18,11 +18,6 @@ enum InitializeErrors: Error {
     case UnknownError
 }
 
-struct SizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGRect = CGRectZero
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
-}
-
 class iJamAudioManager {
     var isVolumeLevelZero: Bool {
         return AVAudioSession.sharedInstance().outputVolume == 0.0

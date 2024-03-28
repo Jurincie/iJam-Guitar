@@ -18,15 +18,17 @@ struct ChordGroupPickerView: View {
             Spacer()
             Menu {
                 Picker("Chord Groups", selection: $chordGroupName) {
-                    let chordGroupNames = getChordGroupNamesForTuning(name: appStates.first!.activeTuning?.name ?? "")
-                    ForEach(chordGroupNames, id: \.self) {
-                        Text($0)
+                    if let appState = appStates.first {
+                        let chordGroupNames = getChordGroupNamesForTuning(name: appState.activeTuning?.name ?? "")
+                        ForEach(chordGroupNames, id: \.self) {
+                            Text($0)
+                        }
+                        .onDelete(perform: deleteChordGroup)
                     }
-                    .onDelete(perform: deleteChordGroup)
                 }
                 .pickerStyle(.automatic)
                 .onChange(of: chordGroupName, { oldValue, newValue in
-                    Logger.viewCycle.notice("new ChordGroupname: \(newValue)")
+                    Logger.viewCycle.notice("New ChordGroupname: \(newValue)")
                     appStates.first!.pickerChordGroupName = newValue
                     if let newChordGroup = appStates.first!.activeTuning?.chordGroups.first(where: { chordGroup in
                         chordGroup.name == newValue
@@ -39,12 +41,15 @@ struct ChordGroupPickerView: View {
                     }
                 })
             } label: {
-                Text(appStates.first!.pickerChordGroupName)
-                    .padding()
-                    .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                    .fontWeight(.semibold)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color.primary)
+                if let appState = appStates.first {
+                    Text(appState.pickerChordGroupName)
+                        .padding()
+                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                        .fontWeight(.semibold)
+                        .background(Color.accentColor)
+                        .foregroundColor(Color.primary)
+                }
+                
             }
             Spacer()
         }

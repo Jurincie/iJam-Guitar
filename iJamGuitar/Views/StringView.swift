@@ -152,7 +152,7 @@ struct CircleView: View {
     let color: Color
     let lineWidth: CGFloat
     
-    init(color: Color = Color.clear, lineWidth: CGFloat = 0.0) {
+    init(color: Color = Color.clear, lineWidth: CGFloat = 1.0) {
         self.color = color
         self.lineWidth = lineWidth
     }
@@ -169,31 +169,35 @@ struct CircleView: View {
 
 extension StringView {
     func getFretBoxArray(minFret: Int, openStringNote: String) -> [FretBox] {
-        let appState = appStates.first!
         var fretBoxArray:[FretBox] = []
-        let index = appState.currentFretPositions[6 - stringNumber]
-        fretBoxArray.append(FretBox(id: 0,
-                                    title: index == -1 ?
-                                    "X" : getFretNoteTitle(openNote: openStringNote,
-                                                           offset: 0)))
-        for index in Range(0...4) {
-            let title = getFretNoteTitle(openNote: openStringNote,
-                                         offset: index + minFret)
-            fretBoxArray.append(FretBox(id: minFret + index,
-                                        title: title))
+        if let appState = appStates.first {
+            let index = appState.currentFretPositions[6 - stringNumber]
+            fretBoxArray.append(FretBox(id: 0,
+                                        title: index == -1 ?
+                                        "X" : getFretNoteTitle(openNote: openStringNote,
+                                                               offset: 0)))
+            for index in Range(0...4) {
+                let title = getFretNoteTitle(openNote: openStringNote,
+                                             offset: index + minFret)
+                fretBoxArray.append(FretBox(id: minFret + index,
+                                            title: title))
+            }
         }
+        
         return fretBoxArray
     }
     
     func getFretNoteTitle(openNote:String, offset:Int) -> String {
-        let appState = appStates.first!
-        if let index = self.notes.firstIndex(of: openNote) {
-            var finalIndex = index + offset + appState.capoPosition
-            if finalIndex < 0 {
-                finalIndex += 12
+        if let appState = appStates.first {
+            if let index = self.notes.firstIndex(of: openNote) {
+                var finalIndex = index + offset + appState.capoPosition
+                if finalIndex < 0 {
+                    finalIndex += 12
+                }
+                return self.notes[finalIndex % 12]
             }
-            return self.notes[finalIndex % 12]
         }
+        
         return "C"
     }
 }
@@ -206,6 +210,7 @@ func getCharForFretNumber(_ number: Int) -> String {
     case 12: return "C"
     case 13: return "D"
     case 14: return "E"
+    case 15: return "F"
     default: return "x"
     }
 }

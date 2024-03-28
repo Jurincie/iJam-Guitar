@@ -48,6 +48,13 @@ struct ContentView: View {
 #Preview {
     return ContentView()
         .modelContainer(AppStateContainer.create(false))
+        .environment(\.sizeCategory, .extraSmall)
+        .preferredColorScheme(.dark)
+}
+
+#Preview {
+    return ContentView()
+        .modelContainer(AppStateContainer.create(false))
         .environment(\.sizeCategory, .accessibilityMedium)
         .preferredColorScheme(.dark)
 }

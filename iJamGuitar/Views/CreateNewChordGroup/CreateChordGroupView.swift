@@ -57,7 +57,8 @@ struct CreateChordGroupView: View {
             VStack {
                 LazyVGrid(columns: columns,
                           spacing: 8) {
-                    ForEach(getUndefinedPicks(), id: \.id) { pick in
+                    let picks = getUndefinedPicks()
+                    ForEach(picks, id: \.id) { pick in
                         CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
                     }
                 }
@@ -70,11 +71,11 @@ struct CreateChordGroupView: View {
                         }
                     }
                     .onChange(of: selectedTuningName, { oldValue, newValue in
-                        // when user changes tuning selection
-                        //  -> remove all the selectedChords from earlier tuning
+                        // when user changes tuning selection:
+                        //  -> remove all the selectedChords with earlier tuning
                         selectedChords.removeAll()
                     })
-                    .pickerStyle(.automatic)
+                    .pickerStyle(.inline)
                     .frame(maxWidth: .infinity)
                 }
             label: {
@@ -154,7 +155,7 @@ struct CreateChordGroupView: View {
         .alert("No Chords Selected", isPresented: $showNoChordsSelectedAlert) {
             Button("OK", role: .cancel) { }
         }
-        .alert("Slected Tuning already has a ChordGroup with this name", isPresented: $showChordGroupNameExistsAlert) {
+        .alert("Selected Tuning already has a ChordGroup with this name", isPresented: $showChordGroupNameExistsAlert) {
             Button("OK", role: .cancel) { }
         }
         .ignoresSafeArea()

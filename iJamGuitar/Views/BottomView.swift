@@ -12,6 +12,7 @@ import OSLog
 struct BottomView: View {
     let width: CGFloat
     let height: CGFloat
+    @Query var appStates: [AppState]
 
     var body: some View {
         ZStack() {
@@ -21,8 +22,10 @@ struct BottomView: View {
                        height:height,
                        alignment:.topLeading)
             VStack() {
-                VolumeView()
-                    .padding(.horizontal, 40)
+                if let appState = appStates.first {
+                    VolumeView(isMuted: appState.isMuted)
+                        .padding(.horizontal, 40)
+                }
             }
         }
     }
