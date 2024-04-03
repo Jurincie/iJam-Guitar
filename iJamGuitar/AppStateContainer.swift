@@ -43,12 +43,12 @@ actor AppStateContainer {
         
         /// Only called on INITIAL launch
         /// Builds AppState, ChordGroups, Tunings and Chords from Plists
-        /// - Throws: PlistError on failurez
+        /// - Throws: PlistError on failure
         func populateData() throws {
-            // THIS is the ONLY insert we need
-            // as we are preloading our data
             let appState = AppState()
             defer {
+                // THIS is the ONLY "insert" we
+                // need as we preload our data
                 container.mainContext.insert(appState)
             }
             
@@ -79,12 +79,13 @@ actor AppStateContainer {
              }
             
             // BECAUSE cannot set currentFretPositions dynamically
-            //  due to a what is likely a SwiftData bug
-            //  we hardwire this to a C chord, ONLY because we already forced:
+            //  due to a what is likely a SwiftData/Xcode bug
+            //  hardwire this to a C chord, ONLY because we already forced:
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
             //  If this ever changes --> make provsions
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
+            
             appState.tunings = tuningsArray
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""

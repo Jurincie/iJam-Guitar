@@ -5,11 +5,6 @@
 //  Created by Ron Jurincie on 5/3/22.
 //
 
-import SwiftData
-import SwiftUI
-import OSLog
-
-
 ///  StringsView
 ///  is responsible for displaying the 6 StringView views
 ///  and obtaining the bounds of each of the strings via their Anchor Preferences
@@ -29,6 +24,9 @@ import OSLog
 /// Zone 10: between Strings 2 - 1
 /// Zone 11: inside String 1
 /// Zone 12: right of String 1
+import SwiftData
+import SwiftUI
+import OSLog
 
 struct StringsView: View {
     @Query var appStates: [AppState]
@@ -90,6 +88,26 @@ struct StringsView: View {
 
 extension StringsView {
     // Drag Management
+    
+    ///   Description: This method determines if we are in a new zone -
+    ///   and if we should then play note on appropriate string
+    /// - Parameter location:- the current location of the drag in global co-ordinates
+    func newDragLocation(_ location: CGPoint?) {
+        guard let location =  location else { return }
+        let zone = getZone(loc: location)
+        if zone != formerZone {
+            Logger.viewCycle.notice("====> New Zone: \(zone)")
+            
+            if formerZone >= 0 && appStates.first!.isMuted == false {
+                let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
+                Task {
+                    await pickString(stringToPlay)
+                }
+            }
+            formerZone = zone
+        }
+    }
+    
     func getZone(loc: CGPoint) -> Int{
         // ZoneBreaks[n] is left-most position of string[n + 1]
         var zone = 0
@@ -117,28 +135,10 @@ extension StringsView {
         return oldZone > zone ? oldZone : zone
     }
     
-    ///   Description: This method determines if we are in a new zone -
-    ///   and if we should then play note on appropriate string
-    /// - Parameter location:- the current location of the drag in global co-ordinates
-    func newDragLocation(_ location: CGPoint?) {
-        guard let location =  location else { return }
-//        Logger.viewCycle.debug("Drag[x] = \(location.x)")
-        let zone = getZone(loc: location)
-        if zone != formerZone {
-            Logger.viewCycle.notice("====> In New Zone: \(zone)")
-            
-            if formerZone >= 0 && appStates.first!.isMuted == false {
-                let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
-                pickString(stringToPlay)
-            }
-            formerZone = zone
-        }
-    }
-    
     /// Description: This method identifies the note to play on this string based on capo position and fret -
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
-    func pickString(_ stringToPlay: Int) {
+    func pickString(_ stringToPlay: Int) async {
         guard audioManager.isVolumeLevelZero == false else {
             appStates.first!.showVolumeAlert.toggle()
             return
@@ -151,7 +151,7 @@ extension StringsView {
                 let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition
                 let noteToPlayName = audioManager.noteNamesArray[index]
                 let volume = appStates.first!.volumeLevel
-                Logger.viewCycle.debug("playing string: \(stringToPlay)")
+                Logger.viewCycle.notice("playing string: \(stringToPlay)")
                 do {
                     try audioManager.playWaveFile(noteName:noteToPlayName,
                                                   stringNumber: stringToPlay,
@@ -164,12 +164,13 @@ extension StringsView {
     }
     
     func playOpeningArpegio() async {
-        for string in 0...5 {
-            pickString(6 - string)
-            try? await Task.sleep(nanoseconds: 50_000_000)
+        Task {
+            for string in 0...5 {
+                await pickString(6 - string)
+                try? await Task.sleep(nanoseconds: 50_000_000)
+            }
         }
-        
-        Logger.viewCycle.debug("zoneBreaks: \(zoneBreaks)")
+        Logger.viewCycle.notice("zoneBreaks: \(zoneBreaks)")
     }
 }
 

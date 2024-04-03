@@ -10,20 +10,6 @@ import SwiftData
 import SwiftUI
 import Foundation
 
-struct TextFieldView: View {
-    @Binding var newChordGroupName: String
-
-    var body: some View {
-        TextField("Enter Group Name", text: $newChordGroupName)
-            .textFieldStyle(CustomTextFieldStyle())
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(.never)
-            .border(.black, width: 2)
-            .padding(.horizontal)
-            .font(.headline)
-    }
-}
-
 struct CreateChordGroupView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
@@ -40,107 +26,41 @@ struct CreateChordGroupView: View {
     @State private var newChordGroupName: String = ""
     @State var selectedTuningName: String = "Select a Tuning"
     
-    // Stored Properties
-    let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 10.0 : 5.0
-    
     // Calculated Property
     var tuningSelected: Bool {
         selectedTuningName != "Select a Tuning"
     }
+    var spacing: Double {
+        UserDefaults.standard.bool(forKey: "IsIpad") ? 10.0 : 5.0
+    }
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Create Chord Group")
-                .font(.title)
             TextFieldView(newChordGroupName: $newChordGroupName)
             VStack {
-                LazyVGrid(columns: columns,
-                          spacing: 8) {
-                    let picks = getUndefinedPicks()
-                    ForEach(picks, id: \.id) { pick in
-                        CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
-                    }
-                }
-                Divider()
-                Menu {
-                    Picker("Tunings", selection: $selectedTuningName) {
-                        ForEach(appStates.first!.getTuningNames(), id: \.self) {
-                            Text($0)
-                                .font(.caption)
-                        }
-                    }
-                    .onChange(of: selectedTuningName, { oldValue, newValue in
-                        // when user changes tuning selection:
-                        //  -> remove all the selectedChords with earlier tuning
-                        selectedChords.removeAll()
-                    })
-                    .pickerStyle(.inline)
-                    .frame(maxWidth: .infinity)
-                }
-            label: {
-                if tuningSelected == false {
-                    Text(selectedTuningName)
-                        .padding()
-                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                        .fontWeight(.semibold)
-                        .background(Color.accentColor)
-                        .foregroundColor(Color.primary)
-                        .shadow(color: .white, radius: 2.0)
-                        .modifier(BlinkingModifier(duration:0.5))
-                } else {
-                    Text(selectedTuningName)
-                        .padding()
-                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                        .fontWeight(.semibold)
-                        .background(Color.accentColor)
-                        .foregroundColor(Color.primary)
-                        .shadow(color: .white, radius: 2.0)
-                }
-            }
-            .cornerRadius(10)
-                Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
-                    .font(.headline)
-                    .foregroundColor(.primary)
+                GridView(selectedChords: $selectedChords)
+                PickerView(tuningSelected: tuningSelected, 
+                           selectedTuningName: $selectedTuningName,
+                           selectedChords: $selectedChords)
                 AvailableChordsGridView(selectedTuningName: $selectedTuningName,
                                         selectedChords: $selectedChords,
-                                        tuningSelected: selectedTuningName != "Select a Tuning")
+                                        tuningSelected: selectedTuningName != "Select Tuning")
             }
-             HStack {
+            HStack {
                 Button(action: {
                     dismiss()
                 }, label: { Text("CANCEL")})
                 .frame(alignment: .bottom)
-                .frame(maxWidth: .infinity)
                 .buttonStyle(.borderedProminent)
                 Spacer()
                 Button(action: {
-                    guard selectedTuningName != "Select a Tuning" else {  showNameTuningUndefinedAlert.toggle()
-                        return
-                    }
-                    if newChordGroupName.count == 0 {
-                        showNameFieldEmptyAlert.toggle()
-                    } else if selectedChords.count == 0 {
-                        showNoChordsSelectedAlert.toggle()
-                    } else {
-                        if let selectedTuning: Tuning = appStates.first!.tunings.first(where: { tuning in
-                            tuning.name == selectedTuningName
-                        }) {
-                            if let _ = selectedTuning.chordGroups.first(where: { $0.name.contains(newChordGroupName) }) {
-                                showChordGroupNameExistsAlert.toggle()
-                            } else {
-                                addNewChordGroup(selectedTuning: selectedTuning)
-                                dismiss()
-                            }
-                        }
-                    }
+                    guard tuningSelected else { showNameTuningUndefinedAlert.toggle(); return }
+                    setupTuning()
                 }, label: { Text("SUBMIT")})
-                .frame(maxWidth: .infinity)
                 .buttonStyle(.borderedProminent)
             }
-            .padding(.horizontal)
+            .padding()
         }
-        .frame(maxHeight: .infinity)
         .padding()
         .background(Image(.topView)
             .resizable()
@@ -160,6 +80,25 @@ struct CreateChordGroupView: View {
         }
         .ignoresSafeArea()
         .dynamicTypeSize(...DynamicTypeSize.large)
+    }
+    
+    private func setupTuning() {
+        if newChordGroupName.count == 0 {
+            showNameFieldEmptyAlert.toggle()
+        } else if selectedChords.count == 0 {
+            showNoChordsSelectedAlert.toggle()
+        } else {
+            if let selectedTuning: Tuning = appStates.first!.tunings.first(where: { tuning in
+                tuning.name == selectedTuningName
+            }) {
+                if let _ = selectedTuning.chordGroups.first(where: { $0.name.contains(newChordGroupName) }) {
+                    showChordGroupNameExistsAlert.toggle()
+                } else {
+                    addNewChordGroup(selectedTuning: selectedTuning)
+                    dismiss()
+                }
+            }
+        }
     }
 }
 
@@ -183,19 +122,59 @@ extension CreateChordGroupView {
         appStates.first!.pickerTuningName = selectedTuning.name ?? ""
         try? modelContext.save()
         
-        Logger.viewCycle.debug("Just Created New ChordGroup: \(newChordGroupName.description)")
+        Logger.viewCycle.notice("Just Created New ChordGroup: \(newChordGroupName.description)")
     }
-    
-    func getUndefinedPicks() -> [Pick] {
-        var pickArray = [Pick]()
-        for index in 0...9 {
-            pickArray.append(Pick(id: index,
-                                  chord: Chord(name: "",
-                                               fretMapString: ""),
-                                  image: Image(.blankPick)))
+}
+
+struct PickerView: View {
+    @Query var appStates: [AppState]
+    var tuningSelected: Bool
+    @Binding var selectedTuningName: String
+    @Binding var selectedChords: [Chord]
+    var body: some View {
+        Menu {
+            Picker("Tunings", selection: $selectedTuningName) {
+                ForEach(appStates.first!.getTuningNames(), id: \.self) {
+                    Text($0)
+                        .font(.caption)
+                }
+            }
+            .onChange(of: selectedTuningName, { oldValue, newValue in
+                // when user changes tuning selection:
+                //  -> remove all the selectedChords with earlier tuning
+                selectedChords.removeAll()
+            })
+            .pickerStyle(.inline)
+            .frame(maxWidth: .infinity)
+        } label: {
+            Text(selectedTuningName)
+                .padding()
+                .foregroundColor(.white)
+                .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                .background(Color.accentColor)
+                .modifier(BlinkingModifier(duration: tuningSelected ? 0.0 : 0.6))
         }
-        
-        return pickArray
+        .cornerRadius(10)
+        Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
+            .font(.headline)
+            .foregroundColor(.primary)
+    }
+}
+
+struct TextFieldView: View {
+    @Binding var newChordGroupName: String
+    
+    var body: some View {
+        Text("Create Chord Group")
+            .foregroundStyle(Color.white)
+            .font(.title)
+        TextField("Enter Group Name", text: $newChordGroupName)
+            .textFieldStyle(CustomTextFieldStyle())
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .border(.black, width: 2)
+            .padding(.horizontal)
+            .font(.headline)
     }
 }
 
@@ -208,6 +187,34 @@ struct CustomTextFieldStyle : TextFieldStyle {
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .strokeBorder(Color.primary.opacity(0.5), lineWidth: 1))
+    }
+}
+
+struct GridView: View {
+    @Binding var selectedChords: [Chord]
+    let columns = Array(repeating: GridItem(.flexible()), count: 5)
+    
+    var body: some View {
+        LazyVGrid(columns: columns,
+                  spacing: 8) {
+            let picks = getUndefinedPicks()
+            ForEach(picks, id: \.id) { pick in
+                CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
+            }
+        }
+        Divider()
+    }
+    
+    func getUndefinedPicks() -> [Pick] {
+        var pickArray = [Pick]()
+        for index in 0...9 {
+            pickArray.append(Pick(id: index,
+                                  chord: Chord(name: "",
+                                               fretMapString: ""),
+                                  image: Image(.blankPick)))
+        }
+        
+        return pickArray
     }
 }
 

@@ -109,7 +109,7 @@
 		7ACEB16B2B8422F400E85A41 /* CreateChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChordGroupView.swift; sourceTree = "<group>"; };
 		7ACEB16E2B842DA800E85A41 /* CreateChordGroupPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChordGroupPickView.swift; sourceTree = "<group>"; };
 		7ACEB1712B84329100E85A41 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
-		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChordGroupPickerView.swift; path = "Top Level/ChordGroupPickerView.swift"; sourceTree = "<group>"; };
+		7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
 		7AD911432B93F22700055738 /* iJamGuitarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD911452B93F22700055738 /* iJamGuitarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarUITests.swift; sourceTree = "<group>"; };
 		7AD911472B93F22700055738 /* iJamGuitarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -160,6 +160,54 @@
 			path = iJamGuitarTests;
 			sourceTree = "<group>";
 		};
+		7A40F7AB2BBC8CDE00B40F5D /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
+				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
+				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		7A40F7AC2BBC8CFF00B40F5D /* Bottom */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
+				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
+			);
+			path = Bottom;
+			sourceTree = "<group>";
+		};
+		7A40F7AD2BBC8D2700B40F5D /* TopView */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96C02B8122B1001A0699 /* TopView.swift */,
+				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
+			);
+			path = TopView;
+			sourceTree = "<group>";
+		};
+		7A40F7AE2BBC8D5700B40F5D /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96C52B8122B1001A0699 /* StringView.swift */,
+				7A8E96BF2B8122B0001A0699 /* StringsView.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		7A40F7AF2BBC8D9A00B40F5D /* Frets */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
+				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
+				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
+				7A8E96B72B8122B0001A0699 /* PickView.swift */,
+			);
+			path = Frets;
+			sourceTree = "<group>";
+		};
 		7A43C7472B8BE016006D08EF /* PLists */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +222,16 @@
 				7A9FEDD52BA5058900A7EC7A /* TuningMeta.plist */,
 			);
 			path = PLists;
+			sourceTree = "<group>";
+		};
+		7A92BC502BBC9BD700A7D04D /* Strings&Frets */ = {
+			isa = PBXGroup;
+			children = (
+				7A42EA892B9251B600A36BFF /* StringsAndFretsAreaView.swift */,
+				7A40F7AF2BBC8D9A00B40F5D /* Frets */,
+				7A40F7AE2BBC8D5700B40F5D /* Strings */,
+			);
+			path = "Strings&Frets";
 			sourceTree = "<group>";
 		};
 		7A9AF58F2B68419900E37CDB /* models */ = {
@@ -238,20 +296,10 @@
 			isa = PBXGroup;
 			children = (
 				7A8E96BD2B8122B0001A0699 /* ContentView.swift */,
-				7A8E96BA2B8122B0001A0699 /* HeaderView.swift */,
-				7ACEB1712B84329100E85A41 /* TuningPickerView.swift */,
-				7ACEB1732B84343E00E85A41 /* ChordGroupPickerView.swift */,
-				7A8E96C02B8122B1001A0699 /* TopView.swift */,
-				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
-				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
-				7A8E96B62B8122B0001A0699 /* ChordButtonsView.swift */,
-				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
-				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
-				7A8E96B72B8122B0001A0699 /* PickView.swift */,
-				7A42EA892B9251B600A36BFF /* StringsAndFretsAreaView.swift */,
-				7A8E96BF2B8122B0001A0699 /* StringsView.swift */,
-				7A8E96C52B8122B1001A0699 /* StringView.swift */,
-				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
+				7A40F7AB2BBC8CDE00B40F5D /* Header */,
+				7A40F7AD2BBC8D2700B40F5D /* TopView */,
+				7A92BC502BBC9BD700A7D04D /* Strings&Frets */,
+				7A40F7AC2BBC8CFF00B40F5D /* Bottom */,
 				7ACEB1702B842FC600E85A41 /* CreateNewChordGroup */,
 			);
 			path = Views;

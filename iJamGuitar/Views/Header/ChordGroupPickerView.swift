@@ -61,8 +61,8 @@ struct ChordGroupPickerView: View {
     
     func deleteChordGroup(at offsets: IndexSet) {
         appStates.first!.activeTuning?.chordGroups.remove(atOffsets: offsets)
-        Logger.viewCycle.debug("Here we delete a chord group")
-        Logger.viewCycle.debug("Do not allow LAST remaining group to be deletee")
+        Logger.viewCycle.notice("Here we delete a chord group")
+        Logger.viewCycle.notice("Do not allow LAST remaining group to be deletee")
     }
     
     func getChordGroupNamesForTuning(name: String) -> [String] {

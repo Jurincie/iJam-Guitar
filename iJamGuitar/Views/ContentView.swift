@@ -35,6 +35,7 @@ struct ContentView: View {
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)
+            .background(.ultraThinMaterial)
         }
         .background(Color.black)
         .ignoresSafeArea()
