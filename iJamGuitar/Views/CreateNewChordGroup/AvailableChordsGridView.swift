@@ -54,9 +54,10 @@ struct AvailableChordsGridView: View {
                 }
                 .scrollBounceBehavior(.always)
                 .contentMargins(.horizontal, 20, for: .scrollContent)
+                .listRowInsets(EdgeInsets())
                 .scrollIndicatorsFlash(onAppear: true)
                 .padding()
-                .border(.black, width: 4)
+                .border(.primary, width: 4)
                 .cornerRadius(12)
             }
             

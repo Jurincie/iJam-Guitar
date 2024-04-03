@@ -202,6 +202,9 @@ struct GridView: View {
                 CreateChordGroupPickView(selectedChords: $selectedChords, pick: pick)
             }
         }
+        .padding()
+        .border(.primary, width: 4)
+        .cornerRadius(12)
         Divider()
     }
     
