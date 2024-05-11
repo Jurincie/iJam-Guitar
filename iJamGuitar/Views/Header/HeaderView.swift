@@ -37,13 +37,17 @@ struct HeaderView: View {
             HStack {
                 TuningPickerView(tuningName: $tuningName,
                                  chordGroupName: $chordGroupName)
-                    .border(.white,
-                            width: 2)
-                    .cornerRadius(7)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 7)
+                            .stroke(Color.white, lineWidth:2)
+                    )
                     .padding(.horizontal)
-                ChordGroupPickerView(chordGroupName: $chordGroupName)
-                    .border(.white,
-                            width: 2)
+                    .cornerRadius(7)
+                ChordGroupPickerView(chordGroupName: $chordGroupName).overlay(
+                        RoundedRectangle(cornerRadius: 7)
+                        .stroke(Color.white, lineWidth:2)
+                    )
+                    .padding(.horizontal)
                     .cornerRadius(7)
                 Spacer()
                 Button(action: {

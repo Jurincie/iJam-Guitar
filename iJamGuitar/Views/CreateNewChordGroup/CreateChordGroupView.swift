@@ -15,7 +15,7 @@ struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
     
-    // Alert State Properties
+    // Alert Properties
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
@@ -54,7 +54,10 @@ struct CreateChordGroupView: View {
                 .buttonStyle(.borderedProminent)
                 Spacer()
                 Button(action: {
-                    guard tuningSelected else { showNameTuningUndefinedAlert.toggle(); return }
+                    guard tuningSelected else {
+                        showNameTuningUndefinedAlert.toggle()
+                        return
+                    }
                     setupTuning()
                 }, label: { Text("SUBMIT")})
                 .buttonStyle(.borderedProminent)
@@ -212,8 +215,7 @@ struct GridView: View {
         var pickArray = [Pick]()
         for index in 0...9 {
             pickArray.append(Pick(id: index,
-                                  chord: Chord(name: "",
-                                               fretMapString: ""),
+                                  chord: Chord(name: "", fretMapString: ""),
                                   image: Image(.blankPick)))
         }
         

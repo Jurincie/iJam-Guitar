@@ -47,7 +47,7 @@ struct ChordGroupPickerView: View {
                         .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
-                        .foregroundColor(Color.primary)
+                        .foregroundColor(Color.white)
                 }
                 
             }

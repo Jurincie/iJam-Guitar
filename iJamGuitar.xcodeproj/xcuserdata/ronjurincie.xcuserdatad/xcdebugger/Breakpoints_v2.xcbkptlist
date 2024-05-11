@@ -126,8 +126,8 @@
             filePath = "iJamGuitar/AppStateContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "create(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +238,8 @@
             filePath = "iJamGuitar/iJamAudioManger.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "playWaveFile(noteName:stringNumber:volume:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,10 +270,10 @@
             filePath = "iJamGuitar/Views/CreateNewChordGroup/CreateChordGroupView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "getUndefinedPicks()"
-            landmarkType = "7">
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "GridView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
