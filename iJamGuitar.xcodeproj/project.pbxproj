@@ -55,6 +55,7 @@
 		7AE86C2D2B1BAC820032DABD /* ChordGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C292B1BAC820032DABD /* ChordGroup.swift */; };
 		7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C2A2B1BAC820032DABD /* Tuning.swift */; };
 		7AE86C302B1D15E90032DABD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE86C2F2B1D15E90032DABD /* Logger.swift */; };
+		7AE97C082C42DB66009F0626 /* iJam_SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE97C072C42DB66009F0626 /* iJam_SwiftTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		7AE86C292B1BAC820032DABD /* ChordGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroup.swift; sourceTree = "<group>"; };
 		7AE86C2A2B1BAC820032DABD /* Tuning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuning.swift; sourceTree = "<group>"; };
 		7AE86C2F2B1D15E90032DABD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		7AE97C072C42DB66009F0626 /* iJam_SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJam_SwiftTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				7A3AD0032B1FFE5F003EEF9A /* iJamGuitarUnitTests.swift */,
+				7AE97C072C42DB66009F0626 /* iJam_SwiftTest.swift */,
 			);
 			path = iJamGuitarTests;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AE97C082C42DB66009F0626 /* iJam_SwiftTest.swift in Sources */,
 				7A3AD0042B1FFE5F003EEF9A /* iJamGuitarUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
