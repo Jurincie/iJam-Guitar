@@ -13,13 +13,13 @@ import SwiftData
 ///  This actor enables us to pre-load data from Plists on INITIAL LAUNCH
 /// - Parameter shouldCreateDefaults: Bool
 /// - Returns: ModelContainer -> An object that manages an app's schema and model storage configuration.
-actor 
+actor
 AppStateContainer {
     @MainActor
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {
         let schema = Schema([AppState.self])
         let configuration = ModelConfiguration()
-        var container: ModelContainer
+        let container: ModelContainer
         var tuningsArray = [Tuning]()
         var standardTuning: Tuning?
         
@@ -53,16 +53,19 @@ AppStateContainer {
                 container.mainContext.insert(appState)
             }
             
-            // open the TuningMeta Plist
-             guard let path = Bundle.main.path(forResource: "TuningMeta", ofType: "plist") else {return}
-             if let arrayOfDictionaries: [Dictionary<String,String>] = NSArray(contentsOfFile: path)  as? [Dictionary<String, String>] {
-                 // iterate arrayRoot: (array of dictionaries)
-                 for dict in arrayOfDictionaries {
-                     let tuningName = dict["TuningName"]!
-                     let openNoteIndices = dict["OpenNoteIndices"]!
-                     let noteNames = dict["NoteNames"]!
-                     let chordLibraryFileName = dict["ChordLibraryName"]!
-                     let chordGroupsFileName = dict["ChordGroupName"]!
+            // build models from TuningMeta.plist
+             guard let path = Bundle.main.path(forResource: "TuningMeta", ofType: "plist") else { return }
+            
+             if let dictionaries: [Dictionary<String,String>] = NSArray(contentsOfFile: path)  as? [Dictionary<String, String>] {
+                 // iterate arrayOfdictionaries
+                 for dict in dictionaries {
+                     guard let tuningName = dict["TuningName"],
+                           let openNoteIndices = dict["OpenNoteIndices"],
+                           let noteNames = dict["NoteNames"],
+                           let chordLibraryFileName = dict["ChordLibraryName"],
+                           let chordGroupsFileName = dict["ChordGroupName"] else {
+                         throw PlistError.unknownError
+                     }
                      do {
                          let newTuning = try createTuning(tuningName: tuningName,
                                                           openIndices: openNoteIndices,
@@ -79,20 +82,17 @@ AppStateContainer {
                  }
              }
             
-            // BECAUSE cannot set currentFretPositions dynamically
-            //  due to a what is likely a SwiftData/Xcode bug
-            //  hardwire this to a C chord, ONLY because we already forced:
+            //  activeChordGroup.activeChord is set to a C chord:
             //  activeChordGroup to be "Key of C" AND activeChord to be "C"
             //  on INITIAL launch
             //  If this ever changes --> make provsions
-            appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
-            
             appState.tunings = tuningsArray
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
+            appState.activeTuning = standardTuning
             appState.pickerTuningName = "Standard"
             appState.pickerChordGroupName = "Key of C"
-            appState.activeTuning = standardTuning
+            appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]
         }
         
         /// This method sets all needed values for Tuning identified by tuningName
@@ -123,7 +123,7 @@ AppStateContainer {
             
             guard let path = Bundle.main.path(forResource: chordGroupsFileName, ofType: "plist"),
                   let thisChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String]  else {
-                throw PlistError.badChordLibraryAddress
+                throw PlistError.badChordGroupAddress
             }
             
             let chordGroups: [ChordGroup] = convertToArrayOfChordGroups(dict: thisChordGroupsDict,
@@ -209,7 +209,6 @@ AppStateContainer {
                     newChord = Chord(name: entry.key, fretMapString: entry.value)
                 }
             }
-            
             return newChord
         }
     }

@@ -14,7 +14,8 @@ struct iJamGuitarApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }.modelContainer(AppStateContainer.create(shouldCreateUserDefaults))
+        }
+        .modelContainer(AppStateContainer.create(shouldCreateUserDefaults))
     }
 }
 

@@ -15,18 +15,20 @@ struct CapoPositionPickerView: View {
     let kLabelWidth = 40.0
 
     var body: some View {
-        VStack {
-            Menu {
-                Picker("Capo Position", selection: Bindable(appStates.first!).capoPosition) {
-                   ForEach(frets, id: \.self) {
-                       Text(String($0))
+        if let appState = appStates.first {
+            VStack {
+                Menu {
+                    Picker("Capo Position", selection: Bindable(appStates.first!).capoPosition) {
+                       ForEach(frets, id: \.self) {
+                           Text(String($0))
+                       }
                    }
+                   .pickerStyle(.automatic)
+               } label: {
+                   getCapoLabel()
                }
-               .pickerStyle(.automatic)
-           } label: {
-               getCapoLabel()
            }
-       }
+        }
     }
         
     func getCapoLabel() -> some View {

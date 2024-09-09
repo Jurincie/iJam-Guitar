@@ -28,14 +28,16 @@ import SwiftData
 import SwiftUI
 import OSLog
 
+@MainActor
 struct StringsView: View {
     @Query var appStates: [AppState]
+   
     @State private var dragLocation: CGPoint?
     @State var formerZone = -1
     @State private var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
     
     // Stored Properties
-    let audioManager = iJamAudioManager()
+    let stateModel = StateModel()
     var height: CGFloat
     let kNoFret = -1
     
@@ -68,20 +70,28 @@ struct StringsView: View {
             }
             .task({
                 guard appStates.first!.isMuted == false else { return }
-                await playOpeningArpegio() })
+                await playOpeningArpegio()
+            })
             .contentShape(Rectangle())
             .gesture(drag)
             .alert("Device Volume is OFF",
                    isPresented: Bindable(appState).showVolumeAlert) {
-                Button("OK", role: .cancel) { appState.showVolumeAlert = false }
+                Button("OK", role: .cancel) { 
+                    appState.showVolumeAlert = false
+                }
             }
             .alert("Another App is using the Audio Player",
                   isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
-               Button("OK", role: .cancel) { appState.showAudioPlayerInUseAlert = false }
+                Button("OK", role: .cancel) {
+                    appState.showAudioPlayerInUseAlert = false
+                }
             }
             .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
               Button("OK", role: .cancel) { fatalError() }
             }
+        } else {
+            Text("SwiftData Query Error")
+                .font(.largeTitle)
         }
     }
 }
@@ -139,7 +149,7 @@ extension StringsView {
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) async {
-        guard audioManager.isVolumeLevelZero == false else {
+        guard stateModel.isDeviceVolumeLevelZero == false else {
             appStates.first!.showVolumeAlert.toggle()
             return
         }
@@ -149,13 +159,13 @@ extension StringsView {
         if fretPosition > kNoFret {
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
                 let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition
-                let noteToPlayName = audioManager.noteNamesArray[index]
+                let noteToPlayName = stateModel.noteNamesArray[index]
                 let volume = appStates.first!.volumeLevel
                 Logger.viewCycle.notice("playing string: \(stringToPlay)")
                 do {
-                    try audioManager.playWaveFile(noteName:noteToPlayName,
-                                                  stringNumber: stringToPlay,
-                                                  volume: volume / 5.0)
+                    try stateModel.audioManager.playWaveFile(noteName: noteToPlayName,
+                                                             stringNumber: stringToPlay,
+                                                             volume: volume / 5.0)
                 } catch {
                     Logger.viewCycle.error("Could not play wave file...")
                 }
@@ -165,7 +175,7 @@ extension StringsView {
     
     func playOpeningArpegio() async {
         Task {
-            for string in 0...5 {
+            for string in 1...5 {
                 await pickString(6 - string)
                 try? await Task.sleep(nanoseconds: 50_000_000)
             }
@@ -174,10 +184,9 @@ extension StringsView {
     }
 }
 
-// This PreferenceKey and View extension:
-//  allow StringsView to determine where to place the Guitar-Strings
+
 struct SizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGRect = CGRectZero
+    static let defaultValue: CGRect = CGRectZero
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
 }
 

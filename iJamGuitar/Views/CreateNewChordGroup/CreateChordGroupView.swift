@@ -15,13 +15,11 @@ struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
     
-    // Alert Properties
+    // State Properties    
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
     @State private var showNameTuningUndefinedAlert = false
-    
-    // State Properties
     @State private var selectedChords = [Chord]()
     @State private var newChordGroupName: String = ""
     @State var selectedTuningName: String = "Select a Tuning"
@@ -114,9 +112,7 @@ extension CreateChordGroupView {
         newChordGroup.availableChords.append(contentsOf: selectedChords)
         if let firstChord = selectedChords.first {
             firstChord.group = newChordGroup
-            
-            let fretMapString = firstChord.fretMapString
-            appStates.first!.currentFretPositions = appStates.first!.getFretIndexMap(fretMapString: fretMapString)
+            appStates.first!.currentFretPositions = appStates.first!.activeChordFretMap
         }
         appStates.first!.activeTuning = selectedTuning
         appStates.first!.activeTuning?.chordGroups.append(newChordGroup)
@@ -137,14 +133,14 @@ struct PickerView: View {
     var body: some View {
         Menu {
             Picker("Tunings", selection: $selectedTuningName) {
-                ForEach(appStates.first!.getTuningNames(), id: \.self) {
+                ForEach(appStates.first!.tuningNames, id: \.self) {
                     Text($0)
                         .font(.caption)
                 }
             }
             .onChange(of: selectedTuningName, { oldValue, newValue in
                 // when user changes tuning selection:
-                //  -> remove all the selectedChords with earlier tuning
+                //  -> remove all the selectedChords from previous Tuning
                 selectedChords.removeAll()
             })
             .pickerStyle(.inline)
@@ -152,12 +148,12 @@ struct PickerView: View {
         } label: {
             Text(selectedTuningName)
                 .padding()
+                .border(Color.white, width: 1)
                 .foregroundColor(.white)
                 .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
                 .background(Color.accentColor)
-                .modifier(BlinkingModifier(duration: tuningSelected ? 0.0 : 0.6))
         }
-        .cornerRadius(10)
+        .cornerRadius(2)
         Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
             .font(.headline)
             .foregroundColor(.primary)
@@ -222,10 +218,4 @@ struct GridView: View {
         return pickArray
     }
 }
-
-struct AnimationValues {
-    var scale = 1.0
-    var verticalStretch = 1.0
-}
-
 

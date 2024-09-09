@@ -20,7 +20,7 @@ struct TuningPickerView: View {
             Menu {
                 Picker("Tunings", selection: $tuningName) {
                     if let appState = appStates.first {
-                        let tuningNames = appState.getTuningNames()
+                        let tuningNames = appState.tuningNames
                         ForEach(tuningNames, id: \.self) {
                             Text($0)
                         }
@@ -29,15 +29,20 @@ struct TuningPickerView: View {
                 .pickerStyle(.automatic)
                 .onChange(of: tuningName, { oldValue, newValue in
                     Logger.viewCycle.notice("new Tuning name: \(newValue)")
-                    if let newTuning = appStates.first!.getTuning(name: newValue) {
+                    
+                    if let newTuning = appStates.first!.tunings.first(where: { tuning in
+                        tuning.name == newValue
+                    }) {
                         if let activeGroup = newTuning.activeChordGroup {
                             chordGroupName =  activeGroup.name
-                            appStates.first!.makeNewTuningActive(newTuning: newTuning)
                         } else {
                             newTuning.activeChordGroup = newTuning.chordGroups.first
                             chordGroupName =  newTuning.activeChordGroup?.name ?? ""
-                            appStates.first!.makeNewTuningActive(newTuning: newTuning)
                         }
+                        appStates.first!.activeTuning = newTuning
+                        appStates.first!.pickerTuningName = newTuning.name ?? "ERROR"
+                        appStates.first!.pickerChordGroupName =  appStates.first!.activeChordGroup?.name ?? ""
+                        appStates.first!.currentFretPositions = appStates.first!.activeChordFretMap
                     }
                 })
             } label: {

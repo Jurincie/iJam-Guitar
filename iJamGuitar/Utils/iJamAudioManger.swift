@@ -10,7 +10,7 @@ import OSLog
 import SwiftData
 import SwiftUI
 
-enum InitializeErrors: Error {
+enum AudioError: Error {
     case InitializeSoundsError
     case MissingResourseError
     case AVAudioSessionError
@@ -19,20 +19,15 @@ enum InitializeErrors: Error {
 }
 
 class iJamAudioManager {
-    var isVolumeLevelZero: Bool {
-        return AVAudioSession.sharedInstance().outputVolume == 0.0
-    }
-    
     // 1 audioPlayer for each string
     var audioPlayerArray = [AVAudioPlayer?]()
-    var noteNamesArray = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
-    
+
     init() {
         do {
             try initializeAVAudioSession()
             try loadWaveFilesIntoAudioPlayers()
         } catch {
-            print("Init ERROR")
+            print(error.localizedDescription)
             fatalError()
         }
     }
@@ -45,7 +40,7 @@ class iJamAudioManager {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
             Logger.statistics.error("\(error.localizedDescription)")
-            throw InitializeErrors.AVAudioSessionError
+            throw AudioError.AVAudioSessionError
         }
     }
     
@@ -57,15 +52,15 @@ class iJamAudioManager {
                     let thisAudioPlayer = try AVAudioPlayer(data:asset.data,
                                                             fileTypeHint:"wav")
                     if thisAudioPlayer.isPlaying {
-                        throw InitializeErrors.AVAudioPlayerInUse
+                        throw AudioError.AVAudioPlayerInUse
                     }
                     audioPlayerArray.append(thisAudioPlayer)
-                } catch InitializeErrors.AVAudioSessionError{
+                } catch AudioError.AVAudioSessionError{
                     fatalError()
                 }
                 catch {
                     Logger.errors.error("\(error.localizedDescription)")
-                    throw InitializeErrors.InitializeSoundsError
+                    throw AudioError.InitializeSoundsError
                 }
             }
         }
@@ -78,17 +73,17 @@ class iJamAudioManager {
         Logger.viewCycle.notice("-> playing String: \(stringNumber) note: \(noteName)")
         if let asset = NSDataAsset(name:prefix) {
             do {
-                let thisAudioPlayer                 = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
-                audioPlayerArray[6 - stringNumber]  = thisAudioPlayer
-                thisAudioPlayer.volume              = Float(volume) / 5.0
+                let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                audioPlayerArray[6 - stringNumber] = thisAudioPlayer
+                thisAudioPlayer.volume = Float(volume) / 5.0
                 thisAudioPlayer.prepareToPlay()
                 thisAudioPlayer.play()
             }
-            catch InitializeErrors.AVAudioSessionError{
-                throw InitializeErrors.AVAudioSessionError
+            catch AudioError.AVAudioSessionError{
+                throw AudioError.AVAudioSessionError
             }
             catch {
-                throw InitializeErrors.UnknownError
+                throw AudioError.UnknownError
             }
         }
     }

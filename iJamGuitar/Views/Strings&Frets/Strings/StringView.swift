@@ -116,35 +116,41 @@ struct ForegroundView: View {
 
 struct BackgroundView: View {
     @Query var appStates: [AppState]
+    
     var fretNumber: Int
     let stringNumber: Int
+    let stateModel = StateModel()
     
     var body: some View {
-        let appState = appStates.first!
-        Button(action: {
-            let index = 6 - stringNumber
-            var correctedFret = fretNumber
-            
-            let currentFret = appState.currentFretPositions[index]
-            if  currentFret == 0 && fretNumber == 0 {
-                correctedFret = -1
-            } else if appState.currentFretPositions[index] == fretNumber {
-                correctedFret = 0
+        if let appState = appStates.first {
+            Button(action: {
+                let index = 6 - stringNumber
+                var correctedFret = fretNumber
+                
+                let currentFret = appState.currentFretPositions[index]
+                if  currentFret == 0 && fretNumber == 0 {
+                    correctedFret = -1
+                } else if appState.currentFretPositions[index] == fretNumber {
+                    correctedFret = 0
+                }
+                
+                // get the current appState.fretIndicesString
+                // replace the nth character
+                appState.currentFretPositions[index] = correctedFret
+            }){
+                if(fretNumber == 0) {
+                    // show a gray circle on zeroFret with black text
+                    CircleView(color: Color.teal)
+                } else if fretNumber == appState.currentFretPositions[6 - stringNumber] {
+                    let fretInChord = stateModel.fretIsInChord(stringNumber: stringNumber,
+                                                               newFretNumber: fretNumber,
+                                                               currentChordFretMap: appState.activeChordFretMap)
+                    CircleView(color: fretInChord ? Color.red : Color.yellow, lineWidth: 1.0)
+                } else {
+                    CircleView(color: Color.clear, lineWidth: 0)
+                }
             }
-            
-            // get the current appState.fretIndicesString
-            // replace the nth character
-            appState.currentFretPositions[index] = correctedFret
-        }){
-            if(fretNumber == 0) {
-                // show a gray circle on zeroFret with black text
-                CircleView(color: Color.teal)
-            } else if fretNumber == appState.currentFretPositions[6 - stringNumber] {
-                CircleView(color: appState.fretBelongsInChord(stringNumber: stringNumber, newFretNumber: fretNumber) ? Color.red : Color.yellow, lineWidth: 1.0)
-            } else {
-                CircleView(color: Color.clear, lineWidth: 0)
-            }
-        }
+        } 
     }
 }
 
@@ -197,7 +203,6 @@ extension StringView {
                 return self.notes[finalIndex % 12]
             }
         }
-        
         return "C"
     }
 }

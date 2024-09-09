@@ -12,6 +12,7 @@ import OSLog
 struct VolumeView: View {
     @Query var appStates: [AppState]
     @State private var isEditing = false
+ 
     let imageWidth = UserDefaults.standard.bool(forKey: "IsIpad") ? 35.0 : 25.0
     var isMuted: Bool
     
@@ -33,21 +34,22 @@ struct VolumeView: View {
     }
     
     var body: some View {
-        
-        VStack() {
-            Spacer()
-            Spacer()
-            HStack {
+        if let appState = appStates.first {
+            VStack() {
                 Spacer()
-                Button(action: {
-                    appStates.first!.isMuted.toggle()
-                }) {
-                    SpeakerImage()
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        appState.isMuted.toggle()
+                    }) {
+                        SpeakerImage()
+                    }
+                    VolumeSlider()
+                    Spacer()
                 }
-                VolumeSlider()
                 Spacer()
             }
-            Spacer()
         }
     }
 }

@@ -16,51 +16,52 @@ struct AvailableChordsGridView: View {
     var tuningSelected: Bool
     
     var body: some View {
-        if tuningSelected == false {
-            VStack {
-                Text("Select Tuning Above")
-                    .frame(alignment: .top)
-                    .bold()
-                    .font(.title)
-            }
-            .foregroundColor(.white)
-            .padding()
-            .border(.black, width: 4)
-        }
-        else {
-            let tuning = appStates.first!.tunings.first { tuning in
-                tuning.name == selectedTuningName
-            }
-            
-            if let chordDictionary: [String:String] = tuning?.chordsDictionary {
-                let keys = chordDictionary.map{$0.key}
-                let values = chordDictionary.map {$0.value}
-                
-                // create then sort tuple array
-                let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
-                    tuple1.0 < tuple2.0
+        if let appState = appStates.first {
+            if tuningSelected == false {
+                VStack {
+                    Text("Select Tuning Above")
+                        .frame(alignment: .top)
+                        .bold()
+                        .font(.title)
                 }
-                let columns = Array(repeating: GridItem(.flexible()), count: 4)
-                
-                ScrollView(.vertical) {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(0..<keyValues.count, id: \.self) { index in
-                            AvailablePickView(selectedChords: $selectedChords,
-                                              name: tuningSelected ? keyValues[index].0 : "",
-                                              fretMapString: tuningSelected ? keyValues[index].1 : "")
-                        }
-                        .scrollTargetLayout()
-                    }
-                }
-                .scrollBounceBehavior(.always)
-                .contentMargins(.horizontal, 20, for: .scrollContent)
-                .listRowInsets(EdgeInsets())
-                .scrollIndicatorsFlash(onAppear: true)
+                .foregroundColor(.white)
                 .padding()
-                .border(.primary, width: 4)
-                .cornerRadius(12)
+                .border(.black, width: 4)
             }
-            
+            else {
+                let tuning = appState.tunings.first { tuning in
+                    tuning.name == selectedTuningName
+                }
+                
+                if let chordDictionary: [String:String] = tuning?.chordsDictionary {
+                    let keys = chordDictionary.map{$0.key}
+                    let values = chordDictionary.map {$0.value}
+                    
+                    // create then sort tuple array
+                    let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+                        tuple1.0 < tuple2.0
+                    }
+                    let columns = Array(repeating: GridItem(.flexible()), count: 4)
+                    
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(0..<keyValues.count, id: \.self) { index in
+                                AvailablePickView(selectedChords: $selectedChords,
+                                                  name: tuningSelected ? keyValues[index].0 : "",
+                                                  fretMapString: tuningSelected ? keyValues[index].1 : "")
+                            }
+                            .scrollTargetLayout()
+                        }
+                    }
+                    .scrollBounceBehavior(.always)
+                    .contentMargins(.horizontal, 20, for: .scrollContent)
+                    .listRowInsets(EdgeInsets())
+                    .scrollIndicatorsFlash(onAppear: true)
+                    .padding()
+                    .border(.primary, width: 4)
+                    .cornerRadius(12)
+                }
+            }
         }
     }
 }

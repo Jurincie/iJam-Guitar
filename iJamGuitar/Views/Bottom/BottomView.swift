@@ -10,19 +10,20 @@ import SwiftUI
 import OSLog
 
 struct BottomView: View {
+    @Query var appStates: [AppState]
+    
     let width: CGFloat
     let height: CGFloat
-    @Query var appStates: [AppState]
 
     var body: some View {
-        ZStack() {
-            Image(.bottomView)
-                .resizable()
-                .frame(width:width,
-                       height:height,
-                       alignment:.topLeading)
-            VStack() {
-                if let appState = appStates.first {
+        if let appState = appStates.first {
+            ZStack() {
+                Image(.bottomView)
+                    .resizable()
+                    .frame(width:width,
+                           height:height,
+                           alignment:.topLeading)
+                VStack() {
                     VolumeView(isMuted: appState.isMuted)
                         .padding(.horizontal, 40)
                 }

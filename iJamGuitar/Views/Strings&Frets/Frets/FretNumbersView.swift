@@ -11,6 +11,7 @@ import OSLog
 
 struct FretNumbersView: View {
     @Query var appStates: [AppState]
+    
     let width: CGFloat
     let height: CGFloat
 
