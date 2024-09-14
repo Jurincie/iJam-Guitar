@@ -16,17 +16,13 @@ struct ChordButtonsView: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
             
     var body: some View {
-        if let appState = appStates.first {
-            let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 18.0 : 12.0
-            let pickArray = getPicks()
-            LazyVGrid(columns: columns, spacing:mySpacing) {
-                    ForEach(pickArray, id: \.id) { pick in
-                        PickView(pick: pick)
-                }
+        let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 18.0 : 12.0
+        let pickArray = getPicks()
+        LazyVGrid(columns: columns, spacing:mySpacing) {
+                ForEach(pickArray, id: \.id) { pick in
+                    PickView(pick: pick)
             }
         }
-        
-        
     }
 }
 

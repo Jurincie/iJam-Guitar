@@ -9,8 +9,8 @@ import SwiftUI
 import OSLog
 
 struct FretBoardView: View {
-    let width:CGFloat
-    let height:CGFloat
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         // width coming in is 76% of parent (StringsAndFretsAreaView) width

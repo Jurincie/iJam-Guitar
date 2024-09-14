@@ -82,14 +82,12 @@ AppStateContainer {
                  }
              }
             
-            //  activeChordGroup.activeChord is set to a C chord:
-            //  activeChordGroup to be "Key of C" AND activeChord to be "C"
-            //  on INITIAL launch
-            //  If this ever changes --> make provsions
+            //  on INITIAL launch ONLY
             appState.tunings = tuningsArray
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.activeTuning = standardTuning
+    
             appState.pickerTuningName = "Standard"
             appState.pickerChordGroupName = "Key of C"
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]

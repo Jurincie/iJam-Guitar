@@ -251,6 +251,7 @@
 		7A9AF58F2B68419900E37CDB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7A274E4D2C73B01F00C368C6 /* AggregateModel */,
 				7A7FBC202B72DE1D00BD5567 /* AppState.swift */,
 				7AE86C2A2B1BAC820032DABD /* Tuning.swift */,
 				7AE86C292B1BAC820032DABD /* ChordGroup.swift */,
@@ -285,7 +286,6 @@
 			children = (
 				7AA07A252A040F6A00AE87B3 /* iJamGuitarApp.swift */,
 				7A1CF6F12B79380300F00AF1 /* AppStateContainer.swift */,
-				7A274E4D2C73B01F00C368C6 /* AggregateModel */,
 				7A274E4A2C73AF4100C368C6 /* Utils */,
 				7A9AF58F2B68419900E37CDB /* Models */,
 				7AA07A762A0417C800AE87B3 /* Views */,

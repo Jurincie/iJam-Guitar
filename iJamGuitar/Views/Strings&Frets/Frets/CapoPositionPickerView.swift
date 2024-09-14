@@ -13,24 +13,22 @@ struct CapoPositionPickerView: View {
     @Query var appStates: [AppState]
     let frets = Range(-2...5)
     let kLabelWidth = 40.0
-
+    
     var body: some View {
-        if let appState = appStates.first {
-            VStack {
-                Menu {
-                    Picker("Capo Position", selection: Bindable(appStates.first!).capoPosition) {
-                       ForEach(frets, id: \.self) {
-                           Text(String($0))
-                       }
-                   }
-                   .pickerStyle(.automatic)
-               } label: {
-                   getCapoLabel()
-               }
-           }
+        VStack {
+            Menu {
+                Picker("Capo Position", selection: Bindable(appStates.first!).capoPosition) {
+                    ForEach(frets, id: \.self) {
+                        Text(String($0))
+                    }
+                }
+                .pickerStyle(.automatic)
+            } label: {
+                getCapoLabel()
+            }
         }
     }
-        
+    
     func getCapoLabel() -> some View {
         let isIpad = UserDefaults.standard.bool(forKey: "IsIpad")
         return Text("\(appStates.first!.capoPosition)")
