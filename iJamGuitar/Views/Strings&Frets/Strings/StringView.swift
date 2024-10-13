@@ -28,33 +28,13 @@ struct StringView: View {
     var body: some View {
         let openNotesString = (appStates.first!.activeTuning?.stringNoteNames)
         if let openNotes: [String] = openNotesString?.components(separatedBy: ["-"]) {
-            let fretBoxes: [FretBox] = getFretBoxArray(minFret: appStates.first!.minimumFret,
-                                                       openStringNote: openNotes[6 - stringNumber])
-            /*
-             1x6 grid of Buttons with noteName in text on top of the possible image
-             zero or one of the buttons may show the redBall image indicating string
-             if fretted there
-             */
+            let frets: [FretBox] = getFretBoxArray(minFret: appStates.first!.minimumFret,
+                                                   openStringNote: openNotes[6 - stringNumber])
             VStack(spacing:0) {
-                FretBoxView(fretBox: fretBoxes[0],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[1],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[2],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[3],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[4],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                FretBoxView(fretBox: fretBoxes[5],
-                            stringNumber:stringNumber)
-                .frame(width: height / 10, height: height / 12, alignment: .top)
-                
+                ForEach(0...5, id: \.self) { index in
+                    FretBoxView(fretBox: frets[index],
+                                stringNumber:stringNumber).frame(width: height / 10, height: height / 12, alignment: .top)
+                }
                 Spacer()
             }
             .background(Image(stringImageName)
@@ -116,15 +96,16 @@ struct ForegroundView: View {
 
 struct BackgroundView: View {
     @Query var appStates: [AppState]
-    
-    var fretNumber: Int
+    fileprivate var fretNumber: Int
     let stringNumber: Int
     let stateModel = StateModel()
+    var index: Int {
+        6 - stringNumber
+    }
     
     var body: some View {
         if let appState = appStates.first {
             Button(action: {
-                let index = 6 - stringNumber
                 var correctedFret = fretNumber
                 
                 let currentFret = appState.currentFretPositions[index]

@@ -87,7 +87,6 @@ AppStateContainer {
             appState.pickerTuningName = appState.activeTuning?.name ?? ""
             appState.pickerChordGroupName = appState.activeChordGroup?.name ?? ""
             appState.activeTuning = standardTuning
-    
             appState.pickerTuningName = "Standard"
             appState.pickerChordGroupName = "Key of C"
             appState.currentFretPositions = [-1, 3, 2, 0, 1, 0]

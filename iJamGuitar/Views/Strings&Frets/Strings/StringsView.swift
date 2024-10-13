@@ -31,13 +31,12 @@ import OSLog
 @MainActor
 struct StringsView: View {
     @Query var appStates: [AppState]
-   
+    private var stateModel = StateModel()
     @State private var dragLocation: CGPoint?
     @State var formerZone = -1
     @State private var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
     
     // Stored Properties
-    let stateModel = StateModel()
     var height: CGFloat
     let kNoFret = -1
     
