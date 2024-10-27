@@ -24,6 +24,7 @@ struct StringsAndFretsAreaView : View {
             VStack(spacing:0) {
                 // display frets in Top half
                 HStack(spacing:0) {
+                
                     FretNumbersView(width: width * 0.12,
                                     height: height / 2)
                     FretBoardView(width: width * 0.76,

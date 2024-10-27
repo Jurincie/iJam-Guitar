@@ -26,7 +26,7 @@ struct TuningPickerView: View {
                         }
                     }
                 }
-                .pickerStyle(.automatic)
+                .pickerStyle(.menu)
                 .onChange(of: tuningName, { oldValue, newValue in
                     Logger.viewCycle.notice("new Tuning name: \(newValue)")
                     
@@ -49,7 +49,7 @@ struct TuningPickerView: View {
                 if let appState = appStates.first {
                     Text(appState.pickerTuningName)
                         .padding()
-                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                        .font(.headline)
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
                         .foregroundColor(Color.white)
@@ -57,7 +57,7 @@ struct TuningPickerView: View {
             }
             Spacer()
         }
-        .frame(maxHeight: UserDefaults.standard.bool(forKey: "IsIpad") ? 48 : 36)
+        .frame(maxHeight: 42)
         .border(.white, width: 3)
         .cornerRadius(8)
     }

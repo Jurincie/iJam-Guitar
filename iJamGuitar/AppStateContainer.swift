@@ -13,7 +13,7 @@ import SwiftData
 ///  This actor enables us to pre-load data from Plists on INITIAL LAUNCH
 /// - Parameter shouldCreateDefaults: Bool
 /// - Returns: ModelContainer -> An object that manages an app's schema and model storage configuration.
-actor
+class
 AppStateContainer {
     @MainActor
     static func create(_ shouldCreateDefaults: Bool) -> ModelContainer {

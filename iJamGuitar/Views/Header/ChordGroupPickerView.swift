@@ -26,7 +26,7 @@ struct ChordGroupPickerView: View {
                         .onDelete(perform: deleteChordGroup)
                     }
                 }
-                .pickerStyle(.automatic)
+                .pickerStyle(.menu)
                 .onChange(of: chordGroupName, { oldValue, newValue in
                     Logger.viewCycle.notice("New ChordGroupname: \(newValue)")
                     appStates.first!.pickerChordGroupName = newValue
@@ -41,7 +41,7 @@ struct ChordGroupPickerView: View {
                 if let appState = appStates.first {
                     Text(appState.pickerChordGroupName)
                         .padding()
-                        .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
+                        .font(.headline)
                         .fontWeight(.semibold)
                         .background(Color.accentColor)
                         .foregroundColor(Color.white)
@@ -50,7 +50,7 @@ struct ChordGroupPickerView: View {
             }
             Spacer()
         }
-        .frame(maxHeight: UserDefaults.standard.bool(forKey: "IsIpad") ? 48 : 36)
+        .frame(maxHeight: 40)
         .border(.white,
                 width: 3)
         .cornerRadius(8)

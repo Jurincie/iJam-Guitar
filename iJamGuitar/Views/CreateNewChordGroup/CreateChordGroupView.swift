@@ -15,7 +15,7 @@ struct CreateChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Query var appStates: [AppState]
     
-    // State Properties    
+    // State Properties
     @State private var showNameFieldEmptyAlert = false
     @State private var showNoChordsSelectedAlert = false
     @State private var showChordGroupNameExistsAlert = false
@@ -28,9 +28,6 @@ struct CreateChordGroupView: View {
     var tuningSelected: Bool {
         selectedTuningName != "Select a Tuning"
     }
-    var spacing: Double {
-        UserDefaults.standard.bool(forKey: "IsIpad") ? 10.0 : 5.0
-    }
     
     var body: some View {
         VStack(alignment: .center) {
@@ -40,6 +37,7 @@ struct CreateChordGroupView: View {
                 PickerView(tuningSelected: tuningSelected, 
                            selectedTuningName: $selectedTuningName,
                            selectedChords: $selectedChords)
+                .cornerRadius(5)
                 AvailableChordsGridView(selectedTuningName: $selectedTuningName,
                                         selectedChords: $selectedChords,
                                         tuningSelected: selectedTuningName != "Select Tuning")
@@ -105,6 +103,7 @@ struct CreateChordGroupView: View {
 
 extension CreateChordGroupView {
     func addNewChordGroup(selectedTuning: Tuning) {
+        // load all selected chord names into "-" separated string
         var chordNamesString = selectedChords.reduce(into: "", { $0 += $1.name + "-" })
         chordNamesString.removeLast()
         let newChordGroup = ChordGroup(name: newChordGroupName,
@@ -119,6 +118,7 @@ extension CreateChordGroupView {
         appStates.first!.activeTuning?.activeChordGroup = newChordGroup
         appStates.first!.pickerChordGroupName = newChordGroup.name
         appStates.first!.pickerTuningName = selectedTuning.name ?? ""
+        appStates.first!.currentFretPositions = appStates.first!.activeChordFretMap
         try? modelContext.save()
         
         Logger.viewCycle.notice("Just Created New ChordGroup: \(newChordGroupName.description)")
@@ -130,33 +130,37 @@ struct PickerView: View {
     var tuningSelected: Bool
     @Binding var selectedTuningName: String
     @Binding var selectedChords: [Chord]
+    @State private var animationAmount = 1.0
     var body: some View {
-        Menu {
-            Picker("Tunings", selection: $selectedTuningName) {
-                ForEach(appStates.first!.tuningNames, id: \.self) {
-                    Text($0)
-                        .font(.caption)
+        if let appState = appStates.first {
+            Menu {
+                Picker("Tunings", selection: $selectedTuningName) {
+                    ForEach(appState.tuningNames, id: \.self) {
+                        Text($0)
+                            .font(.caption)
+                    }
                 }
+                .onChange(of: selectedTuningName, { oldValue, newValue in
+                    // when user changes tuning selection:
+                    //  -> remove all the selectedChords from previous Tuning
+                    selectedChords.removeAll()
+                })
+                .pickerStyle(.inline)
+                .frame(maxWidth: .infinity)
+            } label: {
+                Text(selectedTuningName)
+                    .padding()
+                    .border(Color.white, width: 1)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .background(Color.accentColor)
+                    .animation(.easeInOut, value: animationAmount)
             }
-            .onChange(of: selectedTuningName, { oldValue, newValue in
-                // when user changes tuning selection:
-                //  -> remove all the selectedChords from previous Tuning
-                selectedChords.removeAll()
-            })
-            .pickerStyle(.inline)
-            .frame(maxWidth: .infinity)
-        } label: {
-            Text(selectedTuningName)
-                .padding()
-                .border(Color.white, width: 1)
-                .foregroundColor(.white)
-                .font(UserDefaults.standard.bool(forKey: "IsIpad") ? .title2 : .caption)
-                .background(Color.accentColor)
+            .cornerRadius(2)
+            Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
+                .font(.headline)
+                .foregroundColor(.primary)
         }
-        .cornerRadius(2)
-        Text(tuningSelected == false ? "" : "Choose up to 10 chords (below)")
-            .font(.headline)
-            .foregroundColor(.primary)
     }
 }
 
@@ -169,11 +173,6 @@ struct TextFieldView: View {
             .font(.title)
         TextField("Enter Group Name", text: $newChordGroupName)
             .textFieldStyle(CustomTextFieldStyle())
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(.never)
-            .border(.black, width: 2)
-            .padding(.horizontal)
-            .font(.headline)
     }
 }
 
@@ -183,9 +182,15 @@ struct CustomTextFieldStyle : TextFieldStyle {
             .font(.title) // set the inner Text Field Font
             .padding(5) // Set the inner Text Field Padding
         //Give it some style
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .border(.black, width: 2)
+            .padding(.horizontal)
+            .font(.headline)
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .strokeBorder(Color.primary.opacity(0.5), lineWidth: 1))
+                    .strokeBorder(Color.primary.opacity(0.5), lineWidth: 1)
+            )
     }
 }
 

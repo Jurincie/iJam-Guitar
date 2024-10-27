@@ -17,27 +17,20 @@ struct ContentView: View {
             
             VStack(spacing: 0) {
                 HeaderView(width: width,
-                           height: height * 0.14)
-                .padding()
-                TopView(width:width, height:height * 0.25)
-                    .aspectRatio(contentMode: .fit)
-                StringsAndFretsAreaView(width:width, height:height * 0.47)
-                    .aspectRatio(contentMode: .fit)
+                           height: height * 0.12)
+                TopView(width:width,
+                        height:height * 0.25)
+                StringsAndFretsAreaView(width:width,
+                                        height:height * 0.43)
                 BottomView(width: width,
-                           height:height * 0.14)
-                .aspectRatio(contentMode: .fit)
+                           height:height * 0.20)
             }
-            .dynamicTypeSize(...DynamicTypeSize.medium)
+            .ignoresSafeArea()
+            .minimumScaleFactor(0.6)
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)
-            .background(.ultraThinMaterial)
             .background(Color.black)
-            .ignoresSafeArea()
-            .onAppear() {
-                UserDefaults.standard.setValue(UIDevice.current.userInterfaceIdiom == .pad,
-                                               forKey: "IsIpad")
-            }
         }
     }
 }

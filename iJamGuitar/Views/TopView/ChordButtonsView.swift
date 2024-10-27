@@ -14,13 +14,15 @@ struct ChordButtonsView: View {
     let width: CGFloat
     let height: CGFloat
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
+    let draggingPickImage: Image = Image(.modifiedPick)
+    
             
     var body: some View {
-        let mySpacing = UserDefaults.standard.bool(forKey: "IsIpad") ? 18.0 : 12.0
+        let mySpacing = 12.0
         let pickArray = getPicks()
         LazyVGrid(columns: columns, spacing:mySpacing) {
-                ForEach(pickArray, id: \.id) { pick in
-                    PickView(pick: pick)
+            ForEach(pickArray, id: \.id) { pick in
+                PickView(pick: pick)
             }
         }
     }

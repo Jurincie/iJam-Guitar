@@ -11,9 +11,7 @@ import OSLog
 
 struct VolumeView: View {
     @Query var appStates: [AppState]
-    @State private var isEditing = false
- 
-    let imageWidth = UserDefaults.standard.bool(forKey: "IsIpad") ? 35.0 : 25.0
+    let imageWidth = 25.0
     var isMuted: Bool
     
     func VolumeSlider() -> some View {
@@ -24,7 +22,6 @@ struct VolumeView: View {
     }
     
     func SpeakerImage() -> some View {
-        
         Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.1")
             .resizable()
             .frame(width: imageWidth, height: imageWidth)

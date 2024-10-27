@@ -23,8 +23,7 @@ final class AppState {
     var pickerChordGroupName: String = ""
     var pickerTuningName: String = ""
     
-    // currentFretPositions represents the 
-    // CURRENT fret position for each string irrespective of capo position
+    // currentFretPositions represents the CURRENT fret position for each string ignoring capo position
     // which may have changed via tapping on frets from when latest chord change
     var currentFretPositions: [Int] = []
 

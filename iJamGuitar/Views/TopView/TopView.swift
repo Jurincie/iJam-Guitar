@@ -16,10 +16,8 @@ struct TopView: View {
     var body: some View {
         ChordButtonsView(width: width,
                          height: height)
-            .frame(width: width, 
-                   height: height,
-                   alignment: .center)
-        
+            .frame(width: width, height: height, alignment: .center)
+
             // background image (could have used z-stack here instead
             .background(
                 Image(.topView)

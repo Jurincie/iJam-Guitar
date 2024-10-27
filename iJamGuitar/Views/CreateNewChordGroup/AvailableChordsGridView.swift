@@ -14,53 +14,53 @@ struct AvailableChordsGridView: View {
     @Binding var selectedTuningName: String
     @Binding var selectedChords: [Chord]
     var tuningSelected: Bool
-    
+
     var body: some View {
-        if let appState = appStates.first {
-            if tuningSelected == false {
-                VStack {
-                    Text("Select Tuning Above")
-                        .frame(alignment: .top)
-                        .bold()
-                        .font(.title)
-                }
-                .foregroundColor(.white)
-                .padding()
-                .border(.black, width: 4)
+        if tuningSelected == false {
+            VStack {
+                Text("Select Tuning Above")
+                    .frame(alignment: .top)
+                    .bold()
+                    .font(.title)
             }
-            else {
-                let tuning = appState.tunings.first { tuning in
-                    tuning.name == selectedTuningName
+            .foregroundColor(.white)
+            .padding()
+            .border(.black, width: 4)
+        } else {
+            let tuning = appStates.first!.tunings.first { tuning in
+                tuning.name == selectedTuningName
+            }
+
+            if let chordDictionary: [String: String] = tuning?.chordsDictionary
+            {
+                let keys = chordDictionary.map { $0.key }
+                let values = chordDictionary.map { $0.value }
+
+                // create then sort tupleArray on firstElement
+                let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
+                    tuple1.0 < tuple2.0
                 }
-                
-                if let chordDictionary: [String:String] = tuning?.chordsDictionary {
-                    let keys = chordDictionary.map{$0.key}
-                    let values = chordDictionary.map {$0.value}
-                    
-                    // create then sort tuple array
-                    let keyValues = zip(keys, values).sorted { tuple1, tuple2 in
-                        tuple1.0 < tuple2.0
-                    }
-                    let columns = Array(repeating: GridItem(.flexible()), count: 4)
-                    
-                    ScrollView(.vertical) {
-                        LazyVGrid(columns: columns, spacing: 10) {
-                            ForEach(0..<keyValues.count, id: \.self) { index in
-                                AvailablePickView(selectedChords: $selectedChords,
-                                                  name: tuningSelected ? keyValues[index].0 : "",
-                                                  fretMapString: tuningSelected ? keyValues[index].1 : "")
-                            }
-                            .scrollTargetLayout()
+                let columns = Array(repeating: GridItem(.flexible()), count: 4)
+
+                ScrollView(.vertical) {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(0..<keyValues.count, id: \.self) { index in
+                            AvailablePickView(
+                                selectedChords: $selectedChords,
+                                name: tuningSelected ? keyValues[index].0 : "",
+                                fretMapString: tuningSelected
+                                    ? keyValues[index].1 : "")
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollBounceBehavior(.always)
-                    .contentMargins(.horizontal, 20, for: .scrollContent)
-                    .listRowInsets(EdgeInsets())
-                    .scrollIndicatorsFlash(onAppear: true)
-                    .padding()
-                    .border(.primary, width: 4)
-                    .cornerRadius(12)
                 }
+                .scrollBounceBehavior(.always)
+                .contentMargins(.horizontal, 20, for: .scrollContent)
+                .listRowInsets(EdgeInsets())
+                .scrollIndicatorsFlash(onAppear: true)
+                .padding()
+                .border(.primary, width: 4)
+                .cornerRadius(12)
             }
         }
     }
@@ -68,59 +68,63 @@ struct AvailableChordsGridView: View {
 
 struct AvailablePickView: View {
     @Binding var selectedChords: [Chord]
-    
+
     // Stored Properties
     let name: String
     let fretMapString: String
     @State private var isSelected = false
-    
+
     var canAddPicks: Bool {
         selectedChords.count < 10
     }
-    
+
     var body: some View {
-        Button(action: {
-            if isSelected == false {
-                // user tapped on unselected pick
-                if canAddPicks {
-                    // append chord from this name and fretMapString
-                    let chord = Chord(name: name, fretMapString: fretMapString)
-                    selectedChords.append(chord)
-                    isSelected = true
-                    Logger.viewCycle.debug("Added Chord: \(chord.name)")
+        Button(
+            action: {
+                if isSelected == false {
+                    // user tapped on unselected pick
+                    if canAddPicks {
+                        // append chord from this name and fretMapString
+                        let chord = Chord(
+                            name: name, fretMapString: fretMapString)
+                        selectedChords.append(chord)
+                        isSelected = true
+                        Logger.viewCycle.debug("Added Chord: \(chord.name)")
+                    }
+                } else {
+                    // User tapped on an selected pick
+                    if let index = selectedChords.firstIndex(where: { chord in
+                        chord.name == name
+                    }) {
+                        // remove this pick chord
+                        let name = selectedChords[index].name
+                        selectedChords.remove(at: index)
+                        isSelected = false
+                        Logger.viewCycle.debug("Removed Chord: \(name)")
+                    }
                 }
-            } else {
-                // User tapped on an selected pick
-                if let index = selectedChords.firstIndex(where: { chord in
-                    chord.name == name
-                }) {
-                    // remove this pick chord
-                    let name = selectedChords[index].name
-                    selectedChords.remove(at: index)
-                    isSelected = false
-                    Logger.viewCycle.debug("Removed Chord: \(name)")
+            },
+            label: {
+                ZStack {
+                    // Backgroune
+                    Image(isSelected ? .activePick : .blankPick)
+                        .resizable()
+                        .scaledToFill()
+                    // Foreground
+                    VStack(spacing: 5) {
+                        Spacer()
+                        Text(name)
+                            .font(.caption)
+                            .bold()
+                        Text(fretMapString)
+                            .font(.caption)
+                        Spacer()
+                    }
+                    .font(.caption)
+                    .foregroundColor(.white)
                 }
             }
-        }, label: {
-            ZStack {
-                // Backgroune
-                Image(isSelected ? .activePick : .blankPick)
-                    .resizable()
-                    .scaledToFill()
-                // Foreground
-                VStack(spacing: 5) {
-                    Spacer()
-                    Text(name)
-                        .font(.caption)
-                        .bold()
-                    Text(fretMapString)
-                        .font(.caption)
-                    Spacer()
-                }
-                .font(.caption)
-                .foregroundColor(.white)
-            }
-        })
+        )
         .onChange(of: selectedChords) {
             if selectedChords.count == 0 {
                 isSelected = false

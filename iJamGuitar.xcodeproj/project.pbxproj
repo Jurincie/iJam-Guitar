@@ -22,7 +22,6 @@
 		7A8E96CD2B8122B1001A0699 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BD2B8122B0001A0699 /* ContentView.swift */; };
 		7A8E96CF2B8122B1001A0699 /* StringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96BF2B8122B0001A0699 /* StringsView.swift */; };
 		7A8E96D02B8122B1001A0699 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C02B8122B1001A0699 /* TopView.swift */; };
-		7A8E96D12B8122B1001A0699 /* CapoPositionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */; };
 		7A8E96D22B8122B1001A0699 /* FretBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C22B8122B1001A0699 /* FretBoardView.swift */; };
 		7A8E96D32B8122B1001A0699 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C32B8122B1001A0699 /* VolumeView.swift */; };
 		7A8E96D42B8122B1001A0699 /* FretNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */; };
@@ -86,7 +85,6 @@
 		7A8E96BD2B8122B0001A0699 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7A8E96BF2B8122B0001A0699 /* StringsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsView.swift; sourceTree = "<group>"; };
 		7A8E96C02B8122B1001A0699 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
-		7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapoPositionPickerView.swift; sourceTree = "<group>"; };
 		7A8E96C22B8122B1001A0699 /* FretBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretBoardView.swift; sourceTree = "<group>"; };
 		7A8E96C32B8122B1001A0699 /* VolumeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretNumbersView.swift; sourceTree = "<group>"; };
@@ -211,17 +209,6 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
-		7A40F7AF2BBC8D9A00B40F5D /* Frets */ = {
-			isa = PBXGroup;
-			children = (
-				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
-				7A8E96C12B8122B1001A0699 /* CapoPositionPickerView.swift */,
-				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
-				7A8E96B72B8122B0001A0699 /* PickView.swift */,
-			);
-			path = Frets;
-			sourceTree = "<group>";
-		};
 		7A43C7472B8BE016006D08EF /* PLists */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,7 +229,9 @@
 			isa = PBXGroup;
 			children = (
 				7A42EA892B9251B600A36BFF /* StringsAndFretsAreaView.swift */,
-				7A40F7AF2BBC8D9A00B40F5D /* Frets */,
+				7A8E96C22B8122B1001A0699 /* FretBoardView.swift */,
+				7A8E96C42B8122B1001A0699 /* FretNumbersView.swift */,
+				7A8E96B72B8122B0001A0699 /* PickView.swift */,
 				7A40F7AE2BBC8D5700B40F5D /* Strings */,
 			);
 			path = "Strings&Frets";
@@ -516,7 +505,6 @@
 				7A8E96D02B8122B1001A0699 /* TopView.swift in Sources */,
 				7A8E96CB2B8122B1001A0699 /* BottomView.swift in Sources */,
 				7A8E96D32B8122B1001A0699 /* VolumeView.swift in Sources */,
-				7A8E96D12B8122B1001A0699 /* CapoPositionPickerView.swift in Sources */,
 				7A8E96CA2B8122B1001A0699 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

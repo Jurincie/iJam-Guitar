@@ -34,6 +34,7 @@ struct HeaderView: View {
         VStack {
             Spacer()
             Spacer()
+            Spacer()
             HStack {
                 TuningPickerView(tuningName: $tuningName,
                                  chordGroupName: $chordGroupName)
@@ -58,13 +59,14 @@ struct HeaderView: View {
                         .font(.largeTitle)
                         .symbolEffect(.bounce, value: showCreateChordGroupSheet)
                 })
+                .padding()
             }
+            Spacer()
             .sheet(isPresented: $showCreateChordGroupSheet) {
                 CreateChordGroupView()
                     .presentationBackground(.thinMaterial)
             }
         }
-        .border(.clear)
         .background() {
             Color(.black)
                 .frame(width: width, height: height)

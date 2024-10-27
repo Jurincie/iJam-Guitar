@@ -69,18 +69,19 @@ struct StringsView: View {
                 Spacer()
             }
             .task({
-                guard appStates.first!.isMuted == false else { return }
+                guard appStates.first!.isMuted == false,
+                      stateModel.isDeviceVolumeLevelZero == false else { return }
                 await playOpeningArpegio()
             })
             .contentShape(Rectangle())
             .gesture(drag)
-            .alert("Device Volume is OFF",
+            .alert("Device Volume Level is ZERO",
                    isPresented: Bindable(appState).showVolumeAlert) {
                 Button("OK", role: .cancel) { 
                     appState.showVolumeAlert = false
                 }
             }
-            .alert("Another App is using the Audio Player",
+            .alert("Another App is using Audio Player",
                   isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
                 Button("OK", role: .cancel) {
                     appState.showAudioPlayerInUseAlert = false
@@ -110,7 +111,7 @@ extension StringsView {
             
             if formerZone >= 0 && appStates.first!.isMuted == false {
                 let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
-                Task {
+                Task.detached() {
                     await pickString(stringToPlay)
                 }
             }
@@ -142,7 +143,7 @@ extension StringsView {
     }
     
     func stringNumberToPlay(zone: Int, oldZone: Int) -> Int {
-        return oldZone > zone ? oldZone : zone
+        return max(oldZone, zone)
     }
     
     /// Description: This method identifies the note to play on this string based on capo position and fret -
@@ -150,35 +151,34 @@ extension StringsView {
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) async {
         guard stateModel.isDeviceVolumeLevelZero == false else {
-            appStates.first!.showVolumeAlert.toggle()
+            appStates.first!.showVolumeAlert = true
             return
         }
+        guard let appState = appStates.first else { return }
         
-        let openNotes = appStates.first!.activeTuning?.openNoteIndices.components(separatedBy: "-")
-        let fretPosition = appStates.first!.currentFretPositions[6 - stringToPlay]
+        let openNotes = appState.activeTuning?.openNoteIndices.components(separatedBy: "-")
+        let fretPosition = appState.currentFretPositions[6 - stringToPlay]
         if fretPosition > kNoFret {
             if let noteIndices = openNotes, let thisStringsOpenIndex = Int(noteIndices[6 - stringToPlay]) {
-                let index = fretPosition + thisStringsOpenIndex + appStates.first!.capoPosition
+                let index = fretPosition + thisStringsOpenIndex + appState.capoPosition
                 let noteToPlayName = stateModel.noteNamesArray[index]
                 let volume = appStates.first!.volumeLevel
-                Logger.viewCycle.notice("playing string: \(stringToPlay)")
+
                 do {
                     try stateModel.audioManager.playWaveFile(noteName: noteToPlayName,
                                                              stringNumber: stringToPlay,
                                                              volume: volume / 5.0)
                 } catch {
-                    Logger.viewCycle.error("Could not play wave file...")
+                    Logger.viewCycle.error("Could not play wave file!")
                 }
             }
         }
     }
-    
+   
     func playOpeningArpegio() async {
-        Task {
-            for string in 1...5 {
-                await pickString(6 - string)
-                try? await Task.sleep(nanoseconds: 50_000_000)
-            }
+        for string in 1...5 {
+            await pickString(6 - string)
+            try? await Task.sleep(nanoseconds: 50_000_000)
         }
         Logger.viewCycle.notice("zoneBreaks: \(zoneBreaks)")
     }
@@ -191,7 +191,7 @@ struct SizePreferenceKey: PreferenceKey {
 }
 
 extension View {
-    func readFrame(onChange: @escaping (CGRect) -> ()) -> some View {
+    func readFrame(onChangeClosure: @escaping (CGRect) -> ()) -> some View {
         background(
             GeometryReader { geometryProxy in
                 Color.clear
@@ -200,7 +200,7 @@ extension View {
             }
         )
         .onPreferenceChange(SizePreferenceKey.self, 
-                            perform: onChange)
+                            perform: onChangeClosure)
     }
 }
 

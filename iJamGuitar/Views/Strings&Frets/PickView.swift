@@ -9,10 +9,10 @@ import SwiftData
 import SwiftUI
 import OSLog
 
-struct Pick: Identifiable  {
+struct Pick: Identifiable {
     var id: Int
     var chord: Chord
-    var image:Image
+    var image: Image
 }
 
 struct PickView: View {

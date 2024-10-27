@@ -32,7 +32,11 @@
         }
       }
     },
+    "Another App is using Audio Player" : {
+
+    },
     "Another App is using the Audio Player" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -89,6 +93,7 @@
       }
     },
     "Capo Position" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -201,6 +206,7 @@
       }
     },
     "Device Volume is OFF" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -227,6 +233,9 @@
           }
         }
       }
+    },
+    "Device Volume Level is ZERO" : {
+
     },
     "Enter a name for new ChordGroup" : {
       "localizations" : {

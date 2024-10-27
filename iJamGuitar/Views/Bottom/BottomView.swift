@@ -14,7 +14,7 @@ struct BottomView: View {
     
     let width: CGFloat
     let height: CGFloat
-
+    
     var body: some View {
         if let appState = appStates.first {
             ZStack() {
@@ -23,10 +23,9 @@ struct BottomView: View {
                     .frame(width:width,
                            height:height,
                            alignment:.topLeading)
-                VStack() {
-                    VolumeView(isMuted: appState.isMuted)
-                        .padding(.horizontal, 40)
-                }
+                
+                VolumeView(isMuted: appState.isMuted)
+                    .padding()
             }
         }
     }
