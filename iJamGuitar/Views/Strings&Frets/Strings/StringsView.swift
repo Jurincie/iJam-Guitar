@@ -68,11 +68,11 @@ struct StringsView: View {
                 }
                 Spacer()
             }
-            .task({
+            .onAppear {
                 guard appStates.first!.isMuted == false,
                       stateModel.isDeviceVolumeLevelZero == false else { return }
-                await playOpeningArpegio()
-            })
+                playOpeningArpegio()
+            }
             .contentShape(Rectangle())
             .gesture(drag)
             .alert("Device Volume Level is ZERO",
@@ -111,9 +111,7 @@ extension StringsView {
             
             if formerZone >= 0 && appStates.first!.isMuted == false {
                 let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
-                Task.detached() {
-                    await pickString(stringToPlay)
-                }
+               pickString(stringToPlay)
             }
             formerZone = zone
         }
@@ -149,7 +147,7 @@ extension StringsView {
     /// Description: This method identifies the note to play on this string based on capo position and fret -
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
-    func pickString(_ stringToPlay: Int) async {
+    func pickString(_ stringToPlay: Int) {
         guard stateModel.isDeviceVolumeLevelZero == false else {
             appStates.first!.showVolumeAlert = true
             return
@@ -175,10 +173,10 @@ extension StringsView {
         }
     }
    
-    func playOpeningArpegio() async {
+    func playOpeningArpegio() {
         for string in 1...5 {
-            await pickString(6 - string)
-            try? await Task.sleep(nanoseconds: 50_000_000)
+            pickString(6 - string)
+            sleep(1)
         }
         Logger.viewCycle.notice("zoneBreaks: \(zoneBreaks)")
     }
