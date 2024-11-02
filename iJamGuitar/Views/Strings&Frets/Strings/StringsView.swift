@@ -68,10 +68,10 @@ struct StringsView: View {
                 }
                 Spacer()
             }
-            .onAppear {
+            .task {
                 guard appStates.first!.isMuted == false,
                       stateModel.isDeviceVolumeLevelZero == false else { return }
-                playOpeningArpegio()
+                await playOpeningArpegio()
             }
             .contentShape(Rectangle())
             .gesture(drag)
@@ -173,10 +173,10 @@ extension StringsView {
         }
     }
    
-    func playOpeningArpegio() {
-        for string in 1...5 {
+    func playOpeningArpegio() async {
+        for string in 0...5 {
             pickString(6 - string)
-            sleep(1)
+            try? await Task.sleep(nanoseconds: 300_000_000)
         }
         Logger.viewCycle.notice("zoneBreaks: \(zoneBreaks)")
     }

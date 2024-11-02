@@ -44,7 +44,8 @@ struct HeaderView: View {
                     )
                     .padding(.horizontal)
                     .cornerRadius(7)
-                ChordGroupPickerView(chordGroupName: $chordGroupName).overlay(
+                ChordGroupPickerView(chordGroupName: $chordGroupName)
+                    .overlay(
                         RoundedRectangle(cornerRadius: 7)
                         .stroke(Color.white, lineWidth:2)
                     )

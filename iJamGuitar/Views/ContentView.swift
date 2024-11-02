@@ -25,8 +25,6 @@ struct ContentView: View {
                 BottomView(width: width,
                            height:height * 0.20)
             }
-            .ignoresSafeArea()
-            .minimumScaleFactor(0.6)
             .cornerRadius(16.0)
             .frame(width:width,
                    height:height)

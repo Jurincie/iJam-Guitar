@@ -11,8 +11,7 @@ import OSLog
 
 struct VolumeView: View {
     @Query var appStates: [AppState]
-    let imageWidth = 25.0
-    var isMuted: Bool
+    let imageWidth = 40.0
     
     func VolumeSlider() -> some View {
         Slider(
@@ -21,30 +20,26 @@ struct VolumeView: View {
         )
     }
     
-    func SpeakerImage() -> some View {
-        Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.1")
+    func SpeakerImage(isMuted: Bool) -> some View {
+        Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.2")
             .resizable()
             .frame(width: imageWidth, height: imageWidth)
             .shadow(radius: 10)
-            .foregroundColor(Color.white)
+            .foregroundStyle(.white)
+            .font(.largeTitle)
             .padding(10)
     }
     
     var body: some View {
         if let appState = appStates.first {
-            VStack() {
+            HStack {
                 Spacer()
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        appState.isMuted.toggle()
-                    }) {
-                        SpeakerImage()
-                    }
-                    VolumeSlider()
-                    Spacer()
+                Button(action: {
+                    appState.isMuted.toggle()
+                }) {
+                    SpeakerImage(isMuted: appState.isMuted)
                 }
+                VolumeSlider()
                 Spacer()
             }
         }

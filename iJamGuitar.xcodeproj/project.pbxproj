@@ -10,6 +10,7 @@
 		7A1CF6F22B79380400F00AF1 /* AppStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CF6F12B79380300F00AF1 /* AppStateContainer.swift */; };
 		7A22F44A2B8549F300D60D77 /* AvailableChordsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22F4492B8549F300D60D77 /* AvailableChordsGridView.swift */; };
 		7A274E4F2C73B03F00C368C6 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A274E4E2C73B03F00C368C6 /* StateModel.swift */; };
+		7A2FEA1B2CD5B45B003DEB84 /* CapoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2FEA1A2CD5B45B003DEB84 /* CapoView.swift */; };
 		7A302E5B2A218EBA005864F4 /* iJamAudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */; };
 		7A3AD0042B1FFE5F003EEF9A /* iJamGuitarUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AD0032B1FFE5F003EEF9A /* iJamGuitarUnitTests.swift */; };
 		7A42EA8A2B9251B600A36BFF /* StringsAndFretsAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A42EA892B9251B600A36BFF /* StringsAndFretsAreaView.swift */; };
@@ -72,6 +73,7 @@
 		7A1CF6F12B79380300F00AF1 /* AppStateContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateContainer.swift; sourceTree = "<group>"; };
 		7A22F4492B8549F300D60D77 /* AvailableChordsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableChordsGridView.swift; sourceTree = "<group>"; };
 		7A274E4E2C73B03F00C368C6 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		7A2FEA1A2CD5B45B003DEB84 /* CapoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapoView.swift; sourceTree = "<group>"; };
 		7A302E5A2A218EBA005864F4 /* iJamAudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamAudioManger.swift; sourceTree = "<group>"; };
 		7A3AD0012B1FFE5F003EEF9A /* iJamGuitarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJamGuitarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AD0032B1FFE5F003EEF9A /* iJamGuitarUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJamGuitarUnitTests.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				7A8E96BB2B8122B0001A0699 /* BottomView.swift */,
 				7A8E96C32B8122B1001A0699 /* VolumeView.swift */,
+				7A2FEA1A2CD5B45B003DEB84 /* CapoView.swift */,
 			);
 			path = Bottom;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A8E96D42B8122B1001A0699 /* FretNumbersView.swift in Sources */,
+				7A2FEA1B2CD5B45B003DEB84 /* CapoView.swift in Sources */,
 				7AE86C2E2B1BAC820032DABD /* Tuning.swift in Sources */,
 				7ACEB1742B84343E00E85A41 /* ChordGroupPickerView.swift in Sources */,
 				7AE86C302B1D15E90032DABD /* Logger+extension.swift in Sources */,

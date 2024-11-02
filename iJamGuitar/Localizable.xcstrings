@@ -93,7 +93,6 @@
       }
     },
     "Capo Position" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

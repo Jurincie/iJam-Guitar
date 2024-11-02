@@ -9,24 +9,25 @@ import SwiftData
 import SwiftUI
 import OSLog
 
-struct BottomView: View {
-    @Query var appStates: [AppState]
-    
+struct BottomView: View {    
     let width: CGFloat
     let height: CGFloat
     
     var body: some View {
-        if let appState = appStates.first {
-            ZStack() {
-                Image(.bottomView)
-                    .resizable()
-                    .frame(width:width,
-                           height:height,
-                           alignment:.topLeading)
-                
-                VolumeView(isMuted: appState.isMuted)
-                    .padding()
+        ZStack() {
+            Image(.bottomView)
+                .resizable()
+                .frame(width:width,
+                       height:height,
+                       alignment:.topLeading)
+            HStack {
+                VolumeView()
+                Spacer()
+                CapoView()
             }
+            .padding(.top)
+            .padding(.top)
+            .padding()
         }
     }
 }
