@@ -29,6 +29,7 @@ struct ContentView: View {
             .frame(width:width,
                    height:height)
             .background(Color.black)
+            .dynamicTypeSize(.small ... .xLarge)
         }
     }
 }

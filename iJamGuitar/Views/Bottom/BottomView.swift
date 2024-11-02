@@ -25,8 +25,7 @@ struct BottomView: View {
                 Spacer()
                 CapoView()
             }
-            .padding(.top)
-            .padding(.top)
+            .padding(.top, 20.0)
             .padding()
         }
     }

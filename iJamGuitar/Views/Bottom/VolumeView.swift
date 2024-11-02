@@ -33,7 +33,6 @@ struct VolumeView: View {
     var body: some View {
         if let appState = appStates.first {
             HStack {
-                Spacer()
                 Button(action: {
                     appState.isMuted.toggle()
                 }) {

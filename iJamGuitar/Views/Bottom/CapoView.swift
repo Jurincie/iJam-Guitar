@@ -18,18 +18,28 @@ struct CapoView: View {
     var body: some View {
         if let appState = appStates.first {
             HStack {
-                Text("Capo Position")
-                    .font(.largeTitle)
-                    .foregroundStyle(.white)
-                    .cornerRadius(10)
-                    .padding()
+                ViewThatFits {
+                    Text("Capo Position")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .cornerRadius(10)
+                        .padding()
+                    Text("Capo")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .cornerRadius(10)
+                        .padding()
+                }
+                .minimumScaleFactor(0.5)
+                
                 Menu {
                     Picker("Capo Position", selection: Bindable(appState).capoPosition) {
                         ForEach(capoPositions, id: \.self) { capoPosition in
                             Text("\(capoPosition)")
+                                .font(.caption)
                         }
                     }
-                    .pickerStyle(.inline)
+                    .pickerStyle(.automatic)
                 } label: {
                     if let appState = appStates.first {
                         Text(String(appState.capoPosition))

@@ -41,6 +41,7 @@ struct FretNumbersView: View {
                     .border(Color.white)
                 }
             }
+            .minimumScaleFactor(0.5)
         }
     }
 }
