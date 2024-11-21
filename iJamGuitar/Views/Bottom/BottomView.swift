@@ -22,7 +22,9 @@ struct BottomView: View {
                        alignment:.topLeading)
             HStack {
                 VolumeView()
-                Spacer()
+                Divider()
+                    .frame(width: 3.0, height: 30.0)
+                    .background(Color.white)
                 CapoView()
             }
             .padding(.top, 20.0)

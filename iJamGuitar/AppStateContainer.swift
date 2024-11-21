@@ -46,12 +46,9 @@ AppStateContainer {
         /// Builds AppState, ChordGroups, Tunings and Chords from Plists
         /// - Throws: PlistError on failure
         func populateData() throws {
+            // create and insert AppState Model
             let appState = AppState()
-            defer {
-                // THIS is the ONLY "insert" we
-                // need as we preload our data
-                container.mainContext.insert(appState)
-            }
+            container.mainContext.insert(appState)
             
             // build models from TuningMeta.plist
              guard let path = Bundle.main.path(forResource: "TuningMeta", ofType: "plist") else { return }

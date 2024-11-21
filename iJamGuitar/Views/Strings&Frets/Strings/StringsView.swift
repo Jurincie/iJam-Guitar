@@ -28,10 +28,8 @@ import SwiftData
 import SwiftUI
 import OSLog
 
-@MainActor
 struct StringsView: View {
     @Query var appStates: [AppState]
-   
     @State private var dragLocation: CGPoint?
     @State var formerZone = -1
     @State private var zoneBreaks:[Double] = Array(repeating: 0.0, count: 6)
@@ -47,7 +45,7 @@ struct StringsView: View {
             .onEnded { _ in formerZone = -1 }
             .onChanged { drag in
                 dragLocation = drag.location
-                newDragLocation(dragLocation)
+                processNewDragLocation(dragLocation)
             }
     }
     
@@ -103,7 +101,7 @@ extension StringsView {
     ///   Description: This method determines if we are in a new zone -
     ///   and if we should then play note on appropriate string
     /// - Parameter location:- the current location of the drag in global co-ordinates
-    func newDragLocation(_ location: CGPoint?) {
+    func processNewDragLocation(_ location: CGPoint?) {
         guard let location =  location else { return }
         let zone = getZone(loc: location)
         if zone != formerZone {

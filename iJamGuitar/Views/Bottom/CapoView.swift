@@ -23,12 +23,12 @@ struct CapoView: View {
                         .font(.headline)
                         .foregroundStyle(.white)
                         .cornerRadius(10)
-                        .padding()
+                        .padding(.vertical)
                     Text("Capo")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .cornerRadius(10)
-                        .padding()
+                        .padding(.vertical)
                 }
                 .minimumScaleFactor(0.5)
                 
@@ -51,7 +51,7 @@ struct CapoView: View {
                             .cornerRadius(10)
                     }
                 }
-                .padding(.trailing)
+//                .padding(.trailing)
             }
         }
     }

@@ -5,6 +5,7 @@
 //  Created by Ron Jurincie on 4/29/22.
 //
 
+import Combine
 import SwiftData
 import SwiftUI
 import OSLog
@@ -14,10 +15,8 @@ struct VolumeView: View {
     let imageWidth = 40.0
     
     func VolumeSlider() -> some View {
-        Slider(
-            value: Bindable(appStates.first!).volumeLevel,
-            in: 0...10
-        )
+        Slider(value: Bindable(appStates.first!).volumeLevel,
+               in: 0...10)
     }
     
     func SpeakerImage(isMuted: Bool) -> some View {
