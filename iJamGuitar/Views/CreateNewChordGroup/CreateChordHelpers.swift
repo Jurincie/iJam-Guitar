@@ -25,11 +25,7 @@ struct PickerView: View {
                             .font(.caption)
                     }
                 }
-                .onChange(of: selectedTuningName, { oldValue, newValue in
-                    // when user changes tuning selection:
-                    //  -> remove all the selectedChords from previous Tuning
-                    selectedChords.removeAll()
-                })
+                .onChange(of: selectedTuningName, { selectedChords.removeAll() })
                 .pickerStyle(.inline)
                 .frame(maxWidth: .infinity)
             } label: {
@@ -64,8 +60,8 @@ struct TextFieldView: View {
 struct CustomTextFieldStyle : TextFieldStyle {
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .font(.title) // set the inner Text Field Font
-            .padding(5) // Set the inner Text Field Padding
+            .font(.title)
+            .padding(5)
         //Give it some style
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)

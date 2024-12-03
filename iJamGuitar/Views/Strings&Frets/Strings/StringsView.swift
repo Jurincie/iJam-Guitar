@@ -67,26 +67,17 @@ struct StringsView: View {
                 Spacer()
             }
             .task {
-                guard appStates.first!.isMuted == false,
+                guard appStates.first!.appIsMuted == false,
                       stateModel.isDeviceVolumeLevelZero == false else { return }
                 await playOpeningArpegio()
             }
             .contentShape(Rectangle())
             .gesture(drag)
             .alert("Device Volume Level is ZERO",
-                   isPresented: Bindable(appState).showVolumeAlert) {
-                Button("OK", role: .cancel) { 
-                    appState.showVolumeAlert = false
-                }
-            }
-            .alert("Another App is using Audio Player",
-                  isPresented: Bindable(appState).showAudioPlayerInUseAlert) {
+                   isPresented: Bindable(appState).deviceVolumeIsZero) {
                 Button("OK", role: .cancel) {
-                    appState.showAudioPlayerInUseAlert = false
+                    appState.deviceVolumeIsZero = false
                 }
-            }
-            .alert("Unknown Audio Player Error", isPresented: Bindable(appState).showAudioPlayerErrorAlert) {
-              Button("OK", role: .cancel) { fatalError() }
             }
         } else {
             Text("SwiftData Query Error")
@@ -96,7 +87,7 @@ struct StringsView: View {
 }
 
 extension StringsView {
-    // Drag Management
+    // Mark: Drag Management
     
     ///   Description: This method determines if we are in a new zone -
     ///   and if we should then play note on appropriate string
@@ -107,7 +98,7 @@ extension StringsView {
         if zone != formerZone {
             Logger.viewCycle.notice("====> New Zone: \(zone)")
             
-            if formerZone >= 0 && appStates.first!.isMuted == false {
+            if formerZone >= 0 && appStates.first!.appIsMuted == false {
                 let stringToPlay: Int = stringNumberToPlay(zone: zone, oldZone: formerZone)
                pickString(stringToPlay)
             }
@@ -146,10 +137,6 @@ extension StringsView {
     ///  and then plays that string if the string is not muted
     /// - Parameter stringToPlay: The String to be played
     func pickString(_ stringToPlay: Int) {
-        guard stateModel.isDeviceVolumeLevelZero == false else {
-            appStates.first!.showVolumeAlert = true
-            return
-        }
         guard let appState = appStates.first else { return }
         
         let openNotes = appState.activeTuning?.openNoteIndices.components(separatedBy: "-")
@@ -199,5 +186,3 @@ extension View {
                             perform: onChangeClosure)
     }
 }
-
-

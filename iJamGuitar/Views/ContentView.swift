@@ -26,8 +26,7 @@ struct ContentView: View {
                            height:height * 0.20)
             }
             .cornerRadius(16.0)
-            .frame(width:width,
-                   height:height)
+            .frame(width:width, height:height)
             .background(Color.black)
             .dynamicTypeSize(.small ... .xLarge)
         }

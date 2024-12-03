@@ -38,6 +38,7 @@ struct FretNumbersView: View {
                     .frame(width: width, height: height / 6, alignment: .center)
                     .background(Color.gray)
                     .foregroundColor(Color.white)
+                    .cornerRadius(6)
                     .border(Color.white)
                 }
             }

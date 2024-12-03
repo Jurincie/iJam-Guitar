@@ -12,8 +12,8 @@ import OSLog
 @Model
 final class AppState {
     // Stored Properties
-    var isMuted: Bool = false
-    var showVolumeAlert: Bool = false
+    var appIsMuted: Bool = false
+    var deviceVolumeIsZero: Bool = false
     var showAudioPlayerInUseAlert: Bool = false
     var showAudioNotAvailableAlert: Bool = false
     var showAudioPlayerErrorAlert: Bool = false

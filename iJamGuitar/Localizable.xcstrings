@@ -32,9 +32,6 @@
         }
       }
     },
-    "Another App is using Audio Player" : {
-
-    },
     "Another App is using the Audio Player" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -534,6 +531,7 @@
       }
     },
     "Unknown Audio Player Error" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

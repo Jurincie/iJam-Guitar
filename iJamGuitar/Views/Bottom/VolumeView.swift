@@ -33,9 +33,9 @@ struct VolumeView: View {
         if let appState = appStates.first {
             HStack {
                 Button(action: {
-                    appState.isMuted.toggle()
+                    appState.appIsMuted.toggle()
                 }) {
-                    SpeakerImage(isMuted: appState.isMuted)
+                    SpeakerImage(isMuted: appState.appIsMuted)
                 }
                 VolumeSlider()
                 Spacer()

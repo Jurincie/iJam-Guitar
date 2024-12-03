@@ -263,17 +263,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7607793E-94FE-4541-8370-B08B86040C59"
+            uuid = "00C8D0A1-BF46-4F50-861F-6D4599F191E4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJamGuitar/Views/Strings&amp;Frets/Strings/StringsView.swift"
+            filePath = "iJamGuitar/Models/AppState.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "AppState"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "00C8D0A1-BF46-4F50-861F-6D4599F191E4 - ad28b4027473bab0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.AppState.__allocating_init() -&gt; iJamGuitar.AppState"
+                  moduleName = "iJamGuitar.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ronjurincie/Desktop/iOS/iJamGuitar/iJamGuitar/Models/AppState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "00C8D0A1-BF46-4F50-861F-6D4599F191E4 - d7c8e127c05e2622"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iJamGuitar.AppState.init() -&gt; iJamGuitar.AppState"
+                  moduleName = "iJamGuitar.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/k7/w1vdrv054rvc2h4y1yhj1p8c0000gn/T/swift-generated-sources/@__swiftmacro_10iJamGuitar8AppState5ModelfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2"
+                  endingLineNumber = "2">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
